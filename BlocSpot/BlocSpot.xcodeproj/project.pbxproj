@@ -15,6 +15,7 @@
 		9BA722D01D8C665E006FC1B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */; };
 		9BA722DB1D8C665E006FC1B1 /* BlocSpotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722DA1D8C665E006FC1B1 /* BlocSpotTests.m */; };
 		9BA722E61D8C665E006FC1B1 /* BlocSpotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722E51D8C665E006FC1B1 /* BlocSpotUITests.m */; };
+		9BA722F41D8C66F9006FC1B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA722F31D8C66F9006FC1B1 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		9BA722E11D8C665E006FC1B1 /* BlocSpotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocSpotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA722E51D8C665E006FC1B1 /* BlocSpotUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocSpotUITests.m; sourceTree = "<group>"; };
 		9BA722E71D8C665E006FC1B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BA722F31D8C66F9006FC1B1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BA722F41D8C66F9006FC1B1 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 		9BA722B41D8C665E006FC1B1 = {
 			isa = PBXGroup;
 			children = (
+				9BA722F31D8C66F9006FC1B1 /* MapKit.framework */,
 				9BA722BF1D8C665E006FC1B1 /* BlocSpot */,
 				9BA722D91D8C665E006FC1B1 /* BlocSpotTests */,
 				9BA722E41D8C665E006FC1B1 /* BlocSpotUITests */,
@@ -207,6 +211,11 @@
 				TargetAttributes = {
 					9BA722BC1D8C665E006FC1B1 = {
 						CreatedOnToolsVersion = 7.3;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					9BA722D51D8C665E006FC1B1 = {
 						CreatedOnToolsVersion = 7.3;
