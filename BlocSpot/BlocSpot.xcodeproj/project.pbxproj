@@ -17,6 +17,8 @@
 		9BA722E61D8C665E006FC1B1 /* BlocSpotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722E51D8C665E006FC1B1 /* BlocSpotUITests.m */; };
 		9BA722F41D8C66F9006FC1B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA722F31D8C66F9006FC1B1 /* MapKit.framework */; };
 		9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722F61D8C6751006FC1B1 /* MapViewController.m */; };
+		9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5D7201D908690007E6DBE /* SearchViewController.m */; };
+		9BF5D7241D9086E7007E6DBE /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5D7231D9086E7007E6DBE /* SearchResultsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,10 @@
 		9BA722F31D8C66F9006FC1B1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9BA722F51D8C6751006FC1B1 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		9BA722F61D8C6751006FC1B1 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		9BF5D71F1D908690007E6DBE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		9BF5D7201D908690007E6DBE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		9BF5D7221D9086E7007E6DBE /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
+		9BF5D7231D9086E7007E6DBE /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +121,10 @@
 				9BA722C91D8C665E006FC1B1 /* Main.storyboard */,
 				9BA722F51D8C6751006FC1B1 /* MapViewController.h */,
 				9BA722F61D8C6751006FC1B1 /* MapViewController.m */,
+				9BF5D71F1D908690007E6DBE /* SearchViewController.h */,
+				9BF5D7201D908690007E6DBE /* SearchViewController.m */,
+				9BF5D7221D9086E7007E6DBE /* SearchResultsViewController.h */,
+				9BF5D7231D9086E7007E6DBE /* SearchResultsViewController.m */,
 				9BA722CC1D8C665E006FC1B1 /* Assets.xcassets */,
 				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9BA722D11D8C665E006FC1B1 /* Info.plist */,
@@ -286,6 +296,8 @@
 			files = (
 				9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */,
 				9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */,
+				9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */,
+				9BF5D7241D9086E7007E6DBE /* SearchResultsViewController.m in Sources */,
 				9BA722C21D8C665E006FC1B1 /* main.m in Sources */,
 				9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */,
 			);
@@ -513,6 +525,7 @@
 				9BA722EC1D8C665E006FC1B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BA722ED1D8C665E006FC1B1 /* Build configuration list for PBXNativeTarget "BlocSpotTests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +534,7 @@
 				9BA722EF1D8C665E006FC1B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BA722F01D8C665E006FC1B1 /* Build configuration list for PBXNativeTarget "BlocSpotUITests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +543,7 @@
 				9BA722F21D8C665E006FC1B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
