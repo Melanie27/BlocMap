@@ -18,6 +18,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"BlocSpot Map";
+    MKLocalSearchRequest* request = [[MKLocalSearchRequest alloc] init];
+    request.naturalLanguageQuery = @"coffee";
+    
+    // Set the region to an associated map view's region
+    //request.region = myMapView.region;
 }
 
 - (void)didReceiveMemoryWarning {
