@@ -23,11 +23,77 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="rXy-UH-gsp"/>
+                    <navigationItem key="navigationItem" id="rXy-UH-gsp">
+                        <barButtonItem key="leftBarButtonItem" image="mapView.png" id="fpc-AE-4bp"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="search" id="hzm-qg-EE5">
+                            <connections>
+                                <segue destination="SLq-GC-h0z" kind="presentation" id="0Un-RP-7QD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1391" y="538"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="qXP-nD-445">
+            <objects>
+                <viewController id="8mN-88-Vaz" customClass="SearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Sgc-Sd-icn"/>
+                        <viewControllerLayoutGuide type="bottom" id="UG9-Eq-orN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MEE-oc-PPn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="a9T-Zg-1ET">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="4Af-Xx-MA9">
+                            <connections>
+                                <action selector="DismissSearchView:" destination="8mN-88-Vaz" id="vZn-pe-KLh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZXZ-5p-lYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2877" y="538"/>
+        </scene>
+        <!--Search Results View Controller-->
+        <scene sceneID="AqW-eY-tI6">
+            <objects>
+                <collectionViewController id="Wbm-sm-2ui" customClass="SearchResultsViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="gwT-z2-s69">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8gP-aT-34W">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WBm-HV-DET">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Wbm-sm-2ui" id="lXQ-T0-l07"/>
+                            <outlet property="delegate" destination="Wbm-sm-2ui" id="oJg-5U-maF"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RO9-Nh-UyO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1391" y="1247"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Ws-sQ-8ky">
@@ -47,5 +113,26 @@
             </objects>
             <point key="canvasLocation" x="476" y="538"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SyE-VH-Pzv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SLq-GC-h0z" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Eq4-vY-IGb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8mN-88-Vaz" kind="relationship" relationship="rootViewController" id="lFb-2j-W9G"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UOL-HE-43g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2065" y="538"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="mapView.png" width="25" height="25"/>
+    </resources>
 </document>

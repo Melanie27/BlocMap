@@ -10,4 +10,6 @@
 
 @interface SearchViewController : UIViewController
 
+- (IBAction)DismissSearchView:(id)sender;
+
 @end

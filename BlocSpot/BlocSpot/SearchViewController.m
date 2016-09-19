@@ -34,4 +34,8 @@
 }
 */
 
+- (IBAction)DismissSearchView:(id)sender {
+    NSLog(@"dismiss this screen, yo");
+    [self dismissModalViewControllerAnimated:YES];
+}
 @end
