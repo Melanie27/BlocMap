@@ -38,7 +38,7 @@ CLLocationManager *locationManager;
         //[self.locationManager requestWhenInUseAuthorization];
         [self.locationManager requestAlwaysAuthorization];
         self.mapView.showsUserLocation = YES;
-        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+        [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
 
     }
     

@@ -22,11 +22,8 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7I-dI-4xy">
-                                <rect key="frame" x="167" y="543" width="253" height="21"/>
+                                <rect key="frame" x="20" y="520" width="560" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="253" id="FaH-b6-oh3"/>
-                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="User Location Label">
                                         <attributes>
@@ -41,13 +38,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ReE-6e-pYB" secondAttribute="trailing" id="0Gt-1g-gam"/>
-                            <constraint firstItem="ReE-6e-pYB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5eK-PE-Acd"/>
-                            <constraint firstItem="n7I-dI-4xy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="479" id="LGV-ts-wnn"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="n7I-dI-4xy" secondAttribute="bottom" constant="36" id="cWG-zy-Tg6"/>
-                            <constraint firstItem="ReE-6e-pYB" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="km0-jY-NjS"/>
-                            <constraint firstItem="ReE-6e-pYB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="mBo-2T-2wM"/>
-                            <constraint firstItem="n7I-dI-4xy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tAv-ax-79p"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="n7I-dI-4xy" secondAttribute="bottom" constant="36" id="4FR-xo-67m"/>
+                            <constraint firstItem="n7I-dI-4xy" firstAttribute="centerX" secondItem="ReE-6e-pYB" secondAttribute="centerX" id="4V0-pu-TcE"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ClO-Uo-8FN"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cp8-dk-aXj"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="fXn-g3-5gJ"/>
+                            <constraint firstAttribute="trailing" secondItem="ReE-6e-pYB" secondAttribute="trailing" id="rof-V3-ddy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rXy-UH-gsp">
