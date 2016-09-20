@@ -8,11 +8,29 @@
 
 #import "MapViewController.h"
 
-@interface MapViewController ()
+@interface MapViewController () <CLLocationManagerDelegate>
 @property (nonatomic, strong) MKUserLocation *userLocationVisible;
 @end
 
 @implementation MapViewController
+CLLocationManager *locationManager;
+
+- (void)startStandardUpdates
+{
+    // Create the location manager if this object does not
+    // already have one.
+    if (nil == locationManager)
+        locationManager = [[CLLocationManager alloc] init];
+    
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    
+    // Set a movement threshold for new events.
+    locationManager.distanceFilter = 500; // meters
+    
+    [locationManager startUpdatingLocation];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,7 +41,8 @@
     self.mapView.delegate = self;
     self.mapView.zoomEnabled = YES;
     self.mapView.scrollEnabled = YES;
-    
+    [self startStandardUpdates];
+    [[[CLLocationManager alloc] init]requestWhenInUseAuthorization];
     if([CLLocationManager locationServicesEnabled]) {
     
     self.mapView.showsUserLocation = YES;

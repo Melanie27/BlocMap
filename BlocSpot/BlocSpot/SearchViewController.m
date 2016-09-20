@@ -7,6 +7,8 @@
 //
 
 #import "SearchViewController.h"
+#import "MapViewController.h"
+#import "BLSDataSource.h"
 
 @interface SearchViewController ()
 
@@ -43,7 +45,13 @@
 
 - (IBAction)searchMap:(id)sender {
     
-    NSLog(@"user text %@", self.searchText.text);
+    
+    [[BLSDataSource sharedInstance] searchMap:self.searchText.text andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"response %@", response);
+    }];
+   
+   
+    //request.region = mapView.region;
     //make the search in mapkit with parameters
 }
 @end
