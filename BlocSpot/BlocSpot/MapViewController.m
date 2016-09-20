@@ -9,28 +9,12 @@
 #import "MapViewController.h"
 
 @interface MapViewController () <CLLocationManagerDelegate>
-@property (nonatomic, strong) MKUserLocation *userLocationVisible;
+
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @end
 
 @implementation MapViewController
 CLLocationManager *locationManager;
-
-/*- (void)startStandardUpdates
-{
-    // Create the location manager if this object does not
-    // already have one.
-    if (nil == locationManager)
-        locationManager = [[CLLocationManager alloc] init];
-    
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-    
-    // Set a movement threshold for new events.
-    locationManager.distanceFilter = 500; // meters
-    
-    [locationManager startUpdatingLocation];
-}*/
 
 
 - (void)viewDidLoad {
@@ -42,27 +26,33 @@ CLLocationManager *locationManager;
     self.mapView.delegate = self;
     //set initialial mapkit region
     CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
-    self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 100000, 100000);
+    self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 1000000, 1000000);
     
     //add optional scroll and zoom properties
     self.mapView.zoomEnabled = YES;
     self.mapView.scrollEnabled = YES;
-    self.mapView.showsUserLocation = YES;
     
     self.locationManager = [[CLLocationManager alloc] init];
-    
-    
-    //[self startStandardUpdates];
-    //Control User update on map
-    //[[[CLLocationManager alloc] init]requestWhenInUseAuthorization];
     [[[CLLocationManager alloc ] init ]requestAlwaysAuthorization];
     if([CLLocationManager locationServicesEnabled]) {
-        [self.locationManager requestWhenInUseAuthorization];
+        //[self.locationManager requestWhenInUseAuthorization];
         [self.locationManager requestAlwaysAuthorization];
-    
-        
+        self.mapView.showsUserLocation = YES;
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+
     }
     
+    
+    
+}
+
+-(void)startUserTracking {
+    
+}
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    self.userLocationLabel.text =
+    [NSString stringWithFormat:@"Location %.5f°, %.5f°", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
