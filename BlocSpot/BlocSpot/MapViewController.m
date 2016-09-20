@@ -10,12 +10,13 @@
 
 @interface MapViewController () <CLLocationManagerDelegate>
 @property (nonatomic, strong) MKUserLocation *userLocationVisible;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 @end
 
 @implementation MapViewController
 CLLocationManager *locationManager;
 
-- (void)startStandardUpdates
+/*- (void)startStandardUpdates
 {
     // Create the location manager if this object does not
     // already have one.
@@ -29,7 +30,7 @@ CLLocationManager *locationManager;
     locationManager.distanceFilter = 500; // meters
     
     [locationManager startUpdatingLocation];
-}
+}*/
 
 
 - (void)viewDidLoad {
@@ -39,26 +40,34 @@ CLLocationManager *locationManager;
     
     //make the view controller be the map view's delegate
     self.mapView.delegate = self;
+    //set initialial mapkit region
+    CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
+    self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 100000, 100000);
+    
+    //add optional scroll and zoom properties
     self.mapView.zoomEnabled = YES;
     self.mapView.scrollEnabled = YES;
-    [self startStandardUpdates];
-    [[[CLLocationManager alloc] init]requestWhenInUseAuthorization];
-    if([CLLocationManager locationServicesEnabled]) {
-    
     self.mapView.showsUserLocation = YES;
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    
+    
+    //[self startStandardUpdates];
+    //Control User update on map
+    //[[[CLLocationManager alloc] init]requestWhenInUseAuthorization];
+    [[[CLLocationManager alloc ] init ]requestAlwaysAuthorization];
+    if([CLLocationManager locationServicesEnabled]) {
+        [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+    
         
     }
     
-    
-    //set initialial mapkit region
-    //CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(39.739, -104.983);
-    //self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 100000, 100000);
-    
-    MKLocalSearchRequest* request = [[MKLocalSearchRequest alloc] init];
-    request.naturalLanguageQuery = @"coffee";
-    
-    // Set the region to an associated map view's region
-    //request.region = myMapView.region;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    NSLog(@"%@", [locations lastObject]);
 }
 
 - (void)didReceiveMemoryWarning {
