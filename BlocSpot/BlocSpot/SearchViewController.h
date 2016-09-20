@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Mapkit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface SearchViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITextField *searchText;
 
 - (IBAction)DismissSearchView:(id)sender;
+- (IBAction)searchMap:(id)sender;
 
 @end

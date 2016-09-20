@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
+		9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */; };
 		9BA722C21D8C665E006FC1B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C11D8C665E006FC1B1 /* main.m */; };
 		9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C41D8C665E006FC1B1 /* AppDelegate.m */; };
 		9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C71D8C665E006FC1B1 /* ViewController.m */; };
@@ -39,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B6FDCC81D919D35000B77AB /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
+		9B6FDCC91D919D35000B77AB /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
+		9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointOfInterest.h; sourceTree = "<group>"; };
+		9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointOfInterest.m; sourceTree = "<group>"; };
 		9BA722BD1D8C665E006FC1B1 /* BlocSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA722C11D8C665E006FC1B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9BA722C31D8C665E006FC1B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -125,6 +131,10 @@
 				9BF5D7201D908690007E6DBE /* SearchViewController.m */,
 				9BF5D7221D9086E7007E6DBE /* SearchResultsViewController.h */,
 				9BF5D7231D9086E7007E6DBE /* SearchResultsViewController.m */,
+				9B6FDCC81D919D35000B77AB /* Search.h */,
+				9B6FDCC91D919D35000B77AB /* Search.m */,
+				9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */,
+				9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */,
 				9BA722CC1D8C665E006FC1B1 /* Assets.xcassets */,
 				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9BA722D11D8C665E006FC1B1 /* Info.plist */,
@@ -295,11 +305,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */,
+				9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */,
 				9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */,
 				9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */,
 				9BF5D7241D9086E7007E6DBE /* SearchResultsViewController.m in Sources */,
 				9BA722C21D8C665E006FC1B1 /* main.m in Sources */,
 				9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */,
+				9B6FDCCA1D919D35000B77AB /* Search.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

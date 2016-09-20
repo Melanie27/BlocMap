@@ -9,7 +9,7 @@
 #import "MapViewController.h"
 
 @interface MapViewController ()
-
+@property (nonatomic, strong) MKUserLocation *userLocationVisible;
 @end
 
 @implementation MapViewController
@@ -18,6 +18,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"BlocSpot Map";
+    
+    //make the view controller be the map view's delegate
+    self.mapView.delegate = self;
+    self.mapView.zoomEnabled = YES;
+    self.mapView.scrollEnabled = YES;
+    
+    if([CLLocationManager locationServicesEnabled]) {
+    
+    self.mapView.showsUserLocation = YES;
+        
+    }
+    
+    
+    //set initialial mapkit region
+    //CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(39.739, -104.983);
+    //self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 100000, 100000);
+    
     MKLocalSearchRequest* request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = @"coffee";
     

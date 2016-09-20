@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
      self.navigationItem.title = @"Search";
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,5 +39,11 @@
 - (IBAction)DismissSearchView:(id)sender {
     NSLog(@"dismiss this screen, yo");
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)searchMap:(id)sender {
+    
+    NSLog(@"user text %@", self.searchText.text);
+    //make the search in mapkit with parameters
 }
 @end

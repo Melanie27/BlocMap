@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
@@ -17,11 +18,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-6e-pYB">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-6e-pYB">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7I-dI-4xy">
+                                <rect key="frame" x="167" y="543" width="253" height="21"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="253" id="FaH-b6-oh3"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="User Location Label">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ReE-6e-pYB" secondAttribute="trailing" id="0Gt-1g-gam"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5eK-PE-Acd"/>
+                            <constraint firstItem="n7I-dI-4xy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="479" id="LGV-ts-wnn"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="n7I-dI-4xy" secondAttribute="bottom" constant="36" id="cWG-zy-Tg6"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="km0-jY-NjS"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="mBo-2T-2wM"/>
+                            <constraint firstItem="n7I-dI-4xy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tAv-ax-79p"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rXy-UH-gsp">
                         <barButtonItem key="leftBarButtonItem" image="mapView.png" id="fpc-AE-4bp">
@@ -35,6 +62,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="ReE-6e-pYB" id="Cwd-Nd-vSL"/>
+                        <outlet property="userLocationLabel" destination="n7I-dI-4xy" id="Qkm-aG-J7M"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -51,7 +82,41 @@
                     <view key="view" contentMode="scaleToFill" id="MEE-oc-PPn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Search BlocSpot" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJr-yL-Lzf">
+                                <rect key="frame" x="20" y="42" width="560" height="30"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BBf-Qw-Qp6">
+                                <rect key="frame" x="20" y="98" width="91" height="30"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Search">
+                                            <attributes>
+                                                <font key="NSFont" size="18" name="Futura-CondensedExtraBold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <state key="focused">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchMap:" destination="8mN-88-Vaz" eventType="touchUpInside" id="FTm-hl-HGk"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BBf-Qw-Qp6" firstAttribute="top" secondItem="oJr-yL-Lzf" secondAttribute="bottom" constant="26" id="4fG-RO-cFF"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="oJr-yL-Lzf" secondAttribute="leading" id="KpV-8U-KHv"/>
+                            <constraint firstItem="oJr-yL-Lzf" firstAttribute="top" secondItem="Sgc-Sd-icn" secondAttribute="bottom" constant="42" id="ZTm-Ul-KEC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oJr-yL-Lzf" secondAttribute="trailing" id="jal-Jk-10x"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a9T-Zg-1ET">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="4Af-Xx-MA9">
@@ -60,6 +125,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchText" destination="oJr-yL-Lzf" id="YPa-zu-9yf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXZ-5p-lYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
