@@ -44,8 +44,9 @@
 }
 
 - (IBAction)searchMap:(id)sender {
+    NSLog(@"search text %@", self.searchText.text);
     
-    
+    //this is not being called
     [[BLSDataSource sharedInstance] searchMap:self.searchText.text andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"response %@", response);
     }];
