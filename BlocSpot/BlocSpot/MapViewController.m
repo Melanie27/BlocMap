@@ -7,6 +7,8 @@
 //
 
 #import "MapViewController.h"
+#import "MyAnnotation.h"
+#import "MyAnnotationView.h"
 
 @interface MapViewController () <CLLocationManagerDelegate>
 
@@ -57,10 +59,45 @@ CLLocationManager *locationManager;
     [self.mapView addAnnotation:annotation1];
     [self.mapView addAnnotation:annotation2];
     
+    //We will get this from the data source
+    /*MyAnnotation *ann1 = [[MyAnnotation alloc]
+    initWithCoordinate: CLLocationCoordinate2DMake(34.4208, -119.6982)
+    title: @"Santa Barbara"
+    subtitle: @"Vacation spot"
+    contactInformation:@"9177031346"];*/
+
+    
+    /*MyAnnotation *annotation2 = [[MyAnnotation alloc]
+    initWithCoordinate: CLLocationCoordinate2DMake(33.8303, -116.5453)
+    title:@"Palm Springs"
+    subtitle: @"It's like a sauna"
+    contactInformation: @"2124723014"];*/
+   
+    
+    //[self.mapView addAnnotation:ann1];
+    //[self.mapView addAnnotation:annotation2];
+    
+    //NSArray *annotations = [NSArray arrayWithObjects:annotation1, annotation2, nil];
+    //[self.mapView addAnnotations:annotations];
+    
+    
+    
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
+    /*if([annotation isKindOfClass:[MyAnnotation class]]) {
+        static NSString *myAnnotationID = @"myAnnotation";
+         MyAnnotationView *annotationView = (MyAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:(myAnnotationID)];
+        
+        if(annotationView) {
+          annotationView.annotation = annotation;
+        } else {
+            annotationView = [[MyAnnotationView alloc] initWithAnnotation:(annotation) reuseIdentifier:myAnnotationID];;
+        }
+        
+        return annotationView;
+    }*/
     
     //don't create annotation views for the user location
     if([annotation isKindOfClass:[MKPointAnnotation class]]) {
