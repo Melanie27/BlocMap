@@ -9,6 +9,8 @@
 #import "MapViewController.h"
 #import "MyAnnotation.h"
 #import "MyAnnotationView.h"
+#import "BLSDataSource.h"
+#import "SearchViewController.h"
 
 @interface MapViewController () <CLLocationManagerDelegate>
 
@@ -44,20 +46,7 @@ CLLocationManager *locationManager;
 
     }
     
-    
-    //Add some annotations
-    MKPointAnnotation *annotation1 = [[MKPointAnnotation alloc]init];
-    annotation1.title = @"Santa Barbara";
-    annotation1.subtitle = @"Vacation spot";
-    annotation1.coordinate = CLLocationCoordinate2DMake(34.4208, -119.6982);
-    
-    MKPointAnnotation *annotation2 = [[MKPointAnnotation alloc]init];
-    annotation2.title = @"Palm Springs";
-    annotation2.subtitle = @"It's like a sauna";
-    annotation2.coordinate = CLLocationCoordinate2DMake(33.8303, -116.5453);
-    
-    [self.mapView addAnnotation:annotation1];
-    [self.mapView addAnnotation:annotation2];
+   
     
     //We will get this from the data source
     /*MyAnnotation *ann1 = [[MyAnnotation alloc]
@@ -141,14 +130,45 @@ CLLocationManager *locationManager;
     // Dispose of any resources that can be recreated.
 }
 
-/*
+-(void)loadSearchResults {
+    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+
+    if (!results) {return;}
+    
+    NSLog(@"*************results %@", results);
+    self.mapView.region = results.boundingRegion;
+    NSLog(@"bounding region %@", self.mapView.region);
+    //Add some annotations
+    MKPointAnnotation *annotation1 = [[MKPointAnnotation alloc]init];
+    annotation1.title = results.mapItems[0].name;
+    annotation1.subtitle = results.mapItems[0].phoneNumber;
+    annotation1.coordinate = results.mapItems[0].placemark.coordinate;
+    
+    MKPointAnnotation *annotation2 = [[MKPointAnnotation alloc]init];
+    annotation2.title = @"Palm Springs";
+    annotation2.subtitle = @"It's like a sauna";
+    annotation2.coordinate = CLLocationCoordinate2DMake(33.8303, -116.5453);
+    
+    [self.mapView addAnnotation:annotation1];
+  //  [self.mapView addAnnotation:annotation2];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self loadSearchResults];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    UIViewController *vc = [segue destinationViewController];
+    if ([vc isKindOfClass:[SearchViewController class]]) {
+        SearchViewController *svc = (SearchViewController*)vc;
+        svc.mapVC = self;
+    }
 }
-*/
+
 
 @end

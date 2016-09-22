@@ -10,10 +10,13 @@
 #import <Mapkit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class MapViewController;
+
 @interface SearchViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *searchText;
+@property (strong, nonatomic) IBOutlet MapViewController *mapVC;
 
-- (IBAction)DismissSearchView:(id)sender;
+- (IBAction)dismissSearchView:(id)sender;
 - (IBAction)searchMap:(id)sender;
 
 @end

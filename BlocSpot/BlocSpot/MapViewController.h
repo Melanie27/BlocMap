@@ -15,4 +15,5 @@
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UILabel *userLocationLabel;
 
+-(void)loadSearchResults;
 @end

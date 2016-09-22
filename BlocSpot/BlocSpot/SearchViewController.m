@@ -10,11 +10,14 @@
 #import "MapViewController.h"
 #import "BLSDataSource.h"
 
-@interface SearchViewController ()
+@interface SearchViewController () 
 
 @end
 
 @implementation SearchViewController
+
+//MKLocalSearch *localSearch;
+ //MKLocalSearchResponse *results;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,17 +41,23 @@
 }
 */
 
-- (IBAction)DismissSearchView:(id)sender {
-    NSLog(@"dismiss this screen, yo");
-    [self dismissModalViewControllerAnimated:YES];
+- (IBAction)dismissSearchView:(id)sender {
+   
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.mapVC loadSearchResults];
+    }];
 }
 
 - (IBAction)searchMap:(id)sender {
     NSLog(@"search text %@", self.searchText.text);
+    //cancel previous searches
+    //[localSearch cancel];
+    
     
     //this is not being called
     [[BLSDataSource sharedInstance] searchMap:self.searchText.text andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"response %@", response);
+        [self dismissSearchView:self];
     }];
    
    

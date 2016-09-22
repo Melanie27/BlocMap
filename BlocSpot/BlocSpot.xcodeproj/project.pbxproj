@@ -24,7 +24,6 @@
 		9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADC81D91D91100117D24 /* BLSDataSource.m */; };
 		9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCB1D921B5500117D24 /* MyAnnotation.m */; };
 		9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */; };
-		9BACADD11D9222FA00117D24 /* redHeart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BACADD01D9222FA00117D24 /* redHeart@2x.png */; };
 		9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5D7201D908690007E6DBE /* SearchViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +78,6 @@
 		9BACADCB1D921B5500117D24 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 		9BACADCD1D921E8D00117D24 /* MyAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotationView.h; sourceTree = "<group>"; };
 		9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
-		9BACADD01D9222FA00117D24 /* redHeart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redHeart@2x.png"; sourceTree = "<group>"; };
 		9BF5D71F1D908690007E6DBE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		9BF5D7201D908690007E6DBE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,7 +132,6 @@
 		9BA722BF1D8C665E006FC1B1 /* BlocSpot */ = {
 			isa = PBXGroup;
 			children = (
-				9BACADD01D9222FA00117D24 /* redHeart@2x.png */,
 				9BA722C31D8C665E006FC1B1 /* AppDelegate.h */,
 				9BA722C41D8C665E006FC1B1 /* AppDelegate.m */,
 				9BA722C61D8C665E006FC1B1 /* ViewController.h */,
@@ -303,7 +300,6 @@
 				9BA722D01D8C665E006FC1B1 /* LaunchScreen.storyboard in Resources */,
 				9BA722CD1D8C665E006FC1B1 /* Assets.xcassets in Resources */,
 				9BA722CB1D8C665E006FC1B1 /* Main.storyboard in Resources */,
-				9BACADD11D9222FA00117D24 /* redHeart@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

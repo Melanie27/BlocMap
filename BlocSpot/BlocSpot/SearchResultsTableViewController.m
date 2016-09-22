@@ -43,6 +43,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     //need to return the result count
+    //return [results.mapItems count];
     return 10;
 }
 

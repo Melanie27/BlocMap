@@ -54,12 +54,11 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="search" id="hzm-qg-EE5">
                             <connections>
-                                <segue destination="SLq-GC-h0z" kind="presentation" id="0Un-RP-7QD"/>
+                                <segue destination="8mN-88-Vaz" kind="show" id="D2a-Rw-adK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="ReE-6e-pYB" id="Cwd-Nd-vSL"/>
                         <outlet property="userLocationLabel" destination="n7I-dI-4xy" id="Qkm-aG-J7M"/>
                     </connections>
                 </viewController>
@@ -117,7 +116,7 @@
                     <navigationItem key="navigationItem" id="a9T-Zg-1ET">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="4Af-Xx-MA9">
                             <connections>
-                                <action selector="DismissSearchView:" destination="8mN-88-Vaz" id="vZn-pe-KLh"/>
+                                <action selector="dismissSearchView:" destination="8mN-88-Vaz" id="Akq-Iz-Xb3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -127,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXZ-5p-lYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3165" y="526"/>
+            <point key="canvasLocation" x="2201" y="538"/>
         </scene>
         <!--Item-->
         <scene sceneID="nJt-mJ-9Hu">
@@ -206,11 +205,7 @@
                                 <segue destination="jxr-Do-I8k" kind="presentation" id="uhC-Qn-CnK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7">
-                            <connections>
-                                <segue destination="SLq-GC-h0z" kind="showDetail" id="leV-3g-YSC"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7"/>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -237,24 +232,6 @@
             <point key="canvasLocation" x="476" y="538"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="SyE-VH-Pzv">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SLq-GC-h0z" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Eq4-vY-IGb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="8mN-88-Vaz" kind="relationship" relationship="rootViewController" id="lFb-2j-W9G"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UOL-HE-43g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2065" y="538"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="QfX-DH-RYk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pqj-37-onN" sceneMemberID="viewController">
@@ -278,7 +255,4 @@
         <image name="listView" width="25" height="25"/>
         <image name="mapView.png" width="25" height="25"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="leV-3g-YSC"/>
-    </inferredMetricsTieBreakers>
 </document>

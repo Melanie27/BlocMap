@@ -17,8 +17,9 @@
 +(instancetype) sharedInstance;
 
 @property (nonatomic, strong) MKLocalSearchRequest *latestSearchRequest;
-
-
+@property (nonatomic, strong) MKLocalSearchResponse *results;
+@property (strong, nonatomic) MKMapView *mapView;
+@property(nonatomic, assign) MKCoordinateRegion region;
 
 
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
