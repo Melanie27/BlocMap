@@ -49,7 +49,7 @@
                     <navigationItem key="navigationItem" id="rXy-UH-gsp">
                         <barButtonItem key="leftBarButtonItem" image="listView" id="fpc-AE-4bp">
                             <connections>
-                                <segue destination="aSN-0C-Ioh" kind="presentation" id="itE-nW-coC"/>
+                                <segue destination="pqj-37-onN" kind="presentation" id="2TL-hO-qns"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="search" id="hzm-qg-EE5">
@@ -127,53 +127,96 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXZ-5p-lYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3053" y="547"/>
+            <point key="canvasLocation" x="3165" y="526"/>
         </scene>
-        <!--Search Results View Controller-->
-        <scene sceneID="AqW-eY-tI6">
+        <!--Item-->
+        <scene sceneID="nJt-mJ-9Hu">
             <objects>
-                <collectionViewController id="Wbm-sm-2ui" customClass="SearchResultsViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="gwT-z2-s69">
+                <tableViewController id="37Q-DX-nPR" customClass="SearchResultsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="YGf-fx-Rbq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8gP-aT-34W">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WBm-HV-DET">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="150" id="bOE-Os-CMc" customClass="SearchResultsTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="600" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bOE-Os-CMc" id="oqR-Fp-PHC">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yn2-Hb-Vpq">
+                                            <rect key="frame" x="16" y="16" width="28" height="25"/>
+                                            <state key="normal" title="Button" image="blueHeart"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rX-uf-QbN">
+                                            <rect key="frame" x="71" y="14" width="488" height="29"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="This will be the title .">
+                                                    <attributes>
+                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <font key="NSFont" size="22" name="Futura-Medium"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9J-ua-q6a">
+                                            <rect key="frame" x="8" y="54" width="50" height="41"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="&lt; 1 mi.">
+                                                    <attributes>
+                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWW-Tb-7ZD">
+                                            <rect key="frame" x="71" y="51" width="142" height="21"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="most recent review ">
+                                                    <attributes>
+                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="categoryIcon" destination="yn2-Hb-Vpq" id="fnd-6c-auN"/>
+                                    <outlet property="entrySubtitle" destination="VWW-Tb-7ZD" id="d6h-kg-iM0"/>
+                                    <outlet property="entryTitle" destination="3rX-uf-QbN" id="hfp-3C-SXJ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="Wbm-sm-2ui" id="lXQ-T0-l07"/>
-                            <outlet property="delegate" destination="Wbm-sm-2ui" id="oJg-5U-maF"/>
+                            <outlet property="dataSource" destination="37Q-DX-nPR" id="mEp-GK-z1M"/>
+                            <outlet property="delegate" destination="37Q-DX-nPR" id="Hlb-jc-Eak"/>
                         </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" id="Wzu-Ah-PYb">
-                        <barButtonItem key="leftBarButtonItem" image="mapView.png" id="dHb-mn-CzH">
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="JVh-5u-iTn"/>
+                    <navigationItem key="navigationItem" id="UjH-S0-gGm">
+                        <barButtonItem key="leftBarButtonItem" image="mapView.png" id="kOP-Pa-bqS">
                             <connections>
-                                <segue destination="jxr-Do-I8k" kind="showDetail" id="Hoi-8c-0QS"/>
+                                <segue destination="jxr-Do-I8k" kind="presentation" id="uhC-Qn-CnK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="fuX-UH-Ltb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7">
                             <connections>
-                                <segue destination="8mN-88-Vaz" kind="presentation" id="6Zs-Rx-1jc"/>
+                                <segue destination="SLq-GC-h0z" kind="showDetail" id="leV-3g-YSC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RO9-Nh-UyO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rFE-JY-sig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2346" y="1316"/>
+            <point key="canvasLocation" x="2273" y="1272"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Ws-sQ-8ky">
@@ -212,29 +255,30 @@
             <point key="canvasLocation" x="2065" y="538"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Bbd-r7-exH">
+        <scene sceneID="QfX-DH-RYk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aSN-0C-Ioh" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pqj-37-onN" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ugR-vw-yte">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nm1-oD-upe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Wbm-sm-2ui" kind="relationship" relationship="rootViewController" id="5f2-G5-3r6"/>
+                        <segue destination="37Q-DX-nPR" kind="relationship" relationship="rootViewController" id="MUw-Xm-XYq"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h5w-3I-NM9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KxH-yW-ILa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1397" y="1306"/>
+            <point key="canvasLocation" x="1391" y="1267"/>
         </scene>
     </scenes>
     <resources>
+        <image name="blueHeart" width="25" height="25"/>
         <image name="listView" width="25" height="25"/>
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6Zs-Rx-1jc"/>
+        <segue reference="leV-3g-YSC"/>
     </inferredMetricsTieBreakers>
 </document>
