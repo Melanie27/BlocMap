@@ -11,4 +11,13 @@
 
 @implementation SearchResultsViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+   
+    self.navigationItem.title = @"Results";
+        
+}
+
+
+
 @end

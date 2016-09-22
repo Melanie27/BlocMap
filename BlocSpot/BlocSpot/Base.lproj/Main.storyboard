@@ -47,9 +47,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rXy-UH-gsp">
-                        <barButtonItem key="leftBarButtonItem" image="mapView.png" id="fpc-AE-4bp">
+                        <barButtonItem key="leftBarButtonItem" image="listView" id="fpc-AE-4bp">
                             <connections>
-                                <segue destination="Wbm-sm-2ui" kind="presentation" modalPresentationStyle="formSheet" id="lPB-nQ-EdE"/>
+                                <segue destination="aSN-0C-Ioh" kind="presentation" id="itE-nW-coC"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="search" id="hzm-qg-EE5">
@@ -144,7 +144,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WBm-HV-DET">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -159,6 +159,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="Wzu-Ah-PYb">
+                        <barButtonItem key="leftBarButtonItem" image="mapView.png" id="dHb-mn-CzH">
+                            <connections>
+                                <segue destination="jxr-Do-I8k" kind="showDetail" id="Hoi-8c-0QS"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="fuX-UH-Ltb">
                             <connections>
                                 <segue destination="8mN-88-Vaz" kind="presentation" id="6Zs-Rx-1jc"/>
@@ -226,10 +231,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="listView" width="25" height="25"/>
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lPB-nQ-EdE"/>
         <segue reference="6Zs-Rx-1jc"/>
     </inferredMetricsTieBreakers>
 </document>
