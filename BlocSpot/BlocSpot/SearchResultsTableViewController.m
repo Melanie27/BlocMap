@@ -10,6 +10,7 @@
 #import "SearchResultsTableViewController.h"
 #import "SearchResultsTableViewCell.h"
 #import "BLSDataSource.h"
+#import "MapViewController.h"
 
 
 @interface SearchResultsTableViewController () <UITableViewDelegate, UITableViewDataSource, SearchResultsTableViewCellDelegate>
@@ -44,22 +45,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    //need to return the result count
-    //return [results.mapItems count];
-    return 10;
-    //return self.results.mapItems.count;
-    //NSLog(@"items %@", [BLSDataSource sharedInstance].results.mapItems);
-          //return [BLSDataSource sharedInstance].results.mapItems;
+    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+   
+   
+    return [results.mapItems count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
    SearchResultsTableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
     resultCell.delegate = self;
     // Configure the cell...
     
-    MKMapItem *item = self.results.mapItems[indexPath.row];
+    MKMapItem *item = results.mapItems[indexPath.row];
     NSLog(@"table item %@", item);
     resultCell.textLabel.text = item.name;
     resultCell.detailTextLabel.text = item.placemark.addressDictionary[@"Street"];
