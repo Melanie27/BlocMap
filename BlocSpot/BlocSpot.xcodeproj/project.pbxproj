@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
+		9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */; };
+		9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */; };
+		9B96CD191D9455BC008E6842 /* SearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD181D9455BC008E6842 /* SearchResultsTableViewCell.m */; };
 		9BA722C21D8C665E006FC1B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C11D8C665E006FC1B1 /* main.m */; };
 		9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C41D8C665E006FC1B1 /* AppDelegate.m */; };
 		9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C71D8C665E006FC1B1 /* ViewController.m */; };
@@ -15,6 +19,12 @@
 		9BA722D01D8C665E006FC1B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */; };
 		9BA722DB1D8C665E006FC1B1 /* BlocSpotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722DA1D8C665E006FC1B1 /* BlocSpotTests.m */; };
 		9BA722E61D8C665E006FC1B1 /* BlocSpotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722E51D8C665E006FC1B1 /* BlocSpotUITests.m */; };
+		9BA722F41D8C66F9006FC1B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA722F31D8C66F9006FC1B1 /* MapKit.framework */; };
+		9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722F61D8C6751006FC1B1 /* MapViewController.m */; };
+		9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADC81D91D91100117D24 /* BLSDataSource.m */; };
+		9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCB1D921B5500117D24 /* MyAnnotation.m */; };
+		9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */; };
+		9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5D7201D908690007E6DBE /* SearchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +45,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B6FDCC81D919D35000B77AB /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
+		9B6FDCC91D919D35000B77AB /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
+		9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointOfInterest.h; sourceTree = "<group>"; };
+		9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointOfInterest.m; sourceTree = "<group>"; };
+		9B96CD141D945086008E6842 /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
+		9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
+		9B96CD171D9455BC008E6842 /* SearchResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewCell.h; sourceTree = "<group>"; };
+		9B96CD181D9455BC008E6842 /* SearchResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewCell.m; sourceTree = "<group>"; };
 		9BA722BD1D8C665E006FC1B1 /* BlocSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA722C11D8C665E006FC1B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9BA722C31D8C665E006FC1B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +69,17 @@
 		9BA722E11D8C665E006FC1B1 /* BlocSpotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocSpotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA722E51D8C665E006FC1B1 /* BlocSpotUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocSpotUITests.m; sourceTree = "<group>"; };
 		9BA722E71D8C665E006FC1B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BA722F31D8C66F9006FC1B1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9BA722F51D8C6751006FC1B1 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		9BA722F61D8C6751006FC1B1 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		9BACADC71D91D91100117D24 /* BLSDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLSDataSource.h; sourceTree = "<group>"; };
+		9BACADC81D91D91100117D24 /* BLSDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLSDataSource.m; sourceTree = "<group>"; };
+		9BACADCA1D921B5500117D24 /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
+		9BACADCB1D921B5500117D24 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
+		9BACADCD1D921E8D00117D24 /* MyAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotationView.h; sourceTree = "<group>"; };
+		9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
+		9BF5D71F1D908690007E6DBE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		9BF5D7201D908690007E6DBE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BA722F41D8C66F9006FC1B1 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +111,7 @@
 		9BA722B41D8C665E006FC1B1 = {
 			isa = PBXGroup;
 			children = (
+				9BA722F31D8C66F9006FC1B1 /* MapKit.framework */,
 				9BA722BF1D8C665E006FC1B1 /* BlocSpot */,
 				9BA722D91D8C665E006FC1B1 /* BlocSpotTests */,
 				9BA722E41D8C665E006FC1B1 /* BlocSpotUITests */,
@@ -106,6 +137,24 @@
 				9BA722C61D8C665E006FC1B1 /* ViewController.h */,
 				9BA722C71D8C665E006FC1B1 /* ViewController.m */,
 				9BA722C91D8C665E006FC1B1 /* Main.storyboard */,
+				9BA722F51D8C6751006FC1B1 /* MapViewController.h */,
+				9BA722F61D8C6751006FC1B1 /* MapViewController.m */,
+				9BACADCA1D921B5500117D24 /* MyAnnotation.h */,
+				9BACADCB1D921B5500117D24 /* MyAnnotation.m */,
+				9BACADCD1D921E8D00117D24 /* MyAnnotationView.h */,
+				9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */,
+				9BF5D71F1D908690007E6DBE /* SearchViewController.h */,
+				9BF5D7201D908690007E6DBE /* SearchViewController.m */,
+				9B96CD141D945086008E6842 /* SearchResultsTableViewController.h */,
+				9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */,
+				9B96CD171D9455BC008E6842 /* SearchResultsTableViewCell.h */,
+				9B96CD181D9455BC008E6842 /* SearchResultsTableViewCell.m */,
+				9BACADC71D91D91100117D24 /* BLSDataSource.h */,
+				9BACADC81D91D91100117D24 /* BLSDataSource.m */,
+				9B6FDCC81D919D35000B77AB /* Search.h */,
+				9B6FDCC91D919D35000B77AB /* Search.m */,
+				9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */,
+				9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */,
 				9BA722CC1D8C665E006FC1B1 /* Assets.xcassets */,
 				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9BA722D11D8C665E006FC1B1 /* Info.plist */,
@@ -207,6 +256,11 @@
 				TargetAttributes = {
 					9BA722BC1D8C665E006FC1B1 = {
 						CreatedOnToolsVersion = 7.3;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					9BA722D51D8C665E006FC1B1 = {
 						CreatedOnToolsVersion = 7.3;
@@ -271,8 +325,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */,
+				9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */,
 				9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */,
+				9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */,
+				9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */,
+				9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */,
+				9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */,
+				9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */,
 				9BA722C21D8C665E006FC1B1 /* main.m in Sources */,
+				9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */,
+				9B96CD191D9455BC008E6842 /* SearchResultsTableViewCell.m in Sources */,
+				9B6FDCCA1D919D35000B77AB /* Search.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +561,7 @@
 				9BA722EC1D8C665E006FC1B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BA722ED1D8C665E006FC1B1 /* Build configuration list for PBXNativeTarget "BlocSpotTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +570,7 @@
 				9BA722EF1D8C665E006FC1B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BA722F01D8C665E006FC1B1 /* Build configuration list for PBXNativeTarget "BlocSpotUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +579,7 @@
 				9BA722F21D8C665E006FC1B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
