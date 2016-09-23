@@ -40,17 +40,11 @@ MKLocalSearch *localSearch;
     
     self.latestSearchRequest = [[MKLocalSearchRequest alloc] init];
     self.latestSearchRequest.naturalLanguageQuery = searchText;
-    
-    //set the region - make the region narrower?
-    CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
-    self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 1000000, 1000000);
-    
-    //CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(43.62862, -79.331245);
-    //[self.mapView setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.01f, 0.01f))];
+
     self.latestSearchRequest.region = self.mapView.region;
     
     NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
-    NSMutableArray *arrayOfAnnotaions = [[NSMutableArray alloc] init];
+   
     localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
@@ -74,8 +68,7 @@ MKLocalSearch *localSearch;
         }
         
         self.results = response;
-        NSLog(@"%d",[arrayOfPOIs count]);
-        NSLog(@"map items %@", response.mapItems );
+        
         
         NSMutableArray *placemarks = [NSMutableArray array];
         for (MKMapItem *mapItem in response.mapItems) {
