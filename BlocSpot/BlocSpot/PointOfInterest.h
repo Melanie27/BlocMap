@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PointOfInterest : NSObject
+@interface PointOfInterest : NSObject <NSCoding>
+
+@property NSString *poiName;
+@property NSString *poiAddress;
+@property NSString *poiPhoneNumber;
+@property NSString *poiNote;
+@property NSURL *poiUrl;
+@property NSSet *poiCategories;
+@property NSString *poiCategory;
 
 @end

@@ -35,6 +35,23 @@ MKLocalSearch *localSearch;
     
     return self;
 }
+
+#pragma saving to disc
+- (NSString *) pathForFilename:(NSString *) filename {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:filename];
+    return dataPath;
+}
+
+- (void) savePOI {
+   
+    
+    
+}
+
+
+
 -(void)searchMap:(NSString *)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler {
     //cancel previous searches
     //[localSearch cancel];
@@ -90,7 +107,28 @@ MKLocalSearch *localSearch;
         }
         
 
-        completionHandler(response, error);
+                completionHandler(response, error);
+        
+        if (response.mapItems.count > 0) {
+            // Write the changes to disk
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSUInteger numberOfItemsToSave = MIN(response.mapItems.count, 50);
+                NSArray *mapItemsToSave = [response.mapItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+                NSLog(@"map items to save %@", mapItemsToSave); 
+                NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mapItems))];
+                NSLog(@"fullpath %@", fullPath);
+                NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:mapItemsToSave];
+               
+                
+                NSError *dataError;
+                BOOL wroteSuccessfully = [mapItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+                NSLog(@"map item data %@", mapItemData);
+                if (!wroteSuccessfully) {
+                    NSLog(@"Couldn't write file: %@", dataError);
+                }
+            });
+            
+        }
        
          }];
     
