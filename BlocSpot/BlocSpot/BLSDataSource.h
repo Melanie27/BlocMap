@@ -10,6 +10,8 @@
 #import <MapKit/Mapkit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class SearchResultsTableViewController;
+
 @interface BLSDataSource : NSObject
 
 
@@ -20,6 +22,7 @@
 @property (nonatomic, strong) MKLocalSearchResponse *results;
 @property (strong, nonatomic) MKMapView *mapView;
 @property(nonatomic, assign) MKCoordinateRegion region;
+@property (nonatomic, weak) SearchResultsTableViewController *srtvc;
 
 
 

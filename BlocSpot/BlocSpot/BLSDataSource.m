@@ -7,6 +7,7 @@
 //
 
 #import "BLSDataSource.h"
+#import "SearchResultsTableViewCell.h"
 
 @implementation BLSDataSource
 
@@ -36,7 +37,7 @@ MKLocalSearch *localSearch;
 }
 -(void)searchMap:(NSString *)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler {
     //cancel previous searches
-    [localSearch cancel];
+    //[localSearch cancel];
     
     self.latestSearchRequest = [[MKLocalSearchRequest alloc] init];
     self.latestSearchRequest.naturalLanguageQuery = searchText;
@@ -88,15 +89,12 @@ MKLocalSearch *localSearch;
             [arrayOfPOIs addObject:name];
         }
         
-        
-        
-         //[self.mapView loadTheDataAgain];
-        
-        //NSLog(@"BLSresponse bounding region %@", response.mapItems.boundingRegion.center.latitude );
-        
+
         completionHandler(response, error);
-        //[self.searchDisplayController.searchResultsTableViewController reloadData];*/
+       
          }];
+    
+    //[self.srtvc.tableView reloadData];
 }
 
 @end

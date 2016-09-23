@@ -19,6 +19,16 @@
 
 @implementation SearchResultsTableViewController
 
+//Override the table view controller's initializer to create an empty array
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Search Results";
@@ -28,7 +38,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-     //[BLCDataSource sharedInstance].srvc = self;
+     [BLSDataSource sharedInstance].srtvc = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,9 +70,11 @@
     
     MKMapItem *item = results.mapItems[indexPath.row];
     NSLog(@"table item %@", item);
-    resultCell.textLabel.text = item.name;
-    resultCell.detailTextLabel.text = item.placemark.addressDictionary[@"Street"];
-    
+    //resultCell.textLabel.text = item.name;
+    //resultCell.detailTextLabel.text = item.placemark.addressDictionary[@"Street"];
+    resultCell.detailTextLabel.text = item.phoneNumber;
+    resultCell.entryTitle.text = item.name;
+    resultCell.entrySubtitle.text = item.phoneNumber;
     return resultCell;
 }
 

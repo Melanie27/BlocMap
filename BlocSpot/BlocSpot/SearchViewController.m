@@ -45,7 +45,11 @@
    
     [self dismissViewControllerAnimated:YES completion:^{
         [self.mapVC loadSearchResults];
+        
+       
     }];
+    
+    
 }
 
 - (IBAction)searchMap:(id)sender {
