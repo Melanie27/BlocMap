@@ -49,19 +49,13 @@
 }
 
 - (IBAction)searchMap:(id)sender {
-    NSLog(@"search text %@", self.searchText.text);
-    //cancel previous searches
-    //[localSearch cancel];
-    
-    
-    //this is not being called
+
     [[BLSDataSource sharedInstance] searchMap:self.searchText.text andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
-        NSLog(@"response %@", response);
-        [self dismissSearchView:self];
+       
+       
     }];
+     
    
-   
-    //request.region = mapView.region;
-    //make the search in mapkit with parameters
+
 }
 @end

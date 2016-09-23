@@ -208,7 +208,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7">
                             <connections>
-                                <segue destination="8mN-88-Vaz" kind="showDetail" id="9Yl-il-vaX"/>
+                                <segue destination="8mN-88-Vaz" kind="show" id="IJd-4J-jqX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -261,6 +261,6 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="D2a-Rw-adK"/>
+        <segue reference="IJd-4J-jqX"/>
     </inferredMetricsTieBreakers>
 </document>

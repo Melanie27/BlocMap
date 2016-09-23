@@ -55,6 +55,7 @@ CLLocationManager *locationManager;
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
+    //TODO - make special annotations with images in the furture
     /*if([annotation isKindOfClass:[MyAnnotation class]]) {
         static NSString *myAnnotationID = @"myAnnotation";
          MyAnnotationView *annotationView = (MyAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:(myAnnotationID)];
@@ -116,9 +117,6 @@ CLLocationManager *locationManager;
     
     for (int i=0; i<[results.mapItems count]; i++) {
         MKMapItem* itemPOI = results.mapItems[i];
-        NSLog(@"Result: %@",itemPOI.placemark.name);
-    
-        
         MKPlacemark* annotation= [[MKPlacemark alloc] initWithPlacemark:itemPOI.placemark];
         
         MKPointAnnotation *marker = [MKPointAnnotation new];
@@ -126,22 +124,13 @@ CLLocationManager *locationManager;
         marker.title = itemPOI.placemark.name;
         marker.subtitle = itemPOI.placemark.name;
         
-        //NSLog(annotation.coordinate);
-        [self.mapView addAnnotation:marker];
         
-        NSLog(@"annotations %d",[self.mapView.annotations count]);
+        [self.mapView addAnnotation:marker];
+    
         
     }
-    //NSLog(@"%@",searchText);
-    
-    
-    if (!results) {return;}
-    NSLog(@"*************results %@", results);
-    self.mapView.region = results.boundingRegion;
-    NSLog(@"bounding region %@", self.mapView);
-    
-     
-     }
+   
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [self loadSearchResults];
