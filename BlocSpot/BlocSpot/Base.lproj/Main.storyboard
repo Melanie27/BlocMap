@@ -59,6 +59,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="ReE-6e-pYB" id="Wwb-q4-fn3"/>
                         <outlet property="userLocationLabel" destination="n7I-dI-4xy" id="Qkm-aG-J7M"/>
                     </connections>
                 </viewController>
@@ -126,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXZ-5p-lYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2201" y="538"/>
+            <point key="canvasLocation" x="2415" y="526"/>
         </scene>
         <!--Item-->
         <scene sceneID="nJt-mJ-9Hu">
@@ -205,7 +206,11 @@
                                 <segue destination="jxr-Do-I8k" kind="presentation" id="uhC-Qn-CnK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7">
+                            <connections>
+                                <segue destination="8mN-88-Vaz" kind="showDetail" id="9Yl-il-vaX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -255,4 +260,7 @@
         <image name="listView" width="25" height="25"/>
         <image name="mapView.png" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="D2a-Rw-adK"/>
+    </inferredMetricsTieBreakers>
 </document>

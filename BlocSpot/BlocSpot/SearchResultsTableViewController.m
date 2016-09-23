@@ -13,7 +13,7 @@
 
 
 @interface SearchResultsTableViewController () <UITableViewDelegate, UITableViewDataSource, SearchResultsTableViewCellDelegate>
-
+@property (nonatomic, strong) MKLocalSearchResponse *results;
 @end
 
 @implementation SearchResultsTableViewController
@@ -26,6 +26,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+     //[BLCDataSource sharedInstance].srvc = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,6 +47,9 @@
     //need to return the result count
     //return [results.mapItems count];
     return 10;
+    //return self.results.mapItems.count;
+    //NSLog(@"items %@", [BLSDataSource sharedInstance].results.mapItems);
+          //return [BLSDataSource sharedInstance].results.mapItems;
 }
 
 
@@ -53,6 +58,11 @@
    SearchResultsTableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
     resultCell.delegate = self;
     // Configure the cell...
+    
+    MKMapItem *item = self.results.mapItems[indexPath.row];
+    NSLog(@"table item %@", item);
+    resultCell.textLabel.text = item.name;
+    resultCell.detailTextLabel.text = item.placemark.addressDictionary[@"Street"];
     
     return resultCell;
 }

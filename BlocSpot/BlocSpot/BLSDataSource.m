@@ -49,7 +49,8 @@ MKLocalSearch *localSearch;
     //[self.mapView setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.01f, 0.01f))];
     self.latestSearchRequest.region = self.mapView.region;
     
-    
+    NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayOfAnnotaions = [[NSMutableArray alloc] init];
     localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
@@ -73,8 +74,32 @@ MKLocalSearch *localSearch;
         }
         
         self.results = response;
+        NSLog(@"%d",[arrayOfPOIs count]);
         NSLog(@"map items %@", response.mapItems );
-        NSLog(@"BLSresponse %@", response );
+        
+        NSMutableArray *placemarks = [NSMutableArray array];
+        for (MKMapItem *mapItem in response.mapItems) {
+            [placemarks addObject:mapItem.placemark];
+            NSLog(@"placemarks %@", placemarks);
+        }
+        
+        NSMutableArray *phoneNumbers = [NSMutableArray array];
+        for (MKMapItem *mapItem in response.mapItems) {
+            [phoneNumbers addObject:mapItem.phoneNumber];
+            NSLog(@"phone numbers %@", phoneNumbers);
+        }
+        
+        for (MKMapItem *item in response.mapItems) {
+            NSString *name = item.name;
+            NSLog(@"%@",name);
+            [arrayOfPOIs addObject:name];
+        }
+        
+        
+        
+         //[self.mapView loadTheDataAgain];
+        
+        //NSLog(@"BLSresponse bounding region %@", response.mapItems.boundingRegion.center.latitude );
         
         completionHandler(response, error);
         //[self.searchDisplayController.searchResultsTableViewController reloadData];*/

@@ -48,26 +48,6 @@ CLLocationManager *locationManager;
     
    
     
-    //We will get this from the data source
-    /*MyAnnotation *ann1 = [[MyAnnotation alloc]
-    initWithCoordinate: CLLocationCoordinate2DMake(34.4208, -119.6982)
-    title: @"Santa Barbara"
-    subtitle: @"Vacation spot"
-    contactInformation:@"9177031346"];*/
-
-    
-    /*MyAnnotation *annotation2 = [[MyAnnotation alloc]
-    initWithCoordinate: CLLocationCoordinate2DMake(33.8303, -116.5453)
-    title:@"Palm Springs"
-    subtitle: @"It's like a sauna"
-    contactInformation: @"2124723014"];*/
-   
-    
-    //[self.mapView addAnnotation:ann1];
-    //[self.mapView addAnnotation:annotation2];
-    
-    //NSArray *annotations = [NSArray arrayWithObjects:annotation1, annotation2, nil];
-    //[self.mapView addAnnotations:annotations];
     
     
     
@@ -133,25 +113,33 @@ CLLocationManager *locationManager;
 -(void)loadSearchResults {
     MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
 
-    if (!results) {return;}
     
+    for (int i=0; i<[results.mapItems count]; i++) {
+        MKMapItem* itemPOI = results.mapItems[i];
+        NSLog(@"Result: %@",itemPOI.placemark.name);
+    
+        
+        MKPlacemark* annotation= [[MKPlacemark alloc] initWithPlacemark:itemPOI.placemark];
+        
+        MKPointAnnotation *marker = [MKPointAnnotation new];
+        marker.coordinate = CLLocationCoordinate2DMake(33.8303, -116.5453);
+        marker.title = itemPOI.placemark.name;
+        marker.subtitle = itemPOI.placemark.name;
+        [self.mapView addAnnotation:marker];
+        
+        NSLog(@"annotations %d",[self.mapView.annotations count]);
+        
+    }
+    //NSLog(@"%@",searchText);
+    
+    
+    if (!results) {return;}
     NSLog(@"*************results %@", results);
     self.mapView.region = results.boundingRegion;
-    NSLog(@"bounding region %@", self.mapView.region);
-    //Add some annotations
-    MKPointAnnotation *annotation1 = [[MKPointAnnotation alloc]init];
-    annotation1.title = results.mapItems[0].name;
-    annotation1.subtitle = results.mapItems[0].phoneNumber;
-    annotation1.coordinate = results.mapItems[0].placemark.coordinate;
+    NSLog(@"bounding region %@", self.mapView);
     
-    MKPointAnnotation *annotation2 = [[MKPointAnnotation alloc]init];
-    annotation2.title = @"Palm Springs";
-    annotation2.subtitle = @"It's like a sauna";
-    annotation2.coordinate = CLLocationCoordinate2DMake(33.8303, -116.5453);
-    
-    [self.mapView addAnnotation:annotation1];
-  //  [self.mapView addAnnotation:annotation2];
-}
+     
+     }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self loadSearchResults];

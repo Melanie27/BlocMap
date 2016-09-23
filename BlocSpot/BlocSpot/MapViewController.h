@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UILabel *userLocationLabel;
+@property(nonatomic, readonly) MKCoordinateRegion region;
 
 -(void)loadSearchResults;
 @end

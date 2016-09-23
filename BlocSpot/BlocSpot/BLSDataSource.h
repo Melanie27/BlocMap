@@ -22,5 +22,6 @@
 @property(nonatomic, assign) MKCoordinateRegion region;
 
 
+
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 @end
