@@ -122,9 +122,11 @@ CLLocationManager *locationManager;
         MKPlacemark* annotation= [[MKPlacemark alloc] initWithPlacemark:itemPOI.placemark];
         
         MKPointAnnotation *marker = [MKPointAnnotation new];
-        marker.coordinate = CLLocationCoordinate2DMake(33.8303, -116.5453);
+        marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
         marker.title = itemPOI.placemark.name;
         marker.subtitle = itemPOI.placemark.name;
+        
+        //NSLog(annotation.coordinate);
         [self.mapView addAnnotation:marker];
         
         NSLog(@"annotations %d",[self.mapView.annotations count]);
