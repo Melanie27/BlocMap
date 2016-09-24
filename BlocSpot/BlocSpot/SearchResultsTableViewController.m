@@ -13,8 +13,10 @@
 #import "MapViewController.h"
 
 
-@interface SearchResultsTableViewController () <UITableViewDelegate, UITableViewDataSource, SearchResultsTableViewCellDelegate>
+@interface SearchResultsTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SearchResultsTableViewCellDelegate>
 @property (nonatomic, strong) MKLocalSearchResponse *results;
+
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation SearchResultsTableViewController
@@ -69,13 +71,38 @@
     // Configure the cell...
     
     MKMapItem *item = results.mapItems[indexPath.row];
-    NSLog(@"table item %@", item);
+    //NSLog(@"table item %@", item);
     //resultCell.textLabel.text = item.name;
     //resultCell.detailTextLabel.text = item.placemark.addressDictionary[@"Street"];
     resultCell.detailTextLabel.text = item.phoneNumber;
     resultCell.entryTitle.text = item.name;
     resultCell.entrySubtitle.text = item.phoneNumber;
+    
+    //accessory button to a popup
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
+    button.tag = indexPath.row;
+    resultCell.accessoryView = button;
+    //when adding the category images
+    //[resultCell.contentView addSubview:resultCell.catPhoto];
+    //resultCell.catPhoto.tag = indexPath.row;
+    
     return resultCell;
+}
+
+#pragma mark - QuestionsTableViewCellDelegate
+- (IBAction)didTapResultDetail:(id)sender {
+    
+    NSLog(@"will show the detail view here");
+    //BLSDataSource *ds = [BLSDataSource sharedInstance];
+    
+    //UIButton *theButton = (UIButton *)sender;
+    //self.questionAddingTo = [BLDataSource sharedInstance].questions[theButton.tag];
+    //ds.detailNumber = theButton.tag;
+    //ds.question = self.questionAddingTo;
+    
+    //[self performSegueWithIdentifier:@"resultDetail" sender:self];
+    
 }
 
 

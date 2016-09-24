@@ -109,7 +109,7 @@ MKLocalSearch *localSearch;
 
                 completionHandler(response, error);
         
-        if (response.mapItems.count > 0) {
+        /*if (response.mapItems.count > 0) {
             // Write the changes to disk
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSUInteger numberOfItemsToSave = MIN(response.mapItems.count, 50);
@@ -128,7 +128,7 @@ MKLocalSearch *localSearch;
                 }
             });
             
-        }
+        }*/
        
          }];
     
