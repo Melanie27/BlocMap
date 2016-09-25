@@ -55,6 +55,18 @@ CLLocationManager *locationManager;
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
+    //detecting user interation with the annotated view
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;
+    
+    MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"loc"];
+    annotationView.canShowCallout = YES;
+    //make the additional button a heart or something that triggers save
+    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    //annotationView.rightCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
+    return annotationView;
+    
+    
     //TODO - make special annotations with images in the furture
     /*if([annotation isKindOfClass:[MyAnnotation class]]) {
         static NSString *myAnnotationID = @"myAnnotation";
@@ -70,7 +82,7 @@ CLLocationManager *locationManager;
     }*/
     
     //don't create annotation views for the user location
-    if([annotation isKindOfClass:[MKPointAnnotation class]]) {
+    /*if([annotation isKindOfClass:[MKPointAnnotation class]]) {
         
         static NSString *userPinAnnotationPurpleId = @"userPinAnnotation";
         
@@ -91,9 +103,16 @@ CLLocationManager *locationManager;
         
         return annotationView;
     
-    }
+    }*/
     //returning nil results in default annotation mark
     return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    //call the save method from data source?
+    NSLog(@"save this pin");
+    //possibly segue into a different screen
+    //[self performSegueWithIdentifier:@"DetailsIphone" sender:view];
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
@@ -122,7 +141,8 @@ CLLocationManager *locationManager;
         MKPointAnnotation *marker = [MKPointAnnotation new];
         marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
         marker.title = itemPOI.placemark.name;
-        marker.subtitle = itemPOI.placemark.name;
+        marker.subtitle = itemPOI.phoneNumber;
+        
         
         
         [self.mapView addAnnotation:marker];

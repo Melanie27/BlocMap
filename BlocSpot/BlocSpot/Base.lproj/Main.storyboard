@@ -138,7 +138,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="150" id="bOE-Os-CMc" customClass="SearchResultsTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="resultCell" editingAccessoryType="disclosureIndicator" focusStyle="custom" rowHeight="150" id="bOE-Os-CMc" customClass="SearchResultsTableViewCell">
                                 <rect key="frame" x="0.0" y="92" width="600" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bOE-Os-CMc" id="oqR-Fp-PHC">
@@ -191,6 +191,7 @@
                                     <outlet property="categoryIcon" destination="yn2-Hb-Vpq" id="fnd-6c-auN"/>
                                     <outlet property="entrySubtitle" destination="VWW-Tb-7ZD" id="d6h-kg-iM0"/>
                                     <outlet property="entryTitle" destination="3rX-uf-QbN" id="hfp-3C-SXJ"/>
+                                    <segue destination="sI9-Fv-f6g" kind="presentation" trigger="accessoryAction" id="qdl-Ww-kWe"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -226,7 +227,7 @@
                         <viewControllerLayoutGuide type="top" id="Jlp-NT-Po8"/>
                         <viewControllerLayoutGuide type="bottom" id="Vyx-E6-KLM"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5tx-qc-lBt">
+                    <view key="view" contentMode="scaleToFill" id="5tx-qc-lBt" customClass="ResultDetai">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -234,7 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f49-uq-XPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3129" y="1267"/>
+            <point key="canvasLocation" x="3130" y="1267"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Ws-sQ-8ky">

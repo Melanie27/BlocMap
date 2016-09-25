@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SearchResultsTableViewController.h"
 #import "SearchResultsTableViewCell.h"
+#import "ResultDetailViewController.h"
 #import "BLSDataSource.h"
 #import "MapViewController.h"
 
@@ -79,10 +80,10 @@
     resultCell.entrySubtitle.text = item.phoneNumber;
     
     //accessory button to a popup
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
-    button.tag = indexPath.row;
-    resultCell.accessoryView = button;
+    //UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    //[button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
+    //button.tag = indexPath.row;
+    //resultCell.accessoryView = button;
     //when adding the category images
     //[resultCell.contentView addSubview:resultCell.catPhoto];
     //resultCell.catPhoto.tag = indexPath.row;
@@ -101,7 +102,7 @@
     //ds.detailNumber = theButton.tag;
     //ds.question = self.questionAddingTo;
     
-    //[self performSegueWithIdentifier:@"resultDetail" sender:self];
+    [self performSegueWithIdentifier:@"resultDetail" sender:self];
     
 }
 
@@ -110,6 +111,15 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
     
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"resultDetail"])
+    {
+        ResultDetailViewController *resultDetailVC = (ResultDetailViewController*)segue.destinationViewController;
+        //resultDetailVC.question = self.questionAddingTo;
+        
+    }
 }
 
 /*
