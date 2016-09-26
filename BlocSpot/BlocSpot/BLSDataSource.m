@@ -10,6 +10,7 @@
 #import "SearchResultsTableViewCell.h"
 #import "PointOfInterest.h"
 
+
 @implementation BLSDataSource
 
 MKLocalSearch *localSearch;
@@ -75,19 +76,21 @@ MKLocalSearch *localSearch;
      localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
-        for (MKMapItem *item in response.mapItems) {
-            NSString *name = item.name;
-            NSLog(@"%@",name);
-            [arrayOfPOIs addObject:name];
+        for (MKMapItem *mapItem in response.mapItems) {
+            PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
+            // add if it's been clicked here
+            if (1) {
+                [arrayOfPOIs addObject:item];
+            }
+        }
         
-     
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSUInteger numberOfItemsToSave = MIN(response.mapItems.count, 50);
-            NSArray *mapItemsToSave = [response.mapItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+            NSUInteger numberOfItemsToSave = MIN(arrayOfPOIs.count, 50);
+            NSArray *mapItemsToSave = [arrayOfPOIs subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
              //NSArray *mapItemsToSave = [response.mapItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
             
             NSLog(@"map items to save %@", mapItemsToSave);
-            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mapItems))];
+            NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
             NSLog(@"fullpath %@", fullPath);
             NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:mapItemsToSave];
             
@@ -106,10 +109,8 @@ MKLocalSearch *localSearch;
         
         });
             
-        }
     }];
-     
-     //}
+
     
 }
 

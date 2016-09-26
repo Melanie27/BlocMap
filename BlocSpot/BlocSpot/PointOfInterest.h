@@ -16,6 +16,9 @@
                 title:(NSString *)t
            identifier:(NSNumber *)ident;
 
+- (instancetype)initWithMKMapItem:(MKMapItem*)mapItem;
+
+- (MKMapItem*)mapItem;
 
 //This is an optional property from MKAnnotataion
 @property (nonatomic, copy) NSString *title;
@@ -24,6 +27,7 @@
 @property (nonatomic) BOOL canShowCallout;
 
 @property (copy) NSString *address;
+@property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (copy) NSNumber *identifier;
 @property (nonatomic, copy) NSString *imageKey;
 @property (nonatomic, copy) UIImage *image;

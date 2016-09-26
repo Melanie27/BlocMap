@@ -7,13 +7,36 @@
 //
 
 #import "PointOfInterest.h"
+#import <AddressBook/AddressBook.h>
 
+@interface PointOfInterest ()
+@property (nonatomic, copy) NSString *subtitle;
+
+@end
 
 @implementation PointOfInterest
 NSString *const kPinCoordinateLatitudeKey = @"kPinCoordinateLatitudeKey";
 NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
-@synthesize title, subtitle, animatesDrop, canShowCallout, imageKey, image;
 @synthesize address = _address, coordinate = _coordinate, identifier = _indentifier;
+
+- (instancetype)initWithMKMapItem:(MKMapItem*)mapItem {
+    NSString *address = @"";
+    NSString *name = mapItem.name;
+    NSNumber *identifier = @0;
+    CLLocationCoordinate2D coord = mapItem.placemark.location.coordinate;
+    return [self initWithAddress:address coordinate:coord title:name identifier:identifier];
+}
+
+- (MKMapItem*)mapItem {
+    NSDictionary *addrDict = @{
+                            
+                               };
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.coordinate addressDictionary:addrDict];
+    
+    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
+    item.name = self.title;
+    return item;
+}
 
 -(id)initWithAddress:(NSString *)address
           coordinate:(CLLocationCoordinate2D)coordinate
@@ -30,12 +53,13 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
         
         NSDate *theDate = [NSDate date];
         
-        subtitle = [NSDateFormatter localizedStringFromDate:theDate
+        _subtitle = [NSDateFormatter localizedStringFromDate:theDate
                                                   dateStyle:NSDateFormatterShortStyle
                                                   timeStyle:NSDateFormatterShortStyle];
     }
     return self;
 }
+    
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     
@@ -43,7 +67,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
     
     [aCoder encodeDouble:_coordinate.latitude forKey:@"latitude"];
     [aCoder encodeDouble:_coordinate.longitude forKey:@"longitude"];
-    [aCoder encodeObject:title forKey:@"title"];
+    [aCoder encodeObject:_title forKey:@"title"];
     [aCoder encodeObject:_indentifier forKey:@"identifier"];
 }
 
