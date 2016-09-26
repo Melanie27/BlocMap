@@ -65,6 +65,8 @@
 }
 
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
    SearchResultsTableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
@@ -78,6 +80,9 @@
     resultCell.detailTextLabel.text = item.phoneNumber;
     resultCell.entryTitle.text = item.name;
     resultCell.entrySubtitle.text = item.phoneNumber;
+    
+   
+   
     
     //accessory button to a popup
     //UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];

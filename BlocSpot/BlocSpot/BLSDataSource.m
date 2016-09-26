@@ -22,6 +22,11 @@ MKLocalSearch *localSearch;
     static id sharedInstance;
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
+        //read the saved files at launch so saved pins appear
+        
+        
+        
+        
         
     });
     return sharedInstance;
@@ -31,8 +36,24 @@ MKLocalSearch *localSearch;
     self = [super init];
     
     if(self) {
-        NSString *filename = [self pathForFilename:filename];
-        self.annotations = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
+        
+        
+        //TODO Unarchive the saved map data here
+        
+        /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mapItems))];
+            NSArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (storedMapItems.count > 0) {
+                    NSMutableArray *mutableMapItems = [storedMapItems mutableCopy];
+                    
+                    [self willChangeValueForKey:@"mapItems"];
+                    response.mapItems = mutableMapItems;
+                    
+                }
+            });
+        });*/
     }
     
     return self;
@@ -53,6 +74,12 @@ MKLocalSearch *localSearch;
     
      localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
+        NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
+        for (MKMapItem *item in response.mapItems) {
+            NSString *name = item.name;
+            NSLog(@"%@",name);
+            [arrayOfPOIs addObject:name];
+        
      
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(response.mapItems.count, 50);
@@ -62,8 +89,12 @@ MKLocalSearch *localSearch;
             NSLog(@"map items to save %@", mapItemsToSave);
             NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mapItems))];
             NSLog(@"fullpath %@", fullPath);
-            NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:_annotations];
-     
+            NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:mapItemsToSave];
+            
+            
+            
+            //[NSKeyedArchiver archiveRootObject:books toFile:@"/path/to/archive"];
+
      
             NSError *dataError;
             BOOL wroteSuccessfully = [mapItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
@@ -71,7 +102,11 @@ MKLocalSearch *localSearch;
             if (!wroteSuccessfully) {
                 NSLog(@"Couldn't write file: %@", dataError);
             }
+            
+        
         });
+            
+        }
     }];
      
      //}

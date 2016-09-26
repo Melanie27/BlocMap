@@ -7,6 +7,8 @@
 //
 
 #import "SearchResultsTableViewCell.h"
+#import "BLSDataSource.h"
+#import "PointOfInterest.h"
 
 @implementation SearchResultsTableViewCell
 
@@ -21,4 +23,8 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)savePointOfInterest:(id)sender {
+    [[BLSDataSource sharedInstance] savePOI];
+    NSLog(@"this should save the POI to the data source");
+}
 @end

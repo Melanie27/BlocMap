@@ -11,6 +11,7 @@
 #import "MyAnnotationView.h"
 #import "BLSDataSource.h"
 #import "SearchViewController.h"
+#import "PointOfInterest.h"
 
 @interface MapViewController () <CLLocationManagerDelegate>
 
@@ -46,10 +47,7 @@ CLLocationManager *locationManager;
 
     }
     
-   
-    
-    
-    
+
     
 }
 
@@ -133,8 +131,7 @@ CLLocationManager *locationManager;
     [NSString stringWithFormat:@"Location %.5f°, %.5f°", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     NSLog(@"%@", [locations lastObject]);
 }
 
@@ -156,10 +153,7 @@ CLLocationManager *locationManager;
         marker.title = itemPOI.placemark.name;
         marker.subtitle = itemPOI.phoneNumber;
         
-        
-        
         [self.mapView addAnnotation:marker];
-    
         
     }
    

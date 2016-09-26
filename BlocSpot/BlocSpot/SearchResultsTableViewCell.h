@@ -21,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *categoryIcon;
 @property (strong, nonatomic) IBOutlet UILabel *entryTitle;
 @property (strong, nonatomic) IBOutlet UILabel *entrySubtitle;
+- (IBAction)savePointOfInterest:(id)sender;
 
 @end
