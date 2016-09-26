@@ -8,6 +8,7 @@
 
 #import "BLSDataSource.h"
 #import "SearchResultsTableViewCell.h"
+#import "PointOfInterest.h"
 
 @implementation BLSDataSource
 
@@ -30,7 +31,8 @@ MKLocalSearch *localSearch;
     self = [super init];
     
     if(self) {
-        
+        NSString *filename = [self pathForFilename:filename];
+        self.annotations = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
     }
     
     return self;
@@ -46,7 +48,33 @@ MKLocalSearch *localSearch;
 
 - (void) savePOI {
    
+    //if (response.mapItems.count > 0) {
+     // Write the changes to disk
     
+     localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
+    [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
+     
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSUInteger numberOfItemsToSave = MIN(response.mapItems.count, 50);
+            NSArray *mapItemsToSave = [response.mapItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+             //NSArray *mapItemsToSave = [response.mapItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+            
+            NSLog(@"map items to save %@", mapItemsToSave);
+            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mapItems))];
+            NSLog(@"fullpath %@", fullPath);
+            NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:_annotations];
+     
+     
+            NSError *dataError;
+            BOOL wroteSuccessfully = [mapItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+            NSLog(@"map item data %@", mapItemData);
+            if (!wroteSuccessfully) {
+                NSLog(@"Couldn't write file: %@", dataError);
+            }
+        });
+    }];
+     
+     //}
     
 }
 
@@ -108,27 +136,7 @@ MKLocalSearch *localSearch;
         
 
                 completionHandler(response, error);
-        
-        /*if (response.mapItems.count > 0) {
-            // Write the changes to disk
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSUInteger numberOfItemsToSave = MIN(response.mapItems.count, 50);
-                NSArray *mapItemsToSave = [response.mapItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
-                NSLog(@"map items to save %@", mapItemsToSave); 
-                NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mapItems))];
-                NSLog(@"fullpath %@", fullPath);
-                NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:mapItemsToSave];
-               
-                
-                NSError *dataError;
-                BOOL wroteSuccessfully = [mapItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-                NSLog(@"map item data %@", mapItemData);
-                if (!wroteSuccessfully) {
-                    NSLog(@"Couldn't write file: %@", dataError);
-                }
-            });
-            
-        }*/
+
        
          }];
     

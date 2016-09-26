@@ -23,8 +23,9 @@
 @property (strong, nonatomic) MKMapView *mapView;
 @property(nonatomic, assign) MKCoordinateRegion region;
 @property (nonatomic, weak) SearchResultsTableViewController *srtvc;
+@property (retain, nonatomic) NSMutableArray *annotations;
 
 
-
+-(void)savePOI;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 @end

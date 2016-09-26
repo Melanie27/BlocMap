@@ -29,13 +29,5 @@
 @property (nonatomic, copy) UIImage *image;
 
 
-//THESE WERE MY properties that I may discard
-@property NSString *poiName;
-@property NSString *poiAddress;
-@property NSString *poiPhoneNumber;
-@property NSString *poiNote;
-@property NSURL *poiUrl;
-@property NSSet *poiCategories;
-@property NSString *poiCategory;
 
 @end

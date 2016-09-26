@@ -10,7 +10,8 @@
 
 
 @implementation PointOfInterest
-
+NSString *const kPinCoordinateLatitudeKey = @"kPinCoordinateLatitudeKey";
+NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
 @synthesize title, subtitle, animatesDrop, canShowCallout, imageKey, image;
 @synthesize address = _address, coordinate = _coordinate, identifier = _indentifier;
 
@@ -40,7 +41,8 @@
     
     [aCoder encodeObject:_address forKey:@"address"];
     
-    
+    [aCoder encodeDouble:_coordinate.latitude forKey:@"latitude"];
+    [aCoder encodeDouble:_coordinate.longitude forKey:@"longitude"];
     [aCoder encodeObject:title forKey:@"title"];
     [aCoder encodeObject:_indentifier forKey:@"identifier"];
 }
@@ -49,6 +51,9 @@
     self = [super init];
     if (self) {
         [self setAddress:[aDecoder decodeObjectForKey:@"address"]];
+        CLLocationDegrees latitude = [aDecoder decodeDoubleForKey:kPinCoordinateLatitudeKey];
+        CLLocationDegrees longitude = [aDecoder decodeDoubleForKey:kPinCoordinateLongitudeKey];
+        _coordinate = CLLocationCoordinate2DMake(latitude, longitude);
         
     }
     return self;

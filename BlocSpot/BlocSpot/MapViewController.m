@@ -108,11 +108,24 @@ CLLocationManager *locationManager;
     return nil;
 }
 
+/*- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    // Annotation is your custom class that holds information about the annotation
+    if ([view.annotation isKindOfClass:[Annotation class]]) {
+        Annotation *annot = view.annotation;
+        NSInteger index = [self.arrayOfAnnotations indexOfObject:annot];
+    }
+}*/
+
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
-    //call the save method from data source?
-    NSLog(@"save this pin");
-    //possibly segue into a different screen
-    //[self performSegueWithIdentifier:@"DetailsIphone" sender:view];
+   
+    //;
+   
+    //Grap the pin that has been clicked
+       //MKAnnotationView *viewToSave = view.annotation;
+    
+    [[BLSDataSource sharedInstance] savePOI];
+    NSLog(@"save this pin %@", view);
+    
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
