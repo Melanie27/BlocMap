@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SearchResultsTableViewController.h"
 #import "SearchResultsTableViewCell.h"
-#import "ResultDetailViewController.h"
+#import "ResultsDetailViewController.h"
 #import "BLSDataSource.h"
 #import "MapViewController.h"
 
@@ -65,7 +65,9 @@
 }
 
 
-
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"show a detail view now");
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
@@ -82,13 +84,13 @@
     resultCell.entrySubtitle.text = item.phoneNumber;
     
    
-   
+    
     
     //accessory button to a popup
-    //UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    //[button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
-    //button.tag = indexPath.row;
-    //resultCell.accessoryView = button;
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
+    button.tag = indexPath.row;
+    resultCell.accessoryView = button;
     //when adding the category images
     //[resultCell.contentView addSubview:resultCell.catPhoto];
     //resultCell.catPhoto.tag = indexPath.row;
@@ -96,18 +98,25 @@
     return resultCell;
 }
 
+- (void)checkButtonTapped:(id)sender event:(id)event
+{
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
+    if (indexPath != nil)
+    {
+        [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
+    }
+}
+
 #pragma mark - QuestionsTableViewCellDelegate
 - (IBAction)didTapResultDetail:(id)sender {
     
     NSLog(@"will show the detail view here");
-    //BLSDataSource *ds = [BLSDataSource sharedInstance];
+   
     
-    //UIButton *theButton = (UIButton *)sender;
-    //self.questionAddingTo = [BLDataSource sharedInstance].questions[theButton.tag];
-    //ds.detailNumber = theButton.tag;
-    //ds.question = self.questionAddingTo;
-    
-    [self performSegueWithIdentifier:@"resultDetail" sender:self];
+    [self performSegueWithIdentifier:@"resultsDetail" sender:self];
     
 }
 
@@ -119,10 +128,9 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"resultDetail"])
-    {
-        ResultDetailViewController *resultDetailVC = (ResultDetailViewController*)segue.destinationViewController;
-        //resultDetailVC.question = self.questionAddingTo;
+    if([segue.identifier isEqualToString:@"resultDetail"]) {
+        ResultsDetailViewController *resultDetailVC = (ResultsDetailViewController*)segue.destinationViewController;
+       
         
     }
 }

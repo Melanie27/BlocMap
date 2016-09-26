@@ -191,7 +191,7 @@
                                     <outlet property="categoryIcon" destination="yn2-Hb-Vpq" id="fnd-6c-auN"/>
                                     <outlet property="entrySubtitle" destination="VWW-Tb-7ZD" id="d6h-kg-iM0"/>
                                     <outlet property="entryTitle" destination="3rX-uf-QbN" id="hfp-3C-SXJ"/>
-                                    <segue destination="sI9-Fv-f6g" kind="presentation" trigger="accessoryAction" id="qdl-Ww-kWe"/>
+                                    <segue destination="HVB-Qk-6Fd" kind="presentation" identifier="resultsDetail" modalPresentationStyle="overCurrentContext" id="kjl-NX-gue"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -219,23 +219,23 @@
             </objects>
             <point key="canvasLocation" x="2273" y="1272"/>
         </scene>
-        <!--Result Detail View Controller-->
-        <scene sceneID="lWh-Vd-5mi">
+        <!--Results Detail View Controller-->
+        <scene sceneID="X0U-hP-clm">
             <objects>
-                <viewController id="sI9-Fv-f6g" customClass="ResultDetailViewController" sceneMemberID="viewController">
+                <viewController id="HVB-Qk-6Fd" customClass="ResultsDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Jlp-NT-Po8"/>
-                        <viewControllerLayoutGuide type="bottom" id="Vyx-E6-KLM"/>
+                        <viewControllerLayoutGuide type="top" id="cc8-F6-Nbe"/>
+                        <viewControllerLayoutGuide type="bottom" id="8WK-dU-WYF"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5tx-qc-lBt" customClass="ResultDetai">
+                    <view key="view" contentMode="scaleToFill" id="iN3-Wb-y37">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f49-uq-XPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cNq-sq-etQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3130" y="1267"/>
+            <point key="canvasLocation" x="3051" y="1235"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Ws-sQ-8ky">
