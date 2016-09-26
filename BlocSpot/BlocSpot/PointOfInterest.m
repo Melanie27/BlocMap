@@ -11,31 +11,47 @@
 
 @implementation PointOfInterest
 
--(id)initWithCoder:(NSCoder *)aDecoder {
+@synthesize title, subtitle, animatesDrop, canShowCallout, imageKey, image;
+@synthesize address = _address, coordinate = _coordinate, identifier = _indentifier;
+
+-(id)initWithAddress:(NSString *)address
+          coordinate:(CLLocationCoordinate2D)coordinate
+               title:(NSString *)t
+          identifier:(NSNumber *)ident {
     self = [super init];
-    if(self) {
-        return nil;
+    
+    if (self) {
+        _address = [address copy];
+        _coordinate = coordinate;
+        _indentifier = ident;
+        
+        [self setTitle:t];
+        
+        NSDate *theDate = [NSDate date];
+        
+        subtitle = [NSDateFormatter localizedStringFromDate:theDate
+                                                  dateStyle:NSDateFormatterShortStyle
+                                                  timeStyle:NSDateFormatterShortStyle];
     }
-    
-    self.poiName = [aDecoder decodeObjectForKey:@"name"];
-    self.poiAddress = [aDecoder decodeObjectForKey:@"address"];
-    self.poiPhoneNumber = [aDecoder decodeObjectForKey:@"phoneNumber"];
-    self.poiNote = [aDecoder decodeObjectForKey:@"note"];
-    self.poiUrl = [aDecoder decodeObjectForKey:@"url"];
-    self.poiCategories = [aDecoder decodeObjectForKey:@"categories"];
-    self.poiCategory = [aDecoder decodeObjectForKey:@"category"];
-    
     return self;
 }
 
--(void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.poiName forKey:@"name"];
-    [aCoder encodeObject:self.poiAddress forKey:@"address"];
-    [aCoder encodeObject:self.poiPhoneNumber forKey:@"phoneNumber"];
-    [aCoder encodeObject:self.poiNote forKey:@"note"];
-    [aCoder encodeObject:self.poiUrl forKey:@"url"];
-    [aCoder encodeObject:self.poiCategories forKey:@"categories"];
-    [aCoder encodeObject:self.poiCategory forKey:@"category"];
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    
+    [aCoder encodeObject:_address forKey:@"address"];
+    
+    
+    [aCoder encodeObject:title forKey:@"title"];
+    [aCoder encodeObject:_indentifier forKey:@"identifier"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        [self setAddress:[aDecoder decodeObjectForKey:@"address"]];
+        
+    }
+    return self;
     
 }
 @end
