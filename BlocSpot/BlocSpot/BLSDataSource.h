@@ -12,7 +12,7 @@
 
 @class SearchResultsTableViewController;
 
-@interface BLSDataSource : NSObject
+@interface BLSDataSource : NSObject <MKMapViewDelegate>
 
 
 //use singleton pattern so that any code needing to use this class can share the single instance

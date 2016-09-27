@@ -38,23 +38,52 @@ MKLocalSearch *localSearch;
     
     if(self) {
         
-        
         //TODO Unarchive the saved map data here
         
-        /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mapItems))];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
+            NSLog(@"fullpath saved items %@", fullPath);
+            //get the saved map items
             NSArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+            NSLog(@"stored map items %@", storedMapItems);
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (storedMapItems.count > 0) {
-                    NSMutableArray *mutableMapItems = [storedMapItems mutableCopy];
+                if(storedMapItems.count > 0) {
+                    NSLog(@"number of stored map items %lu", (unsigned long)storedMapItems.count);
+                    MKMapItem *mapItem = [[MKMapItem alloc] init];
+                    PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
                     
-                    [self willChangeValueForKey:@"mapItems"];
-                    response.mapItems = mutableMapItems;
+                    //add the markers for the saved items
                     
+                    
+                    
+                    
+                    for (int i=0; i<[storedMapItems count]; i++) {
+                       MKMapItem *mapItem = storedMapItems[i];
+                        MKMapItem *itemPOI = storedMapItems[i];
+                        NSLog(@"mapitem %@", mapItem);
+                        NSLog(@"itemPOI %@", itemPOI);
+                        //MKPlacemark *annotation = [[MKPlacemark alloc] initWithPlacemark:mapItem.placemark];
+                         //MKPlacemark *annotation = [[MKPlacemark alloc] initWithPlacemark:itemPOI.placemark];
+                        //NSLog(@"anno %@", annotation);
+                        //MKPointAnnotation *marker = [MKPointAnnotation new];
+                        //marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
+                        //marker.title = itemPOI.placemark.name;
+                        //marker.subtitle = itemPOI.phoneNumber;
+                        
+                        //[self.mapView addAnnotation:marker];
+                        
+                    }
+                
                 }
+            
+            
             });
-        });*/
+            
+        });
+            
+       
     }
     
     return self;
@@ -79,6 +108,7 @@ MKLocalSearch *localSearch;
         for (MKMapItem *mapItem in response.mapItems) {
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
             // add if it's been clicked here
+            //BOOL itemWasClicked
             if (1) {
                 [arrayOfPOIs addObject:item];
             }
@@ -87,16 +117,12 @@ MKLocalSearch *localSearch;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(arrayOfPOIs.count, 50);
             NSArray *mapItemsToSave = [arrayOfPOIs subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
-             //NSArray *mapItemsToSave = [response.mapItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+            
             
             NSLog(@"map items to save %@", mapItemsToSave);
             NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
             NSLog(@"fullpath %@", fullPath);
             NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:mapItemsToSave];
-            
-            
-            
-            //[NSKeyedArchiver archiveRootObject:books toFile:@"/path/to/archive"];
 
      
             NSError *dataError;
