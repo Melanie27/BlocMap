@@ -61,6 +61,7 @@ CLLocationManager *locationManager;
     annotationView.canShowCallout = YES;
     //make the additional button a heart or something that triggers save
     annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
     //annotationView.rightCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
     return annotationView;
     
@@ -116,10 +117,6 @@ CLLocationManager *locationManager;
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
    
-    //;
-   
-    //Grap the pin that has been clicked
-       //MKAnnotationView *viewToSave = view.annotation;
     
     [[BLSDataSource sharedInstance] savePOI];
     NSLog(@"save this pin %@", view);
