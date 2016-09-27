@@ -51,28 +51,37 @@ MKLocalSearch *localSearch;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(storedMapItems.count > 0) {
                     NSLog(@"number of stored map items %lu", (unsigned long)storedMapItems.count);
-                    MKMapItem *mapItem = [[MKMapItem alloc] init];
-                    PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-                    
-                    //add the markers for the saved items
-                    
-                    
-                    
-                    
+                   
+                   //For each stored map item put a pin on the map!
                     for (int i=0; i<[storedMapItems count]; i++) {
-                       MKMapItem *mapItem = storedMapItems[i];
-                        MKMapItem *itemPOI = storedMapItems[i];
-                        NSLog(@"mapitem %@", mapItem);
-                        NSLog(@"itemPOI %@", itemPOI);
-                        //MKPlacemark *annotation = [[MKPlacemark alloc] initWithPlacemark:mapItem.placemark];
-                         //MKPlacemark *annotation = [[MKPlacemark alloc] initWithPlacemark:itemPOI.placemark];
-                        //NSLog(@"anno %@", annotation);
-                        //MKPointAnnotation *marker = [MKPointAnnotation new];
-                        //marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
-                        //marker.title = itemPOI.placemark.name;
-                        //marker.subtitle = itemPOI.phoneNumber;
+                       //MKMapItem *mapItem = storedMapItems[i];
+                        //NSLog(@"map item name%@", mapItem);
                         
-                        //[self.mapView addAnnotation:marker];
+                        ///THIS IS CRASHING BECAUSE MAP ITEM DOESNT HAVE A NAME???
+                        //PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
+                        //NSLog(@"item %@", item);
+                        //NSLog(@"mapItem lat %f", item.coordinate.latitude);
+                         //NSLog(@"mapItem long %f", item.coordinate.longitude);
+                       
+                        
+                        
+                        
+                        //ADDING THE ANNOTATIONS
+                        
+                        
+                        //MKMapItem* itemPOI = results.mapItems[i];
+                        //MKPlacemark *annotation= [[MKPlacemark alloc] initWithPlacemark:mapItem.placemark];
+                        /*MKPlacemark *annotation = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(34.0195, -118.4912) addressDictionary:nil];
+                        
+                        MKPointAnnotation *marker = [MKPointAnnotation new];
+                        //need to assign this coordinate to the mapItem's location
+                        marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
+                        marker.title = @"Melanie";
+                        marker.subtitle = @"McGanney";
+                        //marker.title = mapItem.placemark.name;
+                        //marker.subtitle = mapItem.phoneNumber;
+                        
+                        [self.mapView addAnnotation:marker];*/
                         
                     }
                 

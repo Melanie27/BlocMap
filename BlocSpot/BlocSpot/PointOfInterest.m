@@ -74,7 +74,8 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        [self setAddress:[aDecoder decodeObjectForKey:@"address"]];
+        //self.title = [aDecoder decodeObjectForKey:@"title"];
+        //[self setAddress:[aDecoder decodeObjectForKey:@"address"]];
         CLLocationDegrees latitude = [aDecoder decodeDoubleForKey:kPinCoordinateLatitudeKey];
         CLLocationDegrees longitude = [aDecoder decodeDoubleForKey:kPinCoordinateLongitudeKey];
         _coordinate = CLLocationCoordinate2DMake(latitude, longitude);
