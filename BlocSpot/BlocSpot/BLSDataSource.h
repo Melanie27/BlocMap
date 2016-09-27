@@ -24,6 +24,7 @@
 @property(nonatomic, assign) MKCoordinateRegion region;
 @property (nonatomic, weak) SearchResultsTableViewController *srtvc;
 @property (retain, nonatomic) NSMutableArray *annotations;
+@property (nonatomic) BOOL itemSelected;
 
 
 -(void)savePOI;

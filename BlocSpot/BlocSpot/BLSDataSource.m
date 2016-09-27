@@ -43,10 +43,10 @@ MKLocalSearch *localSearch;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-            NSLog(@"fullpath saved items %@", fullPath);
+            //NSLog(@"fullpath saved items %@", fullPath);
             //get the saved map items
             NSArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
-            NSLog(@"stored map items %@", storedMapItems);
+            //NSLog(@"stored map items %@", storedMapItems);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(storedMapItems.count > 0) {
@@ -117,8 +117,8 @@ MKLocalSearch *localSearch;
         for (MKMapItem *mapItem in response.mapItems) {
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
             // add if it's been clicked here
-            //BOOL itemWasClicked
-            if (1) {
+            
+            if (_itemSelected) {
                 [arrayOfPOIs addObject:item];
             }
         }
@@ -194,10 +194,12 @@ MKLocalSearch *localSearch;
         }
         
         NSMutableArray *phoneNumbers = [NSMutableArray array];
-        for (MKMapItem *mapItem in response.mapItems) {
-            [phoneNumbers addObject:mapItem.phoneNumber];
-            NSLog(@"phone numbers %@", phoneNumbers);
-        }
+       
+            for (MKMapItem *mapItem in response.mapItems) {
+                [phoneNumbers addObject:mapItem.phoneNumber];
+                NSLog(@"phone numbers %@", phoneNumbers);
+            }
+        
         
         for (MKMapItem *item in response.mapItems) {
             NSString *name = item.name;

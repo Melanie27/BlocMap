@@ -25,6 +25,7 @@
 @property (nonatomic, readonly, copy) NSString *subtitle;
 @property (nonatomic) BOOL animatesDrop;
 @property (nonatomic) BOOL canShowCallout;
+@property (nonatomic) BOOL itemSelected;
 
 @property (copy) NSString *address;
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;

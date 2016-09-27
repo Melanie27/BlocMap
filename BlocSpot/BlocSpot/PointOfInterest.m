@@ -22,6 +22,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem {
     NSString *address = @"";
     NSString *name = mapItem.name;
+    
     NSNumber *identifier = @0;
     CLLocationCoordinate2D coord = mapItem.placemark.location.coordinate;
     return [self initWithAddress:address coordinate:coord title:name identifier:identifier];
@@ -48,6 +49,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
         _address = [address copy];
         _coordinate = coordinate;
         _indentifier = ident;
+       
         
         [self setTitle:t];
         
