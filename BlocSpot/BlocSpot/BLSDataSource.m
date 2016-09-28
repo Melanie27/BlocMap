@@ -39,6 +39,7 @@ MKLocalSearch *localSearch;
     if(self) {
         
         //TODO Unarchive the saved map data here
+         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
@@ -46,42 +47,36 @@ MKLocalSearch *localSearch;
             //NSLog(@"fullpath saved items %@", fullPath);
             //get the saved map items
             NSArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
-            //NSLog(@"stored map items %@", storedMapItems);
+            
+            
+            NSLog(@"stored names %@", storedMapItems);
+            //NEED TO GET ALL THE ELEMENTS OF THESE STORED MAP ITEMS SO CAN CREATE PLACEMARK
+            
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(storedMapItems.count > 0) {
                     NSLog(@"number of stored map items %lu", (unsigned long)storedMapItems.count);
-                   
+                    
                    //For each stored map item put a pin on the map!
                     for (int i=0; i<[storedMapItems count]; i++) {
-                       //MKMapItem *mapItem = storedMapItems[i];
-                        //NSLog(@"map item name%@", mapItem);
+                       PointOfInterest *mapItem = storedMapItems[i];
                         
-                        ///THIS IS CRASHING BECAUSE MAP ITEM DOESNT HAVE A NAME???
-                        //PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-                        //NSLog(@"item %@", item);
-                        //NSLog(@"mapItem lat %f", item.coordinate.latitude);
-                         //NSLog(@"mapItem long %f", item.coordinate.longitude);
-                       
-                        
-                        
+                        NSLog(@"map item %@", mapItem);
+                        NSLog(@"map item title %@", mapItem.title);
+                        NSLog(@"map item subtitle %@", mapItem.subtitle);
+                        NSLog(@"map item coordinate %f", mapItem.coordinate);
+
                         
                         //ADDING THE ANNOTATIONS
                         
-                        
-                        //MKMapItem* itemPOI = results.mapItems[i];
-                        //MKPlacemark *annotation= [[MKPlacemark alloc] initWithPlacemark:mapItem.placemark];
-                        /*MKPlacemark *annotation = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(34.0195, -118.4912) addressDictionary:nil];
-                        
                         MKPointAnnotation *marker = [MKPointAnnotation new];
-                        //need to assign this coordinate to the mapItem's location
-                        marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
-                        marker.title = @"Melanie";
-                        marker.subtitle = @"McGanney";
-                        //marker.title = mapItem.placemark.name;
-                        //marker.subtitle = mapItem.phoneNumber;
                         
-                        [self.mapView addAnnotation:marker];*/
+                        //marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
+                        marker.coordinate = CLLocationCoordinate2DMake(34.0195, -118.4912);
+                        marker.title = mapItem.title;
+                        marker.subtitle = mapItem.subtitle;
+                        
+                        [self.mapView addAnnotation:marker];
                         
                     }
                 
@@ -114,24 +109,66 @@ MKLocalSearch *localSearch;
      localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
+        
+        
         for (MKMapItem *mapItem in response.mapItems) {
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-            // add if it's been clicked here
+            //NEED TO ARCHIVE ALL ASPECTS OF RESPONSE IN ORDER TO BE ABLE TO RETRIEVE THEM ON LAUNCH
+            // ALSO add if it's been clicked here
+            NSString *title = mapItem.name;
+            NSString *subtitle = mapItem.phoneNumber;
+            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake( mapItem.placemark.location.coordinate.latitude, mapItem.placemark.location.coordinate.longitude);
+           
+           
             
-            if (_itemSelected) {
-                [arrayOfPOIs addObject:item];
+            //CLLocationDegrees latitude = mapItem.placemark.location.coordinate.latitude;
+             //CLLocationDegrees latitude = [NSNumber numberWithFloat:mapItem.placemark.location.coordinate.latitude];
+        
+            [arrayOfPOIs addObject:item];
+            
+            NSMutableArray *itemNames = [[NSMutableArray alloc] init];
+            for (item in arrayOfPOIs) {
+                [itemNames addObject:title];
+                NSLog(@"item attributes %@", itemNames);
             }
+            
+            NSMutableArray *itemPhoneNumbers = [[NSMutableArray alloc] init];
+            for (item in arrayOfPOIs) {
+                [itemPhoneNumbers addObject:subtitle];
+                NSLog(@"item phone numbers %@", itemPhoneNumbers);
+            }
+            
+            NSMutableArray *itemPlacemark = [[NSMutableArray alloc] init];
+            for (item in arrayOfPOIs) {
+                NSValue *placemark = [NSValue valueWithMKCoordinate:coordinate];
+                [itemPlacemark addObject:placemark];
+                NSLog(@"item coordinates %@", itemPlacemark);
+            }
+            
+            
+            //NSValue *coord = [NSValue valueWithMKCoordinate:coordinate];
+            
+            //NSLog (@"coord %@", coord);
+            //[arrayOfPOIs addObject: latLongDict];
+            //[arrayOfPOIs addObject: latitude];
+           
+            //NSLog(@"item %@", item);
+             //NSLog(@"title %@", title);
+            //NSLog(@"coord lat %f", mapItem.placemark.location.coordinate.latitude);
+            //NSLog(@"coord long %f", mapItem.placemark.location.coordinate.longitude);
+            //}
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(arrayOfPOIs.count, 50);
             NSArray *mapItemsToSave = [arrayOfPOIs subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+           
             
-            
-            NSLog(@"map items to save %@", mapItemsToSave);
+            //NSLog(@"map items to save %@", mapItemsToSave);
             NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-            NSLog(@"fullpath %@", fullPath);
+            //NSLog(@"fullpath %@", fullPath);
             NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:mapItemsToSave];
+           
 
      
             NSError *dataError;
