@@ -21,6 +21,7 @@
 @property (nonatomic, strong) MKLocalSearchRequest *latestSearchRequest;
 @property (nonatomic, strong) MKLocalSearchResponse *results;
 @property (strong, nonatomic) MKMapView *mapView;
+@property (strong, nonatomic) MKAnnotationView *annotationView;
 @property(nonatomic, assign) MKCoordinateRegion region;
 @property (nonatomic, weak) SearchResultsTableViewController *srtvc;
 @property (retain, nonatomic) NSMutableArray *annotations;

@@ -119,10 +119,8 @@ CLLocationManager *locationManager;
    
     
     [[BLSDataSource sharedInstance] savePOI];
-    NSLog(@"save this pin %@", view);
+    NSLog(@"save this pin");
     
-    //change annotation view if it has been selected
-    view.selected = ![view isSelected];
     
 }
 

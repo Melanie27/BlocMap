@@ -12,6 +12,7 @@
 @interface PointOfInterest ()
 @property (nonatomic, copy) NSString *subtitle;
 
+
 @end
 
 @implementation PointOfInterest
@@ -23,7 +24,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
     NSString *address = @"";
     NSString *name = mapItem.name;
     NSString *subtitle = mapItem.phoneNumber;
-    NSNumber *identifier = @0;
+    NSNumber *identifier = @10;
     CLLocationCoordinate2D coord = mapItem.placemark.location.coordinate;
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
@@ -37,7 +38,8 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
     MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
     item.name = self.title;
     item.phoneNumber = self.subtitle;
-    //item.placemark = self.coordinate;
+    
+    
     return item;
 }
 
@@ -53,7 +55,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
         _coordinate = coordinate;
         _indentifier = ident;
        
-        
+        //[self setPlacemark:_coordinate];
         [self setTitle:t];
          [self setSubtitle:s];
         

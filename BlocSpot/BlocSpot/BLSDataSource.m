@@ -62,8 +62,9 @@ MKLocalSearch *localSearch;
                         NSLog(@"map item %@", mapItem);
                         NSLog(@"map item title %@", mapItem.title);
                         NSLog(@"map item subtitle %@", mapItem.subtitle);
+                        NSLog(@"map item indentifier %@", mapItem.identifier);
                          NSLog(@"map item placemark %@", mapItem.placemark);
-                        NSLog(@"map item coordinate %f", mapItem.coordinate);
+                        //NSLog(@"map item coordinate %f", mapItem.coordinate);
 
                         
                         //ADDING THE ANNOTATIONS
@@ -117,17 +118,19 @@ MKLocalSearch *localSearch;
             NSString *title = mapItem.name;
             NSString *subtitle = mapItem.phoneNumber;
             CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake( mapItem.placemark.location.coordinate.latitude, mapItem.placemark.location.coordinate.longitude);
-           
+            MKPlacemark *placemark = mapItem.placemark;
            
             
-            //CLLocationDegrees latitude = mapItem.placemark.location.coordinate.latitude;
-             //CLLocationDegrees latitude = [NSNumber numberWithFloat:mapItem.placemark.location.coordinate.latitude];
-        
-            [arrayOfPOIs addObject:item];
+           
+            //TODO only add the item that has been tapped in the annotation 
+            //if(self.annotationView.isSelected) {
+                //NSLog(@"only add the clicked one");
+                [arrayOfPOIs addObject:item];
+            //}
             
             NSMutableArray *placemarks = [NSMutableArray array];
             for (item in arrayOfPOIs) {
-                [placemarks addObject:mapItem.placemark];
+                [placemarks addObject:placemark];
                 NSLog(@"archive placemarks %@", placemarks);
             }
             
