@@ -14,6 +14,7 @@
 - (id)initWithAddress:(NSString*)address
            coordinate:(CLLocationCoordinate2D)coordinate
                 title:(NSString *)t
+                subtitle:(NSString *)s
            identifier:(NSNumber *)ident;
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem;
@@ -22,6 +23,8 @@
 
 //This is an optional property from MKAnnotataion
 @property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, copy) MKPlacemark *placemark;
 @property (nonatomic, readonly, copy) NSString *subtitle;
 @property (nonatomic) BOOL animatesDrop;
 @property (nonatomic) BOOL canShowCallout;

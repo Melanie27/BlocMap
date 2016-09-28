@@ -59,6 +59,8 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
         _subtitle = [NSDateFormatter localizedStringFromDate:theDate
                                                   dateStyle:NSDateFormatterShortStyle
                                                   timeStyle:NSDateFormatterShortStyle];
+    
+        
     }
     return self;
 }
@@ -73,6 +75,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
     [aCoder encodeDouble:_coordinate.latitude forKey:@"latitude"];
     [aCoder encodeDouble:_coordinate.longitude forKey:@"longitude"];
     [aCoder encodeObject:_title forKey:@"title"];
+    [aCoder encodeObject:_subtitle forKey:@"subtitle"];
     [aCoder encodeObject:_indentifier forKey:@"identifier"];
     
 }

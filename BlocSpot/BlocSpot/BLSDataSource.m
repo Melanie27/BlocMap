@@ -60,9 +60,10 @@ MKLocalSearch *localSearch;
                        PointOfInterest *mapItem = storedMapItems[i];
                         
                         NSLog(@"map item %@", mapItem);
-                        //NSLog(@"map item title %@", mapItem.title);
-                        //NSLog(@"map item subtitle %@", mapItem.subtitle);
-                        //NSLog(@"map item coordinate %f", mapItem.coordinate);
+                        NSLog(@"map item title %@", mapItem.title);
+                        NSLog(@"map item subtitle %@", mapItem.subtitle);
+                         NSLog(@"map item placemark %@", mapItem.placemark);
+                        NSLog(@"map item coordinate %f", mapItem.coordinate);
 
                         
                         //ADDING THE ANNOTATIONS
