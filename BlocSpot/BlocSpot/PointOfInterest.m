@@ -25,7 +25,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
     NSString *subtitle = mapItem.phoneNumber;
     NSNumber *identifier = @0;
     CLLocationCoordinate2D coord = mapItem.placemark.location.coordinate;
-    return [self initWithAddress:address coordinate:coord title:name identifier:identifier];
+    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
 
 - (MKMapItem*)mapItem {
@@ -37,12 +37,14 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
     MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
     item.name = self.title;
     item.phoneNumber = self.subtitle;
+    //item.placemark = self.coordinate;
     return item;
 }
 
 -(id)initWithAddress:(NSString *)address
           coordinate:(CLLocationCoordinate2D)coordinate
                title:(NSString *)t
+            subtitle:(NSString *)s
           identifier:(NSNumber *)ident {
     self = [super init];
     
@@ -53,12 +55,13 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
        
         
         [self setTitle:t];
+         [self setSubtitle:s];
         
-        NSDate *theDate = [NSDate date];
+        //NSDate *theDate = [NSDate date];
         
-        _subtitle = [NSDateFormatter localizedStringFromDate:theDate
+        /*_subtitle = [NSDateFormatter localizedStringFromDate:theDate
                                                   dateStyle:NSDateFormatterShortStyle
-                                                  timeStyle:NSDateFormatterShortStyle];
+                                                  timeStyle:NSDateFormatterShortStyle];*/
     
         
     }
