@@ -47,8 +47,6 @@ MKLocalSearch *localSearch;
             //NSLog(@"fullpath saved items %@", fullPath);
             //get the saved map items
             NSArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
-            
-            
             NSLog(@"stored names %@", storedMapItems);
             //NEED TO GET ALL THE ELEMENTS OF THESE STORED MAP ITEMS SO CAN CREATE PLACEMARK
             
@@ -62,9 +60,9 @@ MKLocalSearch *localSearch;
                        PointOfInterest *mapItem = storedMapItems[i];
                         
                         NSLog(@"map item %@", mapItem);
-                        NSLog(@"map item title %@", mapItem.title);
-                        NSLog(@"map item subtitle %@", mapItem.subtitle);
-                        NSLog(@"map item coordinate %f", mapItem.coordinate);
+                        //NSLog(@"map item title %@", mapItem.title);
+                        //NSLog(@"map item subtitle %@", mapItem.subtitle);
+                        //NSLog(@"map item coordinate %f", mapItem.coordinate);
 
                         
                         //ADDING THE ANNOTATIONS
@@ -72,11 +70,11 @@ MKLocalSearch *localSearch;
                         MKPointAnnotation *marker = [MKPointAnnotation new];
                         
                         //marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
-                        marker.coordinate = CLLocationCoordinate2DMake(34.0195, -118.4912);
-                        marker.title = mapItem.title;
-                        marker.subtitle = mapItem.subtitle;
+                        //marker.coordinate = CLLocationCoordinate2DMake(34.0195, -118.4912);
+                        //marker.title = mapItem.title;
+                        //marker.subtitle = mapItem.subtitle;
                         
-                        [self.mapView addAnnotation:marker];
+                        //[self.mapView addAnnotation:marker];
                         
                     }
                 
@@ -125,6 +123,12 @@ MKLocalSearch *localSearch;
              //CLLocationDegrees latitude = [NSNumber numberWithFloat:mapItem.placemark.location.coordinate.latitude];
         
             [arrayOfPOIs addObject:item];
+            
+            NSMutableArray *placemarks = [NSMutableArray array];
+            for (item in arrayOfPOIs) {
+                [placemarks addObject:mapItem.placemark];
+                NSLog(@"archive placemarks %@", placemarks);
+            }
             
             NSMutableArray *itemNames = [[NSMutableArray alloc] init];
             for (item in arrayOfPOIs) {
