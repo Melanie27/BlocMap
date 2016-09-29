@@ -10,4 +10,21 @@
 
 @implementation CategoryViewController
 
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //self.view.backgroundColor = [UIColor blueColor];
+}
+
+
+-(void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+
+
+- (IBAction)closeButtonPressed:(id)sender {
+    [self resignFirstResponder];
+    
+}
 @end

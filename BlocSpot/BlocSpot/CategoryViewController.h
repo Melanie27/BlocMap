@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CategoryViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIButton *closeButton;
+- (IBAction)closeButtonPressed:(id)sender;
 
 @end

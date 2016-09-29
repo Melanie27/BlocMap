@@ -12,6 +12,8 @@
 #import "BLSDataSource.h"
 #import "SearchViewController.h"
 #import "PointOfInterest.h"
+//#import "ModalViewController.h"
+#import "CategoryViewController.h"
 
 @interface MapViewController () <CLLocationManagerDelegate>
 
@@ -47,9 +49,12 @@ CLLocationManager *locationManager;
 
     }
     
+    
 
     
 }
+
+
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
@@ -140,6 +145,14 @@ CLLocationManager *locationManager;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)launchCategoriesList:(id)sender {
+    CategoryViewController *categoryVC = [CategoryViewController new];
+    [self presentViewController:categoryVC animated:YES completion:^{
+        
+    }];
+    
 }
 
 -(void)loadSearchResults {

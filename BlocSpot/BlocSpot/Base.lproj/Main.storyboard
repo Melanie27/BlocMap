@@ -17,8 +17,38 @@
                     <view key="view" contentMode="scaleToFill" id="wmJ-Mo-FQW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQY-3j-5Yh">
+                                <rect key="frame" x="112" y="82" width="339" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="exN-Wi-B54">
+                                <rect key="frame" x="503" y="60" width="39" height="30"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Close">
+                                            <attributes>
+                                                <font key="NSFont" size="36" name="HelveticaNeue-Bold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="v6N-HC-njl" eventType="touchUpInside" id="wEJ-kc-zXB"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="exN-Wi-B54" firstAttribute="top" secondItem="qA6-Y0-Qch" secondAttribute="bottom" constant="40" id="a5j-5e-w6S"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="exN-Wi-B54" secondAttribute="trailing" constant="38" id="t0Q-Fq-Xwn"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="closeButton" destination="exN-Wi-B54" id="Rho-7o-9I6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HEO-JL-f5E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -53,15 +83,24 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wd7-1T-C5u">
+                                <rect key="frame" x="446" y="101" width="114" height="30"/>
+                                <state key="normal" title="Categories"/>
+                                <connections>
+                                    <action selector="launchCategoriesList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iMd-JN-ukU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="n7I-dI-4xy" secondAttribute="bottom" constant="36" id="4FR-xo-67m"/>
                             <constraint firstItem="n7I-dI-4xy" firstAttribute="centerX" secondItem="ReE-6e-pYB" secondAttribute="centerX" id="4V0-pu-TcE"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="top" secondItem="wd7-1T-C5u" secondAttribute="bottom" constant="-67" id="9vs-qh-mFt"/>
                             <constraint firstItem="ReE-6e-pYB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ClO-Uo-8FN"/>
                             <constraint firstItem="ReE-6e-pYB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cp8-dk-aXj"/>
                             <constraint firstItem="ReE-6e-pYB" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="fXn-g3-5gJ"/>
                             <constraint firstAttribute="trailing" secondItem="ReE-6e-pYB" secondAttribute="trailing" id="rof-V3-ddy"/>
+                            <constraint firstItem="wd7-1T-C5u" firstAttribute="leading" secondItem="ReE-6e-pYB" secondAttribute="trailing" constant="-154" id="ufu-iI-P29"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rXy-UH-gsp">
@@ -77,13 +116,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoriesButton" destination="wd7-1T-C5u" id="CrD-Pl-wgG"/>
                         <outlet property="mapView" destination="ReE-6e-pYB" id="Wwb-q4-fn3"/>
                         <outlet property="userLocationLabel" destination="n7I-dI-4xy" id="Qkm-aG-J7M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1391" y="538"/>
+            <point key="canvasLocation" x="1391" y="545"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="qXP-nD-445">
@@ -172,7 +212,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="This will be the title .">
                                                     <attributes>
-                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="22" name="Futura-Medium"/>
                                                     </attributes>
                                                 </fragment>
@@ -184,7 +224,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="&lt; 1 mi.">
                                                     <attributes>
-                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="13" name="HelveticaNeue"/>
                                                     </attributes>
                                                 </fragment>
@@ -196,7 +236,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="most recent review ">
                                                     <attributes>
-                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="15" name="HelveticaNeue"/>
                                                     </attributes>
                                                 </fragment>
