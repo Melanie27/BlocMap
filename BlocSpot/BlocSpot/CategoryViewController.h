@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Interactor;
+
 @interface CategoryViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIButton *closeButton;
-- (IBAction)closeButtonPressed:(id)sender;
+
+-(instancetype)initWithInteractor:(Interactor *)interactor;
 
 @end

@@ -30,6 +30,8 @@
 		9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADC81D91D91100117D24 /* BLSDataSource.m */; };
 		9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCB1D921B5500117D24 /* MyAnnotation.m */; };
 		9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */; };
+		9BDDEA0B1D9DC5CB0099DDB1 /* mabelFlip.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */; };
+		9BDDEA0E1D9DC60D0099DDB1 /* Interactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0D1D9DC60D0099DDB1 /* Interactor.m */; };
 		9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5D7201D908690007E6DBE /* SearchViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,9 @@
 		9BACADCB1D921B5500117D24 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 		9BACADCD1D921E8D00117D24 /* MyAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotationView.h; sourceTree = "<group>"; };
 		9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
+		9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mabelFlip.jpg; path = ../../../Desktop/mabelFlip.jpg; sourceTree = "<group>"; };
+		9BDDEA0C1D9DC60D0099DDB1 /* Interactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interactor.h; path = "../../../Downloads/iOSGuest_TransitionsDemo-2e844f1589c85f6c66c27b5cf4618091086d0b32/TransitionsDemo/Interactor.h"; sourceTree = "<group>"; };
+		9BDDEA0D1D9DC60D0099DDB1 /* Interactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Interactor.m; path = "../../../Downloads/iOSGuest_TransitionsDemo-2e844f1589c85f6c66c27b5cf4618091086d0b32/TransitionsDemo/Interactor.m"; sourceTree = "<group>"; };
 		9BF5D71F1D908690007E6DBE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		9BF5D7201D908690007E6DBE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +166,9 @@
 		9BA722BF1D8C665E006FC1B1 /* BlocSpot */ = {
 			isa = PBXGroup;
 			children = (
+				9BDDEA0C1D9DC60D0099DDB1 /* Interactor.h */,
+				9BDDEA0D1D9DC60D0099DDB1 /* Interactor.m */,
+				9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */,
 				9B96CD1D1D99CA3C008E6842 /* checked.png */,
 				9B96CD221D9AF95B008E6842 /* iconSave.png */,
 				9BA722C31D8C665E006FC1B1 /* AppDelegate.h */,
@@ -349,6 +357,7 @@
 				9B96CD1E1D99CA3C008E6842 /* checked.png in Resources */,
 				9BA722CD1D8C665E006FC1B1 /* Assets.xcassets in Resources */,
 				9BA722CB1D8C665E006FC1B1 /* Main.storyboard in Resources */,
+				9BDDEA0B1D9DC5CB0099DDB1 /* mabelFlip.jpg in Resources */,
 				9B96CD231D9AF95B008E6842 /* iconSave.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +433,7 @@
 			files = (
 				9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */,
 				9B16A5E71D9B457300EFC33C /* CategoryViewController.m in Sources */,
+				9BDDEA0E1D9DC60D0099DDB1 /* Interactor.m in Sources */,
 				9B96CD211D99CD54008E6842 /* ResultsDetailViewController.m in Sources */,
 				9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */,
 				9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */,
