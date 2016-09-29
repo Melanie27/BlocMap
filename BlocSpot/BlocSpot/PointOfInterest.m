@@ -18,7 +18,7 @@
 @implementation PointOfInterest
 NSString *const kPinCoordinateLatitudeKey = @"kPinCoordinateLatitudeKey";
 NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
-@synthesize address = _address, coordinate = _coordinate, identifier = _indentifier;
+//@synthesize address = _address, coordinate = _coordinate, identifier = _identifier;
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem {
     NSString *address = @"";
@@ -53,7 +53,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
     if (self) {
         _address = [address copy];
         _coordinate = coordinate;
-        _indentifier = ident;
+        _identifier = ident;
        
         //[self setPlacemark:_coordinate];
         [self setTitle:t];
@@ -81,7 +81,7 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
     [aCoder encodeDouble:_coordinate.longitude forKey:@"longitude"];
     [aCoder encodeObject:_title forKey:@"title"];
     [aCoder encodeObject:_subtitle forKey:@"subtitle"];
-    [aCoder encodeObject:_indentifier forKey:@"identifier"];
+    [aCoder encodeObject:_identifier forKey:@"identifier"];
     
 }
 
@@ -91,9 +91,10 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
         self.title = [aDecoder decodeObjectForKey:@"title"];
         self.subtitle = [aDecoder decodeObjectForKey:@"subtitle"];
         [self setAddress:[aDecoder decodeObjectForKey:@"address"]];
-        CLLocationDegrees latitude = [aDecoder decodeDoubleForKey:kPinCoordinateLatitudeKey];
-        CLLocationDegrees longitude = [aDecoder decodeDoubleForKey:kPinCoordinateLongitudeKey];
+        CLLocationDegrees latitude = [aDecoder decodeDoubleForKey:@"latitude"];
+        CLLocationDegrees longitude = [aDecoder decodeDoubleForKey:@"longitude"];
         _coordinate = CLLocationCoordinate2DMake(latitude, longitude);
+        _identifier = [aDecoder decodeObjectForKey:@"identifier"];
         
     }
     return self;

@@ -24,7 +24,7 @@
 //This is an optional property from MKAnnotataion
 @property (nonatomic, copy) NSString *title;
 
-@property (nonatomic, copy) MKPlacemark *placemark;
+//@property (nonatomic, copy) NSValue *placemark;
 @property (nonatomic, readonly, copy) NSString *subtitle;
 @property (nonatomic) BOOL animatesDrop;
 @property (nonatomic) BOOL canShowCallout;

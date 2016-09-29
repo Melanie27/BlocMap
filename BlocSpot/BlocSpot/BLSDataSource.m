@@ -63,20 +63,20 @@ MKLocalSearch *localSearch;
                         NSLog(@"map item title %@", mapItem.title);
                         NSLog(@"map item subtitle %@", mapItem.subtitle);
                         NSLog(@"map item indentifier %@", mapItem.identifier);
-                         NSLog(@"map item placemark %@", mapItem.placemark);
-                        //NSLog(@"map item coordinate %f", mapItem.coordinate);
+                       //  NSLog(@"map item placemark %@", mapItem.placemark);
+                        NSLog(@"map item coordinate %f,%f", mapItem.coordinate.latitude,mapItem.coordinate.longitude);
 
                         
                         //ADDING THE ANNOTATIONS
                         
-                        //MKPointAnnotation *marker = [MKPointAnnotation new];
+                        MKPointAnnotation *marker = [MKPointAnnotation new];
                         
-                        //marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
-                        //marker.coordinate = CLLocationCoordinate2DMake(34.0195, -118.4912);
-                        //marker.title = mapItem.title;
-                        //marker.subtitle = mapItem.subtitle;
+                        marker.coordinate = CLLocationCoordinate2DMake(mapItem.coordinate.latitude, mapItem.coordinate.longitude);
                         
-                        //[self.mapView addAnnotation:marker];
+                        marker.title = mapItem.title;
+                        marker.subtitle = mapItem.subtitle;
+                        
+                        [self.mapView addAnnotation:marker];
                         
                     }
                 
@@ -102,6 +102,7 @@ MKLocalSearch *localSearch;
 }
 
 - (void) savePOI:(MKAnnotationView *)view {
+//    - (void) savePOI:(NSArray<MKMapItem> *)mapItemsToSave {
    
     //if (response.mapItems.count > 0) {
      // Write the changes to disk
@@ -113,58 +114,13 @@ MKLocalSearch *localSearch;
         
         for (MKMapItem *mapItem in response.mapItems) {
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-            //NEED TO ARCHIVE ALL ASPECTS OF RESPONSE IN ORDER TO BE ABLE TO RETRIEVE THEM ON LAUNCH
-            // ALSO add if it's been clicked here
-            NSString *title = mapItem.name;
-            NSString *subtitle = mapItem.phoneNumber;
-            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake( mapItem.placemark.location.coordinate.latitude, mapItem.placemark.location.coordinate.longitude);
-            MKPlacemark *placemark = mapItem.placemark;
+            
            
            
             NSLog(@"clicked view %@", self.view);
-            //TODO only add the item that has been tapped in the annotation 
-            //if(self.annotationView.isSelected ) {
-                //NSLog(@"only add the clicked one");
-                [arrayOfPOIs addObject:item];
-            //}
-            
-            NSMutableArray *placemarks = [NSMutableArray array];
-            for (item in arrayOfPOIs) {
-                [placemarks addObject:placemark];
-                NSLog(@"archive placemarks %@", placemarks);
-            }
-            
-            NSMutableArray *itemNames = [[NSMutableArray alloc] init];
-            for (item in arrayOfPOIs) {
-                [itemNames addObject:title];
-                NSLog(@"item attributes %@", itemNames);
-            }
-            
-            NSMutableArray *itemPhoneNumbers = [[NSMutableArray alloc] init];
-            for (item in arrayOfPOIs) {
-                [itemPhoneNumbers addObject:subtitle];
-                NSLog(@"item phone numbers %@", itemPhoneNumbers);
-            }
-            
-            NSMutableArray *itemPlacemark = [[NSMutableArray alloc] init];
-            for (item in arrayOfPOIs) {
-                NSValue *placemark = [NSValue valueWithMKCoordinate:coordinate];
-                [itemPlacemark addObject:placemark];
-                NSLog(@"item coordinates %@", itemPlacemark);
-            }
-            
-            
-            //NSValue *coord = [NSValue valueWithMKCoordinate:coordinate];
-            
-            //NSLog (@"coord %@", coord);
-            //[arrayOfPOIs addObject: latLongDict];
-            //[arrayOfPOIs addObject: latitude];
+                        [arrayOfPOIs addObject:item];
+
            
-            //NSLog(@"item %@", item);
-             //NSLog(@"title %@", title);
-            //NSLog(@"coord lat %f", mapItem.placemark.location.coordinate.latitude);
-            //NSLog(@"coord long %f", mapItem.placemark.location.coordinate.longitude);
-            //}
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
