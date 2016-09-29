@@ -24,7 +24,7 @@
 }
 
 - (IBAction)savePointOfInterest:(id)sender {
-    [[BLSDataSource sharedInstance] savePOI];
+    [[BLSDataSource sharedInstance] savePOI:sender];
     NSLog(@"this should save the POI to the data source");
 }
 @end

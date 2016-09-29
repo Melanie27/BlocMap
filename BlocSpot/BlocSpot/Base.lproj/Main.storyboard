@@ -154,7 +154,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="This will be the title .">
                                                     <attributes>
-                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="22" name="Futura-Medium"/>
                                                     </attributes>
                                                 </fragment>
@@ -166,7 +166,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="&lt; 1 mi.">
                                                     <attributes>
-                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="13" name="HelveticaNeue"/>
                                                     </attributes>
                                                 </fragment>
@@ -178,7 +178,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="most recent review ">
                                                     <attributes>
-                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="15" name="HelveticaNeue"/>
                                                     </attributes>
                                                 </fragment>

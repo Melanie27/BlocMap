@@ -39,7 +39,7 @@ MKLocalSearch *localSearch;
     if(self) {
         
         //TODO Unarchive the saved map data here
-         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
+         //NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
@@ -69,7 +69,7 @@ MKLocalSearch *localSearch;
                         
                         //ADDING THE ANNOTATIONS
                         
-                        MKPointAnnotation *marker = [MKPointAnnotation new];
+                        //MKPointAnnotation *marker = [MKPointAnnotation new];
                         
                         //marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
                         //marker.coordinate = CLLocationCoordinate2DMake(34.0195, -118.4912);
@@ -101,7 +101,7 @@ MKLocalSearch *localSearch;
     return dataPath;
 }
 
-- (void) savePOI {
+- (void) savePOI:(MKAnnotationView *)view {
    
     //if (response.mapItems.count > 0) {
      // Write the changes to disk
@@ -120,10 +120,10 @@ MKLocalSearch *localSearch;
             CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake( mapItem.placemark.location.coordinate.latitude, mapItem.placemark.location.coordinate.longitude);
             MKPlacemark *placemark = mapItem.placemark;
            
-            
            
+            NSLog(@"clicked view %@", self.view);
             //TODO only add the item that has been tapped in the annotation 
-            //if(self.annotationView.isSelected) {
+            //if(self.annotationView.isSelected ) {
                 //NSLog(@"only add the clicked one");
                 [arrayOfPOIs addObject:item];
             //}

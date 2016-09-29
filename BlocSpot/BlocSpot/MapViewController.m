@@ -16,6 +16,7 @@
 @interface MapViewController () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic, strong) PointOfInterest *chosenPointOfInterest;
 @end
 
 @implementation MapViewController
@@ -61,7 +62,7 @@ CLLocationManager *locationManager;
     annotationView.canShowCallout = YES;
     //make the additional button a heart or something that triggers save
     annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    //annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
+    annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
     //annotationView.rightCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
     return annotationView;
     
@@ -118,8 +119,9 @@ CLLocationManager *locationManager;
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
    
     
-    [[BLSDataSource sharedInstance] savePOI];
-    NSLog(@"save this pin");
+    [[BLSDataSource sharedInstance] savePOI:self.view];
+    NSLog(@"save this pin %@", self.view);
+    
     
     
 }
