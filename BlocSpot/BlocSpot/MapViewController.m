@@ -41,12 +41,19 @@ CLLocationManager *locationManager;
     self.locationManager = [[CLLocationManager alloc] init];
     [[[CLLocationManager alloc ] init ]requestAlwaysAuthorization];
     if([CLLocationManager locationServicesEnabled]) {
-        //[self.locationManager requestWhenInUseAuthorization];
         [self.locationManager requestAlwaysAuthorization];
         self.mapView.showsUserLocation = YES;
         [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
 
     }
+    
+    [[BLSDataSource sharedInstance] loadSavedMarkers];
+    
+    
+    
+    //[self.mapView addAnnotation:marker];
+     
+    
     
 
     
@@ -119,8 +126,8 @@ CLLocationManager *locationManager;
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
    
     
-    [[BLSDataSource sharedInstance] savePOI:self.view];
-    NSLog(@"save this pin %@", self.view);
+    [[BLSDataSource sharedInstance] savePOI];
+    
     
     
     

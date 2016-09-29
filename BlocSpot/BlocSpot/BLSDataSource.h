@@ -27,7 +27,7 @@
 @property (retain, nonatomic) NSMutableArray *annotations;
 @property (nonatomic) BOOL itemSelected;
 
-
--(void)savePOI:(MKAnnotationView *)view;
+-(void)loadSavedMarkers;
+-(void)savePOI;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 @end

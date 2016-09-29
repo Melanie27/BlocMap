@@ -16,9 +16,7 @@
 @end
 
 @implementation PointOfInterest
-NSString *const kPinCoordinateLatitudeKey = @"kPinCoordinateLatitudeKey";
-NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
-//@synthesize address = _address, coordinate = _coordinate, identifier = _identifier;
+
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem {
     NSString *address = @"";
@@ -59,12 +57,6 @@ NSString *const kPinCoordinateLongitudeKey = @"kPinCoordinateLongitudeKey";
         [self setTitle:t];
          [self setSubtitle:s];
         
-        //NSDate *theDate = [NSDate date];
-        
-        /*_subtitle = [NSDateFormatter localizedStringFromDate:theDate
-                                                  dateStyle:NSDateFormatterShortStyle
-                                                  timeStyle:NSDateFormatterShortStyle];*/
-    
         
     }
     return self;
