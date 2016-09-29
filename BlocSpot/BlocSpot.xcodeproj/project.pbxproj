@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98B0791459D852EDE832300A /* libPods-BlocSpot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */; };
 		9B16A5E41D9B449F00EFC33C /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E31D9B449F00EFC33C /* Category.m */; };
 		9B16A5E71D9B457300EFC33C /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E61D9B457300EFC33C /* CategoryViewController.m */; };
 		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
@@ -50,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BlocSpot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		67645A3A7F3E56A54DC8EEE6 /* Pods-BlocSpot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlocSpot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BlocSpot/Pods-BlocSpot.debug.xcconfig"; sourceTree = "<group>"; };
+		6F54DF1C3D8710391935050E /* Pods-BlocSpot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlocSpot.release.xcconfig"; path = "Pods/Target Support Files/Pods-BlocSpot/Pods-BlocSpot.release.xcconfig"; sourceTree = "<group>"; };
 		9B16A5E21D9B449F00EFC33C /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = ../Category.h; sourceTree = "<group>"; };
 		9B16A5E31D9B449F00EFC33C /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = ../Category.m; sourceTree = "<group>"; };
 		9B16A5E51D9B457300EFC33C /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA722F41D8C66F9006FC1B1 /* MapKit.framework in Frameworks */,
+				98B0791459D852EDE832300A /* libPods-BlocSpot.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34113BF3D1E167A260EA0C23 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				67645A3A7F3E56A54DC8EEE6 /* Pods-BlocSpot.debug.xcconfig */,
+				6F54DF1C3D8710391935050E /* Pods-BlocSpot.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9BA722B41D8C665E006FC1B1 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +143,8 @@
 				9BA722D91D8C665E006FC1B1 /* BlocSpotTests */,
 				9BA722E41D8C665E006FC1B1 /* BlocSpotUITests */,
 				9BA722BE1D8C665E006FC1B1 /* Products */,
+				34113BF3D1E167A260EA0C23 /* Pods */,
+				BD4B1A65B33D16623EFDA475 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,6 +226,14 @@
 			path = BlocSpotUITests;
 			sourceTree = "<group>";
 		};
+		BD4B1A65B33D16623EFDA475 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -217,9 +241,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BA722EA1D8C665E006FC1B1 /* Build configuration list for PBXNativeTarget "BlocSpot" */;
 			buildPhases = (
+				B78BB405F290888EC1194475 /* [CP] Check Pods Manifest.lock */,
 				9BA722B91D8C665E006FC1B1 /* Sources */,
 				9BA722BA1D8C665E006FC1B1 /* Frameworks */,
 				9BA722BB1D8C665E006FC1B1 /* Resources */,
+				A892A98DC89A453155DC8A9D /* [CP] Embed Pods Frameworks */,
+				6CD96C925F3F721257E5DD07 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -341,6 +368,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6CD96C925F3F721257E5DD07 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BlocSpot/Pods-BlocSpot-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A892A98DC89A453155DC8A9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BlocSpot/Pods-BlocSpot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B78BB405F290888EC1194475 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9BA722B91D8C665E006FC1B1 /* Sources */ = {
@@ -502,6 +577,7 @@
 		};
 		9BA722EB1D8C665E006FC1B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67645A3A7F3E56A54DC8EEE6 /* Pods-BlocSpot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BlocSpot/Info.plist;
@@ -513,6 +589,7 @@
 		};
 		9BA722EC1D8C665E006FC1B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F54DF1C3D8710391935050E /* Pods-BlocSpot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BlocSpot/Info.plist;
