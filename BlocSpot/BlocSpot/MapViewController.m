@@ -12,10 +12,10 @@
 #import "BLSDataSource.h"
 #import "SearchViewController.h"
 #import "PointOfInterest.h"
-//#import "ModalViewController.h"
+
 #import "CategoryViewController.h"
 
-@interface MapViewController () <CLLocationManagerDelegate>
+@interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @end
@@ -149,6 +149,8 @@ CLLocationManager *locationManager;
 
 - (IBAction)launchCategoriesList:(id)sender {
     CategoryViewController *categoryVC = [CategoryViewController new];
+    categoryVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    categoryVC.transitioningDelegate = self;
     [self presentViewController:categoryVC animated:YES completion:^{
         
     }];

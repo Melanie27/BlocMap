@@ -13,7 +13,7 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    //self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor blueColor];
 }
 
 
@@ -24,7 +24,7 @@
 
 
 - (IBAction)closeButtonPressed:(id)sender {
-    [self resignFirstResponder];
+    //[self resignFirstResponder];
     
 }
 @end

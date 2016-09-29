@@ -10,7 +10,6 @@
 		98B0791459D852EDE832300A /* libPods-BlocSpot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */; };
 		9B16A5E41D9B449F00EFC33C /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E31D9B449F00EFC33C /* Category.m */; };
 		9B16A5E71D9B457300EFC33C /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E61D9B457300EFC33C /* CategoryViewController.m */; };
-		9B65B1351D9D9F5000AF779B /* ModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B65B1341D9D9F5000AF779B /* ModalViewController.m */; };
 		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
 		9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */; };
 		9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */; };
@@ -59,8 +58,6 @@
 		9B16A5E31D9B449F00EFC33C /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = ../Category.m; sourceTree = "<group>"; };
 		9B16A5E51D9B457300EFC33C /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		9B16A5E61D9B457300EFC33C /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
-		9B65B1331D9D9F5000AF779B /* ModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalViewController.h; sourceTree = "<group>"; };
-		9B65B1341D9D9F5000AF779B /* ModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalViewController.m; sourceTree = "<group>"; };
 		9B6FDCC81D919D35000B77AB /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
 		9B6FDCC91D919D35000B77AB /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
 		9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointOfInterest.h; sourceTree = "<group>"; };
@@ -195,8 +192,6 @@
 				9B6FDCC91D919D35000B77AB /* Search.m */,
 				9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */,
 				9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */,
-				9B65B1331D9D9F5000AF779B /* ModalViewController.h */,
-				9B65B1341D9D9F5000AF779B /* ModalViewController.m */,
 				9BA722CC1D8C665E006FC1B1 /* Assets.xcassets */,
 				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9BA722D11D8C665E006FC1B1 /* Info.plist */,
@@ -439,7 +434,6 @@
 				9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */,
 				9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */,
 				9BA722C21D8C665E006FC1B1 /* main.m in Sources */,
-				9B65B1351D9D9F5000AF779B /* ModalViewController.m in Sources */,
 				9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */,
 				9B96CD191D9455BC008E6842 /* SearchResultsTableViewCell.m in Sources */,
 				9B6FDCCA1D919D35000B77AB /* Search.m in Sources */,
