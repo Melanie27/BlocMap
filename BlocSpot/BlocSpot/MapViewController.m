@@ -18,6 +18,7 @@
 @interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic, strong) PointOfInterest *chosenPointOfInterest;
 @end
 
 @implementation MapViewController
@@ -42,13 +43,21 @@ CLLocationManager *locationManager;
     self.locationManager = [[CLLocationManager alloc] init];
     [[[CLLocationManager alloc ] init ]requestAlwaysAuthorization];
     if([CLLocationManager locationServicesEnabled]) {
-        //[self.locationManager requestWhenInUseAuthorization];
         [self.locationManager requestAlwaysAuthorization];
         self.mapView.showsUserLocation = YES;
         [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
 
     }
     
+
+    [[BLSDataSource sharedInstance] loadSavedMarkers];
+    
+    
+    
+    //[self.mapView addAnnotation:marker];
+     
+    
+
     
 
     
@@ -66,7 +75,7 @@ CLLocationManager *locationManager;
     annotationView.canShowCallout = YES;
     //make the additional button a heart or something that triggers save
     annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    //annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
+    annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
     //annotationView.rightCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
     return annotationView;
     
@@ -124,10 +133,9 @@ CLLocationManager *locationManager;
    
     
     [[BLSDataSource sharedInstance] savePOI];
-    NSLog(@"save this pin %@", view);
     
-    //change annotation view if it has been selected
-    view.selected = ![view isSelected];
+    
+    
     
 }
 

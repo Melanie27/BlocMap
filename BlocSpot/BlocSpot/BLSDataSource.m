@@ -38,64 +38,65 @@ MKLocalSearch *localSearch;
     
     if(self) {
         
-        //TODO Unarchive the saved map data here
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-            //NSLog(@"fullpath saved items %@", fullPath);
-            //get the saved map items
-            NSArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
-            //NSLog(@"stored map items %@", storedMapItems);
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if(storedMapItems.count > 0) {
-                    NSLog(@"number of stored map items %lu", (unsigned long)storedMapItems.count);
-                   
-                   //For each stored map item put a pin on the map!
-                    for (int i=0; i<[storedMapItems count]; i++) {
-                       //MKMapItem *mapItem = storedMapItems[i];
-                        //NSLog(@"map item name%@", mapItem);
-                        
-                        ///THIS IS CRASHING BECAUSE MAP ITEM DOESNT HAVE A NAME???
-                        //PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-                        //NSLog(@"item %@", item);
-                        //NSLog(@"mapItem lat %f", item.coordinate.latitude);
-                         //NSLog(@"mapItem long %f", item.coordinate.longitude);
-                       
-                        
-                        
-                        
-                        //ADDING THE ANNOTATIONS
-                        
-                        
-                        //MKMapItem* itemPOI = results.mapItems[i];
-                        //MKPlacemark *annotation= [[MKPlacemark alloc] initWithPlacemark:mapItem.placemark];
-                        /*MKPlacemark *annotation = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(34.0195, -118.4912) addressDictionary:nil];
-                        
-                        MKPointAnnotation *marker = [MKPointAnnotation new];
-                        //need to assign this coordinate to the mapItem's location
-                        marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
-                        marker.title = @"Melanie";
-                        marker.subtitle = @"McGanney";
-                        //marker.title = mapItem.placemark.name;
-                        //marker.subtitle = mapItem.phoneNumber;
-                        
-                        [self.mapView addAnnotation:marker];*/
-                        
-                    }
-                
-                }
-            
-            
-            });
-            
-        });
             
        
     }
     
     return self;
+}
+
+#pragma load up all the saved mapitems
+
+
+-(void)loadSavedMarkers {
+    NSLog(@"load saved markers");
+    //TODO Create an array where everything is stored show it shows up again on launch
+    NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
+        NSArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+        
+        //NEED TO GET ALL THE ELEMENTS OF THESE STORED MAP ITEMS SO CAN CREATE PLACEMARK
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(storedMapItems.count > 0) {
+                NSLog(@"number of stored map items %lu", (unsigned long)storedMapItems.count);
+                
+                //For each stored map item put a pin on the map!
+                for (int i=0; i<[storedMapItems count]; i++) {
+                    PointOfInterest *mapItem = storedMapItems[i];
+                    
+                    NSLog(@"map item %@", mapItem);
+                    NSLog(@"map item title %@", mapItem.title);
+                    NSLog(@"map item subtitle %@", mapItem.subtitle);
+                    NSLog(@"map item indentifier %@", mapItem.identifier);
+                    NSLog(@"map item coordinate %f,%f", mapItem.coordinate.latitude,mapItem.coordinate.longitude);
+                    
+                    
+                    //ADDING THE ANNOTATIONS
+                    
+                    MKPointAnnotation *marker = [MKPointAnnotation new];
+                    marker.coordinate = CLLocationCoordinate2DMake(mapItem.coordinate.latitude, mapItem.coordinate.longitude);
+                    
+                    marker.title = mapItem.title;
+                    marker.subtitle = mapItem.subtitle;
+                    [arrayOfPOIs addObject:marker];
+                    NSLog(@"map view %@",arrayOfPOIs);
+                    //map does not exist here - move things around
+                    //[self.mapView addAnnotation:marker];
+                    
+                }
+                
+            }
+            
+            
+        });
+        
+    });
 }
 
 #pragma saving to disc
@@ -107,6 +108,7 @@ MKLocalSearch *localSearch;
 }
 
 - (void) savePOI {
+//    - (void) savePOI:(NSArray<MKMapItem> *)mapItemsToSave {
    
     //if (response.mapItems.count > 0) {
      // Write the changes to disk
@@ -114,26 +116,25 @@ MKLocalSearch *localSearch;
      localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
+        
+        
         for (MKMapItem *mapItem in response.mapItems) {
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-            // add if it's been clicked here
             
-            if (_itemSelected) {
-                [arrayOfPOIs addObject:item];
-            }
+           
+           
+            NSLog(@"clicked view %@", self.view);
+                        [arrayOfPOIs addObject:item];
+
+           
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(arrayOfPOIs.count, 50);
             NSArray *mapItemsToSave = [arrayOfPOIs subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
-            
-            
-            NSLog(@"map items to save %@", mapItemsToSave);
             NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-            NSLog(@"fullpath %@", fullPath);
             NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:mapItemsToSave];
-
-     
+        
             NSError *dataError;
             BOOL wroteSuccessfully = [mapItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
             NSLog(@"map item data %@", mapItemData);

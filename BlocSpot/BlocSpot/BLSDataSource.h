@@ -21,12 +21,13 @@
 @property (nonatomic, strong) MKLocalSearchRequest *latestSearchRequest;
 @property (nonatomic, strong) MKLocalSearchResponse *results;
 @property (strong, nonatomic) MKMapView *mapView;
+@property (strong, nonatomic) MKAnnotationView *view;
 @property(nonatomic, assign) MKCoordinateRegion region;
 @property (nonatomic, weak) SearchResultsTableViewController *srtvc;
 @property (retain, nonatomic) NSMutableArray *annotations;
 @property (nonatomic) BOOL itemSelected;
 
-
+-(void)loadSavedMarkers;
 -(void)savePOI;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 @end
