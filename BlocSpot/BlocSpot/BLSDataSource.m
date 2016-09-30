@@ -93,9 +93,7 @@ MKLocalSearch *localSearch;
                     
                     
                 }
-                
             }
-            
             
         });
         
@@ -121,7 +119,7 @@ MKLocalSearch *localSearch;
             NSLog(@"item to save %@", mapItemsToSave);
                         [arrayOfPOIs addObject:item];
 
-        
+    
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(arrayOfPOIs.count, 50);
             NSArray *mapItemsToSave = [arrayOfPOIs subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
