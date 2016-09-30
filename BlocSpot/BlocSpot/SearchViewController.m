@@ -53,7 +53,7 @@
 }
 
 - (IBAction)searchMap:(id)sender {
-
+//-(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
     [[BLSDataSource sharedInstance] searchMap:self.searchText.text andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
        
        

@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIkit/UIkit.h>
 
 @interface Category : NSObject <NSCoding>
 
-@property (nonatomic, strong) NSOrderedSet *categories;
+@property (nonatomic, strong) NSString *categoryName;
+@property (nonatomic, strong) UIColor *categoryColor;
+@property (nonatomic, strong) NSMutableOrderedSet *categories;
 
+
++ (instancetype)orderedSetWithArray:(NSArray<Category *> *)array;
 @end

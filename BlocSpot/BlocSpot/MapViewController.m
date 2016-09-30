@@ -15,7 +15,7 @@
 
 #import "CategoryViewController.h"
 
-@interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate>
+@interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, strong) PointOfInterest *chosenPointOfInterest;
@@ -131,13 +131,16 @@ CLLocationManager *locationManager;
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
    
+    //right now just passing empty array - need to grab the correct item
+    NSLog(@"annot %@", view.annotation);
+    NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
     
-    [[BLSDataSource sharedInstance] savePOI];
-    
-    
-    
+    [[BLSDataSource sharedInstance] savePOI:(arrayMapItem) andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+    }];
     
 }
+
+
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     self.userLocationLabel.text =

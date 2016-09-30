@@ -73,8 +73,8 @@ MKLocalSearch *localSearch;
                     NSLog(@"map item %@", mapItem);
                     NSLog(@"map item title %@", mapItem.title);
                     NSLog(@"map item subtitle %@", mapItem.subtitle);
-                    NSLog(@"map item indentifier %@", mapItem.identifier);
-                    NSLog(@"map item coordinate %f,%f", mapItem.coordinate.latitude,mapItem.coordinate.longitude);
+                    //NSLog(@"map item indentifier %@", mapItem.identifier);
+                    //NSLog(@"map item coordinate %f,%f", mapItem.coordinate.latitude,mapItem.coordinate.longitude);
                     
                     
                     //ADDING THE ANNOTATIONS
@@ -87,7 +87,10 @@ MKLocalSearch *localSearch;
                     [arrayOfPOIs addObject:marker];
                     NSLog(@"map view %@",arrayOfPOIs);
                     //map does not exist here - move things around
-                    //[self.mapView addAnnotation:marker];
+                   
+                    [self.mapView addAnnotation:marker];
+                    [self.mvc loadView];
+                    
                     
                 }
                 
@@ -107,13 +110,9 @@ MKLocalSearch *localSearch;
     return dataPath;
 }
 
-- (void) savePOI {
-//    - (void) savePOI:(NSArray<MKMapItem> *)mapItemsToSave {
+- (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler{
    
-    //if (response.mapItems.count > 0) {
-     // Write the changes to disk
-    
-     localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
+     
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
         
@@ -121,9 +120,9 @@ MKLocalSearch *localSearch;
         for (MKMapItem *mapItem in response.mapItems) {
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
             
+            
            
-           
-            NSLog(@"clicked view %@", self.view);
+            NSLog(@"item to save %@", mapItemsToSave);
                         [arrayOfPOIs addObject:item];
 
            
