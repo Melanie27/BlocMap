@@ -11,11 +11,15 @@
 
 @interface Category : NSObject <NSCoding>
 
+@property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSString *categoryName;
 @property (nonatomic, strong) UIColor *categoryColor;
+@property  BOOL inCategoryList;
 @property (nonatomic, strong) NSMutableOrderedSet *categories;
 
 
-+ (instancetype)orderedSetWithArray:(NSArray<Category *> *)array;
+//custom class method to init with ease
++ (Category *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor*)categoryColor;
+
 
 @end
