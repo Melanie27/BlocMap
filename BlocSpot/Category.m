@@ -30,7 +30,7 @@
     [aCoder encodeBool:self.inCategoryList forKey:@"inCategoryList"];
 }
 
-+(Category *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor {
++(Category *)createCategoryWithName:(NSString *)categoryName andColor:(NSString *)categoryColor {
     
     //init category
     Category *category = [[Category alloc]init];

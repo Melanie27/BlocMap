@@ -7,7 +7,6 @@
 //
 
 #import "CategoryListViewController.h"
-#import "AddCategoryViewController.h"
 #import "Category.h"
 
 @interface CategoryListViewController() <UITableViewDelegate, UITableViewDataSource>
@@ -51,6 +50,19 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (void)addItem:(id)sender {
     NSLog(@"Button was tapped.");
     [self performSegueWithIdentifier:@"AddCategoryViewController" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"AddCategoryViewController"]) {
+        // Destination View Controller
+        UINavigationController *nc = (UINavigationController *)segue.destinationViewController;
+        
+        // Fetch Add Item View Controller
+        AddCategoryViewController *vc = [nc.viewControllers firstObject];
+        
+        // Set Delegate
+        [vc setDelegate:self];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -137,6 +149,22 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (NSString *)documentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [paths lastObject];
+}
+
+- (void)controller:(AddCategoryViewController *)controller didSaveItemWithName:(NSString *)name andColor:(NSString *)color {
+    // Create Item
+  Category *category = [Category createCategoryWithName:name andColor:color];
+    
+   
+    // Add Item to Data Source
+    [self.categories addObject:category];
+    
+    // Add Row to Table View
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:([self.categories count] - 1) inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    // Save Items
+    [self saveCategories];
 }
 
 @end

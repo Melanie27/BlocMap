@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
+//#import "CategoryListViewController.h"
+#import "Category.h"
+
+
+@protocol AddCategoryViewControllerDelegate;
+//forward protocol declaration
+
+
 
 @interface AddCategoryViewController : ViewController
+
+@property (weak) id<AddCategoryViewControllerDelegate> delegate;
 
 @property IBOutlet UITextField *nameTextField;
 @property IBOutlet UITextField *colorTextField;
@@ -21,3 +31,9 @@
 
 
 @end
+
+
+@protocol AddCategoryViewControllerDelegate <NSObject>
+- (void)controller:(AddCategoryViewController *)controller didSaveItemWithName:(NSString *)name andColor:(NSString *)color;
+@end
+

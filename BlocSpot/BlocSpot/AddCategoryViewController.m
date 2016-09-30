@@ -25,13 +25,17 @@
 }
 
 - (IBAction)cancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
    
 }
 
 - (IBAction)save:(id *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSString *categoryName = [self.nameTextField text];
+    NSString *categoryColor = [self.colorTextField text];
     
+    // Notify Delegate
+     [self.delegate controller:self didSaveItemWithName:categoryName andColor:categoryColor];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+//conform to add cat protocol
+#import "AddCategoryViewController.h"
 
-@interface CategoryListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface CategoryListViewController : UITableViewController <AddCategoryViewControllerDelegate>
 
 @end

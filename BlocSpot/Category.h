@@ -19,7 +19,7 @@
 
 
 //custom class method to init with ease
-+ (Category *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor*)categoryColor;
++ (Category *)createCategoryWithName:(NSString *)categoryName andColor:(NSString *)categoryColor;
 
 
 @end
