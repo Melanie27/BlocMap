@@ -17,4 +17,5 @@
 
 
 + (instancetype)orderedSetWithArray:(NSArray<Category *> *)array;
+
 @end

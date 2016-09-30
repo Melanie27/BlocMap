@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor blackColor];
+    //self.view.backgroundColor = [UIColor blackColor];
     self.view.alpha = .6;
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -44,11 +44,17 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[closeButton(40)]-(10)-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(closeButton)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(22)-[closeButton(40)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(closeButton)]];
     
+    //self.categoryLables =
+
+    /*self.categoryContainerView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:self.categoryContainerView];*/
+    
     UIImageView *imageView = [UIImageView new];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.translatesAutoresizingMaskIntoConstraints = NO;
     imageView.image = [UIImage imageNamed:@"mabelFlip.jpg"];
     [self.view addSubview:imageView];
+    
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(imageView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(imageView)]];

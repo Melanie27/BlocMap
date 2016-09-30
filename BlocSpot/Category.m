@@ -10,4 +10,20 @@
 
 @implementation Category
 
+-(instancetype) initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    
+    if(self) {
+        self.categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
+        self.categoryColor = [aDecoder decodeObjectForKey:@"categoryName"];
+    }
+    
+    return self;
+}
+
+-(void) encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.categoryName forKey:@"categoryName"];
+    [aCoder encodeObject:self.categoryColor forKey:@"categoryColor"];
+}
+
 @end

@@ -34,7 +34,7 @@ CLLocationManager *locationManager;
     self.mapView.delegate = self;
     //set initialial mapkit region
     CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
-    self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 1000000, 1000000);
+    self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 100000, 100000);
     
     //add optional scroll and zoom properties
     self.mapView.zoomEnabled = YES;
@@ -56,9 +56,6 @@ CLLocationManager *locationManager;
     
     //[self.mapView addAnnotation:marker];
      
-    
-
-    
 
     
 }
@@ -71,54 +68,18 @@ CLLocationManager *locationManager;
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
+    
     MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"loc"];
     annotationView.canShowCallout = YES;
     //make the additional button a heart or something that triggers save
     annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeContactAdd];
     annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
-    //annotationView.rightCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
+    
     return annotationView;
     
     
-    //TODO - make special annotations with images in the furture
-    /*if([annotation isKindOfClass:[MyAnnotation class]]) {
-        static NSString *myAnnotationID = @"myAnnotation";
-         MyAnnotationView *annotationView = (MyAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:(myAnnotationID)];
-        
-        if(annotationView) {
-          annotationView.annotation = annotation;
-        } else {
-            annotationView = [[MyAnnotationView alloc] initWithAnnotation:(annotation) reuseIdentifier:myAnnotationID];;
-        }
-        
-        return annotationView;
-    }*/
+   
     
-    //don't create annotation views for the user location
-    /*if([annotation isKindOfClass:[MKPointAnnotation class]]) {
-        
-        static NSString *userPinAnnotationPurpleId = @"userPinAnnotation";
-        
-        //create an annotation view, but reuse a cached on if available
-        MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:(userPinAnnotationPurpleId)];
-        
-        if(annotationView) {
-            //cached view found, set pin color only
-            annotationView.annotation = annotation;
-            
-        } else {
-            //no cached views available
-            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:(annotation) reuseIdentifier:userPinAnnotationPurpleId];
-            
-            //purple indicates user defined pin
-            annotationView.pinTintColor = [UIColor purpleColor];
-        }
-        
-        return annotationView;
-    
-    }*/
-    //returning nil results in default annotation mark
-    return nil;
 }
 
 /*- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
@@ -142,12 +103,12 @@ CLLocationManager *locationManager;
 
 
 
--(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+/*-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     self.userLocationLabel.text =
     [NSString stringWithFormat:@"Location %.5f°, %.5f°", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
      MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-}
+}*/
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     NSLog(@"%@", [locations lastObject]);
@@ -158,6 +119,7 @@ CLLocationManager *locationManager;
     // Dispose of any resources that can be recreated.
 }
 
+//TODO WHEN WE IMPLEMENT A CUSTOM MODAL FOR THIS TRANSITION
 - (IBAction)launchCategoriesList:(id)sender {
     CategoryViewController *categoryVC = [CategoryViewController new];
     categoryVC.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -171,7 +133,7 @@ CLLocationManager *locationManager;
 -(void)loadSearchResults {
     MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
 
-    
+    MKMapRect zoomRect = MKMapRectNull;
     for (int i=0; i<[results.mapItems count]; i++) {
         MKMapItem* itemPOI = results.mapItems[i];
         MKPlacemark* annotation= [[MKPlacemark alloc] initWithPlacemark:itemPOI.placemark];
@@ -180,8 +142,11 @@ CLLocationManager *locationManager;
         marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
         marker.title = itemPOI.placemark.name;
         marker.subtitle = itemPOI.phoneNumber;
-        
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+        zoomRect = MKMapRectUnion(zoomRect, pointRect);
         [self.mapView addAnnotation:marker];
+        [self.mapView setVisibleMapRect:zoomRect animated:YES];
         
     }
    

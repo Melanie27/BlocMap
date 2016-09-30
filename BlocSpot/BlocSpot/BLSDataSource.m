@@ -134,10 +134,7 @@ MKLocalSearch *localSearch;
             
         
         });
-            
-   
-
-    
+ 
 }
 
 
@@ -187,8 +184,12 @@ MKLocalSearch *localSearch;
         NSMutableArray *phoneNumbers = [NSMutableArray array];
        
             for (MKMapItem *mapItem in response.mapItems) {
-                [phoneNumbers addObject:mapItem.phoneNumber];
-                NSLog(@"phone numbers %@", phoneNumbers);
+                if(mapItem.phoneNumber) {
+                    [phoneNumbers addObject:mapItem.phoneNumber];
+                    NSLog(@"phone numbers %@", phoneNumbers);
+                } else {
+                    mapItem.phoneNumber = nil;
+                }
             }
         
         
@@ -197,14 +198,50 @@ MKLocalSearch *localSearch;
             NSLog(@"%@",name);
             [arrayOfPOIs addObject:name];
         }
-        
-
+    
                 completionHandler(response, error);
 
-       
          }];
     
-    //[self.srtvc.tableView reloadData];
+    
+}
+
+#pragma mark Persist Categories to Disc
+-(void)saveCategory {
+    
+    NSMutableArray *arrayOfCategoryColors = [[NSMutableArray alloc] init];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSUInteger numberOfItemsToSave = MIN(arrayOfCategoryColors.count, 50);
+        NSArray *categoryColorItemsToSave = [arrayOfCategoryColors subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+        NSString *fullPath = [self pathForFilename:@"categories.colors"];
+       
+        
+        NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:categoryColorItemsToSave];
+        [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"myColor"];
+        
+        
+        NSError *dataError;
+        BOOL wroteSuccessfully = [colorData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+        NSLog(@"color data %@", colorData);
+        if (!wroteSuccessfully) {
+            NSLog(@"Couldn't write file: %@", dataError);
+        }
+        
+        
+    });
+    
+    
+   /* -(void)retrieveCategory {
+        NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"myColor"];
+        UIColor *color = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
+    }*/
+
+    
+    
+    
+    
+    
+    
 }
 
 @end

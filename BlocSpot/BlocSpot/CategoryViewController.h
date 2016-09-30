@@ -11,6 +11,9 @@
 @class Interactor;
 
 @interface CategoryViewController : UIViewController
+//@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *categoryLables;
+//@property (strong, nonatomic) IBOutlet UIView *categoryContainerView;
+
 
 -(instancetype)initWithInteractor:(Interactor *)interactor;
 

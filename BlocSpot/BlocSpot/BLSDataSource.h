@@ -34,4 +34,5 @@
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;;
 - (instancetype)initWithRequest:(MKLocalSearchRequest *)request;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
+-(void)saveCategory;
 @end
