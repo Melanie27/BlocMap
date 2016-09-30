@@ -112,21 +112,15 @@ MKLocalSearch *localSearch;
 
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler{
    
-     
-    [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
-        
-        
-        for (MKMapItem *mapItem in response.mapItems) {
+   
+    
+            MKMapItem *mapItem = [[MKMapItem alloc] init];
+            //only want the result that has been clicked
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-            
-            
-           
             NSLog(@"item to save %@", mapItemsToSave);
                         [arrayOfPOIs addObject:item];
 
-           
-        }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(arrayOfPOIs.count, 50);
@@ -144,7 +138,7 @@ MKLocalSearch *localSearch;
         
         });
             
-    }];
+   
 
     
 }
