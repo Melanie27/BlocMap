@@ -57,7 +57,7 @@ MKLocalSearch *localSearch;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-        NSArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+        NSMutableArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
         
         //NEED TO GET ALL THE ELEMENTS OF THESE STORED MAP ITEMS SO CAN CREATE PLACEMARK
         
@@ -70,9 +70,9 @@ MKLocalSearch *localSearch;
                 for (int i=0; i<[storedMapItems count]; i++) {
                     PointOfInterest *mapItem = storedMapItems[i];
                     
-                    NSLog(@"map item %@", mapItem);
-                    NSLog(@"map item title %@", mapItem.title);
-                    NSLog(@"map item subtitle %@", mapItem.subtitle);
+                    //NSLog(@"map item %@", mapItem);
+                    //NSLog(@"map item title %@", mapItem.title);
+                    //NSLog(@"map item subtitle %@", mapItem.subtitle);
                     //NSLog(@"map item indentifier %@", mapItem.identifier);
                     //NSLog(@"map item coordinate %f,%f", mapItem.coordinate.latitude,mapItem.coordinate.longitude);
                     
@@ -111,8 +111,7 @@ MKLocalSearch *localSearch;
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler{
    
         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
-   
-    
+
             MKMapItem *mapItem = [[MKMapItem alloc] init];
             //only want the result that has been clicked
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];

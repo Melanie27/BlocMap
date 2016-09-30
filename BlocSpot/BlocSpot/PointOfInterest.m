@@ -7,7 +7,6 @@
 //
 
 #import "PointOfInterest.h"
-
 #import <AddressBook/AddressBook.h>
 
 @interface PointOfInterest ()
@@ -67,7 +66,7 @@
 
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    
+   
     [aCoder encodeObject:_address forKey:@"address"];
     [aCoder encodeDouble:_coordinate.latitude forKey:@"latitude"];
     [aCoder encodeDouble:_coordinate.longitude forKey:@"longitude"];

@@ -83,9 +83,15 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wd7-1T-C5u">
-                                <rect key="frame" x="446" y="101" width="114" height="30"/>
-                                <state key="normal" title="Categories"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wd7-1T-C5u">
+                                <rect key="frame" x="523" y="81" width="50" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="8MC-5p-4G7"/>
+                                    <constraint firstAttribute="width" constant="50" id="W1X-pZ-Y5y"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="-3" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <size key="titleShadowOffset" width="2" height="2"/>
+                                <state key="normal" image="iconCategories"/>
                                 <connections>
                                     <action selector="launchCategoriesList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iMd-JN-ukU"/>
                                 </connections>
@@ -100,7 +106,7 @@
                             <constraint firstItem="ReE-6e-pYB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cp8-dk-aXj"/>
                             <constraint firstItem="ReE-6e-pYB" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="fXn-g3-5gJ"/>
                             <constraint firstAttribute="trailing" secondItem="ReE-6e-pYB" secondAttribute="trailing" id="rof-V3-ddy"/>
-                            <constraint firstItem="wd7-1T-C5u" firstAttribute="leading" secondItem="ReE-6e-pYB" secondAttribute="trailing" constant="-154" id="ufu-iI-P29"/>
+                            <constraint firstItem="wd7-1T-C5u" firstAttribute="leading" secondItem="ReE-6e-pYB" secondAttribute="trailing" constant="-77" id="wpJ-4U-Kaq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rXy-UH-gsp">
@@ -334,6 +340,7 @@
     </scenes>
     <resources>
         <image name="blueHeart" width="25" height="25"/>
+        <image name="iconCategories" width="100" height="75"/>
         <image name="listView" width="25" height="25"/>
         <image name="mapView.png" width="25" height="25"/>
     </resources>
