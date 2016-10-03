@@ -20,15 +20,19 @@
 
 @property (weak) id<AddCategoryViewControllerDelegate> delegate;
 @property IBOutlet UITextField *nameTextField;
+@property (strong, nonatomic) IBOutlet UIButton *colorButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *save;
 
-- (IBAction)createCategoryWithColorFromButton:(UIButton *)sender;
+- (IBAction)grabColorFromButton:(id)sender;
 
 
 @end
 
 
 @protocol AddCategoryViewControllerDelegate <NSObject>
-- (void)controller:(AddCategoryViewController *)controller didSaveCategoryWithName:(NSString *)name;
+- (void)controller:(AddCategoryViewController *)controller didSaveCategoryWithName:(NSString *)name andColor:(UIColor*)color;
+
+
+
 @end
 

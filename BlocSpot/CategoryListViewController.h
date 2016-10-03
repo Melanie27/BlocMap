@@ -10,6 +10,6 @@
 //conform to add cat protocol
 #import "AddCategoryViewController.h"
 
-@interface CategoryListViewController : UITableViewController /*<AddCategoryViewControllerDelegate>*/
+@interface CategoryListViewController : UITableViewController 
 
 @end

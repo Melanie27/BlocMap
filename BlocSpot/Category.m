@@ -17,6 +17,7 @@
         self.uuid = [aDecoder decodeObjectForKey:@"uuid"];
         self.categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
         self.inCategoryList = [aDecoder decodeBoolForKey:@"inCategoryList"];
+        self.categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
     }
     
     return self;
@@ -26,9 +27,25 @@
     [aCoder encodeObject:self.uuid forKey:@"uuid"];
     [aCoder encodeObject:self.categoryName forKey:@"categoryName"];
     [aCoder encodeBool:self.inCategoryList forKey:@"inCategoryList"];
+    [aCoder encodeObject:self.categoryColor forKey:@"categoryColor"];
 }
 
-+(Category *)createCategoryWithName:(NSString *)categoryName {
++ (Category *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor {
+    
+    //init category
+    Category *category = [[Category alloc]init];
+    
+    //Config
+    [category setCategoryName:categoryName];
+    [category setInCategoryList:NO];
+    [category setUuid:[[NSUUID UUID] UUIDString]];
+    [category setCategoryColor:categoryColor];
+    
+    return category;
+    
+}
+
+/*+(Category *)createCategoryWithName:(NSString *)categoryName {
     
     //init category
     Category *category = [[Category alloc]init];
@@ -41,13 +58,13 @@
     return category;
 }
 
-/*+ (Category *)saveColorToCategory:(UIColor*)categoryColor {
++ (Category *)saveColorToCategory:(UIColor*)categoryColor {
     //save color here
     
     Category *category = [[Category alloc] init];
-    [category saveColorToCategory:[UIColor purpleColor]];
+    [category setCategoryColor:[UIColor purpleColor]];
     
-    return categoryColor;
+    return category;
 }*/
 
 @end

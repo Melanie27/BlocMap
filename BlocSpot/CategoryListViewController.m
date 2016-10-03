@@ -61,14 +61,10 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"AddCategoryViewController"]) {
-        
-        
-        if([segue.identifier isEqualToString:@"AddCategoryViewController"])
-        {
+   
+    if([segue.identifier isEqualToString:@"AddCategoryViewController"]) {
             AddCategoryViewController *addCategoryVC = (AddCategoryViewController*)segue.destinationViewController;
             [addCategoryVC setDelegate:self];
-        }
     }
 }
 
@@ -126,10 +122,10 @@ static NSString *CellIdentifier = @"Cell Identifier";
     return [paths lastObject];
 }
 
-- (void)controller:(AddCategoryViewController *)controller didSaveCategoryWithName:(NSString *)name {
+- (void)controller:(AddCategoryViewController *)controller didSaveCategoryWithName:(NSString *)name andColor:(UIColor*)color {
     // Create Category
-    Category *category = [Category createCategoryWithName:name];
-    
+    Category *category = [Category createCategoryWithName:name andColor:color];
+    NSLog(@"color once back in table %@", color);
     
     // Add Item to Data Source
     [self.categories addObject:category];
@@ -141,6 +137,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     // Save Items
     [self saveCategories];
 }
+
 
 
 /*- (void)seedCategories {

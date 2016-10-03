@@ -18,7 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Seed Categories so user knows what to do from that entry point
-    [self seedCategories];
     return YES;
 }
 
@@ -44,43 +43,6 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)seedCategories {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
-    if (![ud boolForKey:@"TSPUserDefaultsSeedItems"]) {
-        // Load Seed Items
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"seed" ofType:@"plist"];
-        NSLog(@"filepath %@", filePath);
-        NSArray *seedCategories = [NSArray arrayWithContentsOfFile:filePath];
-        
-        // Items
-        NSMutableArray *categories = [NSMutableArray array];
-        
-        // Create List of Items
-        for (int i = 0; i < [seedCategories count]; i++) {
-            NSDictionary *seedCategory = [seedCategories objectAtIndex:i];
-            
-            // Create Item
-            Category *category = [Category createCategoryWithName:[seedCategory objectForKey:@"categoryName"]];
-            
-            // Add Item to Items
-            [categories addObject:category];
-        }
-        
-        // Items Path
-        NSString *categoriesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"items.plist"];
-        
-        // Write to File
-        if ([NSKeyedArchiver archiveRootObject:categories toFile:categoriesPath]) {
-            [ud setBool:YES forKey:@"TSPUserDefaultsSeedItems"];
-        }
-    }
-}
-
-- (NSString *)documentsDirectory {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [paths lastObject];
-}
 
 
 
