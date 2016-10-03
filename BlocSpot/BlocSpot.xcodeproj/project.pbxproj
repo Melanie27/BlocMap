@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		98B0791459D852EDE832300A /* libPods-BlocSpot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */; };
 		9B16A5E41D9B449F00EFC33C /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E31D9B449F00EFC33C /* Category.m */; };
-		9B16A5E71D9B457300EFC33C /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E61D9B457300EFC33C /* CategoryViewController.m */; };
 		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
 		9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */; };
 		9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */; };
@@ -30,7 +29,6 @@
 		9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCB1D921B5500117D24 /* MyAnnotation.m */; };
 		9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */; };
 		9BDDEA0B1D9DC5CB0099DDB1 /* mabelFlip.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */; };
-		9BDDEA0E1D9DC60D0099DDB1 /* Interactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0D1D9DC60D0099DDB1 /* Interactor.m */; };
 		9BDDEA101D9DFCFE0099DDB1 /* iconCategories.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */; };
 		9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */; };
 		9BE6C85F1D9EF409005F1ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE6C85E1D9EF409005F1ECC /* Main.storyboard */; };
@@ -62,8 +60,6 @@
 		6F54DF1C3D8710391935050E /* Pods-BlocSpot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlocSpot.release.xcconfig"; path = "Pods/Target Support Files/Pods-BlocSpot/Pods-BlocSpot.release.xcconfig"; sourceTree = "<group>"; };
 		9B16A5E21D9B449F00EFC33C /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = ../Category.h; sourceTree = "<group>"; };
 		9B16A5E31D9B449F00EFC33C /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = ../Category.m; sourceTree = "<group>"; };
-		9B16A5E51D9B457300EFC33C /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
-		9B16A5E61D9B457300EFC33C /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		9B6FDCC81D919D35000B77AB /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
 		9B6FDCC91D919D35000B77AB /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
 		9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointOfInterest.h; sourceTree = "<group>"; };
@@ -101,8 +97,6 @@
 		9BACADCD1D921E8D00117D24 /* MyAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotationView.h; sourceTree = "<group>"; };
 		9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
 		9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mabelFlip.jpg; path = ../../../Desktop/mabelFlip.jpg; sourceTree = "<group>"; };
-		9BDDEA0C1D9DC60D0099DDB1 /* Interactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interactor.h; path = "../../../Downloads/iOSGuest_TransitionsDemo-2e844f1589c85f6c66c27b5cf4618091086d0b32/TransitionsDemo/Interactor.h"; sourceTree = "<group>"; };
-		9BDDEA0D1D9DC60D0099DDB1 /* Interactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Interactor.m; path = "../../../Downloads/iOSGuest_TransitionsDemo-2e844f1589c85f6c66c27b5cf4618091086d0b32/TransitionsDemo/Interactor.m"; sourceTree = "<group>"; };
 		9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = iconCategories.jpg; path = ../../../Desktop/iconCategories.jpg; sourceTree = "<group>"; };
 		9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryListViewController.h; path = ../CategoryListViewController.h; sourceTree = "<group>"; };
 		9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryListViewController.m; path = ../CategoryListViewController.m; sourceTree = "<group>"; };
@@ -181,8 +175,6 @@
 				9BE6C8621D9F1B43005F1ECC /* AddCategoryViewController.h */,
 				9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */,
 				9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */,
-				9BDDEA0C1D9DC60D0099DDB1 /* Interactor.h */,
-				9BDDEA0D1D9DC60D0099DDB1 /* Interactor.m */,
 				9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */,
 				9B96CD1D1D99CA3C008E6842 /* checked.png */,
 				9B96CD221D9AF95B008E6842 /* iconSave.png */,
@@ -207,8 +199,6 @@
 				9B96CD201D99CD54008E6842 /* ResultsDetailViewController.m */,
 				9BACADC71D91D91100117D24 /* BLSDataSource.h */,
 				9BACADC81D91D91100117D24 /* BLSDataSource.m */,
-				9B16A5E51D9B457300EFC33C /* CategoryViewController.h */,
-				9B16A5E61D9B457300EFC33C /* CategoryViewController.m */,
 				9B16A5E21D9B449F00EFC33C /* Category.h */,
 				9B16A5E31D9B449F00EFC33C /* Category.m */,
 				9B6FDCC81D919D35000B77AB /* Search.h */,
@@ -450,8 +440,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */,
-				9B16A5E71D9B457300EFC33C /* CategoryViewController.m in Sources */,
-				9BDDEA0E1D9DC60D0099DDB1 /* Interactor.m in Sources */,
 				9B96CD211D99CD54008E6842 /* ResultsDetailViewController.m in Sources */,
 				9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */,
 				9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */,
