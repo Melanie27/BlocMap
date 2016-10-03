@@ -31,16 +31,19 @@
 
 - (IBAction)save:(id *)sender {
     NSString *categoryName = [self.nameTextField text];
-    
+    //[self grabColorFromButton:self.colorButton];
+    UIColor *categoryColor = self.colorButton.backgroundColor;
+    NSLog(@"passed color %@", categoryColor);
     // Notify Delegate that there is a new category and color
-    [self.delegate controller:self didSaveCategoryWithName:categoryName andColor:self.categoryColor ];
+    [self.delegate controller:self didSaveCategoryWithName:categoryName andColor:categoryColor ];
    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)grabColorFromButton:(UIButton*)sender {
     UIColor *categoryColor = sender.backgroundColor;
-     NSLog(@"background color %@", categoryColor);
+    NSLog(@"grab color %@", categoryColor);
+    
 }
 
 /*
