@@ -61,7 +61,7 @@
             NSDictionary *seedCategory = [seedCategories objectAtIndex:i];
             
             // Create Item
-            Category *category = [Category createCategoryWithName:[seedCategory objectForKey:@"categoryName"] andColor:[seedCategory objectForKey:@"categoryColor"]];
+            Category *category = [Category createCategoryWithName:[seedCategory objectForKey:@"categoryName"]];
             
             // Add Item to Items
             [categories addObject:category];

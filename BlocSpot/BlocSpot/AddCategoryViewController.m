@@ -31,10 +31,10 @@
 
 - (IBAction)save:(id *)sender {
     NSString *categoryName = [self.nameTextField text];
-    //NSString *categoryColor = [self.colorTextField text];
+    // Notify Delegate that there is a new category
     
-    // Notify Delegate
-     //[self.delegate controller:self didSaveItemWithName:categoryName andColor:categoryColor];
+    [self.delegate controller:self didSaveCategoryWithName:categoryName];
+    NSLog(@"category name %@", categoryName);
     [self.navigationController popViewControllerAnimated:YES];
 }
 

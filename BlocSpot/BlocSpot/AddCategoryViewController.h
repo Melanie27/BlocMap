@@ -12,30 +12,23 @@
 #import "Category.h"
 
 
-@protocol AddCategoryViewControllerDelegate;
 //forward protocol declaration
-
-
+@protocol AddCategoryViewControllerDelegate;
 
 @interface AddCategoryViewController : ViewController
 
-//@property (weak) id<AddCategoryViewControllerDelegate> delegate;
 
+@property (weak) id<AddCategoryViewControllerDelegate> delegate;
 @property IBOutlet UITextField *nameTextField;
-@property IBOutlet UITextField *colorTextField;
-
-- (IBAction)createCategoryWithColorFromButton:(UIButton *)sender;
-
-
-
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *save;
 
+- (IBAction)createCategoryWithColorFromButton:(UIButton *)sender;
 
 
 @end
 
 
-/*@protocol AddCategoryViewControllerDelegate <NSObject>
-- (void)controller:(AddCategoryViewController *)controller didSaveItemWithName:(NSString *)name andColor:(NSString *)color;
-@end*/
+@protocol AddCategoryViewControllerDelegate <NSObject>
+- (void)controller:(AddCategoryViewController *)controller didSaveCategoryWithName:(NSString *)name;
+@end
 

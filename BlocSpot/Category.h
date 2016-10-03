@@ -13,13 +13,15 @@
 
 @property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSString *categoryName;
-@property (nonatomic, strong) UIColor *categoryColor;
+//@property (nonatomic, strong) UIColor *categoryColor;
 @property  BOOL inCategoryList;
 @property (nonatomic, strong) NSMutableOrderedSet *categories;
 
 
 //custom class method to init with ease
-+ (Category *)createCategoryWithName:(NSString *)categoryName andColor:(NSString *)categoryColor;
+//+ (Category *)createCategoryWithName:(NSString *)categoryName andColor:(NSString *)categoryColor;
 
++ (Category *)createCategoryWithName:(NSString *)categoryName;
+//+ (Category *)saveColorToCategory:(UIColor*)categoryColor;
 
 @end
