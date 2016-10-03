@@ -31,7 +31,8 @@
 
 - (IBAction)save:(id *)sender {
     NSString *categoryName = [self.nameTextField text];
-   
+   //button that was clicked
+    NSLog(@"collection %@", self.colorButtonCollection);
     UIColor *categoryColor = self.colorButton.backgroundColor;
     NSLog(@"passed color %@", categoryColor);
     // Notify Delegate that there is a new category and color
@@ -40,7 +41,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+ -(IBAction)grabColorFromButton:(UIButton*)sender {
+    
+        UIColor *categoryColor = sender.backgroundColor;
+        NSLog(@"grab color %@", categoryColor);
+     NSLog(@"tag %ld", (long)sender.tag);
+     
+}
 
 /*
 #pragma mark - Navigation
@@ -51,6 +58,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 
 

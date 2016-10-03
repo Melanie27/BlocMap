@@ -23,6 +23,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *colorButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *save;
 
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *colorButtonCollection;
+
+
+
+- (IBAction)grabColorFromButton:(UIButton*)sender;
 
 
 @end

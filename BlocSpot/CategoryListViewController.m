@@ -134,10 +134,18 @@ static NSString *CellIdentifier = @"Cell Identifier";
     NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:([self.categories count] - 1) inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     
+    
     // Save Items
     [self saveCategories];
 }
 
+//GET THE COLORS INTO THE CELLS
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Fetch Item
+    Category *category = [self.categories objectAtIndex:[indexPath row]];
+    cell.backgroundColor = category.categoryColor;
+   
+}
 
 
 /*- (void)seedCategories {
