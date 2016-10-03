@@ -13,10 +13,12 @@
 @end
 
 @implementation AddCategoryViewController
+UIColor *categoryColor;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    categoryColor = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,8 +34,8 @@
 - (IBAction)save:(id *)sender {
     NSString *categoryName = [self.nameTextField text];
    //button that was clicked
-    NSLog(@"collection %@", self.colorButtonCollection);
-    UIColor *categoryColor = self.colorButton.backgroundColor;
+//    NSLog(@"collection %@", self.colorButtonCollection);
+//    UIColor *categoryColor = self.colorButton.backgroundColor;
     NSLog(@"passed color %@", categoryColor);
     // Notify Delegate that there is a new category and color
     [self.delegate controller:self didSaveCategoryWithName:categoryName andColor:categoryColor ];
@@ -43,7 +45,7 @@
 
  -(IBAction)grabColorFromButton:(UIButton*)sender {
     
-        UIColor *categoryColor = sender.backgroundColor;
+        categoryColor = sender.backgroundColor;
         NSLog(@"grab color %@", categoryColor);
      NSLog(@"tag %ld", (long)sender.tag);
      
