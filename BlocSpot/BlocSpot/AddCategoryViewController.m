@@ -31,10 +31,10 @@
 
 - (IBAction)save:(id *)sender {
     NSString *categoryName = [self.nameTextField text];
-    NSString *categoryColor = [self.colorTextField text];
+    //NSString *categoryColor = [self.colorTextField text];
     
     // Notify Delegate
-     [self.delegate controller:self didSaveItemWithName:categoryName andColor:categoryColor];
+     //[self.delegate controller:self didSaveItemWithName:categoryName andColor:categoryColor];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -51,4 +51,10 @@
 */
 
 
+- (IBAction)createCategoryWithColorFromButton:(UIButton *)sender {
+    //MAKE TWO METHODS IN THE DELEGATE ONE FOR TITLE AND 1 FOR TEXT
+    //grab sender.backgroundColor
+    //notify delegate
+    NSLog(@"clicking on this button should set the color of the category");
+}
 @end

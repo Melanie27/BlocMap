@@ -19,12 +19,14 @@
 
 @interface AddCategoryViewController : ViewController
 
-@property (weak) id<AddCategoryViewControllerDelegate> delegate;
+//@property (weak) id<AddCategoryViewControllerDelegate> delegate;
 
 @property IBOutlet UITextField *nameTextField;
 @property IBOutlet UITextField *colorTextField;
 
-//TODO make a bunch of color swatches they can select from?
+- (IBAction)createCategoryWithColorFromButton:(UIButton *)sender;
+
+
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *save;
 
@@ -33,7 +35,7 @@
 @end
 
 
-@protocol AddCategoryViewControllerDelegate <NSObject>
+/*@protocol AddCategoryViewControllerDelegate <NSObject>
 - (void)controller:(AddCategoryViewController *)controller didSaveItemWithName:(NSString *)name andColor:(NSString *)color;
-@end
+@end*/
 

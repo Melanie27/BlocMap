@@ -55,13 +55,13 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddCategoryViewController"]) {
         // Destination View Controller
-        UINavigationController *nc = (UINavigationController *)segue.destinationViewController;
+        //UINavigationController *nc = (UINavigationController *)segue.destinationViewController;
         
         // Fetch Add Item View Controller
-        AddCategoryViewController *vc = [nc.viewControllers firstObject];
+        //AddCategoryViewController *vc = [nc.viewControllers firstObject];
         
         // Set Delegate
-        [vc setDelegate:self];
+        //[vc setDelegate:self];
     }
 }
 
