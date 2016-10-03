@@ -13,7 +13,7 @@
 #import "SearchViewController.h"
 #import "PointOfInterest.h"
 
-#import "CategoryViewController.h"
+//#import "CategoryViewController.h"
 
 @interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, MKMapViewDelegate>
 
@@ -119,16 +119,7 @@ CLLocationManager *locationManager;
     // Dispose of any resources that can be recreated.
 }
 
-//TODO WHEN WE IMPLEMENT A CUSTOM MODAL FOR THIS TRANSITION
-- (IBAction)launchCategoriesList:(id)sender {
-    CategoryViewController *categoryVC = [CategoryViewController new];
-    categoryVC.modalPresentationStyle = UIModalPresentationFormSheet;
-    categoryVC.transitioningDelegate = self;
-    [self presentViewController:categoryVC animated:YES completion:^{
-        
-    }];
-    
-}
+
 
 -(void)loadSearchResults {
     MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];

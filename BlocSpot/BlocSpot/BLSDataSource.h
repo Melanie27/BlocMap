@@ -30,9 +30,9 @@
 @property (nonatomic) BOOL itemSelected;
 
 -(void)loadSavedMarkers;
--(void)savePOI;
+//-(void)savePOI;
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;;
-- (instancetype)initWithRequest:(MKLocalSearchRequest *)request;
+//- (instancetype)initWithRequest:(MKLocalSearchRequest *)request;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 -(void)saveCategory;
 @end

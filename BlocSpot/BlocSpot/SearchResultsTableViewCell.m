@@ -24,7 +24,9 @@
 }
 
 - (IBAction)savePointOfInterest:(id)sender {
-    [[BLSDataSource sharedInstance] savePOI];
+    /*[[BLSDataSource sharedInstance] savePOI:(NSArray<MKMapItem *> *) andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+        
+    };*/
     NSLog(@"this should save the POI to the data source");
 }
 @end
