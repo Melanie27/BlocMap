@@ -9,7 +9,7 @@
 #import "AddCategoryViewController.h"
 
 @interface AddCategoryViewController ()
-@property (nonatomic, strong) UIColor *categoryColor;
+
 @end
 
 @implementation AddCategoryViewController
@@ -31,7 +31,7 @@
 
 - (IBAction)save:(id *)sender {
     NSString *categoryName = [self.nameTextField text];
-    //[self grabColorFromButton:self.colorButton];
+   
     UIColor *categoryColor = self.colorButton.backgroundColor;
     NSLog(@"passed color %@", categoryColor);
     // Notify Delegate that there is a new category and color
@@ -40,11 +40,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)grabColorFromButton:(UIButton*)sender {
-    UIColor *categoryColor = sender.backgroundColor;
-    NSLog(@"grab color %@", categoryColor);
-    
-}
+
 
 /*
 #pragma mark - Navigation

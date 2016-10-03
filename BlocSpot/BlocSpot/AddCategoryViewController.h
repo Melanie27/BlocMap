@@ -23,7 +23,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *colorButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *save;
 
-- (IBAction)grabColorFromButton:(id)sender;
 
 
 @end
