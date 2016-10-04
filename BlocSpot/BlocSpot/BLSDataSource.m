@@ -12,7 +12,7 @@
 
 
 @implementation BLSDataSource
-
+NSMutableArray *arrayOfPOIs;
 MKLocalSearch *localSearch;
 
 +(instancetype) sharedInstance {
@@ -52,7 +52,7 @@ MKLocalSearch *localSearch;
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler {
     NSLog(@"load saved markers");
     //TODO Create an array where everything is stored show it shows up again on launch
-   // NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
+    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -148,15 +148,13 @@ MKLocalSearch *localSearch;
     
     self.latestSearchRequest = [[MKLocalSearchRequest alloc] init];
     self.latestSearchRequest.naturalLanguageQuery = searchText;
-
     self.latestSearchRequest.region = self.mapView.region;
     
-    NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
-   
     localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
-        
+    NSMutableArray *arrayOfPOIs = [NSMutableArray arrayWithObjects:response.mapItems, nil];
+    NSLog(@"pois, %@", arrayOfPOIs);
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         if (error != nil) {
@@ -176,7 +174,8 @@ MKLocalSearch *localSearch;
         }
         
         self.results = response;
-        
+        NSLog(@"response, %@", response);
+       
         
         NSMutableArray *placemarks = [NSMutableArray array];
         for (MKMapItem *mapItem in response.mapItems) {
@@ -209,38 +208,5 @@ MKLocalSearch *localSearch;
     
 }
 
-#pragma mark Persist Categories to Disc
--(void)saveCategory {
-    
-    NSMutableArray *arrayOfCategoryColors = [[NSMutableArray alloc] init];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSUInteger numberOfItemsToSave = MIN(arrayOfCategoryColors.count, 50);
-        NSArray *categoryColorItemsToSave = [arrayOfCategoryColors subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
-        NSString *fullPath = [self pathForFilename:@"categories.colors"];
-       
-        
-        NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:categoryColorItemsToSave];
-        [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"myColor"];
-        
-        
-        NSError *dataError;
-        BOOL wroteSuccessfully = [colorData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-        NSLog(@"color data %@", colorData);
-        if (!wroteSuccessfully) {
-            NSLog(@"Couldn't write file: %@", dataError);
-        }
-        
-        
-    });
-    
-    
-   /* -(void)retrieveCategory {
-        NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"myColor"];
-        UIColor *color = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
-    }*/
-
-    
-
-}
 
 @end

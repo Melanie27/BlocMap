@@ -33,11 +33,6 @@ UIColor *categoryColor;
 
 - (IBAction)save:(id *)sender {
     NSString *categoryName = [self.nameTextField text];
-   //button that was clicked
-//    NSLog(@"collection %@", self.colorButtonCollection);
-//    UIColor *categoryColor = self.colorButton.backgroundColor;
-    NSLog(@"passed color %@", categoryColor);
-    // Notify Delegate that there is a new category and color
     [self.delegate controller:self didSaveCategoryWithName:categoryName andColor:categoryColor ];
    
     [self.navigationController popViewControllerAnimated:YES];

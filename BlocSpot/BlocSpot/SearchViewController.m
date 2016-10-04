@@ -42,7 +42,7 @@
 */
 
 - (IBAction)dismissSearchView:(id)sender {
-   
+    //Will have to make this segue a modal
     [self dismissViewControllerAnimated:YES completion:^{
         [self.mapVC loadSearchResults];
         
