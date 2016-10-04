@@ -13,9 +13,9 @@
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) IBOutlet UILabel *userLocationLabel;
+
 @property(nonatomic, readonly) MKCoordinateRegion region;
-@property (strong, nonatomic) IBOutlet UIButton *categoriesButton;
+
 @property (strong, nonatomic, getter=isChosen) MKAnnotationView *annotationView;
 
 -(void)loadSearchResults;

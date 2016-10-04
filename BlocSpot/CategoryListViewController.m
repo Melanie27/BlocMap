@@ -45,10 +45,8 @@ static NSString *CellIdentifier = @"Cell Identifier";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
     // Create Add Button
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
     
-    //dismissButton
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissScreen:)];
 }
 
 - (void)addItem:(id)sender {
@@ -56,10 +54,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     [self performSegueWithIdentifier:@"AddCategoryViewController" sender:self];
 }
 
--(void)dismissScreen:(id)sender {
-    NSLog(@"dismiss this screen");
-     [self.navigationController popViewControllerAnimated:YES];
-}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
