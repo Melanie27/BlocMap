@@ -49,16 +49,19 @@ MKLocalSearch *localSearch;
 #pragma load up all the saved mapitems
 
 
--(void)loadSavedMarkers {
+-(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler {
     NSLog(@"load saved markers");
     //TODO Create an array where everything is stored show it shows up again on launch
-    NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
+   // NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-        NSMutableArray *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+        NSMutableArray<PointOfInterest*> *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
         
+        self.arrayOfPOIs = storedMapItems;
+        completionHandler(storedMapItems);
+        /*
         //NEED TO GET ALL THE ELEMENTS OF THESE STORED MAP ITEMS SO CAN CREATE PLACEMARK
         
         
@@ -88,15 +91,15 @@ MKLocalSearch *localSearch;
                     NSLog(@"map view %@",arrayOfPOIs);
                     //map does not exist here - move things around
                    
-                    [self.mapView addAnnotation:marker];
                     [self.mvc loadView];
+                    [self.mapView addAnnotation:marker];
                     
                     
                 }
             }
             
         });
-        
+        */
     });
 }
 

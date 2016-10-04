@@ -49,14 +49,12 @@ CLLocationManager *locationManager;
 
     }
     
-
-    [[BLSDataSource sharedInstance] loadSavedMarkers];
-    
-    
-    
-    //[self.mapView addAnnotation:marker];
-     
-
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+        // Set up annotations for each poi
+        NSLog(@"pois %@", pois);
+       
+        
+    }];
     
 }
 

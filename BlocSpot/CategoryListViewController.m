@@ -8,6 +8,7 @@
 
 #import "CategoryListViewController.h"
 #import "Category.h"
+#import "AppDelegate.h"
 
 @interface CategoryListViewController() <UITableViewDelegate, UITableViewDataSource, AddCategoryViewControllerDelegate>
 
@@ -145,6 +146,23 @@ static NSString *CellIdentifier = @"Cell Identifier";
     Category *category = [self.categories objectAtIndex:[indexPath row]];
     cell.backgroundColor = category.categoryColor;
    
+}
+
+//Swipe to delete
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the category from the data source
+        Category *category = [self.categories objectAtIndex:[indexPath row]];
+        [self.categories removeObject:category];
+        
+        //TODO fix category deletion
+        //NSArray *categories = [NSArray arrayWithObjects:self.categories, nil];
+        //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        NSIndexPath *deleteIndexPath = [NSIndexPath indexPathForItem:([self.categories count] - 1) inSection:0];
+        [self.tableView deleteRowsAtIndexPaths:@[deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+    }
 }
 
 

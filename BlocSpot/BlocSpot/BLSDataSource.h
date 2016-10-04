@@ -12,6 +12,9 @@
 #import "MapViewController.h"
 
 @class SearchResultsTableViewController;
+@class PointOfInterest;
+
+typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
 
 @interface BLSDataSource : NSObject <MKMapViewDelegate>
 
@@ -28,8 +31,9 @@
 @property (nonatomic, weak) MapViewController *mvc;
 @property (retain, nonatomic) NSMutableArray *annotations;
 @property (nonatomic) BOOL itemSelected;
+@property (nonatomic, strong) NSArray<PointOfInterest*> *arrayOfPOIs;
 
--(void)loadSavedMarkers;
+-(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler;
 //-(void)savePOI;
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;;
 //- (instancetype)initWithRequest:(MKLocalSearchRequest *)request;
