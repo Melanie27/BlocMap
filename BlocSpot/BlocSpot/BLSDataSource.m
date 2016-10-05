@@ -52,8 +52,6 @@ MKLocalSearch *localSearch;
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler {
     NSLog(@"load saved markers");
-    //TODO Create an array where everything is stored show it shows up again on launch
-    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -62,45 +60,7 @@ MKLocalSearch *localSearch;
         
         self.arrayOfPOIs = storedMapItems;
         completionHandler(storedMapItems);
-        /*
-        //NEED TO GET ALL THE ELEMENTS OF THESE STORED MAP ITEMS SO CAN CREATE PLACEMARK
         
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if(storedMapItems.count > 0) {
-                NSLog(@"number of stored map items %lu", (unsigned long)storedMapItems.count);
-                
-                //For each stored map item put a pin on the map!
-                for (int i=0; i<[storedMapItems count]; i++) {
-                    PointOfInterest *mapItem = storedMapItems[i];
-                    
-                    //NSLog(@"map item %@", mapItem);
-                    //NSLog(@"map item title %@", mapItem.title);
-                    //NSLog(@"map item subtitle %@", mapItem.subtitle);
-                    //NSLog(@"map item indentifier %@", mapItem.identifier);
-                    //NSLog(@"map item coordinate %f,%f", mapItem.coordinate.latitude,mapItem.coordinate.longitude);
-                    
-                    
-                    //ADDING THE ANNOTATIONS
-                    
-                    MKPointAnnotation *marker = [MKPointAnnotation new];
-                    marker.coordinate = CLLocationCoordinate2DMake(mapItem.coordinate.latitude, mapItem.coordinate.longitude);
-                    
-                    marker.title = mapItem.title;
-                    marker.subtitle = mapItem.subtitle;
-                    [arrayOfPOIs addObject:marker];
-                    NSLog(@"map view %@",arrayOfPOIs);
-                    //map does not exist here - move things around
-                   
-                    [self.mvc loadView];
-                    [self.mapView addAnnotation:marker];
-                    
-                    
-                }
-            }
-            
-        });
-        */
     });
 }
 
@@ -114,6 +74,7 @@ MKLocalSearch *localSearch;
 
 
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave {
+    
     NSMutableArray *newArrayOfPOIs = [[NSMutableArray alloc] init];
     
     for (MKMapItem *mapItem in mapItemsToSave) {
@@ -125,13 +86,17 @@ MKLocalSearch *localSearch;
 
 
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave {
-    NSMutableArray *newArrayOfPOIs = [[NSMutableArray alloc] init];
+    //init this array with already stored items
+    NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
+    NSMutableArray<PointOfInterest*> *newArrayOfPOIs = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
+   
     
     for (MKPointAnnotation *pointAnnotation in pointAnnotationsToSave) {
         PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:pointAnnotation];
         [newArrayOfPOIs addObject:item];
     }
     self.arrayOfPOIs = newArrayOfPOIs;
+    NSLog(@"new array %@", newArrayOfPOIs);
 }
 
 - (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
@@ -148,7 +113,7 @@ MKLocalSearch *localSearch;
         }
         
         completionHandler(nil,nil);
-        
+        //self.arrayOfPOIs = newArrayOfPOIs;
     });
 }
 

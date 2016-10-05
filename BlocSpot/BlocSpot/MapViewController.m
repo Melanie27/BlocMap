@@ -52,7 +52,10 @@ CLLocationManager *locationManager;
     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
         
-    
+        if(pois.count > 0) {
+            NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
+        }
+        
         for (MKPointAnnotation *annotation in pois) {
          PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
             MKPointAnnotation *marker = [MKPointAnnotation new];
@@ -63,7 +66,6 @@ CLLocationManager *locationManager;
             
         }
         
-       
         
     }];
     
