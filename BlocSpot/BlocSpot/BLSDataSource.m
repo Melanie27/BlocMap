@@ -161,23 +161,6 @@ MKLocalSearch *localSearch;
         NSLog(@"response, %@", response);
        
         
-        NSMutableArray *placemarks = [NSMutableArray array];
-        for (MKMapItem *mapItem in response.mapItems) {
-            [placemarks addObject:mapItem.placemark];
-            NSLog(@"placemarks %@", placemarks);
-        }
-        
-        NSMutableArray *phoneNumbers = [NSMutableArray array];
-       
-            for (MKMapItem *mapItem in response.mapItems) {
-                if(mapItem.phoneNumber) {
-                    [phoneNumbers addObject:mapItem.phoneNumber];
-                    NSLog(@"phone numbers %@", phoneNumbers);
-                } else {
-                    mapItem.phoneNumber = nil;
-                }
-            }
-        
         
         for (MKMapItem *item in response.mapItems) {
             NSString *name = item.name;

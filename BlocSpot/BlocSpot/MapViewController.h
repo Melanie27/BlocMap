@@ -17,6 +17,7 @@
 @property(nonatomic, readonly) MKCoordinateRegion region;
 
 @property (strong, nonatomic, getter=isChosen) MKAnnotationView *annotationView;
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 -(void)loadSearchResults;
 @end

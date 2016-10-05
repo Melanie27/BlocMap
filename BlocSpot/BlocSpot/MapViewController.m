@@ -12,6 +12,7 @@
 #import "BLSDataSource.h"
 #import "SearchViewController.h"
 #import "PointOfInterest.h"
+#import "CategoryListViewController.h"
 
 //#import "CategoryViewController.h"
 
@@ -142,8 +143,8 @@ CLLocationManager *locationManager;
         [ds convertPointAnnotationsToPOI:arrayMapItem];
         [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
 
-        //segue to the embedded segue
-         //[self childViewControllers[0] view].hidden = NO;
+        
+        self.containerView.hidden = NO;
         //[self performSegueWithIdentifier:@"showCategories" sender:view];
         
     } else if (control == view.leftCalloutAccessoryView){
@@ -155,6 +156,10 @@ CLLocationManager *locationManager;
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([sender isKindOfClass:[MKAnnotationView class]]) {
         [self prepareViewController:segue.destinationViewController forSegue:segue.identifier toShowAnnotation:((MKAnnotationView *) sender).annotation];
+    }
+    //prepare segue for embed
+    if([segue.destinationViewController isKindOfClass:[CategoryListViewController class]]) {
+        //pass some data about the POI so that that is can be saved to a category
     }
 }
 

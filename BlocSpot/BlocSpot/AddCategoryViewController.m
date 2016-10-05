@@ -41,8 +41,8 @@ UIColor *categoryColor;
  -(IBAction)grabColorFromButton:(UIButton*)sender {
     
         categoryColor = sender.backgroundColor;
-        NSLog(@"grab color %@", categoryColor);
-     NSLog(@"tag %ld", (long)sender.tag);
+        //NSLog(@"grab color %@", categoryColor);
+        //NSLog(@"tag %ld", (long)sender.tag);
      
 }
 
