@@ -52,26 +52,16 @@ CLLocationManager *locationManager;
     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
         
-        if(pois.count > 0) {
-            NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
+    
+        for (MKPointAnnotation *annotation in pois) {
+         PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
+            MKPointAnnotation *marker = [MKPointAnnotation new];
+            marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
+            marker.title = item.title;
+            marker.subtitle = item.subtitle;
+            [self.mapView addAnnotation:marker];
+            
         }
-        
-        //MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
-        /*NSLog(@"pois %@", pois);
-        for (int i=0; i<[pois count]; i++) {
-            
-            MKMapItem* itemPOI = pois[i];
-            PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:itemPOI];
-            NSLog(@"item poi %@", item);
-            MKPlacemark* annotation= [[MKPlacemark alloc] initWithPlacemark:itemPOI.placemark];
-        
-        MKPointAnnotation *marker = [MKPointAnnotation new];
-        marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
-        marker.title = itemPOI.placemark.name;
-        marker.subtitle = itemPOI.phoneNumber;
-        [self.mapView addAnnotation:marker];
-            
-        }*/
         
        
         

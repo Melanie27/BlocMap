@@ -136,8 +136,7 @@ MKLocalSearch *localSearch;
 
 - (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSUInteger numberOfItemsToSave = MIN(self.arrayOfPOIs.count, 50);
-        //  NSArray *mapItemsToSave = [arrayOfPOIs subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+       
         NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
         NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
         
