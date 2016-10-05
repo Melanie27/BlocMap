@@ -21,7 +21,6 @@
 //custom class method 
 + (Category *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor;
 
-//+ (Category *)createCategoryWithName:(NSString *)categoryName;
-//+ (Category *)saveColorToCategory:(UIColor*)categoryColor;
+
 
 @end

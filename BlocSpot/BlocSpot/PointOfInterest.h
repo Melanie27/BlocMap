@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Mapkit/Mapkit.h>
+#import "Category.h"
     
 @interface PointOfInterest : NSObject <NSCoding, MKAnnotation>
 
@@ -19,14 +20,17 @@
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem;
 
+-(Category*)saveCategoryToPOI;
+
+
 - (MKMapItem*)mapItem;
 
-//This is an optional property from MKAnnotataion
+
 @property (nonatomic, copy) NSString *title;
-
-
 @property (nonatomic, readonly, copy) NSString *subtitle;
-@property (nonatomic) BOOL animatesDrop;
+@property (nonatomic, strong) Category *category;
+
+//@property (nonatomic) BOOL animatesDrop;
 @property (nonatomic) BOOL canShowCallout;
 @property (nonatomic) BOOL itemSelected;
 

@@ -51,33 +51,74 @@ CLLocationManager *locationManager;
     
     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
-        NSLog(@"pois %@", pois);
+        //MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+        /*NSLog(@"pois %@", pois);
+        for (int i=0; i<[pois count]; i++) {
+            
+            MKMapItem* itemPOI = pois[i];
+            PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:itemPOI];
+            NSLog(@"item poi %@", item);
+            MKPlacemark* annotation= [[MKPlacemark alloc] initWithPlacemark:itemPOI.placemark];
+        
+        MKPointAnnotation *marker = [MKPointAnnotation new];
+        marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
+        marker.title = itemPOI.placemark.name;
+        marker.subtitle = itemPOI.phoneNumber;
+        [self.mapView addAnnotation:marker];
+            
+        }*/
+        
        
         
     }];
     
 }
 
+-(void)updateMapviewAnnotations {
+    
+}
+-(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    
+}
 
 
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
+    
+        [self updateLeftCalloutAccessoryViewInAnnotationView:annotationView];
+    
+    
+}
+
+//gives an annotation and returns a view for that annotation
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
     
     //detecting user interation with the annotated view
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
+    static NSString *reuseIdentifier = @"MapViewControllerLoc";
+    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:reuseIdentifier];
+    if(!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+        annotationView.canShowCallout = YES;
+        UIButton *infoButton = [[UIButton alloc]init];
+        [infoButton setBackgroundImage:[UIImage imageNamed:@"redHeart.png"] forState:UIControlStateNormal];
+        [infoButton sizeToFit];
+        //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
+        annotationView.leftCalloutAccessoryView = infoButton;
+        
+        UIButton *savePOIButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        annotationView.rightCalloutAccessoryView = savePOIButton;
+    }
     
-    MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"loc"];
-    annotationView.canShowCallout = YES;
-    //make the additional button a heart or something that triggers save
-    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
+    
+    //annotationView = annotation;
     
     return annotationView;
     
-    
-   
-    
+
 }
 
 /*- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
@@ -88,14 +129,26 @@ CLLocationManager *locationManager;
     }
 }*/
 
+-(void)updateLeftCalloutAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
+    //NSlog update the color of the heart depending on the category the poi has been assigned
+    //see stanford lecture 15 around min 45
+    //will have to respond to changing data model
+    NSLog(@"change appearance of heart");
+}
+
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
    
-    //right now just passing empty array - need to grab the correct item
-    NSLog(@"annot %@", view.annotation);
-    NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
+    if (control == view.rightCalloutAccessoryView) {
+        NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
     
-    [[BLSDataSource sharedInstance] savePOI:(arrayMapItem) andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
-    }];
+        [[BLSDataSource sharedInstance] savePOI:(arrayMapItem) andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+        }];
+        //segue to the embedded segue
+        [self performSegueWithIdentifier:@"showCategories" sender:view];
+        
+    } else if (control == view.leftCalloutAccessoryView){
+        NSLog(@"add to a category");
+    }
     
 }
 
@@ -121,7 +174,7 @@ CLLocationManager *locationManager;
 
 -(void)loadSearchResults {
     MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
-
+  
     MKMapRect zoomRect = MKMapRectNull;
     for (int i=0; i<[results.mapItems count]; i++) {
         MKMapItem* itemPOI = results.mapItems[i];
@@ -131,13 +184,18 @@ CLLocationManager *locationManager;
         marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
         marker.title = itemPOI.placemark.name;
         marker.subtitle = itemPOI.phoneNumber;
+        
         MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
         MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
         zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        
+        
         [self.mapView addAnnotation:marker];
+        
         [self.mapView setVisibleMapRect:zoomRect animated:YES];
         
     }
+    //[self.mapView showAnnotations:results.mapItems animated:YES];
    
 }
 

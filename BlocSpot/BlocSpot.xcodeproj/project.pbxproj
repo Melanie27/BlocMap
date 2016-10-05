@@ -28,6 +28,7 @@
 		9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADC81D91D91100117D24 /* BLSDataSource.m */; };
 		9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCB1D921B5500117D24 /* MyAnnotation.m */; };
 		9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */; };
+		9BB0075E1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0075D1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m */; };
 		9BDDEA0B1D9DC5CB0099DDB1 /* mabelFlip.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */; };
 		9BDDEA101D9DFCFE0099DDB1 /* iconCategories.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */; };
 		9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */; };
@@ -96,6 +97,8 @@
 		9BACADCB1D921B5500117D24 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 		9BACADCD1D921E8D00117D24 /* MyAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotationView.h; sourceTree = "<group>"; };
 		9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
+		9BB0075C1DA56EBD0079898C /* SavePOIToCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePOIToCategoryTableViewController.h; sourceTree = "<group>"; };
+		9BB0075D1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePOIToCategoryTableViewController.m; sourceTree = "<group>"; };
 		9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mabelFlip.jpg; path = ../../../Desktop/mabelFlip.jpg; sourceTree = "<group>"; };
 		9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = iconCategories.jpg; path = ../../../Desktop/iconCategories.jpg; sourceTree = "<group>"; };
 		9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryListViewController.h; path = ../CategoryListViewController.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				9B96CD1D1D99CA3C008E6842 /* checked.png */,
 				9B96CD221D9AF95B008E6842 /* iconSave.png */,
 				9BE6C85E1D9EF409005F1ECC /* Main.storyboard */,
+				9BB0075C1DA56EBD0079898C /* SavePOIToCategoryTableViewController.h */,
+				9BB0075D1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m */,
 				9BA722C31D8C665E006FC1B1 /* AppDelegate.h */,
 				9BA722C41D8C665E006FC1B1 /* AppDelegate.m */,
 				9BA722C61D8C665E006FC1B1 /* ViewController.h */,
@@ -449,6 +454,7 @@
 				9B16A5E41D9B449F00EFC33C /* Category.m in Sources */,
 				9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */,
 				9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */,
+				9BB0075E1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m in Sources */,
 				9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */,
 				9BA722C21D8C665E006FC1B1 /* main.m in Sources */,
 				9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */,

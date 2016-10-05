@@ -116,9 +116,10 @@ MKLocalSearch *localSearch;
         NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
 
             MKMapItem *mapItem = [[MKMapItem alloc] init];
+            //NSMutableArray *arrayOfPOIs = [NSMutableArray arrayWithObjects:mapItems, nil];
             //only want the result that has been clicked
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-            NSLog(@"item to save %@", mapItemsToSave);
+            //NSLog(@"item to save %@", mapItemsToSave);
                         [arrayOfPOIs addObject:item];
 
     
