@@ -144,10 +144,40 @@ CLLocationManager *locationManager;
         [[BLSDataSource sharedInstance] savePOI:(arrayMapItem) andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
         }];
         //segue to the embedded segue
+         //[self childViewControllers[0] view].hidden = NO;
         [self performSegueWithIdentifier:@"showCategories" sender:view];
         
     } else if (control == view.leftCalloutAccessoryView){
         NSLog(@"add to a category");
+    }
+    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([sender isKindOfClass:[MKAnnotationView class]]) {
+        [self prepareViewController:segue.destinationViewController forSegue:segue.identifier toShowAnnotation:((MKAnnotationView *) sender).annotation];
+    }
+}
+
+-(void)prepareViewController:(id)vc
+                    forSegue:(NSString *)segueIdentifier
+            toShowAnnotation:(id<MKAnnotation>)annotation {
+     NSLog(@"check call");
+    PointOfInterest *poi = nil;
+    //if([annotation isKindOfClass:[PointOfInterest class]]) {
+        poi = (PointOfInterest *)annotation;
+        NSLog(@"poi");
+    //}
+    
+    if(poi) {
+        if(![segueIdentifier length] || [segueIdentifier isEqualToString:@"showCategories"]) {
+            if ([vc isKindOfClass:[UITableViewController class]]) {
+                UITableViewController *tvc = (UITableViewController *)vc;
+                tvc.title = poi.title;
+                NSLog(@"title %@", tvc.title);
+                //pass stuff
+            }
+        }
     }
     
 }
@@ -206,7 +236,7 @@ CLLocationManager *locationManager;
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     UIViewController *vc = [segue destinationViewController];
@@ -214,7 +244,7 @@ CLLocationManager *locationManager;
         SearchViewController *svc = (SearchViewController*)vc;
         svc.mapVC = self;
     }
-}
+}*/
 
 
 @end
