@@ -31,10 +31,13 @@ typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
 @property (nonatomic, weak) MapViewController *mvc;
 @property (retain, nonatomic) NSMutableArray *annotations;
 @property (nonatomic) BOOL itemSelected;
-@property (nonatomic, strong) NSArray<PointOfInterest*> *arrayOfPOIs;
+@property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfPOIs;
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler;
 //-(void)savePOI;
+- (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave;
+- (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave;
+- (void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;;
 //- (instancetype)initWithRequest:(MKLocalSearchRequest *)request;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;

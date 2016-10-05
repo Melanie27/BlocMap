@@ -15,6 +15,7 @@
 NSMutableArray *arrayOfPOIs;
 MKLocalSearch *localSearch;
 
+
 +(instancetype) sharedInstance {
     //the dispatch_once function ensures we only create a single instance of this class. function takes a block of code and runs it only the first time it is called
     static dispatch_once_t once;
@@ -57,7 +58,7 @@ MKLocalSearch *localSearch;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-        NSMutableArray<PointOfInterest*> *storedMapItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+        NSMutableArray<PointOfInterest*> *storedMapItems = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
         
         self.arrayOfPOIs = storedMapItems;
         completionHandler(storedMapItems);
@@ -111,34 +112,52 @@ MKLocalSearch *localSearch;
     return dataPath;
 }
 
+
+- (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave {
+    NSMutableArray *newArrayOfPOIs = [[NSMutableArray alloc] init];
+    
+    for (MKMapItem *mapItem in mapItemsToSave) {
+        PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
+        [newArrayOfPOIs addObject:item];
+    }
+    self.arrayOfPOIs = newArrayOfPOIs;
+}
+
+
+- (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave {
+    NSMutableArray *newArrayOfPOIs = [[NSMutableArray alloc] init];
+    
+    for (MKPointAnnotation *pointAnnotation in pointAnnotationsToSave) {
+        PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:pointAnnotation];
+        [newArrayOfPOIs addObject:item];
+    }
+    self.arrayOfPOIs = newArrayOfPOIs;
+}
+
+- (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSUInteger numberOfItemsToSave = MIN(self.arrayOfPOIs.count, 50);
+        //  NSArray *mapItemsToSave = [arrayOfPOIs subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+        NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
+        NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
+        
+        NSError *dataError;
+        BOOL wroteSuccessfully = [mapItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+        NSLog(@"map item data %@", self.arrayOfPOIs);
+        if (!wroteSuccessfully) {
+            NSLog(@"Couldn't write file: %@", dataError);
+        }
+        
+        completionHandler(nil,nil);
+        
+    });
+}
+
+
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler{
    
-        NSMutableArray *arrayOfPOIs = [[NSMutableArray alloc] init];
-
-            MKMapItem *mapItem = [[MKMapItem alloc] init];
-            //NSMutableArray *arrayOfPOIs = [NSMutableArray arrayWithObjects:mapItems, nil];
-            //only want the result that has been clicked
-            PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
-            //NSLog(@"item to save %@", mapItemsToSave);
-                        [arrayOfPOIs addObject:item];
-
-    
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSUInteger numberOfItemsToSave = MIN(arrayOfPOIs.count, 50);
-            NSArray *mapItemsToSave = [arrayOfPOIs subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
-            NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-            NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:mapItemsToSave];
-        
-            NSError *dataError;
-            BOOL wroteSuccessfully = [mapItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-            NSLog(@"map item data %@", mapItemData);
-            if (!wroteSuccessfully) {
-                NSLog(@"Couldn't write file: %@", dataError);
-            }
-            
-        
-        });
- 
+    [self convertMapItemsToPOI:mapItemsToSave];
+    [self savePOIAndThen:completionHandler];
 }
 
 
@@ -154,8 +173,8 @@ MKLocalSearch *localSearch;
     localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
-    NSMutableArray *arrayOfPOIs = [NSMutableArray arrayWithObjects:response.mapItems, nil];
-    NSLog(@"pois, %@", arrayOfPOIs);
+    NSMutableArray *responsePOIs = [NSMutableArray arrayWithObjects:response.mapItems, nil];
+    NSLog(@"pois, %@", responsePOIs);
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         if (error != nil) {
@@ -199,7 +218,8 @@ MKLocalSearch *localSearch;
         for (MKMapItem *item in response.mapItems) {
             NSString *name = item.name;
             NSLog(@"%@",name);
-            [arrayOfPOIs addObject:name];
+            PointOfInterest *poi = [[PointOfInterest alloc] initWithMKMapItem:item];
+            [self.arrayOfPOIs addObject:poi];
         }
     
                 completionHandler(response, error);

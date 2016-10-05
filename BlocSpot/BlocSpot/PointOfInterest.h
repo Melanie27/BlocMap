@@ -19,6 +19,7 @@
            identifier:(NSNumber *)ident;
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem;
+- (instancetype)initWithMKPointAnnotation:(MKPointAnnotation*)pointAnnotation;
 
 -(Category*)saveCategoryToPOI;
 

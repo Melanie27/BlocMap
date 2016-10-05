@@ -51,6 +51,11 @@ CLLocationManager *locationManager;
     
     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
+        
+        if(pois.count > 0) {
+            NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
+        }
+        
         //MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
         /*NSLog(@"pois %@", pois);
         for (int i=0; i<[pois count]; i++) {
@@ -137,15 +142,17 @@ CLLocationManager *locationManager;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
-   
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
     if (control == view.rightCalloutAccessoryView) {
         NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
-    
-        [[BLSDataSource sharedInstance] savePOI:(arrayMapItem) andThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
-        }];
+        
+        
+        [ds convertPointAnnotationsToPOI:arrayMapItem];
+        [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
+
         //segue to the embedded segue
          //[self childViewControllers[0] view].hidden = NO;
-        [self performSegueWithIdentifier:@"showCategories" sender:view];
+        //[self performSegueWithIdentifier:@"showCategories" sender:view];
         
     } else if (control == view.leftCalloutAccessoryView){
         NSLog(@"add to a category");

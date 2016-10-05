@@ -27,6 +27,15 @@
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
 
+- (instancetype)initWithMKPointAnnotation:(MKPointAnnotation *)annotation {
+    NSString *address = @"";
+    NSString *name = annotation.title;
+    NSString *subtitle = annotation.subtitle;
+    NSNumber *identifier = @10;
+    CLLocationCoordinate2D coord = annotation.coordinate;
+    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
+}
+
 - (MKMapItem*)mapItem {
     NSDictionary *addrDict = @{
                             
