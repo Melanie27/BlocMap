@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		98B0791459D852EDE832300A /* libPods-BlocSpot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */; };
 		9B16A5E41D9B449F00EFC33C /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E31D9B449F00EFC33C /* Category.m */; };
+		9B6977591DA6BC8C003043D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B6977581DA6BC8C003043D4 /* Main.storyboard */; };
 		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
 		9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */; };
 		9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */; };
@@ -29,10 +30,7 @@
 		9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCB1D921B5500117D24 /* MyAnnotation.m */; };
 		9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */; };
 		9BB0075E1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0075D1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m */; };
-		9BDDEA0B1D9DC5CB0099DDB1 /* mabelFlip.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */; };
-		9BDDEA101D9DFCFE0099DDB1 /* iconCategories.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */; };
 		9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */; };
-		9BE6C85F1D9EF409005F1ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE6C85E1D9EF409005F1ECC /* Main.storyboard */; };
 		9BE6C8611D9F15CB005F1ECC /* seed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE6C8601D9F15CB005F1ECC /* seed.plist */; };
 		9BE6C8641D9F1B43005F1ECC /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */; };
 		9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5D7201D908690007E6DBE /* SearchViewController.m */; };
@@ -61,6 +59,7 @@
 		6F54DF1C3D8710391935050E /* Pods-BlocSpot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlocSpot.release.xcconfig"; path = "Pods/Target Support Files/Pods-BlocSpot/Pods-BlocSpot.release.xcconfig"; sourceTree = "<group>"; };
 		9B16A5E21D9B449F00EFC33C /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = ../Category.h; sourceTree = "<group>"; };
 		9B16A5E31D9B449F00EFC33C /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = ../Category.m; sourceTree = "<group>"; };
+		9B6977581DA6BC8C003043D4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9B6FDCC81D919D35000B77AB /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
 		9B6FDCC91D919D35000B77AB /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
 		9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointOfInterest.h; sourceTree = "<group>"; };
@@ -99,11 +98,8 @@
 		9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
 		9BB0075C1DA56EBD0079898C /* SavePOIToCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePOIToCategoryTableViewController.h; sourceTree = "<group>"; };
 		9BB0075D1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePOIToCategoryTableViewController.m; sourceTree = "<group>"; };
-		9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mabelFlip.jpg; path = ../../../Desktop/mabelFlip.jpg; sourceTree = "<group>"; };
-		9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = iconCategories.jpg; path = ../../../Desktop/iconCategories.jpg; sourceTree = "<group>"; };
 		9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryListViewController.h; path = ../CategoryListViewController.h; sourceTree = "<group>"; };
 		9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryListViewController.m; path = ../CategoryListViewController.m; sourceTree = "<group>"; };
-		9BE6C85E1D9EF409005F1ECC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
 		9BE6C8601D9F15CB005F1ECC /* seed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = seed.plist; sourceTree = "<group>"; };
 		9BE6C8621D9F1B43005F1ECC /* AddCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategoryViewController.h; sourceTree = "<group>"; };
 		9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCategoryViewController.m; sourceTree = "<group>"; };
@@ -177,11 +173,8 @@
 				9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */,
 				9BE6C8621D9F1B43005F1ECC /* AddCategoryViewController.h */,
 				9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */,
-				9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */,
-				9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */,
 				9B96CD1D1D99CA3C008E6842 /* checked.png */,
 				9B96CD221D9AF95B008E6842 /* iconSave.png */,
-				9BE6C85E1D9EF409005F1ECC /* Main.storyboard */,
 				9BB0075C1DA56EBD0079898C /* SavePOIToCategoryTableViewController.h */,
 				9BB0075D1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m */,
 				9BA722C31D8C665E006FC1B1 /* AppDelegate.h */,
@@ -214,6 +207,7 @@
 				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9BA722D11D8C665E006FC1B1 /* Info.plist */,
 				9BE6C8601D9F15CB005F1ECC /* seed.plist */,
+				9B6977581DA6BC8C003043D4 /* Main.storyboard */,
 				9BA722C01D8C665E006FC1B1 /* Supporting Files */,
 			);
 			path = BlocSpot;
@@ -364,13 +358,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BE6C85F1D9EF409005F1ECC /* Main.storyboard in Resources */,
 				9BA722D01D8C665E006FC1B1 /* LaunchScreen.storyboard in Resources */,
 				9B96CD1E1D99CA3C008E6842 /* checked.png in Resources */,
 				9BA722CD1D8C665E006FC1B1 /* Assets.xcassets in Resources */,
-				9BDDEA101D9DFCFE0099DDB1 /* iconCategories.jpg in Resources */,
+				9B6977591DA6BC8C003043D4 /* Main.storyboard in Resources */,
 				9BE6C8611D9F15CB005F1ECC /* seed.plist in Resources */,
-				9BDDEA0B1D9DC5CB0099DDB1 /* mabelFlip.jpg in Resources */,
 				9B96CD231D9AF95B008E6842 /* iconSave.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
