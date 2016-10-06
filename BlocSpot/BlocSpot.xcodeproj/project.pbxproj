@@ -29,8 +29,6 @@
 		9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCB1D921B5500117D24 /* MyAnnotation.m */; };
 		9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */; };
 		9BB0075E1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0075D1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m */; };
-		9BDDEA0B1D9DC5CB0099DDB1 /* mabelFlip.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */; };
-		9BDDEA101D9DFCFE0099DDB1 /* iconCategories.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */; };
 		9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */; };
 		9BE6C85F1D9EF409005F1ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE6C85E1D9EF409005F1ECC /* Main.storyboard */; };
 		9BE6C8611D9F15CB005F1ECC /* seed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE6C8601D9F15CB005F1ECC /* seed.plist */; };
@@ -99,8 +97,6 @@
 		9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
 		9BB0075C1DA56EBD0079898C /* SavePOIToCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePOIToCategoryTableViewController.h; sourceTree = "<group>"; };
 		9BB0075D1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePOIToCategoryTableViewController.m; sourceTree = "<group>"; };
-		9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mabelFlip.jpg; path = ../../../Desktop/mabelFlip.jpg; sourceTree = "<group>"; };
-		9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = iconCategories.jpg; path = ../../../Desktop/iconCategories.jpg; sourceTree = "<group>"; };
 		9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryListViewController.h; path = ../CategoryListViewController.h; sourceTree = "<group>"; };
 		9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryListViewController.m; path = ../CategoryListViewController.m; sourceTree = "<group>"; };
 		9BE6C85E1D9EF409005F1ECC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
@@ -177,8 +173,6 @@
 				9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */,
 				9BE6C8621D9F1B43005F1ECC /* AddCategoryViewController.h */,
 				9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */,
-				9BDDEA0F1D9DFCFE0099DDB1 /* iconCategories.jpg */,
-				9BDDEA0A1D9DC5CB0099DDB1 /* mabelFlip.jpg */,
 				9B96CD1D1D99CA3C008E6842 /* checked.png */,
 				9B96CD221D9AF95B008E6842 /* iconSave.png */,
 				9BE6C85E1D9EF409005F1ECC /* Main.storyboard */,
@@ -368,9 +362,7 @@
 				9BA722D01D8C665E006FC1B1 /* LaunchScreen.storyboard in Resources */,
 				9B96CD1E1D99CA3C008E6842 /* checked.png in Resources */,
 				9BA722CD1D8C665E006FC1B1 /* Assets.xcassets in Resources */,
-				9BDDEA101D9DFCFE0099DDB1 /* iconCategories.jpg in Resources */,
 				9BE6C8611D9F15CB005F1ECC /* seed.plist in Resources */,
-				9BDDEA0B1D9DC5CB0099DDB1 /* mabelFlip.jpg in Resources */,
 				9B96CD231D9AF95B008E6842 /* iconSave.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
