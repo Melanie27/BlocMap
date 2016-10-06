@@ -8,7 +8,7 @@
 
 #import "CategoryListViewController.h"
 #import "Category.h"
-#import "AppDelegate.h"
+#import "MapViewController.h"
 
 @interface CategoryListViewController() <UITableViewDelegate, UITableViewDataSource, AddCategoryViewControllerDelegate>
 
@@ -47,11 +47,27 @@ static NSString *CellIdentifier = @"Cell Identifier";
     // Create Add Button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
     
+    // Create Add Button
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+  
+    
 }
 
 - (void)addItem:(id)sender {
     NSLog(@"Button was tapped.");
     [self performSegueWithIdentifier:@"AddCategoryViewController" sender:self];
+}
+
+-(void)back:(id)sender {
+    
+    //[super.navigationController popViewControllerAnimated:YES];
+    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    //self.containerView.hidden = YES;
+    NSLog(@"go back");
 }
 
 

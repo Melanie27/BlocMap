@@ -16,10 +16,11 @@
 
 //#import "CategoryViewController.h"
 
-@interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, MKMapViewDelegate>
+@interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, strong) PointOfInterest *chosenPointOfInterest;
+
 @end
 
 @implementation MapViewController
@@ -70,6 +71,14 @@ CLLocationManager *locationManager;
         
     }];
     
+    UITapGestureRecognizer *tapOutsideContainerRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissContainerView)];
+    [self.mapView addGestureRecognizer:tapOutsideContainerRecognizer];
+    
+}
+
+-(void)dismissContainerView {
+    
+     self.containerView.hidden = YES;
 }
 
 -(void)updateMapviewAnnotations {
