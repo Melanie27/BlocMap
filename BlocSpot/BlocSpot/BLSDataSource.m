@@ -38,9 +38,6 @@ MKLocalSearch *localSearch;
     self = [super init];
     
     if(self) {
-        
-        
-            
        
     }
     

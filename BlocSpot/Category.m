@@ -45,6 +45,13 @@
     
 }
 
++ (Category *)addPointOfInterest:(PointOfInterest *)pointOfInterest {
+    Category *category = [[Category alloc]init];
+    
+    
+    return category;
+}
+
 /*+(Category *)createCategoryWithName:(NSString *)categoryName {
     
     //init category

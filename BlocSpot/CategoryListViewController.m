@@ -66,7 +66,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
     //[super.navigationController popViewControllerAnimated:YES];
     //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
-    //self.containerView.hidden = YES;
     NSLog(@"go back");
 }
 
@@ -88,6 +87,18 @@ static NSString *CellIdentifier = @"Cell Identifier";
     return [self.categories count];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"assign POI to category");
+    // Fetch Item
+    Category *category = [self.categories objectAtIndex:[indexPath row]];
+    NSLog(@"category %@", category);
+    //Fetch POI that's been passed from the map view controller
+    
+    //METHOD that adds POI to the category
+    //[category addPointOfInterest: POIthatgotsent];
+    
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Dequeue Reusable Cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];

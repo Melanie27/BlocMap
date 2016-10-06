@@ -53,7 +53,7 @@ CLLocationManager *locationManager;
     
     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
-        
+        NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
         if(pois.count > 0) {
             NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
         }
@@ -150,11 +150,11 @@ CLLocationManager *locationManager;
         
         
         [ds convertPointAnnotationsToPOI:arrayMapItem];
-        [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
-
-        
+        [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response %@", response.mapItems);}];
         self.containerView.hidden = NO;
-        //[self performSegueWithIdentifier:@"showCategories" sender:view];
+        
+        //NSLog(@"response %@", response.mapItems);
         
     } else if (control == view.leftCalloutAccessoryView){
         NSLog(@"add to a category");
@@ -167,9 +167,18 @@ CLLocationManager *locationManager;
         [self prepareViewController:segue.destinationViewController forSegue:segue.identifier toShowAnnotation:((MKAnnotationView *) sender).annotation];
     }
     //prepare segue for embed
-    if([segue.destinationViewController isKindOfClass:[CategoryListViewController class]]) {
-        //pass some data about the POI so that that is can be saved to a category
+    if ([segue.identifier isEqualToString:@"showEmbed"]) {
+        
+        
+        CategoryListViewController *clvc = (CategoryListViewController*)segue.destinationViewController;
+        NSLog(@"showEmbed");
+        //clvc.POI = self.POI
+        
     }
+    
+    //if([segue.destinationViewController isKindOfClass:[CategoryListViewController class]]) {
+        //pass some data about the POI so that that is can be saved to a category
+    //}
 }
 
 -(void)prepareViewController:(id)vc
