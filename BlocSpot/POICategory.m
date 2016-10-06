@@ -52,7 +52,7 @@
     return category;
 }
 
-/*+(Category *)createCategoryWithName:(NSString *)categoryName {
+/*+(POICategory *)createCategoryWithName:(NSString *)categoryName {
     
     //init category
     Category *category = [[Category alloc]init];
@@ -65,7 +65,7 @@
     return category;
 }
 
-+ (Category *)saveColorToCategory:(UIColor*)categoryColor {
++ (POICategory *)saveColorToCategory:(UIColor*)categoryColor {
     //save color here
     
     Category *category = [[Category alloc] init];

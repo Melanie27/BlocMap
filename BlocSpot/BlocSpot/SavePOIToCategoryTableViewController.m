@@ -25,7 +25,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
         
         //Load categories
         //[self seedCategories];
-        [self loadCategories];
+        //[self loadCategories];
     }
     
     return self;
@@ -76,7 +76,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
  return cell;
 }
 
--(void)loadCategories {
+/*-(void)loadCategories {
     //retrieve the path of the file in which the list of items is stored
     NSString *filePath = [self pathForCategories];
     //file manager api - reference an instance of the default class
@@ -87,7 +87,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
         self.categories = [NSMutableArray array];
     }
     
-}
+}*/
 
 -(NSString*)pathForCategories {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

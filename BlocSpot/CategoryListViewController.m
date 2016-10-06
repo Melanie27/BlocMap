@@ -90,18 +90,32 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"assign POI to category");
+    
     BLSDataSource *ds = [BLSDataSource sharedInstance];
+    
     // Fetch Item
     POICategory *category = [self.categories objectAtIndex:[indexPath row]];
-    NSLog(@"category %@", category);
-    //Fetch POI that's been passed from the map view controller
+    NSLog(@"category %@", category.categoryName);
+    
     ds.currentPOI.category = category;
+    //update appearance of the accessory views
+    //add checkmark to selected row
     //METHOD that adds POI to the category
     //[category addPointOfInterest: POIthatgotsent];
     
+    //self.accessoryType UITableViewCellAccessoryCheckmark
+    //self.selectedRow = indexPath.row
     
 }
+
+-(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSIndexPath *oldIndex = [self.tableView indexPathForSelectedRow];
+    [self.tableView cellForRowAtIndexPath:oldIndex].accessoryType = UITableViewCellAccessoryNone;
+    [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+    return indexPath;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Dequeue Reusable Cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
