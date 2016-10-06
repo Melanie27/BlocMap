@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIkit/UIkit.h>
-#import "PointOfInterest.h"
 
-@interface Category : NSObject <NSCoding>
+@class PointOfInterest;
+
+@interface POICategory : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSString *categoryName;
@@ -21,8 +22,8 @@
 @property (nonatomic, strong) NSMutableArray *pointsOfInterest;
 
 //custom class method 
-+ (Category *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor;
++ (POICategory *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor;
 
-+ (Category *)addPointOfInterest:(PointOfInterest *)pointOfInterest;
++ (POICategory *)addPointOfInterest:(PointOfInterest *)pointOfInterest;
 
 @end

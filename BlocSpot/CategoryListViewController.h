@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 //conform to add cat protocol
 #import "AddCategoryViewController.h"
-
+@class PointOfInterest;
 @interface CategoryListViewController : UITableViewController 
+@property (strong) PointOfInterest *POI;
 
 @end

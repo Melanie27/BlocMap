@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Mapkit/Mapkit.h>
-//#import "Category.h"
+#import "POICategory.h"
     
 @interface PointOfInterest : NSObject <NSCoding, MKAnnotation>
 
@@ -29,7 +29,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, readonly, copy) NSString *subtitle;
-//@property (nonatomic, strong) Category *category;
+@property (nonatomic, strong) POICategory *category;
 
 //@property (nonatomic) BOOL animatesDrop;
 @property (nonatomic) BOOL canShowCallout;

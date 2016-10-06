@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 //#import "CategoryListViewController.h"
-#import "Category.h"
+#import "POICategory.h"
 
 
 //forward protocol declaration

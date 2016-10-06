@@ -7,7 +7,7 @@
 //
 
 #import "SavePOIToCategoryTableViewController.h"
-#import "Category.h"
+#import "POICategory.h"
 
 @interface SavePOIToCategoryTableViewController () <UITableViewDelegate, UITableViewDataSource >
 @property (nonatomic, strong) NSMutableArray *categories;
@@ -68,7 +68,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
  
  // Fetch Item
- Category *category = [self.categories objectAtIndex:[indexPath row]];
+ POICategory *category = [self.categories objectAtIndex:[indexPath row]];
  
  // Configure Cell
  [cell.textLabel setText:[category categoryName]];

@@ -123,6 +123,7 @@ CLLocationManager *locationManager;
     
     //annotationView = annotation;
     
+    
     return annotationView;
     
 
@@ -141,6 +142,12 @@ CLLocationManager *locationManager;
     //see stanford lecture 15 around min 45
     //will have to respond to changing data model
     NSLog(@"change appearance of heart");
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
+        [ds.arrayOfPOIs addObject:ds.currentPOI];
+    }
+    
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
@@ -148,6 +155,7 @@ CLLocationManager *locationManager;
     if (control == view.rightCalloutAccessoryView) {
         NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
         
+
         
         [ds convertPointAnnotationsToPOI:arrayMapItem];
         [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
@@ -167,11 +175,14 @@ CLLocationManager *locationManager;
     }
     //prepare segue for embed
     if ([segue.identifier isEqualToString:@"showEmbed"]) {
-        
-        
-        CategoryListViewController *clvc = (CategoryListViewController*)segue.destinationViewController;
         NSLog(@"showEmbed");
-        //clvc.POI = self.POI
+    } else if ([segue.identifier isEqualToString:@"showCategories"]) {
+        NSLog(@"showCategories");
+        
+        
+        UINavigationController *navc = (UINavigationController*)segue.destinationViewController;
+        CategoryListViewController *clvc = (CategoryListViewController*)([navc viewControllers][0]);
+        clvc.POI = self.currentPOI;
         
     }
     

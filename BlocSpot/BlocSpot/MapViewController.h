@@ -10,6 +10,8 @@
 #import <MapKit/Mapkit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class PointOfInterest;
+
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
@@ -18,6 +20,6 @@
 
 @property (strong, nonatomic, getter=isChosen) MKAnnotationView *annotationView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
-
+@property (strong, nonatomic) PointOfInterest *currentPOI;
 -(void)loadSearchResults;
 @end

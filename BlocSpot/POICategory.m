@@ -6,9 +6,9 @@
 //  Copyright © 2016 Bloc. All rights reserved.
 //
 
-#import "Category.h"
+#import "POICategory.h"
 
-@implementation Category
+@implementation POICategory
 
 -(instancetype) initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -30,10 +30,10 @@
     [aCoder encodeObject:self.categoryColor forKey:@"categoryColor"];
 }
 
-+ (Category *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor {
++ (POICategory *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor {
     
     //init category
-    Category *category = [[Category alloc]init];
+    POICategory *category = [[POICategory alloc]init];
     
     //Config
     [category setCategoryName:categoryName];
@@ -45,8 +45,8 @@
     
 }
 
-+ (Category *)addPointOfInterest:(PointOfInterest *)pointOfInterest {
-    Category *category = [[Category alloc]init];
++ (POICategory *)addPointOfInterest:(PointOfInterest *)pointOfInterest {
+    POICategory *category = [[POICategory alloc]init];
     
     
     return category;

@@ -32,6 +32,8 @@ typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
 @property (retain, nonatomic) NSMutableArray *annotations;
 @property (nonatomic) BOOL itemSelected;
 @property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfPOIs;
+@property (atomic, strong) PointOfInterest* currentPOI;
+
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler;
 

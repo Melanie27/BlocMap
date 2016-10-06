@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		98B0791459D852EDE832300A /* libPods-BlocSpot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */; };
-		9B16A5E41D9B449F00EFC33C /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E31D9B449F00EFC33C /* Category.m */; };
+		9B16A5E41D9B449F00EFC33C /* POICategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E31D9B449F00EFC33C /* POICategory.m */; };
 		9B6977591DA6BC8C003043D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B6977581DA6BC8C003043D4 /* Main.storyboard */; };
 		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
 		9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */; };
@@ -57,8 +57,8 @@
 		41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BlocSpot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67645A3A7F3E56A54DC8EEE6 /* Pods-BlocSpot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlocSpot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BlocSpot/Pods-BlocSpot.debug.xcconfig"; sourceTree = "<group>"; };
 		6F54DF1C3D8710391935050E /* Pods-BlocSpot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlocSpot.release.xcconfig"; path = "Pods/Target Support Files/Pods-BlocSpot/Pods-BlocSpot.release.xcconfig"; sourceTree = "<group>"; };
-		9B16A5E21D9B449F00EFC33C /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = ../Category.h; sourceTree = "<group>"; };
-		9B16A5E31D9B449F00EFC33C /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = ../Category.m; sourceTree = "<group>"; };
+		9B16A5E21D9B449F00EFC33C /* POICategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POICategory.h; path = ../POICategory.h; sourceTree = "<group>"; };
+		9B16A5E31D9B449F00EFC33C /* POICategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POICategory.m; path = ../POICategory.m; sourceTree = "<group>"; };
 		9B6977581DA6BC8C003043D4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9B6FDCC81D919D35000B77AB /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
 		9B6FDCC91D919D35000B77AB /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
@@ -197,8 +197,8 @@
 				9B96CD201D99CD54008E6842 /* ResultsDetailViewController.m */,
 				9BACADC71D91D91100117D24 /* BLSDataSource.h */,
 				9BACADC81D91D91100117D24 /* BLSDataSource.m */,
-				9B16A5E21D9B449F00EFC33C /* Category.h */,
-				9B16A5E31D9B449F00EFC33C /* Category.m */,
+				9B16A5E21D9B449F00EFC33C /* POICategory.h */,
+				9B16A5E31D9B449F00EFC33C /* POICategory.m */,
 				9B6FDCC81D919D35000B77AB /* Search.h */,
 				9B6FDCC91D919D35000B77AB /* Search.m */,
 				9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */,
@@ -443,7 +443,7 @@
 				9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */,
 				9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */,
 				9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */,
-				9B16A5E41D9B449F00EFC33C /* Category.m in Sources */,
+				9B16A5E41D9B449F00EFC33C /* POICategory.m in Sources */,
 				9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */,
 				9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */,
 				9BB0075E1DA56EBD0079898C /* SavePOIToCategoryTableViewController.m in Sources */,

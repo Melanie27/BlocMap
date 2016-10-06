@@ -7,8 +7,10 @@
 //
 
 #import "CategoryListViewController.h"
-#import "Category.h"
+#import "POICategory.h"
 #import "MapViewController.h"
+#import "PointOfInterest.h"
+#import "BLSDataSource.h"
 
 @interface CategoryListViewController() <UITableViewDelegate, UITableViewDataSource, AddCategoryViewControllerDelegate>
 
@@ -89,11 +91,12 @@ static NSString *CellIdentifier = @"Cell Identifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"assign POI to category");
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
     // Fetch Item
-    Category *category = [self.categories objectAtIndex:[indexPath row]];
+    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
     NSLog(@"category %@", category);
     //Fetch POI that's been passed from the map view controller
-    
+    ds.currentPOI.category = category;
     //METHOD that adds POI to the category
     //[category addPointOfInterest: POIthatgotsent];
     
@@ -104,7 +107,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Fetch Item
-    Category *category = [self.categories objectAtIndex:[indexPath row]];
+    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
     
     // Configure Cell
     [cell.textLabel setText:[category categoryName]];
@@ -147,7 +150,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 
 - (void)controller:(AddCategoryViewController *)controller didSaveCategoryWithName:(NSString *)name andColor:(UIColor*)color {
     // Create Category
-    Category *category = [Category createCategoryWithName:name andColor:color];
+    POICategory *category = [POICategory createCategoryWithName:name andColor:color];
     NSLog(@"color once back in table %@", color);
     
     // Add Item to Data Source
@@ -165,7 +168,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 //GET THE COLORS INTO THE CELLS
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // Fetch Item
-    Category *category = [self.categories objectAtIndex:[indexPath row]];
+    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
     cell.backgroundColor = category.categoryColor;
    
 }
@@ -174,7 +177,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the category from the data source
-        Category *category = [self.categories objectAtIndex:[indexPath row]];
+        POICategory *category = [self.categories objectAtIndex:[indexPath row]];
         [self.categories removeObject:category];
         
         //TODO fix category deletion

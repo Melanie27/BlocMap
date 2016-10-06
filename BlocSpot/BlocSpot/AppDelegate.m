@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "Category.h"
+#import "POICategory.h"
 
 @interface AppDelegate ()
 
