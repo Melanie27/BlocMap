@@ -40,6 +40,7 @@ typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave;
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave;
 - (void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;
+- (void)saveCategoryToPOI:(MKLocalSearchCompletionHandler)completionHandler;
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 

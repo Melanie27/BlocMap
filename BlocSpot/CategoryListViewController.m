@@ -98,6 +98,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     NSLog(@"category %@", category.categoryName);
     
     ds.currentPOI.category = category;
+    [ds saveCategoryToPOI:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
     //update appearance of the accessory views
     //add checkmark to selected row
     //METHOD that adds POI to the category

@@ -65,6 +65,7 @@ CLLocationManager *locationManager;
             marker.title = item.title;
             marker.subtitle = item.subtitle;
             [self.mapView addAnnotation:marker];
+            NSLog(@"catogory of POI %@", item.category);
             
         }
         

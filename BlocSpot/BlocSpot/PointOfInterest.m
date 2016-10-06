@@ -23,8 +23,10 @@
     NSString *name = mapItem.name;
     NSString *subtitle = mapItem.phoneNumber;
     NSNumber *identifier = @10;
+    NSString *categoryName = @"not set";
+    //POICategory *category = @"not set";
     CLLocationCoordinate2D coord = mapItem.placemark.location.coordinate;
-    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
+    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier categoryName:categoryName];
 }
 
 - (instancetype)initWithMKPointAnnotation:(MKPointAnnotation *)annotation {
@@ -32,8 +34,15 @@
     NSString *name = annotation.title;
     NSString *subtitle = annotation.subtitle;
     NSNumber *identifier = @10;
+    NSString *categoryName = @"not set";
+    //POICategory *category = category;
     CLLocationCoordinate2D coord = annotation.coordinate;
-    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
+    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier categoryName:categoryName];
+}
+
+-(instancetype)initWithPOICategory:(POICategory *)POIcategory {
+    NSString *categoryName = POIcategory.categoryName;
+    return [self initWithCategoryName:categoryName];
 }
 
 - (MKMapItem*)mapItem {
@@ -54,7 +63,8 @@
           coordinate:(CLLocationCoordinate2D)coordinate
                title:(NSString *)t
             subtitle:(NSString *)s
-          identifier:(NSNumber *)ident {
+          identifier:(NSNumber *)ident
+        categoryName:(NSString *)n {
     self = [super init];
     
     if (self) {
@@ -65,6 +75,7 @@
         //[self setPlacemark:_coordinate];
         [self setTitle:t];
          [self setSubtitle:s];
+        [self setCategoryName:n];
         
         
     }
@@ -82,6 +93,7 @@
     [aCoder encodeObject:_title forKey:@"title"];
     [aCoder encodeObject:_subtitle forKey:@"subtitle"];
     [aCoder encodeObject:_identifier forKey:@"identifier"];
+    [aCoder encodeObject:_categoryName forKey:@"categoryName"];
     
 }
 
@@ -95,6 +107,7 @@
         CLLocationDegrees longitude = [aDecoder decodeDoubleForKey:@"longitude"];
         _coordinate = CLLocationCoordinate2DMake(latitude, longitude);
         _identifier = [aDecoder decodeObjectForKey:@"identifier"];
+        _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
         
     }
     return self;

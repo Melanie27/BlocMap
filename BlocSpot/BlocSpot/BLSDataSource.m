@@ -84,6 +84,15 @@ MKLocalSearch *localSearch;
     self.arrayOfPOIs = newArrayOfPOIs;
 }
 
+-(void)saveCategoryToPOI:(MKLocalSearchCompletionHandler)completionHandler {
+    NSLog(@"save category to POI");
+    NSLog(@"current poi %@", _currentPOI.categoryName);
+    PointOfInterest *itemCategory = [[PointOfInterest alloc] initWithPOICategory:poiCategory];
+    NSLog(@"item category %@", itemCategory);
+    completionHandler(nil,nil);
+    
+}
+
 
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave {
     //init this array with already stored items
@@ -105,6 +114,9 @@ MKLocalSearch *localSearch;
 - (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
        
+        NSLog(@"cat poi %@", _currentPOI.categoryName);
+        //NSLog(@"cat poi %@", PointOfInterest.categoryName);
+        
         NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
         NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
         
@@ -121,6 +133,8 @@ MKLocalSearch *localSearch;
 }
 
 
+
+
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler{
    
     [self convertMapItemsToPOI:mapItemsToSave];
@@ -131,7 +145,8 @@ MKLocalSearch *localSearch;
 
 -(void)searchMap:(NSString *)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler {
     //cancel previous searches
-    //[localSearch cancel];
+    [localSearch cancel];
+    //remove unsaved annotations?
     
     self.latestSearchRequest = [[MKLocalSearchRequest alloc] init];
     self.latestSearchRequest.naturalLanguageQuery = searchText;
