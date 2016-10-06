@@ -150,8 +150,7 @@ CLLocationManager *locationManager;
         
         
         [ds convertPointAnnotationsToPOI:arrayMapItem];
-        [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
-            NSLog(@"response %@", response.mapItems);}];
+        [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
         self.containerView.hidden = NO;
         
         //NSLog(@"response %@", response.mapItems);

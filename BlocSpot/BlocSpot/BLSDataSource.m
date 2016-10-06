@@ -73,7 +73,10 @@ MKLocalSearch *localSearch;
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave {
     
     NSMutableArray *newArrayOfPOIs = [[NSMutableArray alloc] init];
-    
+    if (newArrayOfPOIs == nil) {
+        newArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
+    }
+
     for (MKMapItem *mapItem in mapItemsToSave) {
         PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
         [newArrayOfPOIs addObject:item];
@@ -86,6 +89,9 @@ MKLocalSearch *localSearch;
     //init this array with already stored items
     NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
     NSMutableArray<PointOfInterest*> *newArrayOfPOIs = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
+    if (newArrayOfPOIs == nil) {
+        newArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
+    }
    
     
     for (MKPointAnnotation *pointAnnotation in pointAnnotationsToSave) {
