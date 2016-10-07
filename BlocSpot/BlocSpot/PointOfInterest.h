@@ -16,21 +16,22 @@
            coordinate:(CLLocationCoordinate2D)coordinate
                 title:(NSString *)t
                 subtitle:(NSString *)s
-           identifier:(NSNumber *)ident
-            categoryName:(NSString *)n;
+           identifier:(NSNumber *)ident;
+
+
 -(id)initWithCategoryName:(NSString *)categoryName;
 
-//-(id)initWithCategory: (NSString*)categoryName;
+
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem;
 - (instancetype)initWithMKPointAnnotation:(MKPointAnnotation*)pointAnnotation;
 -(instancetype)initWithPOICategory:(POICategory *)poiCategory;
-//-(Category*)saveCategoryToPOI;
+
 
 
 - (MKMapItem*)mapItem;
 
-//ds.currentPOI.category = category;
+
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, readonly, copy) NSString *subtitle;
 @property (nonatomic, strong) POICategory *category;

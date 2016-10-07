@@ -99,14 +99,15 @@ static NSString *CellIdentifier = @"Cell Identifier";
     NSLog(@"category %@", category.categoryName);
     
     ds.currentPOI.category = category;
-    //[ds saveCategoryToPOI:(NSArray<POICategory *> *)];
-    //update appearance of the accessory views
-    //add checkmark to selected row
-    //METHOD that adds POI to the category
-    //[category addPointOfInterest: POIthatgotsent];
     
-    //self.accessoryType UITableViewCellAccessoryCheckmark
-    //self.selectedRow = indexPath.row
+    //Save the category selected to the POI
+    NSArray *arrayCategoryItem = [NSArray arrayWithObjects:category, nil];
+    [ds saveCategoryToPOI:arrayCategoryItem];
+    
+    
+    
+    
+    
     
 }
 
@@ -167,7 +168,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (void)controller:(AddCategoryViewController *)controller didSaveCategoryWithName:(NSString *)name andColor:(UIColor*)color {
     // Create Category
     POICategory *category = [POICategory createCategoryWithName:name andColor:color];
-    NSLog(@"color once back in table %@", color);
+    //NSLog(@"color once back in table %@", color);
     
     // Add Item to Data Source
     [self.categories addObject:category];

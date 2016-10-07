@@ -85,16 +85,34 @@ MKLocalSearch *localSearch;
 }
 
 - (void)saveCategoryToPOI:(NSArray<POICategory *> *)poiCategoriesToSave {
-    NSLog(@"save category to POI");
-    NSLog(@"current poi %@", _currentPOI.categoryName);
+    
+    
     
     for (POICategory *poiCategory in poiCategoriesToSave) {
         PointOfInterest *itemCategory = [[PointOfInterest alloc] initWithPOICategory:poiCategory];
         NSLog(@"item category %@", itemCategory);
+       
+        _currentPOI.categoryName = itemCategory.categoryName;
+        
     }
-   
+    NSLog(@"current poi cat name %@", _currentPOI.categoryName);
     
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *fullPath = [self pathForFilename:@"categories.poi"];
+        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:_currentPOI.categoryName];
+        
+        NSError *dataError;
+        BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+        NSLog(@"category data %@",  poiCategoryData);
+        if (!wroteSuccessfully) {
+            NSLog(@"Couldn't write file: %@", dataError);
+        }
+        
+     });
+                   
 }
+  
 
 
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave {
@@ -117,8 +135,7 @@ MKLocalSearch *localSearch;
 - (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
        
-        NSLog(@"cat poi %@", _currentPOI.categoryName);
-        //NSLog(@"cat poi %@", PointOfInterest.categoryName);
+        
         
         NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
         NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];

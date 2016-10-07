@@ -23,10 +23,8 @@
     NSString *name = mapItem.name;
     NSString *subtitle = mapItem.phoneNumber;
     NSNumber *identifier = @10;
-    NSString *categoryName = @"not set";
-    //POICategory *category = @"not set";
     CLLocationCoordinate2D coord = mapItem.placemark.location.coordinate;
-    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier categoryName:categoryName];
+    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
 
 - (instancetype)initWithMKPointAnnotation:(MKPointAnnotation *)annotation {
@@ -34,14 +32,13 @@
     NSString *name = annotation.title;
     NSString *subtitle = annotation.subtitle;
     NSNumber *identifier = @10;
-    NSString *categoryName = @"not set";
-    //POICategory *category = category;
-    CLLocationCoordinate2D coord = annotation.coordinate;
-    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier categoryName:categoryName];
+   CLLocationCoordinate2D coord = annotation.coordinate;
+    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
 
 -(instancetype)initWithPOICategory:(POICategory *)POIcategory {
     NSString *categoryName = POIcategory.categoryName;
+    NSLog(@"category name %@", categoryName);
     return [self initWithCategoryName:categoryName];
 }
 
@@ -59,12 +56,22 @@
     return item;
 }
 
+-(id)initWithCategoryName:(NSString *)categoryName {
+    self = [super init];
+    
+    if (self) {
+        _categoryName = categoryName;
+    }
+    
+    return self;
+}
+
 -(id)initWithAddress:(NSString *)address
           coordinate:(CLLocationCoordinate2D)coordinate
                title:(NSString *)t
             subtitle:(NSString *)s
-          identifier:(NSNumber *)ident
-        categoryName:(NSString *)n {
+          identifier:(NSNumber *)ident {
+    
     self = [super init];
     
     if (self) {
@@ -75,9 +82,8 @@
         //[self setPlacemark:_coordinate];
         [self setTitle:t];
          [self setSubtitle:s];
-        [self setCategoryName:n];
-        
-        
+       
+
     }
     return self;
 }
