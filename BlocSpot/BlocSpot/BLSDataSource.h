@@ -32,6 +32,7 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 @property (nonatomic, weak) SearchResultsTableViewController *srtvc;
 @property (nonatomic, weak) MapViewController *mvc;
 @property (retain, nonatomic) NSMutableArray *annotations;
+@property (retain, nonatomic) NSMutableArray *categories;
 @property (nonatomic) BOOL itemSelected;
 @property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfPOIs;
 @property (atomic, strong) PointOfInterest* currentPOI;

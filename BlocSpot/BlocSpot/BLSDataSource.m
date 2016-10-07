@@ -12,6 +12,8 @@
 
 @interface BLSDataSource () {
     NSMutableArray *_arrayOfPOIs;
+    NSMutableArray *_categories;
+    NSMutableArray *_annotations;
 }
 @end
 
@@ -43,7 +45,7 @@ MKLocalSearch *localSearch;
 }
 
 
-#pragma mark - Key/Value Observing
+#pragma mark - Key/Value Observing for categorization
 
 - (NSUInteger) countOfArrayOfPOIs {
     return self.arrayOfPOIs.count;
@@ -69,7 +71,20 @@ MKLocalSearch *localSearch;
     [_arrayOfPOIs replaceObjectAtIndex:index withObject:object];
 }
 
+#pragma mark Key/Value Observing for categories
 
+-(NSUInteger) countOfCategories {
+    return self.categories.count;
+}
+
+-(id) objectInCategoriesAtIndex:(NSUInteger)index {
+    return [self.categories objectAtIndex:index];
+}
+
+-(NSArray *) categoriesAtIndexes:(NSIndexSet *)indexes {
+    
+    return [self.categories objectsAtIndexes:indexes];
+}
 
 #pragma load up all the saved mapitems
 

@@ -12,6 +12,7 @@
 #import "ResultsDetailViewController.h"
 #import "BLSDataSource.h"
 #import "MapViewController.h"
+#import "PointOfInterest.h"
 
 
 @interface SearchResultsTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SearchResultsTableViewCellDelegate>
@@ -91,9 +92,14 @@
     [button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
     button.tag = indexPath.row;
     resultCell.accessoryView = button;
-    //when adding the category images
-    //[resultCell.contentView addSubview:resultCell.catPhoto];
-    //resultCell.catPhoto.tag = indexPath.row;
+    
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+        // Set up annotations for each poi
+        NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
+        //need to loop through the saved results
+        
+        
+    }];
     
     return resultCell;
 }

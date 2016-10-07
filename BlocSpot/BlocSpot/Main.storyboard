@@ -498,8 +498,8 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SDO-40-JA1"/>
         <segue reference="ooD-K5-9nQ"/>
-        <segue reference="hiA-Gq-6wD"/>
+        <segue reference="uhC-Qn-CnK"/>
+        <segue reference="IJd-4J-jqX"/>
     </inferredMetricsTieBreakers>
 </document>
