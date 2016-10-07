@@ -52,26 +52,5 @@
     return category;
 }
 
-/*+(POICategory *)createCategoryWithName:(NSString *)categoryName {
-    
-    //init category
-    Category *category = [[Category alloc]init];
-    
-    //Config
-    [category setCategoryName:categoryName];
-    [category setInCategoryList:NO];
-    [category setUuid:[[NSUUID UUID] UUIDString]];
-    
-    return category;
-}
-
-+ (POICategory *)saveColorToCategory:(UIColor*)categoryColor {
-    //save color here
-    
-    Category *category = [[Category alloc] init];
-    [category setCategoryColor:[UIColor purpleColor]];
-    
-    return category;
-}*/
 
 @end
