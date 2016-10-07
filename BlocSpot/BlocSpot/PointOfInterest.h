@@ -19,7 +19,8 @@
            identifier:(NSNumber *)ident;
 
 
--(id)initWithCategoryName:(NSString *)categoryName;
+-(id)initWithCategoryName:(NSString *)categoryName
+            categoryColor:(UIColor*)categoryColor;
 
 
 
@@ -36,7 +37,7 @@
 @property (nonatomic, readonly, copy) NSString *subtitle;
 @property (nonatomic, strong) POICategory *category;
 @property (nonatomic, strong) NSString *categoryName;
-//@property (nonatomic, strong) UIColor *categorycolor;
+@property (nonatomic, strong) UIColor *categoryColor;
 //@property (nonatomic) BOOL animatesDrop;
 @property (nonatomic) BOOL canShowCallout;
 @property (nonatomic) BOOL itemSelected;

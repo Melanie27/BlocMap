@@ -14,7 +14,7 @@
 @implementation BLSDataSource
 NSMutableArray *arrayOfPOIs;
 MKLocalSearch *localSearch;
-
+//NSMutableArray *arrayOfCategories;
 
 +(instancetype) sharedInstance {
     //the dispatch_once function ensures we only create a single instance of this class. function takes a block of code and runs it only the first time it is called
@@ -46,6 +46,19 @@ MKLocalSearch *localSearch;
 
 #pragma load up all the saved mapitems
 
+-(void) loadSavedCategories:(CategoriesSavedCompletionHandler)completionHandler {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSString *fullPath = [self pathForFilename:@"categories.poi"];
+        NSMutableArray<PointOfInterest*> *storedCategories = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
+        
+         self.arrayOfPOIs = storedCategories;
+        NSLog(@"load saved categories %@", storedCategories);
+        completionHandler(storedCategories);
+        
+    });
+}
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler {
     NSLog(@"load saved markers");

@@ -38,8 +38,10 @@
 
 -(instancetype)initWithPOICategory:(POICategory *)POIcategory {
     NSString *categoryName = POIcategory.categoryName;
+    UIColor *categoryColor = POIcategory.categoryColor;
     NSLog(@"category name %@", categoryName);
-    return [self initWithCategoryName:categoryName];
+    NSLog(@"category color %@", categoryColor);
+    return [self initWithCategoryName:categoryName categoryColor:categoryColor];
 }
 
 - (MKMapItem*)mapItem {
@@ -56,11 +58,13 @@
     return item;
 }
 
--(id)initWithCategoryName:(NSString *)categoryName {
+-(id)initWithCategoryName:(NSString *)categoryName
+            categoryColor:(UIColor *)categoryColor{
     self = [super init];
     
     if (self) {
         _categoryName = categoryName;
+        _categoryColor = categoryColor;
     }
     
     return self;
@@ -100,6 +104,7 @@
     [aCoder encodeObject:_subtitle forKey:@"subtitle"];
     [aCoder encodeObject:_identifier forKey:@"identifier"];
     [aCoder encodeObject:_categoryName forKey:@"categoryName"];
+    [aCoder encodeObject:_categoryColor forKey:@"categoryColor"];
     
 }
 
@@ -114,6 +119,7 @@
         _coordinate = CLLocationCoordinate2DMake(latitude, longitude);
         _identifier = [aDecoder decodeObjectForKey:@"identifier"];
         _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
+        _categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
         
     }
     return self;

@@ -51,11 +51,17 @@ CLLocationManager *locationManager;
 
     }
     
-    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+    
+    [[BLSDataSource sharedInstance] loadSavedCategories:^(NSArray *pois) {
+        NSLog(@"UI work here");
+        //NSLog(@"number of stored map items %lu", (unsigned long)pois.st);
+    }];
+    
+     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
         NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
         if(pois.count > 0) {
-            NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
+           
         }
         
         for (MKPointAnnotation *annotation in pois) {
@@ -65,7 +71,7 @@ CLLocationManager *locationManager;
             marker.title = item.title;
             marker.subtitle = item.subtitle;
             [self.mapView addAnnotation:marker];
-            NSLog(@"catogory of POI %@", item.category);
+            //NSLog(@"catogory of POI %@", item.category);
             
         }
         
