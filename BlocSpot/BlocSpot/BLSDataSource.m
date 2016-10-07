@@ -84,12 +84,15 @@ MKLocalSearch *localSearch;
     self.arrayOfPOIs = newArrayOfPOIs;
 }
 
--(void)saveCategoryToPOI:(MKLocalSearchCompletionHandler)completionHandler {
+- (void)saveCategoryToPOI:(NSArray<POICategory *> *)poiCategoriesToSave {
     NSLog(@"save category to POI");
     NSLog(@"current poi %@", _currentPOI.categoryName);
-    PointOfInterest *itemCategory = [[PointOfInterest alloc] initWithPOICategory:poiCategory];
-    NSLog(@"item category %@", itemCategory);
-    completionHandler(nil,nil);
+    
+    for (POICategory *poiCategory in poiCategoriesToSave) {
+        PointOfInterest *itemCategory = [[PointOfInterest alloc] initWithPOICategory:poiCategory];
+        NSLog(@"item category %@", itemCategory);
+    }
+   
     
 }
 

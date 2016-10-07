@@ -11,6 +11,7 @@
 #import "MapViewController.h"
 #import "PointOfInterest.h"
 #import "BLSDataSource.h"
+#import "POICategory.h"
 
 @interface CategoryListViewController() <UITableViewDelegate, UITableViewDataSource, AddCategoryViewControllerDelegate>
 
@@ -98,7 +99,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     NSLog(@"category %@", category.categoryName);
     
     ds.currentPOI.category = category;
-    [ds saveCategoryToPOI:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
+    //[ds saveCategoryToPOI:(NSArray<POICategory *> *)];
     //update appearance of the accessory views
     //add checkmark to selected row
     //METHOD that adds POI to the category
