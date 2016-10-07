@@ -32,6 +32,9 @@ CLLocationManager *locationManager;
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"BlocSpot Map";
     
+    //register kvo for points of interest
+    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
+    
     //make the view controller be the map view's delegate
     self.mapView.delegate = self;
     //set initialial mapkit region
@@ -53,9 +56,13 @@ CLLocationManager *locationManager;
     
     
     [[BLSDataSource sharedInstance] loadSavedCategories:^(NSArray *pois) {
-        NSLog(@"UI work here");
-        //NSLog(@"number of stored map items %lu", (unsigned long)pois.st);
+        NSLog(@"UI work here %@", pois);
+       //CALL KVO
+        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
+        
     }];
+    
+    
     
      [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
@@ -81,6 +88,36 @@ CLLocationManager *locationManager;
     UITapGestureRecognizer *tapOutsideContainerRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissContainerView)];
     [self.mapView addGestureRecognizer:tapOutsideContainerRecognizer];
     
+}
+
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    
+    
+    if (object == [BLSDataSource sharedInstance] && [keyPath isEqualToString:@"arrayOfPOIs"]) {
+        // We know arrayOfPOIs changed.  Let's see what kind of change it is.
+        NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
+        
+        if (kindOfChange == NSKeyValueChangeSetting) {
+            
+            NSLog(@"registering a change neeed to update pin color");
+            NSLog(@"array of pois cat name %@", _currentPOI.categoryName);
+            
+            
+        }  else if (kindOfChange == NSKeyValueChangeInsertion ||
+                     kindOfChange == NSKeyValueChangeRemoval ||
+                     kindOfChange == NSKeyValueChangeReplacement) {
+            // We have an incremental change: inserted, deleted, or replaced pins
+            
+        }
+
+    }
+}
+
+//remove kv observer when it's no longer needed
+- (void) dealloc {
+    [[BLSDataSource sharedInstance] removeObserver:self forKeyPath:@"arrayOfPOIs"];
 }
 
 -(void)dismissContainerView {

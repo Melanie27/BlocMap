@@ -10,6 +10,10 @@
 #import "SearchResultsTableViewCell.h"
 #import "PointOfInterest.h"
 
+@interface BLSDataSource () {
+    NSMutableArray *_arrayOfPOIs;
+}
+@end
 
 @implementation BLSDataSource
 NSMutableArray *arrayOfPOIs;
@@ -19,17 +23,11 @@ MKLocalSearch *localSearch;
 +(instancetype) sharedInstance {
     //the dispatch_once function ensures we only create a single instance of this class. function takes a block of code and runs it only the first time it is called
     static dispatch_once_t once;
-    
-    //a static variable "sharedInstance" holds the shared instance
     static id sharedInstance;
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
-        //read the saved files at launch so saved pins appear
-        
-        
-        
-        
-        
+       
+  
     });
     return sharedInstance;
 }
@@ -43,6 +41,35 @@ MKLocalSearch *localSearch;
     
     return self;
 }
+
+
+#pragma mark - Key/Value Observing
+
+- (NSUInteger) countOfArrayOfPOIs {
+    return self.arrayOfPOIs.count;
+}
+
+- (id) objectInArrayOfPOIsAtIndex:(NSUInteger)index {
+    return [self.arrayOfPOIs objectAtIndex:index];
+}
+
+- (NSArray *) arrayOfPOIsAtIndexes:(NSIndexSet *)indexes {
+    return [self.arrayOfPOIs objectsAtIndexes:indexes];
+}
+
+- (void) insertObject:(PointOfInterest *)object inArrayOfPOIsAtIndex:(NSUInteger)index {
+    [_arrayOfPOIs insertObject:object atIndex:index];
+}
+
+- (void) removeObjectFromArrayOfPOIsAtIndex:(NSUInteger)index {
+    [_arrayOfPOIs removeObjectAtIndex:index];
+}
+
+- (void) replaceObjectInArrayOfPOIsAtIndex:(NSUInteger)index withObject:(id)object {
+    [_arrayOfPOIs replaceObjectAtIndex:index withObject:object];
+}
+
+
 
 #pragma load up all the saved mapitems
 
