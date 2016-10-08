@@ -59,10 +59,32 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+//MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+   //return [results.mapItems count];
+    
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+       //process array
+        int total = pois.count;
+        NSMutableArray *storedItems =[[NSMutableArray alloc] init];
+        for(int x = 0; x < total; x++) {
+
+             [storedItems addObject:[NSNumber numberWithInt:x]];
+            
+            NSLog(@"stored items %lu", (unsigned long)storedItems.count);
+            
+        }
+       
+        
+        
+       //return [storedItems count];
+
+        
+    }];
+    
+    return 5;
    
-   
-    return [results.mapItems count];
+    
+    
 }
 
 
@@ -105,8 +127,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint currentTouchPosition = [touch locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
-    if (indexPath != nil)
-    {
+    if (indexPath != nil) {
         [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
     }
 }
