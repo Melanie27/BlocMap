@@ -49,4 +49,6 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 
+- (void) deletePOI:(PointOfInterest *)item;
+
 @end

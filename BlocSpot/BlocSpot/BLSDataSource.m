@@ -71,6 +71,13 @@ MKLocalSearch *localSearch;
     [_arrayOfPOIs replaceObjectAtIndex:index withObject:object];
 }
 
+- (void) deletePOI:(PointOfInterest *)item {
+    
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfPOIs"];
+    [mutableArrayWithKVO removeObject:item];
+    NSLog(@"remove POI");
+}
+
 #pragma mark Key/Value Observing for categories
 
 -(NSUInteger) countOfCategories {
