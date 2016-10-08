@@ -13,6 +13,7 @@
 #import "BLSDataSource.h"
 #import "MapViewController.h"
 #import "PointOfInterest.h"
+#import "POICategory.h"
 
 
 @interface SearchResultsTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SearchResultsTableViewCellDelegate>
@@ -36,6 +37,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Search Results";
+    
+    
+    //[[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -45,10 +50,21 @@
      [BLSDataSource sharedInstance].srtvc = self;
 }
 
+#pragma mark KVO
+
+- (void) dealloc {
+    [[BLSDataSource sharedInstance] removeObserver:self forKeyPath:@"arrayOfPOIs"];
+}
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 #pragma mark - Table view data source
 
@@ -62,7 +78,7 @@
 //MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
    //return [results.mapItems count];
     
-    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+    /*[[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
        //process array
         int total = pois.count;
         NSMutableArray *storedItems =[[NSMutableArray alloc] init];
@@ -79,7 +95,7 @@
        //return [storedItems count];
 
         
-    }];
+    }];*/
     
     return 5;
    
@@ -165,7 +181,7 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -175,7 +191,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

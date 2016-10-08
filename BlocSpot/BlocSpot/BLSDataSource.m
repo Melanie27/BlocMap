@@ -45,7 +45,7 @@ MKLocalSearch *localSearch;
 }
 
 
-#pragma mark - Key/Value Observing for categorization
+#pragma mark - Key/Value Observing for POIS
 
 - (NSUInteger) countOfArrayOfPOIs {
     return self.arrayOfPOIs.count;
