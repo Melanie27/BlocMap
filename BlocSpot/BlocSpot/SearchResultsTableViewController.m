@@ -71,35 +71,30 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+    //MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
    SearchResultsTableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
     resultCell.delegate = self;
     // Configure the cell...
     
-    MKMapItem *item = results.mapItems[indexPath.row];
-    //NSLog(@"table item %@", item);
-    //resultCell.textLabel.text = item.name;
-    //resultCell.detailTextLabel.text = item.placemark.addressDictionary[@"Street"];
-    resultCell.detailTextLabel.text = item.phoneNumber;
-    resultCell.entryTitle.text = item.name;
-    resultCell.entrySubtitle.text = item.phoneNumber;
-    
-   
-    
-    
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+       
+        for (MKPointAnnotation *annotation in pois) {
+            PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
+           
+            resultCell.entryTitle.text = item.title;
+            resultCell.entrySubtitle.text = item.subtitle;
+            
+        }
+        
+    }];
+
     //accessory button to a popup
     UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     [button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
     button.tag = indexPath.row;
     resultCell.accessoryView = button;
     
-    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
-        // Set up annotations for each poi
-        NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
-        //need to loop through the saved results
-        
-        
-    }];
+    
     
     return resultCell;
 }
@@ -122,7 +117,7 @@
     NSLog(@"will show the detail view here");
    
     
-    [self performSegueWithIdentifier:@"resultsDetail" sender:self];
+    //[self performSegueWithIdentifier:@"resultsDetail" sender:self];
     
 }
 

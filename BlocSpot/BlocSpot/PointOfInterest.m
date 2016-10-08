@@ -39,8 +39,8 @@
 -(instancetype)initWithPOICategory:(POICategory *)POIcategory {
     NSString *categoryName = POIcategory.categoryName;
     UIColor *categoryColor = POIcategory.categoryColor;
-    NSLog(@"category name %@", categoryName);
-    NSLog(@"category color %@", categoryColor);
+    //NSLog(@"category name %@", categoryName);
+    //NSLog(@"category color %@", categoryColor);
     return [self initWithCategoryName:categoryName categoryColor:categoryColor];
 }
 
