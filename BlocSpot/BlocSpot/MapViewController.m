@@ -56,10 +56,11 @@ CLLocationManager *locationManager;
     
     
     [[BLSDataSource sharedInstance] loadSavedCategories:^(NSArray *pois) {
-        NSLog(@"UI work here %@", pois);
+        //NSLog(@"UI work here %@", pois);
        //CALL KVO
         [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
-        
+        //change the appearance of the chosenPoint of interest
+        NSLog(@"chosen POI %@", _chosenPointOfInterest);
     }];
     
     
@@ -101,9 +102,23 @@ CLLocationManager *locationManager;
         
         if (kindOfChange == NSKeyValueChangeSetting) {
             
-            NSLog(@"registering a change neeed to update pin color");
-            NSLog(@"array of pois cat name %@", _currentPOI.categoryName);
+            NSLog(@"registering a change neeed to update color of the POI title");
+            //test what category it is then change the pin color accordingly
+            NSLog(@" cat name %@", _currentPOI.categoryName);
+            NSLog(@"observe poi title %@", _currentPOI.title);
+            MKPointAnnotation *marker = [MKPointAnnotation new];
+           
+            marker.title = @"hello";
             
+           
+            //UIColor *catColor = [UIColor blueColor];
+            //NSString *catName = _currentPOI.categoryName;
+            //NSDictionary *attrs = @{ NSForegroundColorAttributeName : catColor };
+            //NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:catName attributes:attrs];
+            //self.scanLabel.attributedText = attrStr;
+            //MKPointAnnotation *marker = [MKPointAnnotation new];
+            //marker.tintColor = _currentPOI.categoryColor;
+           //marker.pinColor = MKPinAnnotationColorPurple;
             
         }  else if (kindOfChange == NSKeyValueChangeInsertion ||
                      kindOfChange == NSKeyValueChangeRemoval ||

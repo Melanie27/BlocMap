@@ -17,6 +17,7 @@
 
 @implementation BLSDataSource
 NSMutableArray *arrayOfPOIs;
+PointOfInterest* currentPOI;
 MKLocalSearch *localSearch;
 //NSMutableArray *arrayOfCategories;
 
@@ -44,6 +45,7 @@ MKLocalSearch *localSearch;
 
 
 #pragma mark - Key/Value Observing
+
 
 - (NSUInteger) countOfArrayOfPOIs {
     return self.arrayOfPOIs.count;
