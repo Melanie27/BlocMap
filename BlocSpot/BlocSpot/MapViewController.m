@@ -141,6 +141,13 @@ CLLocationManager *locationManager;
     
 }
 
+
+#pragma mark add map functionality 
+- (BOOL)openInMapsWithLaunchOptions:(NSDictionary<NSString *,id> *)launchOptions {
+    
+    return YES;
+}
+
 //gives an annotation and returns a view for that annotation
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
@@ -199,16 +206,17 @@ CLLocationManager *locationManager;
     if (control == view.rightCalloutAccessoryView) {
         NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
         
-
-        
         [ds convertPointAnnotationsToPOI:arrayMapItem];
         [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
         self.containerView.hidden = NO;
         
-        //NSLog(@"response %@", response.mapItems);
         
     } else if (control == view.leftCalloutAccessoryView){
-        NSLog(@"add to a category");
+        NSLog(@"map it!");
+       // Need to open the mapItem from this accessory view in the map
+    
+        MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:thisItem.placemark];
+        [thisItem openInMapsWithLaunchOptions:nil];
     }
     
 }
@@ -268,7 +276,7 @@ CLLocationManager *locationManager;
 }*/
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    NSLog(@"%@", [locations lastObject]);
+    //NSLog(@"%@", [locations lastObject]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -295,6 +303,8 @@ CLLocationManager *locationManager;
         MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
         zoomRect = MKMapRectUnion(zoomRect, pointRect);
         
+        //open MKMapItem in the maps app
+        //[itemPOI openInMapsWithLaunchOptions:nil];
         
         [self.mapView addAnnotation:marker];
         
