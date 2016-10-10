@@ -44,6 +44,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
      [BLSDataSource sharedInstance].srtvc = self;
+    [[BLSDataSource sharedInstance]loadSavedCategories:^(NSArray *pois) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,35 +62,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int total;
-   
-    //MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
-    //return [results.mapItems count];
+   return [[BLSDataSource sharedInstance] arrayOfPOIs].count;
     
-    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
-       
-       //NSUInteger *mapItemsCount = [pois count];
-       // NSLog(@"mapItemsCount %lu", (unsigned long)mapItemsCount);
-       // if(pois.count > 0) {
-            
-       // }
-        
-        NSString *numberString = [NSString stringWithFormat:@"Total Properties: %lu", (unsigned long)[pois count]];
-        NSLog(@"%@",[NSString stringWithFormat:@"Total Properties: %lu", (unsigned long)[pois count]]);
-        int total = [[numberString stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
-        
-     
-         //return total;
-       
-    
-    }];
-    
-    
-    
-    
-     
-    return 5;
-    //return total;
     
     
 }
@@ -103,19 +79,26 @@
     resultCell.delegate = self;
     // Configure the cell...
     
+    //TODO crashing when I get to bottom of table
     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+       
         
         for (MKPointAnnotation *annotation in pois) {
+            NSLog(@"pois array for table %@", pois);
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
-            
+            MKPointAnnotation *marker = [MKPointAnnotation new];
+            marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
+            marker.title = item.title;
+            marker.subtitle = item.subtitle;
             resultCell.entryTitle.text = item.title;
             resultCell.entrySubtitle.text = item.subtitle;
+           
+            
             
         }
         
+        
     }];
-    
-   
     
     
     //accessory button to a popup
@@ -146,7 +129,7 @@
     NSLog(@"will show the detail view here");
    
     
-    [self performSegueWithIdentifier:@"resultsDetail" sender:self];
+    //[self performSegueWithIdentifier:@"resultsDetail" sender:self];
     
 }
 
