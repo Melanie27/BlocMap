@@ -39,7 +39,7 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler;
--(void)loadSavedCategories:(CategoriesSavedCompletionHandler)completionHandler;
+//-(void)loadSavedCategories:(CategoriesSavedCompletionHandler)completionHandler;
 
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave;
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave;

@@ -55,13 +55,13 @@ CLLocationManager *locationManager;
     }
     
     
-    [[BLSDataSource sharedInstance] loadSavedCategories:^(NSArray *pois) {
+    /*[[BLSDataSource sharedInstance] loadSavedCategories:^(NSArray *pois) {
         //NSLog(@"UI work here %@", pois);
        //CALL KVO
         [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
         //change the appearance of the chosenPoint of interest
         //NSLog(@"chosen POI %@", _chosenPointOfInterest);
-    }];
+    }];*/
     
     
     

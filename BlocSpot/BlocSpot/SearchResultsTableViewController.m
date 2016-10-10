@@ -44,9 +44,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
      [BLSDataSource sharedInstance].srtvc = self;
-    [[BLSDataSource sharedInstance]loadSavedCategories:^(NSArray *pois) {
+    //[[BLSDataSource sharedInstance]loadSavedCategories:^(NSArray *pois) {
         
-    }];
+    //}];
 }
 
 - (void)didReceiveMemoryWarning {

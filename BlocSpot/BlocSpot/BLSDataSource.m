@@ -75,7 +75,7 @@ MKLocalSearch *localSearch;
 
 #pragma load up all the saved mapitems
 
--(void) loadSavedCategories:(CategoriesSavedCompletionHandler)completionHandler {
+/*-(void) loadSavedCategories:(CategoriesSavedCompletionHandler)completionHandler {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -87,7 +87,7 @@ MKLocalSearch *localSearch;
         completionHandler(storedCategories);
         
     });
-}
+}*/
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler {
     //NSLog(@"load saved markers");
