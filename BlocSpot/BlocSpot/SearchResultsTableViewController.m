@@ -12,6 +12,8 @@
 #import "ResultsDetailViewController.h"
 #import "BLSDataSource.h"
 #import "MapViewController.h"
+#import "PointOfInterest.h"
+#import "POICategory.h"
 
 
 @interface SearchResultsTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SearchResultsTableViewCellDelegate>
@@ -57,11 +59,37 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+    int total;
    
-   
-    return [results.mapItems count];
+    //MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+    //return [results.mapItems count];
+    
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+       
+       //NSUInteger *mapItemsCount = [pois count];
+       // NSLog(@"mapItemsCount %lu", (unsigned long)mapItemsCount);
+       // if(pois.count > 0) {
+            
+       // }
+        
+        NSString *numberString = [NSString stringWithFormat:@"Total Properties: %lu", (unsigned long)[pois count]];
+        NSLog(@"%@",[NSString stringWithFormat:@"Total Properties: %lu", (unsigned long)[pois count]]);
+        int total = [[numberString stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+        
+     
+         //return total;
+       
+    
+    }];
+    
+    
+    
+    
+     
+    return 5;
+    //return total;
+    
+    
 }
 
 
@@ -70,18 +98,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+    
    SearchResultsTableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
     resultCell.delegate = self;
     // Configure the cell...
     
-    MKMapItem *item = results.mapItems[indexPath.row];
-    //NSLog(@"table item %@", item);
-    //resultCell.textLabel.text = item.name;
-    //resultCell.detailTextLabel.text = item.placemark.addressDictionary[@"Street"];
-    resultCell.detailTextLabel.text = item.phoneNumber;
-    resultCell.entryTitle.text = item.name;
-    resultCell.entrySubtitle.text = item.phoneNumber;
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+        
+        for (MKPointAnnotation *annotation in pois) {
+            PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
+            
+            resultCell.entryTitle.text = item.title;
+            resultCell.entrySubtitle.text = item.subtitle;
+            
+        }
+        
+    }];
     
    
     
@@ -91,9 +123,7 @@
     [button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
     button.tag = indexPath.row;
     resultCell.accessoryView = button;
-    //when adding the category images
-    //[resultCell.contentView addSubview:resultCell.catPhoto];
-    //resultCell.catPhoto.tag = indexPath.row;
+    
     
     return resultCell;
 }
