@@ -17,7 +17,7 @@
 
 @implementation BLSDataSource
 NSMutableArray *arrayOfPOIs;
-PointOfInterest* currentPOI;
+NSMutableArray *arrayOfCategories;
 MKLocalSearch *localSearch;
 //NSMutableArray *arrayOfCategories;
 
@@ -47,28 +47,28 @@ MKLocalSearch *localSearch;
 #pragma mark - Key/Value Observing
 
 
-- (NSUInteger) countOfArrayOfPOIs {
-    return self.arrayOfPOIs.count;
+- (NSUInteger) countOfArrayOfCategories {
+    return self.arrayOfCategories.count;
 }
 
-- (id) objectInArrayOfPOIsAtIndex:(NSUInteger)index {
-    return [self.arrayOfPOIs objectAtIndex:index];
+- (id) objectInArrayOfCategoriesAtIndex:(NSUInteger)index {
+    return [self.arrayOfCategories objectAtIndex:index];
 }
 
-- (NSArray *) arrayOfPOIsAtIndexes:(NSIndexSet *)indexes {
-    return [self.arrayOfPOIs objectsAtIndexes:indexes];
+- (NSArray *) arrayOfCategoriesAtIndexes:(NSIndexSet *)indexes {
+    return [self.arrayOfCategories objectsAtIndexes:indexes];
 }
 
-- (void) insertObject:(PointOfInterest *)object inArrayOfPOIsAtIndex:(NSUInteger)index {
-    [_arrayOfPOIs insertObject:object atIndex:index];
+- (void) insertObject:(PointOfInterest *)object inArrayOfCategoriesAtIndex:(NSUInteger)index {
+    [_arrayOfCategories insertObject:object atIndex:index];
 }
 
-- (void) removeObjectFromArrayOfPOIsAtIndex:(NSUInteger)index {
-    [_arrayOfPOIs removeObjectAtIndex:index];
+- (void) removeObjectFromArrayOfCategoriesAtIndex:(NSUInteger)index {
+    [_arrayOfCategories removeObjectAtIndex:index];
 }
 
-- (void) replaceObjectInArrayOfPOIsAtIndex:(NSUInteger)index withObject:(id)object {
-    [_arrayOfPOIs replaceObjectAtIndex:index withObject:object];
+- (void) replaceObjectInArrayOfCategoriesAtIndex:(NSUInteger)index withObject:(id)object {
+    [_arrayOfCategories replaceObjectAtIndex:index withObject:object];
 }
 
 
@@ -82,7 +82,7 @@ MKLocalSearch *localSearch;
         NSString *fullPath = [self pathForFilename:@"categories.poi"];
         NSMutableArray<PointOfInterest*> *storedCategories = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
         
-         self.arrayOfPOIs = storedCategories;
+         self.arrayOfCategories = storedCategories;
         NSLog(@"load saved categories %@", storedCategories);
         completionHandler(storedCategories);
         
@@ -90,7 +90,7 @@ MKLocalSearch *localSearch;
 }
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler {
-    NSLog(@"load saved markers");
+    //NSLog(@"load saved markers");
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -128,16 +128,18 @@ MKLocalSearch *localSearch;
 
 - (void)saveCategoryToPOI:(NSArray<POICategory *> *)poiCategoriesToSave {
     
-    
+    NSMutableArray *arrayOfCategories = [[NSMutableArray alloc] init];
     
     for (POICategory *poiCategory in poiCategoriesToSave) {
         PointOfInterest *itemCategory = [[PointOfInterest alloc] initWithPOICategory:poiCategory];
         NSLog(@"item category %@", itemCategory);
        
         _currentPOI.categoryName = itemCategory.categoryName;
+        [arrayOfCategories addObject:itemCategory];
         
     }
-    NSLog(@"current poi cat name %@", _currentPOI.categoryName);
+    //NSLog(@"current poi cat name %@", _currentPOI.categoryName);
+    NSLog(@"array of cats %@", self.arrayOfCategories);
     
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

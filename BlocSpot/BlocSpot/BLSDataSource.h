@@ -34,6 +34,7 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 @property (retain, nonatomic) NSMutableArray *annotations;
 @property (nonatomic) BOOL itemSelected;
 @property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfPOIs;
+@property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfCategories;
 @property (atomic, strong) PointOfInterest* currentPOI;
 
 

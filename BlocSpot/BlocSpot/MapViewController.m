@@ -33,7 +33,7 @@ CLLocationManager *locationManager;
     self.navigationItem.title = @"BlocSpot Map";
     
     //register kvo for points of interest
-    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
+    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfCategories" options:0 context:nil];
     
     //make the view controller be the map view's delegate
     self.mapView.delegate = self;
@@ -58,7 +58,7 @@ CLLocationManager *locationManager;
     [[BLSDataSource sharedInstance] loadSavedCategories:^(NSArray *pois) {
         //NSLog(@"UI work here %@", pois);
        //CALL KVO
-        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
+        [self observeValueForKeyPath:@"arrayOfCategories" ofObject:_chosenPointOfInterest change:nil context:nil];
         //change the appearance of the chosenPoint of interest
         NSLog(@"chosen POI %@", _chosenPointOfInterest);
     }];
