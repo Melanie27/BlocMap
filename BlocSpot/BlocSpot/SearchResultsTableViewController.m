@@ -76,7 +76,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
    SearchResultsTableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
-    resultCell.delegate = self;
+    
     // Configure the cell...
     
     //TODO crashing when I get to bottom of table
@@ -86,10 +86,8 @@
         for (MKPointAnnotation *annotation in pois) {
             NSLog(@"pois array for table %@", pois);
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
-            MKPointAnnotation *marker = [MKPointAnnotation new];
-            marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
-            marker.title = item.title;
-            marker.subtitle = item.subtitle;
+            
+            resultCell.delegate = self;
             resultCell.entryTitle.text = item.title;
             resultCell.entrySubtitle.text = item.subtitle;
            
