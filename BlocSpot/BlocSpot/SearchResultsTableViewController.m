@@ -44,6 +44,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
      [BLSDataSource sharedInstance].srtvc = self;
+    [[BLSDataSource sharedInstance]loadSavedData:^(NSArray *pois) {
+       
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,18 +62,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int total;
    
-    //MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
-    //return [results.mapItems count];
+   
     
-    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+    return [[BLSDataSource sharedInstance] arrayOfPOIs].count;
+    
        
-       //NSUInteger *mapItemsCount = [pois count];
-       // NSLog(@"mapItemsCount %lu", (unsigned long)mapItemsCount);
-       // if(pois.count > 0) {
+       /*NSUInteger *mapItemsCount = [pois count];
+        NSLog(@"mapItemsCount %lu", (unsigned long)mapItemsCount);
+        if(pois.count > 0) {
             
-       // }
+        }
         
         NSString *numberString = [NSString stringWithFormat:@"Total Properties: %lu", (unsigned long)[pois count]];
         NSLog(@"%@",[NSString stringWithFormat:@"Total Properties: %lu", (unsigned long)[pois count]]);
@@ -80,13 +82,13 @@
          //return total;
        
     
-    }];
+    }];*/
     
     
     
     
      
-    return 5;
+    //return 5;
     //return total;
     
     
@@ -103,7 +105,7 @@
     resultCell.delegate = self;
     // Configure the cell...
     
-    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+    [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
         
         for (MKPointAnnotation *annotation in pois) {
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
