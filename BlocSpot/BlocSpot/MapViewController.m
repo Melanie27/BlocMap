@@ -16,7 +16,7 @@
 
 //#import "CategoryViewController.h"
 
-@interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate>
+@interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, strong) PointOfInterest *chosenPointOfInterest;
@@ -161,7 +161,7 @@ CLLocationManager *locationManager;
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
     
-        [self updateAccessoryViewInAnnotationView:annotationView];
+        //[self updateAccessoryViewInAnnotationView:annotationView];
     
 
 }
@@ -187,9 +187,19 @@ CLLocationManager *locationManager;
         //label.numberOfLines = 4;
         //label.text = @"hello";
         //[vw addSubview:label];
+        CGFloat yourSelectedFontSize = 8.0 ;
+        UITextField *noteForPOI = [[UITextField alloc] initWithFrame:CGRectMake(0, 25, 140, 20)];
+        UIFont *yourNewSameStyleFont = [noteForPOI.font fontWithSize:yourSelectedFontSize];
+        noteForPOI.font = yourNewSameStyleFont;
+        noteForPOI.layer.cornerRadius=8.0f;
+        noteForPOI.layer.masksToBounds=YES;
+        noteForPOI.layer.borderColor=[[UIColor redColor]CGColor];
+        noteForPOI.layer.borderWidth= 1.0f;
+        noteForPOI.placeholder = @"add a note";
+        noteForPOI.minimumFontSize = 10;
         
-        
-        
+        self.currentNote.noteText = noteForPOI.text;
+        NSLog(@"note text %@", self.currentNote.noteText);
         //annotationView.rightCalloutAccessoryView = savePOIButton;
         UIButton *directionsButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 13, 13)];
         [directionsButton setBackgroundImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
@@ -209,6 +219,7 @@ CLLocationManager *locationManager;
         UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(95, 5, 13, 13)];
         [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
         
+        [vw addSubview:noteForPOI];
         [vw addSubview:triggerShareButton];
         [vw addSubview:directionsButton];
         //[vw addSubview:savePOIButton];
@@ -241,7 +252,7 @@ CLLocationManager *locationManager;
 
 
 -(IBAction)shareButtonPressed:(UIButton *)button  {
-    //BLSDataSource *ds = [BLSDataSource sharedInstance];
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
     //ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
     //Add UIActivityViewController here?
     NSString *string = @"this can be the individual note to share";
@@ -336,23 +347,35 @@ CLLocationManager *locationManager;
 }*/
 
 
-
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    NSLog(@"hello");
+    if(buttonIndex == alertView.cancelButtonIndex) {
+        return;
+    }
+    
+    self.currentNote.noteText = [alertView textFieldAtIndex:0].text;
+    
+    NSLog(@"current note %@", self.currentNote.noteText);
+    [[BLSDataSource sharedInstance] saveNoteToPOI:self.currentNote];
+    
+}
 
 
 -(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
     
     //this stuff needs to be in the notes object
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Save a note Location" message:nil delegate:self cancelButtonTitle:@"Continue" otherButtonTitles: nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Save a note Location" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField * alertTextField = [alert textFieldAtIndex:0];
     alertTextField.keyboardType = UIKeyboardTypeDefault;
-    alertTextField.placeholder = @"Enter title of your tag";
+    alertTextField.placeholder = @"Enter Your note";
     
     [alert  show];
-    self.currentNote = alertTextField.text;
-    NSLog(@"current note %@", self.currentNote);
-    [[BLSDataSource sharedInstance] saveNoteToPOI:self.currentNote];
+    
+    
+    
     
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];

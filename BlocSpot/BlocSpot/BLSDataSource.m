@@ -143,6 +143,24 @@ MKLocalSearch *localSearch;
 
 -(void)saveNoteToPOI:(POINote*)note {
     self.currentNote = note;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *fullPath = [self pathForFilename:@"notes.poi"];
+        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
+        
+        NSError *dataError;
+        BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+        
+        NSLog(@"note that got saved %@", note);
+        
+        if (!wroteSuccessfully) {
+            NSLog(@"Couldn't write file: %@", dataError);
+            
+        }
+        
+    });
+    
+    
     NSLog(@"note %@", note);
 }
 
