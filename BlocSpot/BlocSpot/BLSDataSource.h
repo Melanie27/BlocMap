@@ -13,13 +13,16 @@
 #import "POICategory.h"
 
 @class SearchResultsTableViewController;
+@class CategoryListViewController;
 @class PointOfInterest;
 
 typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
 typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
+//typedef void (^SaveCatToPOICompletionHandler)(NSArray *pois);
 
 @interface BLSDataSource : NSObject <MKMapViewDelegate>
-
+//add private mutable array
+@property (nonatomic, strong) NSMutableArray *categories;
 
 //use singleton pattern so that any code needing to use this class can share the single instance
 +(instancetype) sharedInstance;
@@ -34,16 +37,20 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 @property (retain, nonatomic) NSMutableArray *annotations;
 @property (nonatomic) BOOL itemSelected;
 @property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfPOIs;
-@property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfCategories;
+@property (nonatomic, strong) NSMutableArray<POICategory*> *arrayOfCategories;
 @property (atomic, strong) PointOfInterest* currentPOI;
 
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler;
-//-(void)loadSavedCategories:(CategoriesSavedCompletionHandler)completionHandler;
+
 
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave;
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave;
-- (void)saveCategoryToPOI:(NSArray<POICategory *> *)poiCategoriesToSave;
+
+//- (void)saveCategoryToPOI:(POICategory *)cat andThen:(SaveCatToPOICompletionHandler)completionHandler;
+- (void)saveCategoryToPOI:(POICategory *)cat;
+
+//- (void)saveCategoryToPOI:(NSArray<POICategory *> *)poiCategoriesToSave;
 - (void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;
 
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;;

@@ -54,24 +54,24 @@ CLLocationManager *locationManager;
 
     }
     
-    
-    /*[[BLSDataSource sharedInstance] loadSavedCategories:^(NSArray *pois) {
-        //NSLog(@"UI work here %@", pois);
-       //CALL KVO
-        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
-        //change the appearance of the chosenPoint of interest
-        //NSLog(@"chosen POI %@", _chosenPointOfInterest);
+
+    /*[[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory andThen:^(NSArray *pois) {
+        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentPOI change:nil context:nil];
+         NSLog(@"chosen POI %@", self.currentCategory);
     }];*/
-    
     
     
      [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
         NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
+         [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentPOI change:nil context:nil];
+         NSLog(@"chosen POI %@", self.currentPOI);
         if(pois.count > 0) {
            
         }
         
+         
+         
         for (MKPointAnnotation *annotation in pois) {
          PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
             MKPointAnnotation *marker = [MKPointAnnotation new];
@@ -104,21 +104,17 @@ CLLocationManager *locationManager;
             
             NSLog(@"registering a change neeed to update color of the POI title");
             //test what category it is then change the pin color accordingly
-            NSLog(@" cat name %@", _currentPOI.categoryName);
-            NSLog(@"observe poi title %@", _currentPOI.title);
-            MKPointAnnotation *marker = [MKPointAnnotation new];
-           
-            marker.title = @"hello";
+            NSLog(@" cat name %@", self.currentPOI.category);
+            NSLog(@"observe poi title %@", self.currentPOI.title);
+            
             
            
-            //UIColor *catColor = [UIColor blueColor];
-            //NSString *catName = _currentPOI.categoryName;
+            UIColor *catColor = [UIColor blueColor];
+            //NSString *catName = self.currentPOI.category;
             //NSDictionary *attrs = @{ NSForegroundColorAttributeName : catColor };
             //NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:catName attributes:attrs];
             //self.scanLabel.attributedText = attrStr;
-            //MKPointAnnotation *marker = [MKPointAnnotation new];
-            //marker.tintColor = _currentPOI.categoryColor;
-           //marker.pinColor = MKPinAnnotationColorPurple;
+            
             
         }  else if (kindOfChange == NSKeyValueChangeInsertion ||
                      kindOfChange == NSKeyValueChangeRemoval ||

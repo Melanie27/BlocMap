@@ -48,46 +48,34 @@ MKLocalSearch *localSearch;
 
 
 - (NSUInteger) countOfArrayOfCategories {
-    return self.arrayOfCategories.count;
+    return self.arrayOfPOIs.count;
 }
 
-- (id) objectInArrayOfCategoriesAtIndex:(NSUInteger)index {
-    return [self.arrayOfCategories objectAtIndex:index];
+- (id) objectInArrayOfPOIsAtIndex:(NSUInteger)index {
+    return [self.arrayOfPOIs objectAtIndex:index];
 }
 
-- (NSArray *) arrayOfCategoriesAtIndexes:(NSIndexSet *)indexes {
-    return [self.arrayOfCategories objectsAtIndexes:indexes];
+- (NSArray *) arrayOfPOIsAtIndexes:(NSIndexSet *)indexes {
+    return [self.arrayOfPOIs objectsAtIndexes:indexes];
 }
 
-- (void) insertObject:(PointOfInterest *)object inArrayOfCategoriesAtIndex:(NSUInteger)index {
-    [_arrayOfCategories insertObject:object atIndex:index];
+- (void) insertObject:(PointOfInterest *)object inArrayOfPOIsAtIndex:(NSUInteger)index {
+    [_arrayOfPOIs insertObject:object atIndex:index];
 }
 
-- (void) removeObjectFromArrayOfCategoriesAtIndex:(NSUInteger)index {
-    [_arrayOfCategories removeObjectAtIndex:index];
+- (void) removeObjectFromArrayOfPOIsAtIndex:(NSUInteger)index {
+    [_arrayOfPOIs removeObjectAtIndex:index];
 }
 
-- (void) replaceObjectInArrayOfCategoriesAtIndex:(NSUInteger)index withObject:(id)object {
-    [_arrayOfCategories replaceObjectAtIndex:index withObject:object];
+- (void) replaceObjectInArrayOfPOIsAtIndex:(NSUInteger)index withObject:(id)object {
+    [_arrayOfPOIs replaceObjectAtIndex:index withObject:object];
 }
 
 
 
 #pragma load up all the saved mapitems
 
-/*-(void) loadSavedCategories:(CategoriesSavedCompletionHandler)completionHandler {
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSString *fullPath = [self pathForFilename:@"categories.poi"];
-        NSMutableArray<PointOfInterest*> *storedCategories = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
-        
-         self.arrayOfCategories = storedCategories;
-        NSLog(@"load saved categories %@", storedCategories);
-        completionHandler(storedCategories);
-        
-    });
-}*/
+
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler {
     //NSLog(@"load saved markers");
@@ -99,6 +87,7 @@ MKLocalSearch *localSearch;
         
         self.arrayOfPOIs = storedMapItems;
         completionHandler(storedMapItems);
+        //self.currentPOI = self.chosenPointOfInterest
         
     });
 }
@@ -126,37 +115,29 @@ MKLocalSearch *localSearch;
     self.arrayOfPOIs = newArrayOfPOIs;
 }
 
-- (void)saveCategoryToPOI:(NSArray<POICategory *> *)poiCategoriesToSave {
-    
-    NSMutableArray *arrayOfCategories = [[NSMutableArray alloc] init];
-    
-    for (POICategory *poiCategory in poiCategoriesToSave) {
-        PointOfInterest *itemCategory = [[PointOfInterest alloc] initWithPOICategory:poiCategory];
-        NSLog(@"item category %@", itemCategory);
-       
-        _currentPOI.categoryName = itemCategory.categoryName;
-        [arrayOfCategories addObject:itemCategory];
-        
-    }
-    //NSLog(@"current poi cat name %@", _currentPOI.categoryName);
-    NSLog(@"array of cats %@", self.arrayOfCategories);
-    
+//- (void)saveCategoryToPOI:(POICategory *)cat andThen:(SaveCatToPOICompletionHandler)completionHandler {
+
+-(void)saveCategoryToPOI:(POICategory *)cat {
+    self.currentPOI.category = cat;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *fullPath = [self pathForFilename:@"categories.poi"];
-        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:_currentPOI.categoryName];
+        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
         
         NSError *dataError;
         BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
         NSLog(@"category data %@",  poiCategoryData);
+         NSLog(@"cat that got saved %@", cat);
+        NSLog(@"pois %@", self.currentPOI);
+        //GET THIS CURRENT POI into map view controller
         if (!wroteSuccessfully) {
             NSLog(@"Couldn't write file: %@", dataError);
+            
         }
         
-     });
-                   
+    });
 }
-  
+
 
 
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave {
@@ -173,14 +154,12 @@ MKLocalSearch *localSearch;
         [newArrayOfPOIs addObject:item];
     }
     self.arrayOfPOIs = newArrayOfPOIs;
-    NSLog(@"new array %@", newArrayOfPOIs);
+    //NSLog(@"new array %@", newArrayOfPOIs);
 }
 
 - (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
        
-        
-        
         NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
         NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
         
@@ -192,7 +171,7 @@ MKLocalSearch *localSearch;
         }
         
         completionHandler(nil,nil);
-        //self.arrayOfPOIs = newArrayOfPOIs;
+        
     });
 }
 
@@ -220,7 +199,7 @@ MKLocalSearch *localSearch;
     
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
     NSMutableArray *responsePOIs = [NSMutableArray arrayWithObjects:response.mapItems, nil];
-    NSLog(@"pois, %@", responsePOIs);
+    
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         if (error != nil) {

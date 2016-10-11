@@ -36,13 +36,13 @@
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
 
--(instancetype)initWithPOICategory:(POICategory *)POIcategory {
+/*-(instancetype)initWithPOICategory:(POICategory *)POIcategory {
     NSString *categoryName = POIcategory.categoryName;
     UIColor *categoryColor = POIcategory.categoryColor;
-    NSLog(@"category name %@", categoryName);
-    NSLog(@"category color %@", categoryColor);
+    //NSLog(@"category name %@", categoryName);
+    //NSLog(@"category color %@", categoryColor);
     return [self initWithCategoryName:categoryName categoryColor:categoryColor];
-}
+}*/
 
 - (MKMapItem*)mapItem {
     NSDictionary *addrDict = @{
@@ -58,7 +58,7 @@
     return item;
 }
 
--(id)initWithCategoryName:(NSString *)categoryName
+/*-(id)initWithCategoryName:(NSString *)categoryName
             categoryColor:(UIColor *)categoryColor{
     self = [super init];
     
@@ -68,7 +68,7 @@
     }
     
     return self;
-}
+}*/
 
 -(id)initWithAddress:(NSString *)address
           coordinate:(CLLocationCoordinate2D)coordinate
@@ -103,8 +103,8 @@
     [aCoder encodeObject:_title forKey:@"title"];
     [aCoder encodeObject:_subtitle forKey:@"subtitle"];
     [aCoder encodeObject:_identifier forKey:@"identifier"];
-    [aCoder encodeObject:_categoryName forKey:@"categoryName"];
-    [aCoder encodeObject:_categoryColor forKey:@"categoryColor"];
+    //[aCoder encodeObject:_categoryName forKey:@"categoryName"];
+    //[aCoder encodeObject:_categoryColor forKey:@"categoryColor"];
     
 }
 
@@ -118,8 +118,8 @@
         CLLocationDegrees longitude = [aDecoder decodeDoubleForKey:@"longitude"];
         _coordinate = CLLocationCoordinate2DMake(latitude, longitude);
         _identifier = [aDecoder decodeObjectForKey:@"identifier"];
-        _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
-        _categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
+       // _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
+        //_categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
         
     }
     return self;
