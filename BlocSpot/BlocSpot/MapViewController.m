@@ -54,21 +54,13 @@ CLLocationManager *locationManager;
 
     }
     
-
-    /*[[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory andThen:^(NSArray *pois) {
-        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentPOI change:nil context:nil];
-         NSLog(@"chosen POI %@", self.currentCategory);
-    }];*/
-    
-    /*[[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory andThen:^(POICategory *currCat) {
-         [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentCategory change:nil context:nil];
-    }];*/
     [[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory];
-    [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentCategory change:nil context:nil];
+    
     
     
     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
+        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
         NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
          
          NSLog(@"chosen POI %@", self.currentPOI);
@@ -87,6 +79,7 @@ CLLocationManager *locationManager;
             [self.mapView addAnnotation:marker];
             //NSLog(@"catogory of POI %@", item.category);
             
+            
         }
         
         
@@ -102,8 +95,10 @@ CLLocationManager *locationManager;
     
     
     
+    
     if (object == [BLSDataSource sharedInstance] && [keyPath isEqualToString:@"arrayOfPOIs"]) {
         // We know arrayOfPOIs changed.  Let's see what kind of change it is.
+        NSLog(@"something changed");
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         
         if (kindOfChange == NSKeyValueChangeSetting) {
