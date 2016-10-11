@@ -122,7 +122,7 @@ CLLocationManager *locationManager;
             
             
            
-            UIColor *catColor = [UIColor blueColor];
+            //UIColor *catColor = [UIColor blueColor];
             //NSString *catName = self.currentPOI.category;
             //NSDictionary *attrs = @{ NSForegroundColorAttributeName : catColor };
             //NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:catName attributes:attrs];
@@ -191,37 +191,40 @@ CLLocationManager *locationManager;
         
         
         //annotationView.rightCalloutAccessoryView = savePOIButton;
-        UIButton *directionsButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 10, 13)];
+        UIButton *directionsButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 13, 13)];
         [directionsButton setBackgroundImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
         
        
-        UIButton *triggerShareButton = [[UIButton alloc] initWithFrame:CGRectMake(35, 5, 10, 13)];
+        UIButton *triggerShareButton = [[UIButton alloc] initWithFrame:CGRectMake(35, 5, 13, 13)];
         [triggerShareButton setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
         
         
-        UIButton *savePOIButton = [[UIButton alloc] initWithFrame:CGRectMake(65, 5, 10, 13)];
+        UIButton *savePOIButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
         [savePOIButton setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
+        annotationView.rightCalloutAccessoryView = savePOIButton;
         
-        UIButton *addNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(95, 5, 10, 13)];
+        UIButton *addNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(65, 5, 13, 13)];
         [addNoteButton setBackgroundImage:[UIImage imageNamed:@"note.png"] forState:UIControlStateNormal];
         
-        UIButton *addDeleteButton = [[UIButton alloc] initWithFrame:CGRectMake(125, 5, 10, 13)];
-        [addDeleteButton setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
+        UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(95, 5, 13, 13)];
+        [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
         
         [vw addSubview:triggerShareButton];
         [vw addSubview:directionsButton];
-        [vw addSubview:savePOIButton];
+        //[vw addSubview:savePOIButton];
         [vw addSubview:addNoteButton];
-        [vw addSubview:addDeleteButton];
+        [vw addSubview:deleteButton];
         
-        
-        [triggerShareButton addTarget:self action:@selector(shareButtonPressed:annotationView:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [directionsButton addTarget:self action:@selector(directionsButtonPressed:annotationView:) forControlEvents:UIControlEventTouchUpInside];
         
         [triggerShareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-         [triggerShareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-         [triggerShareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [directionsButton addTarget:self action:@selector( directionsButtonPressed:mapView:annotationView:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //[savePOIButton addTarget:self action:@selector(savePOIButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [addNoteButton addTarget:self action:@selector(addNoteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [deleteButton addTarget:self action:@selector(deletePOIPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         
         
@@ -237,7 +240,7 @@ CLLocationManager *locationManager;
 }
 
 
--(IBAction)shareButtonPressed:(UIButton *)button annotationView:(MKAnnotationView *)view {
+-(IBAction)shareButtonPressed:(UIButton *)button  {
     //BLSDataSource *ds = [BLSDataSource sharedInstance];
     //ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
     //Add UIActivityViewController here?
@@ -257,8 +260,7 @@ CLLocationManager *locationManager;
                                               // ...
                                           }];
 }
-
--(IBAction)directionsButtonPressed:(UIButton *)button annotationView:(MKAnnotationView *)view {
+-(IBAction)directionsButtonPressed:(UIButton *)button mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view {
     NSLog(@"map it");
     NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
     BLSDataSource *ds = [BLSDataSource sharedInstance];
@@ -280,7 +282,17 @@ CLLocationManager *locationManager;
     }
 }
 
+-(IBAction)deletePOIPressed:(UIButton *)button {
+    NSLog(@"delete POI here");
+}
 
+/*-(IBAction)savePOIButtonPressed:(UIButton *)button {
+    NSLog(@"save poi");
+}*/
+
+-(IBAction)addNoteButtonPressed:(UIButton *)button {
+    NSLog(@"add Note");
+}
 
 
 #pragma mark add map functionality
