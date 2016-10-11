@@ -84,7 +84,7 @@
        
         
         for (MKPointAnnotation *annotation in pois) {
-            NSLog(@"pois array for table %@", pois);
+            //NSLog(@"pois array for table %@", pois);
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
             
             resultCell.delegate = self;

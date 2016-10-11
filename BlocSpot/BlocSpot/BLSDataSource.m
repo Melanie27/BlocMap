@@ -128,7 +128,8 @@ MKLocalSearch *localSearch;
         BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
         NSLog(@"category data %@",  poiCategoryData);
          NSLog(@"cat that got saved %@", cat);
-        NSLog(@"pois %@", self.currentPOI);
+        NSLog(@"cat got saved to this poi %@", self.currentPOI);
+        //TRIGGER Key Value Observing HERE
         //GET THIS CURRENT POI into map view controller
         if (!wroteSuccessfully) {
             NSLog(@"Couldn't write file: %@", dataError);
@@ -136,6 +137,8 @@ MKLocalSearch *localSearch;
         }
         
     });
+    
+     //completionHandler(cat);
 }
 
 

@@ -18,7 +18,7 @@
 
 typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
 typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
-//typedef void (^SaveCatToPOICompletionHandler)(NSArray *pois);
+typedef void (^SaveCatToPOICompletionHandler)(POICategory *currCat);
 
 @interface BLSDataSource : NSObject <MKMapViewDelegate>
 //add private mutable array

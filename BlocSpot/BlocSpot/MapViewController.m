@@ -60,11 +60,17 @@ CLLocationManager *locationManager;
          NSLog(@"chosen POI %@", self.currentCategory);
     }];*/
     
+    /*[[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory andThen:^(POICategory *currCat) {
+         [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentCategory change:nil context:nil];
+    }];*/
+    [[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory];
+    [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentCategory change:nil context:nil];
     
-     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+    
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
         NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
-         [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentPOI change:nil context:nil];
+         
          NSLog(@"chosen POI %@", self.currentPOI);
         if(pois.count > 0) {
            

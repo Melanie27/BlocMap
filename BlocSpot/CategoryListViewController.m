@@ -102,6 +102,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     
     //Save the category selected to the POI
     NSArray *arrayCategoryItem = [NSArray arrayWithObjects:category, nil];
+    
     [ds saveCategoryToPOI:arrayCategoryItem];
     
 
