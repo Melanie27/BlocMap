@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @class PointOfInterest;
+@class POICategory;
 
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 
@@ -21,5 +22,6 @@
 @property (strong, nonatomic, getter=isChosen) MKAnnotationView *annotationView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) PointOfInterest *currentPOI;
+@property (strong, nonatomic) POICategory *currentCategory;
 -(void)loadSearchResults;
 @end

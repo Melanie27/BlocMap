@@ -24,7 +24,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
         self.title = @"Categories";
         
         //Load categories
-        //[self seedCategories];
+        
         //[self loadCategories];
     }
     
@@ -76,18 +76,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
  return cell;
 }
 
-/*-(void)loadCategories {
-    //retrieve the path of the file in which the list of items is stored
-    NSString *filePath = [self pathForCategories];
-    //file manager api - reference an instance of the default class
-    if([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        self.categories = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-    } else {
-        //if nothing's there just instantiate a mutable array
-        self.categories = [NSMutableArray array];
-    }
-    
-}*/
+
 
 -(NSString*)pathForCategories {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

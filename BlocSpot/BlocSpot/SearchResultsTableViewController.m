@@ -12,6 +12,8 @@
 #import "ResultsDetailViewController.h"
 #import "BLSDataSource.h"
 #import "MapViewController.h"
+#import "PointOfInterest.h"
+#import "POICategory.h"
 
 
 @interface SearchResultsTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SearchResultsTableViewCellDelegate>
@@ -42,6 +44,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
      [BLSDataSource sharedInstance].srtvc = self;
+    //[[BLSDataSource sharedInstance]loadSavedCategories:^(NSArray *pois) {
+        
+    //}];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,11 +62,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
-   
-   
-    return [results.mapItems count];
+   return [[BLSDataSource sharedInstance] arrayOfPOIs].count;
+    
+    
+    
 }
 
 
@@ -70,20 +74,29 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
+    
    SearchResultsTableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
-    resultCell.delegate = self;
+    
     // Configure the cell...
     
-    MKMapItem *item = results.mapItems[indexPath.row];
-    //NSLog(@"table item %@", item);
-    //resultCell.textLabel.text = item.name;
-    //resultCell.detailTextLabel.text = item.placemark.addressDictionary[@"Street"];
-    resultCell.detailTextLabel.text = item.phoneNumber;
-    resultCell.entryTitle.text = item.name;
-    resultCell.entrySubtitle.text = item.phoneNumber;
-    
-   
+    //TODO crashing when I get to bottom of table
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+       
+        
+        for (MKPointAnnotation *annotation in pois) {
+            //NSLog(@"pois array for table %@", pois);
+            PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
+            
+            resultCell.delegate = self;
+            resultCell.entryTitle.text = item.title;
+            resultCell.entrySubtitle.text = item.subtitle;
+           
+            
+            
+        }
+        
+        
+    }];
     
     
     //accessory button to a popup
@@ -91,9 +104,7 @@
     [button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
     button.tag = indexPath.row;
     resultCell.accessoryView = button;
-    //when adding the category images
-    //[resultCell.contentView addSubview:resultCell.catPhoto];
-    //resultCell.catPhoto.tag = indexPath.row;
+    
     
     return resultCell;
 }
@@ -116,7 +127,7 @@
     NSLog(@"will show the detail view here");
    
     
-    [self performSegueWithIdentifier:@"resultsDetail" sender:self];
+    //[self performSegueWithIdentifier:@"resultsDetail" sender:self];
     
 }
 

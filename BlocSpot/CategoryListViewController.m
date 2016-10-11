@@ -33,7 +33,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
         self.title = @"Categories";
         
         //Load categories
-         //[self seedCategories];
+        
         [self loadCategories];
     }
     
@@ -102,13 +102,11 @@ static NSString *CellIdentifier = @"Cell Identifier";
     
     //Save the category selected to the POI
     NSArray *arrayCategoryItem = [NSArray arrayWithObjects:category, nil];
+    
+    //TODO change this to an NSSet so it doesn't get double saved
     [ds saveCategoryToPOI:arrayCategoryItem];
     
-    
-    
-    
-    
-    
+
 }
 
 -(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -33,7 +33,7 @@ CLLocationManager *locationManager;
     self.navigationItem.title = @"BlocSpot Map";
     
     //register kvo for points of interest
-    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
+    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfCategories" options:0 context:nil];
     
     //make the view controller be the map view's delegate
     self.mapView.delegate = self;
@@ -54,23 +54,30 @@ CLLocationManager *locationManager;
 
     }
     
+
+    /*[[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory andThen:^(NSArray *pois) {
+        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentPOI change:nil context:nil];
+         NSLog(@"chosen POI %@", self.currentCategory);
+    }];*/
     
-    [[BLSDataSource sharedInstance] loadSavedCategories:^(NSArray *pois) {
-        NSLog(@"UI work here %@", pois);
-       //CALL KVO
-        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
-        
-    }];
+    /*[[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory andThen:^(POICategory *currCat) {
+         [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentCategory change:nil context:nil];
+    }];*/
+    [[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory];
+    [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:self.currentCategory change:nil context:nil];
     
     
-    
-     [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
         // Set up annotations for each poi
         NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
+         
+         NSLog(@"chosen POI %@", self.currentPOI);
         if(pois.count > 0) {
            
         }
         
+         
+         
         for (MKPointAnnotation *annotation in pois) {
          PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
             MKPointAnnotation *marker = [MKPointAnnotation new];
@@ -101,8 +108,18 @@ CLLocationManager *locationManager;
         
         if (kindOfChange == NSKeyValueChangeSetting) {
             
-            NSLog(@"registering a change neeed to update pin color");
-            NSLog(@"array of pois cat name %@", _currentPOI.categoryName);
+            NSLog(@"registering a change neeed to update color of the POI title");
+            //test what category it is then change the pin color accordingly
+            NSLog(@" cat name %@", self.currentPOI.category);
+            NSLog(@"observe poi title %@", self.currentPOI.title);
+            
+            
+           
+            UIColor *catColor = [UIColor blueColor];
+            //NSString *catName = self.currentPOI.category;
+            //NSDictionary *attrs = @{ NSForegroundColorAttributeName : catColor };
+            //NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:catName attributes:attrs];
+            //self.scanLabel.attributedText = attrStr;
             
             
         }  else if (kindOfChange == NSKeyValueChangeInsertion ||
