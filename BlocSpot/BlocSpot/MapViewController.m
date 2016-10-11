@@ -153,7 +153,7 @@ CLLocationManager *locationManager;
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
     
-        [self updateLeftCalloutAccessoryViewInAnnotationView:annotationView];
+        [self updateAccessoryViewInAnnotationView:annotationView];
     
     
 }
@@ -205,10 +205,24 @@ CLLocationManager *locationManager;
     }
 }*/
 
--(void)updateLeftCalloutAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
-    //NSlog update the color of the heart depending on the category the poi has been assigned
-    //see stanford lecture 15 around min 45
-    //will have to respond to changing data model
+-(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
+    
+    
+    //Add UIActivityViewController here?
+    NSString *string = @"this can be the individual note to share";
+    //NSURL *URL = ...;
+    
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[string]
+                                      applicationActivities:nil];
+    [self.navigationController presentViewController:activityViewController
+                                       animated:YES
+                                     completion:^{
+                                         // ...
+                                     }];
+
+    
+    
     NSLog(@"change appearance of heart");
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
@@ -229,34 +243,26 @@ CLLocationManager *locationManager;
         
         
     } else if (control == view.leftCalloutAccessoryView){
-        NSLog(@"map it!");
        
-       
-        
-        
-        
-        
+    
         NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
         [ds convertPointAnnotationsToPOI:arrayMapItem];
         for (int i=0; i<[arrayMapItem count]; i++ ) {
             MKPointAnnotation* savedPoint = arrayMapItem[i];
             NSLog(@"MKPointAnnotation %@", savedPoint);
-            //get the placemarl
+           
             
             MKPlacemark *mkDest = [[MKPlacemark alloc]
                                    initWithCoordinate:savedPoint.coordinate
                                    addressDictionary:nil];
             
-            //[request setDestination:[[MKMapItem alloc] initWithPlacemark:mkDest]];
+           
             MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:mkDest];
             [thisItem openInMapsWithLaunchOptions:nil];
             
             
         }
-        // Need to open the mapItem from this accessory view in the map
-    
-        //MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:thisItem.placemark];
-        //[thisItem openInMapsWithLaunchOptions:nil];
+       
     }
     
 }

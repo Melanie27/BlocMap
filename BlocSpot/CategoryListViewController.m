@@ -135,6 +135,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     NSString *filePath = [self pathForCategories];
     //file manager api - reference an instance of the default class
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        //TODO crashing on phone
         self.categories = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     } else {
         //if nothing's there just instantiate a mutable array
