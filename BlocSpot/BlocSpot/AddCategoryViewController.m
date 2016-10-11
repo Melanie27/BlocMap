@@ -34,7 +34,10 @@ UIColor *categoryColor;
 - (IBAction)save:(id *)sender {
     NSString *categoryName = [self.nameTextField text];
     [self.delegate controller:self didSaveCategoryWithName:categoryName andColor:categoryColor ];
-   
+    
+    
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

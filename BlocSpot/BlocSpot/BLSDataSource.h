@@ -15,6 +15,7 @@
 @class SearchResultsTableViewController;
 @class CategoryListViewController;
 @class PointOfInterest;
+@class POINote;
 
 typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
 typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
@@ -39,6 +40,7 @@ typedef void (^SaveCatToPOICompletionHandler)(POICategory *currCat);
 @property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfPOIs;
 @property (nonatomic, strong) NSMutableArray<POICategory*> *arrayOfCategories;
 @property (atomic, strong) PointOfInterest* currentPOI;
+@property (atomic, strong) POINote *currentNote;
 
 
 -(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler;
@@ -49,6 +51,7 @@ typedef void (^SaveCatToPOICompletionHandler)(POICategory *currCat);
 
 //- (void)saveCategoryToPOI:(POICategory *)cat andThen:(SaveCatToPOICompletionHandler)completionHandler;
 - (void)saveCategoryToPOI:(POICategory *)cat;
+-(void)saveNoteToPOI:(POINote *)note;
 
 //- (void)saveCategoryToPOI:(NSArray<POICategory *> *)poiCategoriesToSave;
 - (void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;

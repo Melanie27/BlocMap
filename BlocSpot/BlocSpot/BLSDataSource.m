@@ -141,6 +141,11 @@ MKLocalSearch *localSearch;
      //completionHandler(cat);
 }
 
+-(void)saveNoteToPOI:(POINote*)note {
+    self.currentNote = note;
+    NSLog(@"note %@", note);
+}
+
 
 
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave {

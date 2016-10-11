@@ -155,8 +155,11 @@ CLLocationManager *locationManager;
     
         [self updateAccessoryViewInAnnotationView:annotationView];
     
+        
     
 }
+
+
 
 
 #pragma mark add map functionality 
@@ -197,23 +200,34 @@ CLLocationManager *locationManager;
 
 }
 
-/*- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    // Annotation is your custom class that holds information about the annotation
-    if ([view.annotation isKindOfClass:[Annotation class]]) {
-        Annotation *annot = view.annotation;
-        NSInteger index = [self.arrayOfAnnotations indexOfObject:annot];
-    }
-}*/
+
+
+
 
 -(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
     
+    //this stuff needs to be in the notes object
     
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Save a note Location" message:nil delegate:self cancelButtonTitle:@"Continue" otherButtonTitles: nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField * alertTextField = [alert textFieldAtIndex:0];
+    alertTextField.keyboardType = UIKeyboardTypeDefault;
+    alertTextField.placeholder = @"Enter title of your tag";
+    
+    [alert  show];
+    
+    
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
     //Add UIActivityViewController here?
     NSString *string = @"this can be the individual note to share";
+    NSString *name = ds.currentPOI.title;
+    //ADD the point of interest name and number?
+    
     //NSURL *URL = ...;
     
     UIActivityViewController *activityViewController =
-    [[UIActivityViewController alloc] initWithActivityItems:@[string]
+    [[UIActivityViewController alloc] initWithActivityItems:@[string, name]
                                       applicationActivities:nil];
     [self.navigationController presentViewController:activityViewController
                                        animated:YES
@@ -223,9 +237,8 @@ CLLocationManager *locationManager;
 
     
     
-    NSLog(@"change appearance of heart");
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
-    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    
+    
     if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
         [ds.arrayOfPOIs addObject:ds.currentPOI];
     }
@@ -314,12 +327,12 @@ CLLocationManager *locationManager;
 
 
 
-/*-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    self.userLocationLabel.text =
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    //self.userLocationLabel.text =
     [NSString stringWithFormat:@"Location %.5f°, %.5f°", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
      MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-}*/
+}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     //NSLog(@"%@", [locations lastObject]);

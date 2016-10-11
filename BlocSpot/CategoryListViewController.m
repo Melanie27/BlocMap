@@ -106,6 +106,9 @@ static NSString *CellIdentifier = @"Cell Identifier";
     //TODO change this to an NSSet so it doesn't get double saved
     [ds saveCategoryToPOI:arrayCategoryItem];
     
+   
+    
+    //[self.navigationController popViewControllerAnimated:YES];
 
 }
 
