@@ -219,7 +219,7 @@ CLLocationManager *locationManager;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    BLSDataSource *ds = [BLSDataSource sharedInstance] ;
     if (control == view.rightCalloutAccessoryView) {
         NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
         
@@ -230,7 +230,30 @@ CLLocationManager *locationManager;
         
     } else if (control == view.leftCalloutAccessoryView){
         NSLog(@"map it!");
-       // Need to open the mapItem from this accessory view in the map
+       
+       
+        
+        
+        
+        
+        NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
+        [ds convertPointAnnotationsToPOI:arrayMapItem];
+        for (int i=0; i<[arrayMapItem count]; i++ ) {
+            MKPointAnnotation* savedPoint = arrayMapItem[i];
+            NSLog(@"MKPointAnnotation %@", savedPoint);
+            //get the placemarl
+            
+            MKPlacemark *mkDest = [[MKPlacemark alloc]
+                                   initWithCoordinate:savedPoint.coordinate
+                                   addressDictionary:nil];
+            
+            //[request setDestination:[[MKMapItem alloc] initWithPlacemark:mkDest]];
+            MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:mkDest];
+            [thisItem openInMapsWithLaunchOptions:nil];
+            
+            
+        }
+        // Need to open the mapItem from this accessory view in the map
     
         //MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:thisItem.placemark];
         //[thisItem openInMapsWithLaunchOptions:nil];
@@ -321,7 +344,7 @@ CLLocationManager *locationManager;
         zoomRect = MKMapRectUnion(zoomRect, pointRect);
         
         //open MKMapItem in the maps app
-        //[itemPOI openInMapsWithLaunchOptions:nil];
+        [itemPOI openInMapsWithLaunchOptions:nil];
         
         [self.mapView addAnnotation:marker];
         
