@@ -25,8 +25,8 @@
 @property (strong, nonatomic) PointOfInterest *currentPOI;
 @property (strong, nonatomic) POICategory *currentCategory;
 @property (strong, nonatomic) POINote  *currentNote;
+@property (strong, nonatomic) IBOutlet UITextField *noteForPOI;
 
 
--(IBAction)shareButtonPressed:(UIButton *)button;
 -(void)loadSearchResults;
 @end

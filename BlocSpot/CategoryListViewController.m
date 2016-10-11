@@ -52,8 +52,8 @@ static NSString *CellIdentifier = @"Cell Identifier";
     
     // Create Add Button
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
-    self.navigationItem.leftBarButtonItem = backButton;
+    //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
+    //self.navigationItem.leftBarButtonItem = backButton;
     
   
     
@@ -64,14 +64,14 @@ static NSString *CellIdentifier = @"Cell Identifier";
     [self performSegueWithIdentifier:@"AddCategoryViewController" sender:self];
 }
 
--(void)back:(id)sender {
-    
-    //[super.navigationController popViewControllerAnimated:YES];
-    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    
-    NSLog(@"go back");
+
+
+- (IBAction)dismiss:(id)sender {
+     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)triggerShareScreen:(id)sender {
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -210,38 +210,8 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 
-/*- (void)seedCategories {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
-    if (![ud boolForKey:@"TSPUserDefaultsSeedItems"]) {
-        // Load Seed Items
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"seed" ofType:@"plist"];
-        NSLog(@"filepath %@", filePath);
-        NSArray *seedCategories = [NSArray arrayWithContentsOfFile:filePath];
-        
-        // Items
-        NSMutableArray *categories = [NSMutableArray array];
-        
-        // Create List of Items
-        for (int i = 0; i < [seedCategories count]; i++) {
-            NSDictionary *seedCategory = [seedCategories objectAtIndex:i];
-            
-            // Create Item
-            Category *category = [Category createCategoryWithName:[seedCategory objectForKey:@"categoryName"] andColor:[seedCategory objectForKey:@"categoryColor"]];
-            
-            // Add Item to Items
-            [categories addObject:category];
-        }
-        
-        // Items Path
-        NSString *categoriesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"items.plist"];
-        
-        // Write to File
-        if ([NSKeyedArchiver archiveRootObject:categories toFile:categoriesPath]) {
-            [ud setBool:YES forKey:@"TSPUserDefaultsSeedItems"];
-        }
-    }
-}*/
+
+
 
 
 @end
