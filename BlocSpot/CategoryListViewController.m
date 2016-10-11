@@ -101,10 +101,10 @@ static NSString *CellIdentifier = @"Cell Identifier";
     ds.currentPOI.category = category;
     
     //Save the category selected to the POI
-    NSArray *arrayCategoryItem = [NSArray arrayWithObjects:category, nil];
+    NSSet *setCategoryItem = [NSSet setWithObjects:category, nil];
     
     //TODO change this to an NSSet so it doesn't get double saved
-    [ds saveCategoryToPOI:arrayCategoryItem];
+    [ds saveCategoryToPOI:setCategoryItem];
     
 
 }
@@ -148,7 +148,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documents = [paths lastObject];
     
-    return [documents stringByAppendingPathComponent:@"categories.plist"];
+    return [documents stringByAppendingPathComponent:@"categories.poi"];
 }
 
 
@@ -206,38 +206,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 
-/*- (void)seedCategories {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
-    if (![ud boolForKey:@"TSPUserDefaultsSeedItems"]) {
-        // Load Seed Items
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"seed" ofType:@"plist"];
-        NSLog(@"filepath %@", filePath);
-        NSArray *seedCategories = [NSArray arrayWithContentsOfFile:filePath];
-        
-        // Items
-        NSMutableArray *categories = [NSMutableArray array];
-        
-        // Create List of Items
-        for (int i = 0; i < [seedCategories count]; i++) {
-            NSDictionary *seedCategory = [seedCategories objectAtIndex:i];
-            
-            // Create Item
-            Category *category = [Category createCategoryWithName:[seedCategory objectForKey:@"categoryName"] andColor:[seedCategory objectForKey:@"categoryColor"]];
-            
-            // Add Item to Items
-            [categories addObject:category];
-        }
-        
-        // Items Path
-        NSString *categoriesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"items.plist"];
-        
-        // Write to File
-        if ([NSKeyedArchiver archiveRootObject:categories toFile:categoriesPath]) {
-            [ud setBool:YES forKey:@"TSPUserDefaultsSeedItems"];
-        }
-    }
-}*/
+
 
 
 @end
