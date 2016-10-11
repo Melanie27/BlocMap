@@ -179,7 +179,7 @@ CLLocationManager *locationManager;
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
         annotationView.canShowCallout = YES;
         UIButton *infoButton = [[UIButton alloc]init];
-        [infoButton setBackgroundImage:[UIImage imageNamed:@"redHeart.png"] forState:UIControlStateNormal];
+        [infoButton setBackgroundImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
         [infoButton sizeToFit];
         //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
         annotationView.leftCalloutAccessoryView = infoButton;
@@ -232,8 +232,8 @@ CLLocationManager *locationManager;
         NSLog(@"map it!");
        // Need to open the mapItem from this accessory view in the map
     
-        MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:thisItem.placemark];
-        [thisItem openInMapsWithLaunchOptions:nil];
+        //MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:thisItem.placemark];
+        //[thisItem openInMapsWithLaunchOptions:nil];
     }
     
 }
