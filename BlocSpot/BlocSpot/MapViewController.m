@@ -21,6 +21,8 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, strong) PointOfInterest *chosenPointOfInterest;
 
+@property (nonatomic, strong) UIView *customAnnotationView;
+
 @end
 
 @implementation MapViewController
@@ -53,6 +55,11 @@ CLLocationManager *locationManager;
         [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
 
     }
+    
+    
+    
+    
+    
     
 
     /*[[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory andThen:^(NSArray *pois) {
@@ -151,25 +158,141 @@ CLLocationManager *locationManager;
 
 
 
+
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
     
         [self updateAccessoryViewInAnnotationView:annotationView];
     
-        
+
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    static NSString *reuseId = @"ann";
     
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView
+                                                                  dequeueReusableAnnotationViewWithIdentifier:reuseId];
+    if (annotationView == nil) {
+        annotationView = [[MKPinAnnotationView alloc]
+                          initWithAnnotation:annotation
+                          reuseIdentifier:@"test"];
+        annotationView.canShowCallout = YES;  //set to YES, default is NO
+        
+        //your code
+        
+        UIView *vw = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 200)];
+        annotationView.leftCalloutAccessoryView = vw;
+        //vw.backgroundColor = [UIColor redColor];
+        //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 35, 35)];
+        //label.numberOfLines = 4;
+        //label.text = @"hello";
+        //[vw addSubview:label];
+        
+        
+        
+        //annotationView.rightCalloutAccessoryView = savePOIButton;
+        UIButton *directionsButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 10, 13)];
+        [directionsButton setBackgroundImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
+        
+       
+        UIButton *triggerShareButton = [[UIButton alloc] initWithFrame:CGRectMake(35, 5, 10, 13)];
+        [triggerShareButton setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
+        
+        
+        UIButton *savePOIButton = [[UIButton alloc] initWithFrame:CGRectMake(65, 5, 10, 13)];
+        [savePOIButton setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
+        
+        UIButton *addNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(95, 5, 10, 13)];
+        [addNoteButton setBackgroundImage:[UIImage imageNamed:@"note.png"] forState:UIControlStateNormal];
+        
+        UIButton *addDeleteButton = [[UIButton alloc] initWithFrame:CGRectMake(125, 5, 10, 13)];
+        [addDeleteButton setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
+        
+        [vw addSubview:triggerShareButton];
+        [vw addSubview:directionsButton];
+        [vw addSubview:savePOIButton];
+        [vw addSubview:addNoteButton];
+        [vw addSubview:addDeleteButton];
+        
+        
+        [triggerShareButton addTarget:self action:@selector(shareButtonPressed:annotationView:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [directionsButton addTarget:self action:@selector(directionsButtonPressed:annotationView:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [triggerShareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+         [triggerShareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+         [triggerShareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+    }
+    else {
+        //Update view's annotation reference
+        //because we are re-using view that may have
+        //been previously used for another annotation...
+        annotationView.annotation = annotation;
+    }
+    
+    return annotationView;
+}
+
+
+-(IBAction)shareButtonPressed:(UIButton *)button annotationView:(MKAnnotationView *)view {
+    //BLSDataSource *ds = [BLSDataSource sharedInstance];
+    //ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    //Add UIActivityViewController here?
+    NSString *string = @"this can be the individual note to share";
+    //NSString *name = ds.currentPOI.title;
+    NSString *name = @"this will be the name";
+    //ADD the point of interest name and number?
+    
+    //NSURL *URL = ...;
+    
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[string, name]
+                                      applicationActivities:nil];
+    [self.navigationController presentViewController:activityViewController
+                                            animated:YES
+                                          completion:^{
+                                              // ...
+                                          }];
+}
+
+-(IBAction)directionsButtonPressed:(UIButton *)button annotationView:(MKAnnotationView *)view {
+    NSLog(@"map it");
+    NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    [ds convertPointAnnotationsToPOI:arrayMapItem];
+    for (int i=0; i<[arrayMapItem count]; i++ ) {
+        MKPointAnnotation* savedPoint = arrayMapItem[i];
+        NSLog(@"MKPointAnnotation %@", savedPoint);
+        
+        
+        MKPlacemark *mkDest = [[MKPlacemark alloc]
+                               initWithCoordinate:savedPoint.coordinate
+                               addressDictionary:nil];
+        
+        
+        MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:mkDest];
+        [thisItem openInMapsWithLaunchOptions:nil];
+        
+        
+    }
 }
 
 
 
 
-#pragma mark add map functionality 
+#pragma mark add map functionality
 - (BOOL)openInMapsWithLaunchOptions:(NSDictionary<NSString *,id> *)launchOptions {
     
     return YES;
 }
 
+
+
 //gives an annotation and returns a view for that annotation
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+/*-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     
     //detecting user interation with the annotated view
@@ -198,7 +321,7 @@ CLLocationManager *locationManager;
     return annotationView;
     
 
-}
+}*/
 
 
 
@@ -219,9 +342,11 @@ CLLocationManager *locationManager;
     
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    
     //Add UIActivityViewController here?
     NSString *string = @"this can be the individual note to share";
     NSString *name = ds.currentPOI.title;
+    //NSString *name = @"this will be the name";
     //ADD the point of interest name and number?
     
     //NSURL *URL = ...;
@@ -230,14 +355,11 @@ CLLocationManager *locationManager;
     [[UIActivityViewController alloc] initWithActivityItems:@[string, name]
                                       applicationActivities:nil];
     [self.navigationController presentViewController:activityViewController
-                                       animated:YES
-                                     completion:^{
-                                         // ...
-                                     }];
+                                            animated:YES
+                                          completion:^{
+                                              // ...
+                                          }];
 
-    
-    
-    
     
     if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
         [ds.arrayOfPOIs addObject:ds.currentPOI];

@@ -23,5 +23,8 @@
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) PointOfInterest *currentPOI;
 @property (strong, nonatomic) POICategory *currentCategory;
+
+
+-(IBAction)shareButtonPressed:(UIButton *)button;
 -(void)loadSearchResults;
 @end
