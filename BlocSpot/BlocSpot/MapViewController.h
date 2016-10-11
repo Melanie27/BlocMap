@@ -12,6 +12,7 @@
 
 @class PointOfInterest;
 @class POICategory;
+@class POINote;
 
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) PointOfInterest *currentPOI;
 @property (strong, nonatomic) POICategory *currentCategory;
+@property (strong, nonatomic) POINote  *currentNote;
 
 
 -(IBAction)shareButtonPressed:(UIButton *)button;

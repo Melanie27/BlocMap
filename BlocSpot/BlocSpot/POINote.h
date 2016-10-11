@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface POINote : NSObject
+@interface POINote : NSObject <NSCoding>
+
+@property (nonatomic, strong) NSString *noteText;
 
 @end

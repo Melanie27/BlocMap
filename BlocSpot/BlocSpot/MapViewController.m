@@ -350,7 +350,9 @@ CLLocationManager *locationManager;
     alertTextField.placeholder = @"Enter title of your tag";
     
     [alert  show];
-    
+    self.currentNote = alertTextField.text;
+    NSLog(@"current note %@", self.currentNote);
+    [[BLSDataSource sharedInstance] saveNoteToPOI:self.currentNote];
     
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];

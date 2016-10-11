@@ -10,4 +10,20 @@
 
 @implementation POINote
 
+-(instancetype) initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    
+    if(self) {
+        self.noteText = [aDecoder decodeObjectForKey:@"noteText"];
+        
+    }
+    
+    return self;
+}
+
+-(void) encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.noteText forKey:@"noteText"];
+    
+}
+
 @end
