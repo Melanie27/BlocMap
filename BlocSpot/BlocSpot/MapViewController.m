@@ -31,7 +31,7 @@ CLLocationManager *locationManager;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"BlocSpot Map";
-    
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
     //register kvo for points of interest
     [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
     
@@ -55,10 +55,17 @@ CLLocationManager *locationManager;
     }
     
     
-   
-   
+    
    
     [[BLSDataSource sharedInstance] loadSavedCategoryData:^(NSArray *pois) {
+        
+        //POICategory *category = [[POICategory alloc] init];
+        //ds.currentPOI.category = category;
+        ///get all points of interest associated with this category
+        //NSLog(@"current poi %@", ds.currentPOI);
+        
+        
+        //currentPOI.category = category;
         //for (MKPointAnnotation *annotation in pois) {
             //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
 

@@ -103,8 +103,8 @@
     [aCoder encodeObject:_title forKey:@"title"];
     [aCoder encodeObject:_subtitle forKey:@"subtitle"];
     [aCoder encodeObject:_identifier forKey:@"identifier"];
-    //[aCoder encodeObject:_categoryName forKey:@"categoryName"];
-    //[aCoder encodeObject:_categoryColor forKey:@"categoryColor"];
+    [aCoder encodeObject:_categoryName forKey:@"categoryName"];
+    [aCoder encodeObject:_categoryColor forKey:@"categoryColor"];
     
 }
 
@@ -118,8 +118,8 @@
         CLLocationDegrees longitude = [aDecoder decodeDoubleForKey:@"longitude"];
         _coordinate = CLLocationCoordinate2DMake(latitude, longitude);
         _identifier = [aDecoder decodeObjectForKey:@"identifier"];
-       // _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
-        //_categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
+        _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
+        _categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
         
     }
     return self;

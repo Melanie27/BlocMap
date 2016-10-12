@@ -35,7 +35,7 @@
 @property (nonatomic, readonly, copy) NSString *subtitle;
 @property (nonatomic, strong) POICategory *category;
 @property (nonatomic, strong) NSString *categoryName;
-//@property (nonatomic, strong) UIColor *categoryColor;
+@property (nonatomic, strong) UIColor *categoryColor;
 //@property (nonatomic) BOOL animatesDrop;
 @property (nonatomic) BOOL canShowCallout;
 @property (nonatomic) BOOL itemSelected;

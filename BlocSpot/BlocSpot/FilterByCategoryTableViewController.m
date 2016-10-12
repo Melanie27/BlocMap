@@ -85,6 +85,21 @@ return [self.categories count];
     
     ds.currentPOI.category = category;
     
+    //grab all pois
+    NSMutableArray *arrayOfPOIs = [[BLSDataSource sharedInstance] arrayOfPOIs];
+    NSLog(@"array of pois %@", arrayOfPOIs);
+    //get categoryname
+    
+    //check if the category name is equal to category variable
+    
+    //get all points of interest associated with this category
+    
+    
+    
+    //NSMutableArray *poisWithCategory = [NSMutableArray ]
+    
+    NSLog(@"current poi %@", ds.currentPOI);
+    
     NSLog(@"perform filter on all points of interest with the selected category, dismiss the view controller, show the map with only the selected category markers");
     
     
