@@ -1,0 +1,15 @@
+//
+//  POINote.h
+//  BlocSpot
+//
+//  Created by MELANIE MCGANNEY on 10/12/16.
+//  Copyright © 2016 Bloc. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface POINote : NSObject <NSCoding>
+
+@property (nonatomic, strong) NSString *noteText;
+
+@end
