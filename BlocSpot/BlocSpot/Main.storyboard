@@ -29,7 +29,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUu-Wm-fgh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3320" y="-110"/>
+            <point key="canvasLocation" x="3326" y="-716"/>
         </scene>
         <!--Add Category-->
         <scene sceneID="2dY-kP-gRV">
@@ -175,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fzf-XG-2Je" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4057" y="-110"/>
+            <point key="canvasLocation" x="4050" y="-716"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -220,7 +220,11 @@
                                     <segue destination="8mN-88-Vaz" kind="show" identifier="searchMap" id="hiA-Gq-6wD"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="filter" id="zkR-iy-N3a"/>
+                            <barButtonItem image="filter" id="zkR-iy-N3a">
+                                <connections>
+                                    <segue destination="XO0-Ji-e9g" kind="show" identifier="filterCategory" id="qof-sh-i08"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -488,7 +492,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qoH-FE-oWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2508" y="-110"/>
+            <point key="canvasLocation" x="2454" y="-716"/>
+        </scene>
+        <!--Filter By Category Table View Controller-->
+        <scene sceneID="xu8-9O-Nh7">
+            <objects>
+                <tableViewController id="XO0-Ji-e9g" customClass="FilterByCategoryTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6LM-Yv-VAM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="XO0-Ji-e9g" id="ifh-rV-1Ye"/>
+                            <outlet property="delegate" destination="XO0-Ji-e9g" id="D3M-yp-8Jh"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="amP-EE-hEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2573" y="-99"/>
         </scene>
     </scenes>
     <resources>

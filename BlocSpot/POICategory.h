@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIColor *categoryColor;
 @property (nonatomic, strong) NSMutableArray *pointsOfInterest;
 
+
+
 //custom class method 
 + (POICategory *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor;
 
