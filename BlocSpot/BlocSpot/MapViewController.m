@@ -31,26 +31,30 @@ CLLocationManager *locationManager;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"BlocSpot Map";
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
+   
     //register kvo for points of interest
     [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
     
     //make the view controller be the map view's delegate
     self.mapView.delegate = self;
+   
+    
     //set initialial mapkit region
     CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
     self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 100000, 100000);
     
-    //add optional scroll and zoom properties
-    self.mapView.zoomEnabled = YES;
-    self.mapView.scrollEnabled = YES;
     
+   
     self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
     [[[CLLocationManager alloc ] init ]requestAlwaysAuthorization];
     if([CLLocationManager locationServicesEnabled]) {
         [self.locationManager requestAlwaysAuthorization];
         self.mapView.showsUserLocation = YES;
-        [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
+        [self.mapView setMapType:MKMapTypeStandard];
+        [self.mapView setZoomEnabled:YES];
+        [self.mapView setScrollEnabled:YES];
+        //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 
     }
     
@@ -84,14 +88,7 @@ CLLocationManager *locationManager;
         // Set up annotations for each poi
         
         NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
-         
-         //NSLog(@"chosen POI %@", storedMapItems);
-        if(pois.count > 0) {
-           
-        }
         
-         
-         
         for (MKPointAnnotation *annotation in pois) {
          PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
            
@@ -100,9 +97,7 @@ CLLocationManager *locationManager;
             marker.title = item.title;
             marker.subtitle = item.subtitle;
             [self.mapView addAnnotation:marker];
-           
-            
-            
+
         }
         
         
@@ -117,8 +112,7 @@ CLLocationManager *locationManager;
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
     
-    
-    
+
     if (object == [BLSDataSource sharedInstance] && [keyPath isEqualToString:@"arrayOfPOIs"]) {
         // We know arrayOfPOIs changed.  Let's see what kind of change it is.
         
@@ -168,8 +162,7 @@ CLLocationManager *locationManager;
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
     
-        [self updateLeftCalloutAccessoryViewInAnnotationView:annotationView];
-    
+        [self updateAccessoryViewInAnnotationView:annotationView];
     
 }
 
@@ -187,17 +180,17 @@ CLLocationManager *locationManager;
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
         annotationView.canShowCallout = YES;
         UIButton *infoButton = [[UIButton alloc]init];
-        [infoButton setBackgroundImage:[UIImage imageNamed:@"redHeart.png"] forState:UIControlStateNormal];
+        [infoButton setBackgroundImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
         [infoButton sizeToFit];
-        //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redHeart.png"]];
         annotationView.leftCalloutAccessoryView = infoButton;
-        
         UIButton *savePOIButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
         annotationView.rightCalloutAccessoryView = savePOIButton;
+        
+        /*UIButton *noteButton = [[UIButton alloc]init];
+        [noteButton setBackgroundImage:[UIImage imageNamed:@"note.png"] forState:UIControlStateNormal];
+        [noteButton sizeToFit];
+        annotationView.detailCalloutAccessoryView = noteButton;*/
     }
-    
-    
-    //annotationView = annotation;
     
     
     return annotationView;
@@ -205,21 +198,29 @@ CLLocationManager *locationManager;
 
 }
 
-/*- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    // Annotation is your custom class that holds information about the annotation
-    if ([view.annotation isKindOfClass:[Annotation class]]) {
-        Annotation *annot = view.annotation;
-        NSInteger index = [self.arrayOfAnnotations indexOfObject:annot];
-    }
-}*/
 
--(void)updateLeftCalloutAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
-    //NSlog update the color of the heart depending on the category the poi has been assigned
-    //see stanford lecture 15 around min 45
-    //will have to respond to changing data model
-    NSLog(@"change appearance of heart");
+
+-(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
+    
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    
+    //Call Activity Controller
+    NSString *string = @"this can be the individual note to share";
+    //NSString *subtitle = ds.currentPOI.subtitle;
+    NSString *name = ds.currentPOI.title;
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[name, string]
+                                      applicationActivities:nil];
+    [self.navigationController presentViewController:activityViewController
+                                            animated:YES
+                                          completion:^{
+                                              // ...
+                                          }];
+    
+    
+    
+    
     if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
         [ds.arrayOfPOIs addObject:ds.currentPOI];
     }
@@ -231,8 +232,6 @@ CLLocationManager *locationManager;
     if (control == view.rightCalloutAccessoryView) {
         NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
         
-
-        
         [ds convertPointAnnotationsToPOI:arrayMapItem];
         [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
         self.containerView.hidden = NO;
@@ -240,7 +239,24 @@ CLLocationManager *locationManager;
        
         
     } else if (control == view.leftCalloutAccessoryView){
-        NSLog(@"add to a category");
+        NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
+        
+        for (int i=0; i<[arrayMapItem count]; i++ ) {
+            MKPointAnnotation* savedPoint = arrayMapItem[i];
+            NSLog(@"MKPointAnnotation %@", savedPoint);
+            
+            
+            MKPlacemark *mapDest = [[MKPlacemark alloc]
+                                   initWithCoordinate:savedPoint.coordinate
+                                   addressDictionary:nil];
+           
+            NSLog(@"mkdest %@", mapDest);
+            
+            MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:mapDest];
+            [thisItem openInMapsWithLaunchOptions:nil];
+        }
+    } else if (control == view.detailCalloutAccessoryView) {
+        NSLog(@"write a note");
     }
     
 }
@@ -251,9 +267,9 @@ CLLocationManager *locationManager;
     }
     //prepare segue for embed
     if ([segue.identifier isEqualToString:@"showEmbed"]) {
-        NSLog(@"showEmbed");
+        //NSLog(@"showEmbed");
     } else if ([segue.identifier isEqualToString:@"showCategories"]) {
-        NSLog(@"showCategories");
+       // NSLog(@"showCategories");
         
         
         UINavigationController *navc = (UINavigationController*)segue.destinationViewController;
@@ -262,20 +278,16 @@ CLLocationManager *locationManager;
         
     }
     
-    //if([segue.destinationViewController isKindOfClass:[CategoryListViewController class]]) {
-        //pass some data about the POI so that that is can be saved to a category
-    //}
 }
 
 -(void)prepareViewController:(id)vc
                     forSegue:(NSString *)segueIdentifier
             toShowAnnotation:(id<MKAnnotation>)annotation {
-     NSLog(@"check call");
+    
     PointOfInterest *poi = nil;
-    //if([annotation isKindOfClass:[PointOfInterest class]]) {
         poi = (PointOfInterest *)annotation;
-        NSLog(@"poi");
-    //}
+        //NSLog(@"poi");
+  
     
     if(poi) {
         if(![segueIdentifier length] || [segueIdentifier isEqualToString:@"showCategories"]) {
@@ -283,7 +295,7 @@ CLLocationManager *locationManager;
                 UITableViewController *tvc = (UITableViewController *)vc;
                 tvc.title = poi.title;
                 NSLog(@"title %@", tvc.title);
-                //pass stuff
+               
             }
         }
     }
@@ -292,16 +304,18 @@ CLLocationManager *locationManager;
 
 
 
-/*-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    self.userLocationLabel.text =
-    [NSString stringWithFormat:@"Location %.5f°, %.5f°", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
-     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+   
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-}*/
+    
+}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     NSLog(@"%@", [locations lastObject]);
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -333,7 +347,7 @@ CLLocationManager *locationManager;
         [self.mapView setVisibleMapRect:zoomRect animated:YES];
         
     }
-    //[self.mapView showAnnotations:results.mapItems animated:YES];
+   
    
 }
 

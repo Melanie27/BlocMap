@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
+
 @property(nonatomic, readonly) MKCoordinateRegion region;
 
 @property (strong, nonatomic, getter=isChosen) MKAnnotationView *annotationView;
