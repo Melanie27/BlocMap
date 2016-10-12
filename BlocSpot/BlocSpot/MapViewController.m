@@ -55,10 +55,22 @@ CLLocationManager *locationManager;
     }
     
     
-    //WHAT TO OBSERVE
-    [[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory];
-    [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
-    
+   
+   
+   
+    [[BLSDataSource sharedInstance] loadSavedCategoryData:^(NSArray *pois) {
+        //for (MKPointAnnotation *annotation in pois) {
+            //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
+
+            //NSLog(@"changed cat %@",item.category);
+            //NSLog(@"changed poi %@", item.categoryName);
+       // }
+        
+        //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
+        
+        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
+
+    }];
     
     
     [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
@@ -75,13 +87,13 @@ CLLocationManager *locationManager;
          
         for (MKPointAnnotation *annotation in pois) {
          PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
-            NSLog(@"chosen POI cat %@", item.category);
+           
             MKPointAnnotation *marker = [MKPointAnnotation new];
             marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
             marker.title = item.title;
             marker.subtitle = item.subtitle;
             [self.mapView addAnnotation:marker];
-            //NSLog(@"catogory of POI %@", item.category);
+           
             
             
         }
@@ -109,15 +121,12 @@ CLLocationManager *locationManager;
             
             NSLog(@"registering a change neeed to update color of the POI title");
             //test what category it is then change the pin color accordingly
-            NSLog(@" cat name %@", self.currentPOI.category);
-            NSLog(@"observe poi title %@", self.currentPOI.title);
+            //NSLog(@" cat name %@", self.currentPOI.category);
+            //NSLog(@"observe poi title %@", self.currentPOI.title);
             
             //Grab a hold of the POI that changed
            
-            //UIColor *catColor = [UIColor blueColor];
-            //NSString *catName = self.currentPOI.category;
-            //NSDictionary *attrs = @{ NSForegroundColorAttributeName : catColor };
-            //NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:catName attributes:attrs];
+           
             
             
             

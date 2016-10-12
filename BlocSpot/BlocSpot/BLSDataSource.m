@@ -74,8 +74,17 @@ MKLocalSearch *localSearch;
 
 
 #pragma load up all the saved mapitems
-
-
+-(void)loadSavedCategoryData:(CategoriesSavedCompletionHandler)completionHandler {
+     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+         
+         NSString *fullPath = [self pathForFilename:@"categories.poi"];
+         NSMutableArray<PointOfInterest*> *storedCategoryItems = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
+         
+         self.arrayOfPOIs = storedCategoryItems;
+         completionHandler(storedCategoryItems);
+         
+     });
+}
 
 -(void)loadSavedData:(MarkersSavedCompletionHandler)completionHandler {
    
@@ -130,7 +139,8 @@ MKLocalSearch *localSearch;
 
 
 -(void)saveCategoryToPOI:(POICategory *)cat {
-    self.currentPOI.category = cat;
+
+self.currentPOI.category = cat;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *fullPath = [self pathForFilename:@"categories.poi"];
@@ -149,6 +159,7 @@ MKLocalSearch *localSearch;
         }
         
     });
+
     
     
 }
