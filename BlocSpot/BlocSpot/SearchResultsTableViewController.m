@@ -80,7 +80,7 @@
     // Configure the cell...
     
     //TODO crashing when I get to bottom of table
-    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+    [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
        
         
         for (MKPointAnnotation *annotation in pois) {

@@ -33,7 +33,7 @@ CLLocationManager *locationManager;
     self.navigationItem.title = @"BlocSpot Map";
     
     //register kvo for points of interest
-    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfCategories" options:0 context:nil];
+    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
     
     //make the view controller be the map view's delegate
     self.mapView.delegate = self;
@@ -54,16 +54,19 @@ CLLocationManager *locationManager;
 
     }
     
+    
+    //WHAT TO OBSERVE
     [[BLSDataSource sharedInstance] saveCategoryToPOI:self.currentCategory];
+    [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
     
     
     
-    [[BLSDataSource sharedInstance] loadSavedMarkers:^(NSArray *pois) {
+    [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
         // Set up annotations for each poi
-        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
+        
         NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
          
-         NSLog(@"chosen POI %@", self.currentPOI);
+         //NSLog(@"chosen POI %@", storedMapItems);
         if(pois.count > 0) {
            
         }
@@ -72,6 +75,7 @@ CLLocationManager *locationManager;
          
         for (MKPointAnnotation *annotation in pois) {
          PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
+            NSLog(@"chosen POI cat %@", item.category);
             MKPointAnnotation *marker = [MKPointAnnotation new];
             marker.coordinate = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
             marker.title = item.title;
@@ -98,7 +102,7 @@ CLLocationManager *locationManager;
     
     if (object == [BLSDataSource sharedInstance] && [keyPath isEqualToString:@"arrayOfPOIs"]) {
         // We know arrayOfPOIs changed.  Let's see what kind of change it is.
-        NSLog(@"something changed");
+        
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         
         if (kindOfChange == NSKeyValueChangeSetting) {
@@ -108,13 +112,13 @@ CLLocationManager *locationManager;
             NSLog(@" cat name %@", self.currentPOI.category);
             NSLog(@"observe poi title %@", self.currentPOI.title);
             
-            
+            //Grab a hold of the POI that changed
            
-            UIColor *catColor = [UIColor blueColor];
+            //UIColor *catColor = [UIColor blueColor];
             //NSString *catName = self.currentPOI.category;
             //NSDictionary *attrs = @{ NSForegroundColorAttributeName : catColor };
             //NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:catName attributes:attrs];
-            //self.scanLabel.attributedText = attrStr;
+            
             
             
         }  else if (kindOfChange == NSKeyValueChangeInsertion ||
@@ -217,7 +221,7 @@ CLLocationManager *locationManager;
         [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
         self.containerView.hidden = NO;
         
-        //NSLog(@"response %@", response.mapItems);
+       
         
     } else if (control == view.leftCalloutAccessoryView){
         NSLog(@"add to a category");

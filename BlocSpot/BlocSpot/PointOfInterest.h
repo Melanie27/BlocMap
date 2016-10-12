@@ -19,14 +19,12 @@
            identifier:(NSNumber *)ident;
 
 
-/*-(id)initWithCategoryName:(NSString *)categoryName
-            categoryColor:(UIColor*)categoryColor;*/
 
 
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem;
 - (instancetype)initWithMKPointAnnotation:(MKPointAnnotation*)pointAnnotation;
-//-(instancetype)initWithPOICategory:(POICategory *)poiCategory;
+
 
 
 
@@ -36,7 +34,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, readonly, copy) NSString *subtitle;
 @property (nonatomic, strong) POICategory *category;
-//@property (nonatomic, strong) NSString *categoryName;
+@property (nonatomic, strong) NSString *categoryName;
 //@property (nonatomic, strong) UIColor *categoryColor;
 //@property (nonatomic) BOOL animatesDrop;
 @property (nonatomic) BOOL canShowCallout;

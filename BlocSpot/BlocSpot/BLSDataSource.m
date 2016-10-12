@@ -77,8 +77,8 @@ MKLocalSearch *localSearch;
 
 
 
--(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler {
-    //NSLog(@"load saved markers");
+-(void)loadSavedData:(MarkersSavedCompletionHandler)completionHandler {
+   
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -87,7 +87,19 @@ MKLocalSearch *localSearch;
         
         self.arrayOfPOIs = storedMapItems;
         completionHandler(storedMapItems);
-        //self.currentPOI = self.chosenPointOfInterest
+       
+        //CRASHING
+        /*NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
+        NSArray *fileDataArray = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
+        
+        self.arrayOfPOIs = fileDataArray[0];
+        self.arrayOfCategories = fileDataArray[1];
+        
+        if (self.arrayOfPOIs == nil) { self.arrayOfPOIs = [@[] mutableCopy]; }
+        if (self.arrayOfCategories == nil) { self.arrayOfCategories = [@[] mutableCopy]; }
+        
+        completionHandler(self.arrayOfPOIs);*/
+        
         
     });
 }
@@ -115,7 +127,7 @@ MKLocalSearch *localSearch;
     self.arrayOfPOIs = newArrayOfPOIs;
 }
 
-//- (void)saveCategoryToPOI:(POICategory *)cat andThen:(SaveCatToPOICompletionHandler)completionHandler {
+
 
 -(void)saveCategoryToPOI:(POICategory *)cat {
     self.currentPOI.category = cat;
@@ -126,7 +138,7 @@ MKLocalSearch *localSearch;
         
         NSError *dataError;
         BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-        NSLog(@"category data %@",  poiCategoryData);
+        
          NSLog(@"cat that got saved %@", cat);
         NSLog(@"cat got saved to this poi %@", self.currentPOI);
         //TRIGGER Key Value Observing HERE
@@ -138,7 +150,7 @@ MKLocalSearch *localSearch;
         
     });
     
-     //completionHandler(cat);
+    
 }
 
 
@@ -160,9 +172,27 @@ MKLocalSearch *localSearch;
     //NSLog(@"new array %@", newArrayOfPOIs);
 }
 
+
+- (void)saveData {
+    NSLog(@"array of cats %@", self.arrayOfCategories);
+    
+    /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
+        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:@[self.arrayOfCategories, self.arrayOfPOIs]];
+        
+        NSError *dataError;
+        BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+        NSLog(@"category data %@",  poiCategoryData);
+        if (!wroteSuccessfully) {
+            NSLog(@"Couldn't write file: %@", dataError);
+        }
+        
+    });*/
+}
+
 - (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-       
+        //[self saveData];
         NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
         NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
         

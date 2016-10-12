@@ -41,7 +41,7 @@ typedef void (^SaveCatToPOICompletionHandler)(POICategory *currCat);
 @property (atomic, strong) PointOfInterest* currentPOI;
 
 
--(void)loadSavedMarkers:(MarkersSavedCompletionHandler)completionHandler;
+-(void)loadSavedData:(MarkersSavedCompletionHandler)completionHandler;
 
 
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave;
@@ -50,9 +50,9 @@ typedef void (^SaveCatToPOICompletionHandler)(POICategory *currCat);
 //- (void)saveCategoryToPOI:(POICategory *)cat andThen:(SaveCatToPOICompletionHandler)completionHandler;
 - (void)saveCategoryToPOI:(POICategory *)cat;
 
-//- (void)saveCategoryToPOI:(NSArray<POICategory *> *)poiCategoriesToSave;
-- (void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;
 
+- (void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;
+-(void)saveData;
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 
