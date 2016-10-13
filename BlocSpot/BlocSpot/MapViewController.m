@@ -132,11 +132,8 @@ CLLocationManager *locationManager;
     
 }
 
-
-
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
-    
-        [self updateAccessoryViewInAnnotationView:annotationView];
+            [self updateAccessoryViewInAnnotationView:annotationView];
     
 }
 
@@ -167,28 +164,35 @@ CLLocationManager *locationManager;
     
 }
 
-
-
--(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
-    
+-(void)mapView:(MKMapView *)mapView currentPOI:(NSString*)title shareButtonPressed:(MKAnnotationView *)annotationView {
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
-    
+    if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
+        [ds.arrayOfPOIs addObject:ds.currentPOI];
+    }
     //Call Activity Controller
-    /*NSString *string = @"this can be the individual note to share";
-    //NSString *subtitle = ds.currentPOI.subtitle;
-    NSString *name = ds.currentPOI.title;
+    //GET THIS STRING FROM THE TEXTFIELD
+    NSString *string = @"this can be the individual note to share";
+    //NSString *dstitle = title;
+    
+    
     UIActivityViewController *activityViewController =
-    [[UIActivityViewController alloc] initWithActivityItems:@[name, string]
+    [[UIActivityViewController alloc] initWithActivityItems:@[title, string]
                                       applicationActivities:nil];
     [self.navigationController presentViewController:activityViewController
                                             animated:YES
                                           completion:^{
                                               // ...
-                                          }];*/
+                                          }];
     
     
+}
+
+-(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
     
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+
     
     if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
         [ds.arrayOfPOIs addObject:ds.currentPOI];
@@ -196,10 +200,11 @@ CLLocationManager *locationManager;
     
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView calloutAccessoryControlTapped:(UIControl *)control{
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    if (control == view.rightCalloutAccessoryView) {
-        NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
+    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    if (control == annotationView.rightCalloutAccessoryView) {
+        NSArray *arrayMapItem = [NSArray arrayWithObjects:annotationView.annotation, nil];
         
         [ds convertPointAnnotationsToPOI:arrayMapItem];
         [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
@@ -207,14 +212,14 @@ CLLocationManager *locationManager;
         
        
         
-    } else if (control == view.leftCalloutAccessoryView){
+    } else if (control == annotationView.leftCalloutAccessoryView){
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Points of Interest"
                                                                        message:@"Do Stuff"
                                                                 preferredStyle:UIAlertControllerStyleActionSheet]; // 1
         UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"get directions"
                                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                                  NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
+                                                                  NSArray *arrayMapItem = [NSArray arrayWithObjects:annotationView.annotation, nil];
                                                                   
                                                                   for (int i=0; i<[arrayMapItem count]; i++ ) {
                                                                       MKPointAnnotation* savedPoint = arrayMapItem[i];
@@ -232,27 +237,44 @@ CLLocationManager *locationManager;
                                                                   }
                                                                   
                                                               }];
+        
+       
         UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"add a brief note to poi"
                                                                style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Poi Note"
-                                                                                                                   message:@"Add a brief note:"
-                                                                                                                  delegate:self
-                                                                                                         cancelButtonTitle:@"Done"
-                                                                                                         otherButtonTitles:nil];
+                                                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert" message:@"This is an alert." preferredStyle:UIAlertControllerStyleAlert];
                                                                    
-                                                                   alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-                                                                   UITextField *textField = [alert textFieldAtIndex:0];
-                                                                   textField.keyboardType = UIKeyboardTypeDefault;
-                                                                   textField.placeholder = @"Enter some text";
+                                                                   //alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                                                                   //UITextField *textField = [alert textFieldAtIndex:0];
+                                                                   //textField.keyboardType = UIKeyboardTypeDefault;
+                                                                   //textField.placeholder = @"Enter some text";
                                                                    
-                                                                   [alert show];
+                                                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                       NSLog(@"You pressed button OK");
+                                                                   }]; // 8
+                                                                   
+                                                                   [alert addAction:defaultAction]; // 9
+                                                                   
+                                                                   [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                                                                       textField.placeholder = @"Input data...";
+                                                                   }]; // 10
+                                                                   
+                                                                   //[alert show];
+                                                                  [self presentViewController:alert animated:YES completion:nil]; 
                                                                    NSLog(@"add a brief note");
                                                                    
                                                                }];
         UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"share poi"
                                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                   NSLog(@"share poi");
-                                                                  [self shareButtonPressed:self.annotationView];
+                                                                  BLSDataSource *ds = [BLSDataSource sharedInstance];
+                                                                  ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+                                                                  if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
+                                                                      [ds.arrayOfPOIs addObject:ds.currentPOI];
+                                                                  }
+                                                                  
+                                                                  NSString *name = ds.currentPOI.title;
+                                                                  [self mapView:self.mapView currentPOI:name shareButtonPressed:self.annotationView];
+                                                                  //[self shareButtonPressed:self.annotationView];
                                                                   
                                                               }];
         UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"delete poi"
@@ -273,28 +295,32 @@ CLLocationManager *locationManager;
         [alert addAction:fifthAction];
         
         [self presentViewController:alert animated:YES completion:nil]; // 6
-        //[self alertView:alert clickedButtonAtIndex:buttonIndex];
         
         /**/
-    } else if (control == view.detailCalloutAccessoryView) {
+    } else if (control == annotationView.detailCalloutAccessoryView) {
         NSLog(@"write a note");
     }
     
 }
 
-- (void)alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex > 0) {
-        NSLog(@"is this being called??");
-        UITextField *textField = [alert textFieldAtIndex:0];
-        NSString *text = textField.text;
-        NSLog(@"text %@", text);
-        if(text == nil) {
-            return;
-        } else {
-            //do something with text
-        }
-    }
+
+//ATTACK TO OK BUTTON
+- (IBAction)alertButtonPressed:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert" message:@"This is an alert." preferredStyle:UIAlertControllerStyleAlert]; // 7
+    
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        NSLog(@"You pressed button OK");
+    }]; // 8
+    
+    [alert addAction:defaultAction]; // 9
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Input data...";
+    }]; // 10
+    
+    [self presentViewController:alert animated:YES completion:nil]; // 11
 }
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([sender isKindOfClass:[MKAnnotationView class]]) {
@@ -387,91 +413,6 @@ CLLocationManager *locationManager;
 }
 
 
-//BUILDING THE CUSTOM CALLOUT WITH MULTIPLE BUTTONS
-
-/*- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
- static NSString *reuseId = @"ann";
- 
- MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView
- dequeueReusableAnnotationViewWithIdentifier:reuseId];
- if (annotationView == nil) {
- annotationView = [[MKPinAnnotationView alloc]
- initWithAnnotation:annotation
- reuseIdentifier:@"test"];
- annotationView.canShowCallout = YES;  //set to YES, default is NO
- 
- //your code
- 
- UIView *vw = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 200)];
- annotationView.leftCalloutAccessoryView = vw;
- //vw.backgroundColor = [UIColor redColor];
- //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 35, 35)];
- //label.numberOfLines = 4;
- //label.text = @"hello";
- //[vw addSubview:label];
- CGFloat yourSelectedFontSize = 8.0 ;
- self.noteForPOI = [[UITextField alloc] initWithFrame:CGRectMake(0, 25, 140, 20)];
- UIFont *yourNewSameStyleFont = [self.noteForPOI.font fontWithSize:yourSelectedFontSize];
- self.noteForPOI.font = yourNewSameStyleFont;
- self.noteForPOI.layer.cornerRadius=8.0f;
- self.noteForPOI.layer.masksToBounds=NO;
- self.noteForPOI.layer.borderColor=[[UIColor redColor]CGColor];
- self.noteForPOI.layer.borderWidth= 1.0f;
- self.noteForPOI.placeholder = @"add a note";
- self.noteForPOI.minimumFontSize = 10;
- 
- self.currentNote.noteText = self.noteForPOI.text;
- NSLog(@"note text %@", self.currentNote.noteText);
- //annotationView.rightCalloutAccessoryView = savePOIButton;
- UIButton *directionsButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 13, 13)];
- [directionsButton setBackgroundImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
- 
- 
- UIButton *triggerShareButton = [[UIButton alloc] initWithFrame:CGRectMake(35, 5, 13, 13)];
- [triggerShareButton setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
- 
- 
- UIButton *savePOIButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
- [savePOIButton setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
- annotationView.rightCalloutAccessoryView = savePOIButton;
- 
- UIButton *addNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(65, 5, 13, 13)];
- [addNoteButton setBackgroundImage:[UIImage imageNamed:@"note.png"] forState:UIControlStateNormal];
- 
- UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(95, 5, 13, 13)];
- [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
- 
- [vw addSubview:self.noteForPOI];
- [vw addSubview:triggerShareButton];
- [vw addSubview:directionsButton];
- //[vw addSubview:savePOIButton];
- [vw addSubview:addNoteButton];
- [vw addSubview:deleteButton];
- 
- 
- [triggerShareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
- 
- [directionsButton addTarget:self action:@selector( directionsButtonPressed:annotationView:) forControlEvents:UIControlEventTouchUpInside];
- 
- //[savePOIButton addTarget:self action:@selector(savePOIButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
- 
- [addNoteButton addTarget:self action:@selector(addNoteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
- 
- [deleteButton addTarget:self action:@selector(deletePOIPressed:) forControlEvents:UIControlEventTouchUpInside];
- 
- 
- 
- }
- else {
- //Update view's annotation reference
- //because we are re-using view that may have
- //been previously used for another annotation...
- annotationView.annotation = annotation;
- }
- 
- return annotationView;
- }*/
-
 -(IBAction)directionsButtonPressed:(UIButton *)button annotationView:(MKAnnotationView *)view {
     NSLog(@"map it");
     BLSDataSource *ds = [BLSDataSource sharedInstance];
@@ -497,21 +438,19 @@ CLLocationManager *locationManager;
 
 
 
--(IBAction)shareButtonPressed: (MKAnnotationView *)view {
+
+
+
+-(void)shareButtonPressed: (MKAnnotationView *)annotationView {
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)view.annotation];
-    //Add UIActivityViewController here?
+    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    
+    //Call Activity Controller
     NSString *string = @"this can be the individual note to share";
-    
-    //NSLog(@"current poi %@", self.currentPOI.title);
-    //NSString *name = ds.currentPOI.title;
-    NSString *name = @"this will be the name";
-    //ADD the point of interest name and number?
-    
-    //NSURL *URL = ...;
-    
+    //NSString *subtitle = ds.currentPOI.subtitle;
+    NSString *name = ds.currentPOI.title;
     UIActivityViewController *activityViewController =
-    [[UIActivityViewController alloc] initWithActivityItems:@[string, name]
+    [[UIActivityViewController alloc] initWithActivityItems:@[name, string]
                                       applicationActivities:nil];
     [self.navigationController presentViewController:activityViewController
                                             animated:YES
