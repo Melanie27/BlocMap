@@ -16,13 +16,14 @@
 @interface CategoryListViewController() <UITableViewDelegate, UITableViewDataSource, AddCategoryViewControllerDelegate>
 
 //add private mutable array
-@property (nonatomic, strong) NSMutableArray *categories;
+//@property (nonatomic, strong) NSMutableArray *categories;
 
 @end
 
 @implementation CategoryListViewController
 
 static NSString *CellIdentifier = @"Cell Identifier";
+BLSDataSource *ds;
 
 //TODO MOVE THIS STUFF TO DATASOURCE ONCE IT IS WORKING
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -33,8 +34,9 @@ static NSString *CellIdentifier = @"Cell Identifier";
         self.title = @"Categories";
         
         //Load categories
-        
-        [self loadCategories];
+        ds = [BLSDataSource sharedInstance];
+
+        //[self loadCategories];
     }
     
     return self;
@@ -42,8 +44,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"Categories > %@", self.categories);
+    NSLog(@"Categories > %@", ds.arrayOfCategories);
     // Register Class for Cell Reuse
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
@@ -55,7 +56,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
     self.navigationItem.leftBarButtonItem = backButton;
     
-  
+    
     
 }
 
@@ -87,15 +88,15 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.categories count];
+    return [ds.arrayOfCategories count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    
     
     // Fetch Item
-    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
+    POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     NSLog(@"category %@", category.categoryName);
     
     ds.currentPOI.category = category;
@@ -105,6 +106,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
    
     //TODO change this to an NSSet so it doesn't get double saved
     [ds saveCategoryToPOI:category];
+    [ds saveData];
     
 
 }
@@ -122,7 +124,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Fetch Item
-    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
+    POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     
     // Configure Cell
     [cell.textLabel setText:[category categoryName]];
@@ -130,20 +132,20 @@ static NSString *CellIdentifier = @"Cell Identifier";
     return cell;
 }
 
--(void)loadCategories {
+/*-(void)loadCategories {
     //[[BLSDataSource sharedInstance] loadSavedCategories];
     
     //retrieve the path of the file in which the list of items is stored
     NSString *filePath = [self pathForCategories];
     //file manager api - reference an instance of the default class
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        self.categories = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+        ds.arrayOfCategories = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     } else {
         //if nothing's there just instantiate a mutable array
-        self.categories = [NSMutableArray array];
+        ds.arrayOfCategories = [NSMutableArray array];
     }
     
-}
+}*/
 
 //returns the path to the file containing the application's list of categories by appending a string to the path of the documents directory.
 -(NSString*)pathForCategories {
@@ -155,8 +157,10 @@ static NSString *CellIdentifier = @"Cell Identifier";
 
 
 -(void)saveCategories {
-    NSString *filePath = [self pathForCategories];
-    [NSKeyedArchiver archiveRootObject:self.categories toFile:filePath];
+    [[BLSDataSource sharedInstance]saveData];
+    
+    //NSString *filePath = [self pathForCategories];
+    //[NSKeyedArchiver archiveRootObject:self.categories toFile:filePath];
 }
 
 
@@ -169,23 +173,28 @@ static NSString *CellIdentifier = @"Cell Identifier";
     // Create Category
     POICategory *category = [POICategory createCategoryWithName:name andColor:color];
     //NSLog(@"color once back in table %@", color);
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
     
     // Add Item to Data Source
-    [self.categories addObject:category];
+    if (![ds.arrayOfCategories containsObject:category])
+        [ds.arrayOfCategories addObject:category];
     
-    // Add Row to Table View
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:([self.categories count] - 1) inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-    
+    ds.currentPOI.category = category; 
     
     // Save Items
     [self saveCategories];
+    
+    // Add Row to Table View
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:([ds.arrayOfCategories count] - 1) inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    
 }
 
 //GET THE COLORS INTO THE CELLS
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // Fetch Item
-    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
+    POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     cell.backgroundColor = category.categoryColor;
    
 }
@@ -194,14 +203,14 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the category from the data source
-        POICategory *category = [self.categories objectAtIndex:[indexPath row]];
-        [self.categories removeObject:category];
+        POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
+        [ds.arrayOfCategories removeObject:category];
         
         //TODO fix category deletion
         //NSArray *categories = [NSArray arrayWithObjects:self.categories, nil];
         //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        NSIndexPath *deleteIndexPath = [NSIndexPath indexPathForItem:([self.categories count] - 1) inSection:0];
+        NSIndexPath *deleteIndexPath = [NSIndexPath indexPathForItem:([ds.arrayOfCategories count] - 1) inSection:0];
         [self.tableView deleteRowsAtIndexPaths:@[deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
         
     }
