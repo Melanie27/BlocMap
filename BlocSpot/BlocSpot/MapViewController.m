@@ -273,8 +273,8 @@ CLLocationManager *locationManager;
         [alert addAction:fifthAction];
         
         [self presentViewController:alert animated:YES completion:nil]; // 6
+        //[self alertView:alert clickedButtonAtIndex:buttonIndex];
         
-        //[self alertView:alert.view clickedButtonAtIndex:buttonIndex];
         /**/
     } else if (control == view.detailCalloutAccessoryView) {
         NSLog(@"write a note");
@@ -503,8 +503,9 @@ CLLocationManager *locationManager;
     //Add UIActivityViewController here?
     NSString *string = @"this can be the individual note to share";
     
+    //NSLog(@"current poi %@", self.currentPOI.title);
     //NSString *name = ds.currentPOI.title;
-    //NSString *name = @"this will be the name";
+    NSString *name = @"this will be the name";
     //ADD the point of interest name and number?
     
     //NSURL *URL = ...;

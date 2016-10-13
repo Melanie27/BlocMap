@@ -87,11 +87,11 @@ MKLocalSearch *localSearch;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
+        /*NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
         NSMutableArray<PointOfInterest*> *storedMapItems = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
         
         self.arrayOfPOIs = storedMapItems;
-        completionHandler(storedMapItems);
+        completionHandler(storedMapItems);*/
        
         //CRASHING
         /*NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
