@@ -61,33 +61,17 @@ CLLocationManager *locationManager;
     
     
    
-    [[BLSDataSource sharedInstance] loadSavedCategoryData:^(NSArray *pois) {
-        
-        //POICategory *category = [[POICategory alloc] init];
-        //ds.currentPOI.category = category;
-        ///get all points of interest associated with this category
-        //NSLog(@"current poi %@", ds.currentPOI);
-        
-        
-        //currentPOI.category = category;
-        //for (MKPointAnnotation *annotation in pois) {
-            //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
-
-            //NSLog(@"changed cat %@",item.category);
-            //NSLog(@"changed poi %@", item.categoryName);
-       // }
-        
-        //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
+    
         
         [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
 
-    }];
+  
     
     
     [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
         // Set up annotations for each poi
         
-        NSLog(@"number of stored map items %lu", (unsigned long)pois.count);
+        NSLog(@"number of stored map items hi %lu", (unsigned long)pois.count);
         
         for (MKPointAnnotation *annotation in pois) {
          PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];

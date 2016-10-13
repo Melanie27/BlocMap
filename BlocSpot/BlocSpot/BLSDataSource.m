@@ -47,7 +47,7 @@ MKLocalSearch *localSearch;
 #pragma mark - Key/Value Observing
 
 
-- (NSUInteger) countOfArrayOfCategories {
+- (NSUInteger) countOfArrayOfPOIs {
     return self.arrayOfPOIs.count;
 }
 
@@ -72,19 +72,15 @@ MKLocalSearch *localSearch;
 }
 
 
+#pragma deletion
+
+- (void) deletePOIItem:(PointOfInterest *)item {
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfPOIs"];
+    [mutableArrayWithKVO removeObject:item];
+}
+
 
 #pragma load up all the saved mapitems
--(void)loadSavedCategoryData:(CategoriesSavedCompletionHandler)completionHandler {
-     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-         
-         NSString *fullPath = [self pathForFilename:@"categories.poi"];
-         NSMutableArray<PointOfInterest*> *storedCategoryItems = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
-         
-         self.arrayOfPOIs = storedCategoryItems;
-         completionHandler(storedCategoryItems);
-         
-     });
-}
 
 -(void)loadSavedData:(MarkersSavedCompletionHandler)completionHandler {
    
@@ -168,6 +164,9 @@ self.currentPOI.category = cat;
 
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave {
     //init this array with already stored items
+    //CRASHING
+    //NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
+    
     NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
     NSMutableArray<PointOfInterest*> *newArrayOfPOIs = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
     if (newArrayOfPOIs == nil) {

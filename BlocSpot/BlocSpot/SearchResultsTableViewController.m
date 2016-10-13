@@ -44,9 +44,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
      [BLSDataSource sharedInstance].srtvc = self;
-    //[[BLSDataSource sharedInstance]loadSavedCategories:^(NSArray *pois) {
-        
-    //}];
+    //[[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,16 +76,16 @@
    SearchResultsTableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    
-    //TODO crashing when I get to bottom of table
+     resultCell.delegate = self;
+    //TODO crashing when I get to bottom of table OR not showing all the saved spots
     [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
        
         
         for (MKPointAnnotation *annotation in pois) {
-            //NSLog(@"pois array for table %@", pois);
+            NSLog(@"pois array for table %@", pois);
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
             
-            resultCell.delegate = self;
+           
             resultCell.entryTitle.text = item.title;
             resultCell.entrySubtitle.text = item.subtitle;
            
@@ -100,16 +98,16 @@
     
     
     //accessory button to a popup
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
-    button.tag = indexPath.row;
-    resultCell.accessoryView = button;
+    //UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    //[button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
+    //button.tag = indexPath.row;
+    //resultCell.accessoryView = button;
     
     
     return resultCell;
 }
 
-- (void)checkButtonTapped:(id)sender event:(id)event
+/*- (void)checkButtonTapped:(id)sender event:(id)event
 {
     NSSet *touches = [event allTouches];
     UITouch *touch = [touches anyObject];
@@ -129,7 +127,7 @@
     
     //[self performSegueWithIdentifier:@"resultsDetail" sender:self];
     
-}
+}*/
 
 
 //Override the default height
@@ -138,13 +136,13 @@
     
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+/*-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"resultDetail"]) {
         //ResultsDetailViewController *resultDetailVC = (ResultsDetailViewController*)segue.destinationViewController;
        
         
     }
-}
+}*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -154,17 +152,36 @@
 }
 */
 
-/*
+
+
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == [BLSDataSource sharedInstance] && [keyPath isEqualToString:@"arrayOfPOIs"]) {
+        NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
+        
+        if (kindOfChange == NSKeyValueChangeSetting) {
+            // Someone set a brand new images array
+            [self.tableView reloadData];
+        }
+    }
+}
+
+
+
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        PointOfInterest *item = [BLSDataSource sharedInstance].arrayOfPOIs[indexPath.row];
+        [[BLSDataSource sharedInstance] deletePOIItem:item];
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

@@ -375,7 +375,7 @@
                     <navigationItem key="navigationItem" id="UjH-S0-gGm">
                         <barButtonItem key="leftBarButtonItem" image="mapView.png" id="kOP-Pa-bqS">
                             <connections>
-                                <segue destination="jxr-Do-I8k" kind="presentation" id="uhC-Qn-CnK"/>
+                                <segue destination="jxr-Do-I8k" kind="show" id="uhC-Qn-CnK"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7">
@@ -520,8 +520,8 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SDO-40-JA1"/>
         <segue reference="ooD-K5-9nQ"/>
+        <segue reference="uhC-Qn-CnK"/>
         <segue reference="hiA-Gq-6wD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -60,7 +60,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 - (void)addItem:(id)sender {
-    NSLog(@"Button was tapped.");
+    //NSLog(@"Button was tapped.");
     [self performSegueWithIdentifier:@"AddCategoryViewController" sender:self];
 }
 
@@ -101,10 +101,10 @@ static NSString *CellIdentifier = @"Cell Identifier";
     ds.currentPOI.category = category;
     
     //Save the category selected to the POI
-    NSSet *setCategoryItem = [NSSet setWithObjects:category, nil];
-    
+    //NSSet *setCategoryItem = [NSSet setWithObjects:category, nil];
+   
     //TODO change this to an NSSet so it doesn't get double saved
-    [ds saveCategoryToPOI:setCategoryItem];
+    [ds saveCategoryToPOI:category];
     
 
 }
@@ -131,6 +131,8 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 -(void)loadCategories {
+    //[[BLSDataSource sharedInstance] loadSavedCategories];
+    
     //retrieve the path of the file in which the list of items is stored
     NSString *filePath = [self pathForCategories];
     //file manager api - reference an instance of the default class

@@ -18,7 +18,7 @@
 
 typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
 typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
-typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
+
 //typedef void (^SaveCatToPOICompletionHandler)(POICategory *currCat);
 
 @interface BLSDataSource : NSObject <MKMapViewDelegate>
@@ -43,7 +43,7 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 
 
 -(void)loadSavedData:(MarkersSavedCompletionHandler)completionHandler;
--(void)loadSavedCategoryData:(CategoriesSavedCompletionHandler)completionHandler;
+
 
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave;
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave;
@@ -56,5 +56,5 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 -(void)saveData;
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
-
+- (void) deletePOIItem:(PointOfInterest *)item;
 @end
