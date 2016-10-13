@@ -139,26 +139,6 @@ MKLocalSearch *localSearch;
 
 self.currentPOI.category = cat;
     
-    /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *fullPath = [self pathForFilename:@"categories.poi"];
-        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
-        
-        NSError *dataError;
-        BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-        
-         NSLog(@"cat that got saved %@", cat);
-        NSLog(@"cat got saved to this poi %@", self.currentPOI);
-        //TRIGGER Key Value Observing HERE
-        //GET THIS CURRENT POI into map view controller
-        if (!wroteSuccessfully) {
-            NSLog(@"Couldn't write file: %@", dataError);
-            
-        }
-        
-    });*/
-
-    
-    
 }
 
 
@@ -204,15 +184,6 @@ self.currentPOI.category = cat;
 - (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self saveData];
-        /*NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-        NSData *mapItemData = [NSKeyedArchiver archivedDataWithRootObject:self.arrayOfPOIs];
-        
-        NSError *dataError;
-        BOOL wroteSuccessfully = [mapItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-        NSLog(@"map item data %@", self.arrayOfPOIs);
-        if (!wroteSuccessfully) {
-            NSLog(@"Couldn't write file: %@", dataError);
-        }*/
         
         completionHandler(nil,nil);
         
