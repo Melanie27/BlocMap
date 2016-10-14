@@ -13,7 +13,10 @@
 @class PointOfInterest;
 @class POICategory;
 
-@interface MapViewController : UIViewController <MKMapViewDelegate>
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
+
+    CLLocationManager *_locationManager;
+}
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -23,5 +26,12 @@
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) PointOfInterest *currentPOI;
 @property (strong, nonatomic) POICategory *currentCategory;
+
+@property (strong, nonatomic) IBOutlet UITextView *locationInformationView;
+@property (strong, nonatomic) IBOutlet UISwitch *locationUpdatesSwitch;
+- (IBAction)toggleLocationUpdates:(id)sender;
+
+
+
 -(void)loadSearchResults;
 @end

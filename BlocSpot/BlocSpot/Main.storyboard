@@ -189,23 +189,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-6e-pYB">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-6e-pYB">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
-                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E8W-dp-AfJ">
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E8W-dp-AfJ">
                                 <rect key="frame" x="20" y="171" width="560" height="288"/>
                                 <connections>
                                     <segue destination="oau-Dq-Vb5" kind="embed" identifier="showEmbed" id="ooD-K5-9nQ"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYG-5G-adY">
+                                <rect key="frame" x="455" y="467" width="125" height="21"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Location Info">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="display location information here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YjS-sd-sbI">
+                                <rect key="frame" x="358" y="488" width="222" height="65"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="ACG-hA-Ewc"/>
+                                    <constraint firstAttribute="width" constant="222" id="c9B-iI-Nes"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Bo9-UN-jYW">
+                                <rect key="frame" x="531" y="561" width="51" height="31"/>
+                                <connections>
+                                    <action selector="toggleLocationUpdates:" destination="BYZ-38-t0r" eventType="valueChanged" id="CVf-vh-kAQ"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="E8W-dp-AfJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="K5F-hS-UrY"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="E8W-dp-AfJ" secondAttribute="bottom" constant="92" id="Pqt-vt-u5z"/>
-                            <constraint firstItem="E8W-dp-AfJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="107" id="TK5-u8-Vxe"/>
-                            <constraint firstItem="E8W-dp-AfJ" firstAttribute="centerX" secondItem="ReE-6e-pYB" secondAttribute="centerX" id="Wm9-jf-Ldz"/>
-                            <constraint firstItem="E8W-dp-AfJ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qnD-oq-y6B"/>
+                            <constraint firstItem="E8W-dp-AfJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1Xt-AI-xts"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4bW-ce-zgk"/>
+                            <constraint firstItem="YjS-sd-sbI" firstAttribute="trailing" secondItem="Bo9-UN-jYW" secondAttribute="trailing" id="9xk-kC-8oR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Bo9-UN-jYW" secondAttribute="bottom" constant="8" symbolic="YES" id="G3a-IK-nyJ"/>
+                            <constraint firstItem="Bo9-UN-jYW" firstAttribute="top" secondItem="YjS-sd-sbI" secondAttribute="bottom" constant="8" symbolic="YES" id="GGn-aG-o3s"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Ke1-4B-VZu"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="RTy-zL-OvU"/>
+                            <constraint firstItem="E8W-dp-AfJ" firstAttribute="trailing" secondItem="FYG-5G-adY" secondAttribute="trailing" id="RoB-qu-4pL"/>
+                            <constraint firstItem="FYG-5G-adY" firstAttribute="top" secondItem="E8W-dp-AfJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Xtw-Jb-JkQ"/>
+                            <constraint firstItem="YjS-sd-sbI" firstAttribute="top" secondItem="FYG-5G-adY" secondAttribute="bottom" id="kQt-7J-5PK"/>
+                            <constraint firstItem="E8W-dp-AfJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="107" id="qjh-yV-jUE"/>
+                            <constraint firstItem="ReE-6e-pYB" firstAttribute="centerX" secondItem="E8W-dp-AfJ" secondAttribute="centerX" id="tMa-DK-oGJ"/>
+                            <constraint firstAttribute="trailing" secondItem="ReE-6e-pYB" secondAttribute="trailing" id="y2e-t0-iYa"/>
+                            <constraint firstItem="FYG-5G-adY" firstAttribute="trailing" secondItem="YjS-sd-sbI" secondAttribute="trailing" id="zOZ-AI-pxk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rXy-UH-gsp">
@@ -229,6 +266,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="containerView" destination="E8W-dp-AfJ" id="O01-bD-TGG"/>
+                        <outlet property="locationInformationView" destination="YjS-sd-sbI" id="7a4-7z-CZe"/>
+                        <outlet property="locationUpdatesSwitch" destination="Bo9-UN-jYW" id="iGw-yg-i66"/>
                         <outlet property="mapView" destination="ReE-6e-pYB" id="Wwb-q4-fn3"/>
                         <segue destination="oau-Dq-Vb5" kind="show" identifier="showCategories" id="fk6-TY-2Z4"/>
                     </connections>
@@ -520,8 +559,8 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SDO-40-JA1"/>
-        <segue reference="ooD-K5-9nQ"/>
         <segue reference="hiA-Gq-6wD"/>
+        <segue reference="uhC-Qn-CnK"/>
+        <segue reference="ooD-K5-9nQ"/>
     </inferredMetricsTieBreakers>
 </document>
