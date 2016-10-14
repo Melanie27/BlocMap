@@ -75,8 +75,7 @@ MKLocalSearch *localSearch;
 #pragma deletion
 
 - (void) deletePOIItem:(PointOfInterest *)item {
-//    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfPOIs"];
-//    [mutableArrayWithKVO removeObject:item];
+    NSLog(@"do we get here?");
     [self.arrayOfPOIs removeObject:item];
 }
 
