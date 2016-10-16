@@ -137,7 +137,7 @@ MKLocalSearch *localSearch;
 -(void)saveCategoryToPOI:(POICategory *)cat {
 
 self.currentPOI.category = cat;
-    
+    [self saveData];
 }
 
 
@@ -158,7 +158,9 @@ self.currentPOI.category = cat;
         PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:pointAnnotation];
         [newArrayOfPOIs addObject:item];
     }
-    self.arrayOfPOIs = newArrayOfPOIs;
+
+    // self.arrayOfPOIs = newArrayOfPOIs;
+    
     //NSLog(@"new array %@", newArrayOfPOIs);
 }
 

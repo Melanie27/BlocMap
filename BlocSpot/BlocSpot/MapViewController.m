@@ -166,9 +166,21 @@ CLLocationManager *locationManager;
 
 -(void)mapView:(MKMapView *)mapView currentPOI:(NSString*)title shareButtonPressed:(MKAnnotationView *)annotationView {
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    
+    NSUInteger index = [ds.arrayOfPOIs indexOfObjectPassingTest:^BOOL(PointOfInterest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.coordinate.latitude == annotationView.annotation.coordinate.latitude &&
+            obj.coordinate.longitude == annotationView.annotation.coordinate.longitude &&
+            [obj.title isEqualToString:annotationView.annotation.title]) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }];
+    
+    ds.currentPOI = ds.arrayOfPOIs[index];
+    
     if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
-        [ds.arrayOfPOIs addObject:ds.currentPOI];
+    //    [ds.arrayOfPOIs addObject:ds.currentPOI];
     }
     //Call Activity Controller
     //GET THIS STRING FROM THE TEXTFIELD
@@ -191,18 +203,35 @@ CLLocationManager *locationManager;
 -(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
     
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
 
+   NSUInteger index = [ds.arrayOfPOIs indexOfObjectPassingTest:^BOOL(PointOfInterest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.coordinate.latitude == annotationView.annotation.coordinate.latitude &&
+            obj.coordinate.longitude == annotationView.annotation.coordinate.longitude &&
+            [obj.title isEqualToString:annotationView.annotation.title]) {
+                return YES;
+            } else {
+                return NO;
+            }
+    }];
     
-    if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
-        [ds.arrayOfPOIs addObject:ds.currentPOI];
-    }
+    ds.currentPOI = ds.arrayOfPOIs[index];
     
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView calloutAccessoryControlTapped:(UIControl *)control{
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    
+    NSUInteger index = [ds.arrayOfPOIs indexOfObjectPassingTest:^BOOL(PointOfInterest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.coordinate.latitude == annotationView.annotation.coordinate.latitude &&
+            obj.coordinate.longitude == annotationView.annotation.coordinate.longitude &&
+            [obj.title isEqualToString:annotationView.annotation.title]) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }];
+    
+    ds.currentPOI = ds.arrayOfPOIs[index];
     if (control == annotationView.rightCalloutAccessoryView) {
         NSArray *arrayMapItem = [NSArray arrayWithObjects:annotationView.annotation, nil];
         
@@ -443,8 +472,18 @@ CLLocationManager *locationManager;
 
 -(void)shareButtonPressed: (MKAnnotationView *)annotationView {
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
     
+    NSUInteger index = [ds.arrayOfPOIs indexOfObjectPassingTest:^BOOL(PointOfInterest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.coordinate.latitude == annotationView.annotation.coordinate.latitude &&
+            obj.coordinate.longitude == annotationView.annotation.coordinate.longitude &&
+            [obj.title isEqualToString:annotationView.annotation.title]) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }];
+    
+    ds.currentPOI = ds.arrayOfPOIs[index];
     //Call Activity Controller
     NSString *string = @"this can be the individual note to share";
     //NSString *subtitle = ds.currentPOI.subtitle;
