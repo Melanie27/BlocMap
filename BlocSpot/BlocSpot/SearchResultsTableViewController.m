@@ -43,8 +43,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-     [BLSDataSource sharedInstance].srtvc = self;
-    //[[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
+     //[BLSDataSource sharedInstance].srtvc = self;
+    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,6 +113,10 @@
 }
 */
 
+- (void) dealloc {
+    [[BLSDataSource sharedInstance] removeObserver:self forKeyPath:@"arrayOfPOIs"];
+}
+
 
 
 
@@ -120,7 +124,7 @@
     if (object == [BLSDataSource sharedInstance] && [keyPath isEqualToString:@"arrayOfPOIs"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         
-        if (kindOfChange == NSKeyValueChangeSetting) {
+        if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
             [self.tableView reloadData];
         }

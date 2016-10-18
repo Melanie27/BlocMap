@@ -11,7 +11,7 @@
 #import "PointOfInterest.h"
 
 @interface BLSDataSource () {
-
+     NSMutableArray *_arrayOfPOIs;
 }
 @end
 
@@ -46,7 +46,7 @@ MKLocalSearch *localSearch;
 #pragma mark - Key/Value Observing
 
 
-/*- (NSUInteger) countOfArrayOfPOIs {
+- (NSUInteger) countOfArrayOfPOIs {
     return self.arrayOfPOIs.count;
 }
 
@@ -56,8 +56,8 @@ MKLocalSearch *localSearch;
 
 - (NSArray *) arrayOfPOIsAtIndexes:(NSIndexSet *)indexes {
     return [self.arrayOfPOIs objectsAtIndexes:indexes];
-}*/
-/*
+}
+
 - (void) insertObject:(PointOfInterest *)object inArrayOfPOIsAtIndex:(NSUInteger)index {
     [_arrayOfPOIs insertObject:object atIndex:index];
 }
@@ -69,13 +69,14 @@ MKLocalSearch *localSearch;
 - (void) replaceObjectInArrayOfPOIsAtIndex:(NSUInteger)index withObject:(id)object {
     [_arrayOfPOIs replaceObjectAtIndex:index withObject:object];
 }
-*/
+
 
 #pragma deletion
 
 - (void) deletePOIItem:(PointOfInterest *)item {
-    
-    [self.arrayOfPOIs removeObject:item];
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfPOIs"];
+    [mutableArrayWithKVO removeObject:item];
+    //[self.arrayOfPOIs removeObject:item];
     NSLog(@"deleted");
 }
 
