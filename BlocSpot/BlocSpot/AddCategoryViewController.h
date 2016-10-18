@@ -10,6 +10,7 @@
 #import "ViewController.h"
 //#import "CategoryListViewController.h"
 #import "POICategory.h"
+#import "PointOfInterest.h"
 
 
 //forward protocol declaration
@@ -24,7 +25,8 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *save;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *colorButtonCollection;
-
+@property (atomic, strong) PointOfInterest* currentPOI;
+@property (atomic, strong) POICategory* currentCategory;
 
 
 - (IBAction)grabColorFromButton:(UIButton*)sender;

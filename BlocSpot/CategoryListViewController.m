@@ -98,13 +98,31 @@ BLSDataSource *ds;
     // Fetch Item
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     NSLog(@"category %@", category.categoryName);
-    
     ds.currentPOI.category = category;
+    //Get POI
+    PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+    ds.currentPOI = poi;
+    
     
     //Save the category selected to the POI
     //NSSet *setCategoryItem = [NSSet setWithObjects:category, nil];
    
+    //save POI to category
+    //save the current POI to the the current category
+    //get current POI
+     NSLog(@"current poi to be saved to this category %@", ds.currentPOI);
+    NSLog(@"current poi title %@", ds.currentPOI.title);
+    NSLog(@"current poi subtitle %@", ds.currentPOI.subtitle);
+     NSLog(@"current cat  %@", ds.currentPOI.category);
+    NSLog(@"current cat name %@", ds.currentPOI.categoryName);
+    NSLog(@"current cat color %@", ds.currentPOI.categoryColor);
+    NSLog(@"current poi cat %@", ds.currentPOI.category);
+    
+    
     //TODO change this to an NSSet so it doesn't get double saved
+    //[ds savePOIToCategory:poi];
+    //[ds saveCategoryToPOI:category];
+    [ds savePOIToCategory:poi];
     [ds saveCategoryToPOI:category];
     [ds saveData];
     

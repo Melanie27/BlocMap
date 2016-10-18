@@ -18,6 +18,11 @@
         self.categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
         self.inCategoryList = [aDecoder decodeBoolForKey:@"inCategoryList"];
         self.categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
+        self.poi = [aDecoder decodeObjectForKey:@"poi"];
+        self.poiName = [aDecoder decodeObjectForKey:@"poiName"];
+        self.poiPhoneNumber = [aDecoder decodeObjectForKey:@"poiPhoneNumber"];
+        
+        
     }
     
     return self;
@@ -28,6 +33,9 @@
     [aCoder encodeObject:self.categoryName forKey:@"categoryName"];
     [aCoder encodeBool:self.inCategoryList forKey:@"inCategoryList"];
     [aCoder encodeObject:self.categoryColor forKey:@"categoryColor"];
+    [aCoder encodeBool:self.inCategoryList forKey:@"poi"];
+    [aCoder encodeBool:self.inCategoryList forKey:@"poiName"];
+    [aCoder encodeObject:self.categoryColor forKey:@"poiPhoneNumber"];
 }
 
 + (POICategory *)createCategoryWithName:(NSString *)categoryName andColor:(UIColor *)categoryColor {
