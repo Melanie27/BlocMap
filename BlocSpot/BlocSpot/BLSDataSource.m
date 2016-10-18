@@ -216,11 +216,11 @@ self.currentPOI.category = cat;
     localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
-    NSMutableArray *responsePOIs = [NSMutableArray arrayWithObjects:response.mapItems, nil];
+    //NSMutableArray *responsePOIs = [NSMutableArray arrayWithObjects:response.mapItems, nil];
     
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
-        if (error != nil) {
+        /*if (error != nil) {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
                                         message:[error localizedDescription]
                                        delegate:nil
@@ -234,7 +234,7 @@ self.currentPOI.category = cat;
                                        delegate:nil
                               cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
             return;
-        }
+        }*/
         
         self.results = response;
         NSLog(@"response, %@", response);
