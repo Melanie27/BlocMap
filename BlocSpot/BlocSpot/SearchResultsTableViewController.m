@@ -75,20 +75,14 @@
     // Configure the cell...
      resultCell.delegate = self;
     //TODO crashing when I get to bottom of table OR not showing all the saved spots
-    [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
-       
-        
-        for (MKPointAnnotation *annotation in pois) {
-            NSLog(@"pois array for table %@", pois);
-            PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
-           
-            resultCell.entryTitle.text = item.title;
-            resultCell.entrySubtitle.text = item.subtitle;
-           
-        }
-        
-        
-    }];
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    // Fetch Item
+    PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+    //[resultCell.textLabel setText:[category categoryName]];
+    resultCell.entryTitle.text = poi.title;
+    resultCell.entrySubtitle.text = poi.subtitle;
+     NSLog(@"pois array for table %@", poi);
+   
     
 
     return resultCell;
