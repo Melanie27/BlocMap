@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class PointOfInterest;
+@class POICategory;
 @interface FilterByCategoryTableViewController : UITableViewController
-
+@property (strong) PointOfInterest *POI;
+@property (nonatomic, strong) POICategory *currentlySelectedCategory;
 @end

@@ -132,20 +132,7 @@ BLSDataSource *ds;
     return cell;
 }
 
-/*-(void)loadCategories {
-    //[[BLSDataSource sharedInstance] loadSavedCategories];
-    
-    //retrieve the path of the file in which the list of items is stored
-    NSString *filePath = [self pathForCategories];
-    //file manager api - reference an instance of the default class
-    if([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        ds.arrayOfCategories = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-    } else {
-        //if nothing's there just instantiate a mutable array
-        ds.arrayOfCategories = [NSMutableArray array];
-    }
-    
-}*/
+
 
 //returns the path to the file containing the application's list of categories by appending a string to the path of the documents directory.
 -(NSString*)pathForCategories {

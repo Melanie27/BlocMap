@@ -17,7 +17,7 @@
 
 @implementation FilterByCategoryTableViewController
 static NSString *CellIdentifier = @"Cat Identifier";
-
+//BLSDataSource *ds;
 //TODO MOVE THIS STUFF TO DATASOURCE ONCE IT IS WORKING
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -27,8 +27,9 @@ static NSString *CellIdentifier = @"Cat Identifier";
         self.title = @"Filter by Category";
         
         //Load categories
-        
-        [self loadCategories];
+        BLSDataSource *ds = [BLSDataSource sharedInstance];
+        ds = [BLSDataSource sharedInstance];
+        //[self loadCategories];
     }
     
     return self;
@@ -38,7 +39,8 @@ static NSString *CellIdentifier = @"Cat Identifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    NSLog(@"Categories > %@", ds.arrayOfCategories);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
@@ -59,15 +61,16 @@ static NSString *CellIdentifier = @"Cat Identifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-return [self.categories count];
+     BLSDataSource *ds = [BLSDataSource sharedInstance];
+    return [ds.arrayOfCategories count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Dequeue Reusable Cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
     // Fetch Item
-    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
+    POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     
     // Configure Cell
     [cell.textLabel setText:[category categoryName]];
@@ -77,30 +80,31 @@ return [self.categories count];
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    
-    // Fetch Item
-    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
+     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
+    //category = self.currentlySelectedCategory;
     NSLog(@"category %@", category.categoryName);
+    self.currentlySelectedCategory = category;
+    self.currentlySelectedCategory.categoryName = category.categoryName;
+    NSLog(@"currently seclected category %@", self.currentlySelectedCategory.categoryName);
+    if(!self.currentlySelectedCategory) {
+        //[tableView reloadData];
+         //[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+        //[cell setSelected:NO];
+        NSLog(@"not");
+    } else {
+        //[cell setSelected:YES];
+        //[tableView reloadData];
+        NSLog (@"yes %@", self.currentlySelectedCategory.categoryName);
+        //[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+        //need to get all POIs associated with this category
+    }
     
-    ds.currentPOI.category = category;
+   
+    //NSLog(@"current poi %@", ds.currentPOI);
     
-    //grab all pois
-    NSMutableArray *arrayOfPOIs = [[BLSDataSource sharedInstance] arrayOfPOIs];
-    NSLog(@"array of pois %@", arrayOfPOIs);
-    //get categoryname
-    
-    //check if the category name is equal to category variable
-    
-    //get all points of interest associated with this category
-    
-    
-    
-    //NSMutableArray *poisWithCategory = [NSMutableArray ]
-    
-    NSLog(@"current poi %@", ds.currentPOI);
-    
-    NSLog(@"perform filter on all points of interest with the selected category, dismiss the view controller, show the map with only the selected category markers");
+    //NSLog(@"perform filter on all points of interest with the selected category, dismiss the view controller, show the map with only the selected category markers");
     
     
     
@@ -127,7 +131,8 @@ return [self.categories count];
 //GET THE COLORS INTO THE CELLS
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // Fetch Item
-    POICategory *category = [self.categories objectAtIndex:[indexPath row]];
+   BLSDataSource *ds = [BLSDataSource sharedInstance];
+    POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     cell.backgroundColor = category.categoryColor;
     
 }
@@ -148,7 +153,7 @@ return [self.categories count];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 */
 

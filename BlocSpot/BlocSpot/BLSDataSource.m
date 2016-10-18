@@ -137,6 +137,8 @@ MKLocalSearch *localSearch;
 -(void)saveCategoryToPOI:(POICategory *)cat {
 
 self.currentPOI.category = cat;
+    self.currentPOI.categoryName = cat.categoryName;
+    self.currentPOI.categoryColor = cat.categoryColor;
     [self saveData];
 }
 
