@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class PointOfInterest;
+@class POICategory;
 @interface SearchResultsTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
-
+-(void)loadSearchResults;
 @end

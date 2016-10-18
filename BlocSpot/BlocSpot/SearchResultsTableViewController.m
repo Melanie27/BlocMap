@@ -44,7 +44,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
      [BLSDataSource sharedInstance].srtvc = self;
-    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
+    //[[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,11 +61,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    return [[BLSDataSource sharedInstance] arrayOfPOIs].count;
-    
-    
-    
-}
 
+}
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"show a detail view now");
@@ -84,50 +81,20 @@
         for (MKPointAnnotation *annotation in pois) {
             NSLog(@"pois array for table %@", pois);
             PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
-            
            
             resultCell.entryTitle.text = item.title;
             resultCell.entrySubtitle.text = item.subtitle;
            
-            
-            
         }
         
         
     }];
     
-    
-    //accessory button to a popup
-    //UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    //[button addTarget:self action:@selector(didTapResultDetail:) forControlEvents:UIControlEventTouchDown];
-    //button.tag = indexPath.row;
-    //resultCell.accessoryView = button;
-    
-    
+
     return resultCell;
 }
 
-/*- (void)checkButtonTapped:(id)sender event:(id)event
-{
-    NSSet *touches = [event allTouches];
-    UITouch *touch = [touches anyObject];
-    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
-    if (indexPath != nil)
-    {
-        [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
-    }
-}
 
-#pragma mark - QuestionsTableViewCellDelegate
-- (IBAction)didTapResultDetail:(id)sender {
-    
-    NSLog(@"will show the detail view here");
-   
-    
-    //[self performSegueWithIdentifier:@"resultsDetail" sender:self];
-    
-}*/
 
 
 //Override the default height
@@ -167,15 +134,13 @@
 }
 
 
-
-
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         NSLog(@"please delete");
         PointOfInterest *item = [BLSDataSource sharedInstance].arrayOfPOIs[indexPath.row];
+    
         [[BLSDataSource sharedInstance] deletePOIItem:item];
         //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
