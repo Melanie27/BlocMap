@@ -106,6 +106,7 @@
     [aCoder encodeObject:_category forKey:@"category"];
     [aCoder encodeObject:_categoryName forKey:@"categoryName"];
     [aCoder encodeObject:_categoryColor forKey:@"categoryColor"];
+    [aCoder encodeObject:self.noteText forKey:@"noteText"];
     
 }
 
@@ -122,6 +123,7 @@
         _category = [aDecoder decodeObjectForKey:@"category"];
         _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
         _categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
+        self.noteText = [aDecoder decodeObjectForKey:@"noteText"];
         
     }
     return self;

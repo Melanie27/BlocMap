@@ -29,7 +29,8 @@
 
 
 - (MKMapItem*)mapItem;
-
+//adding a note to a poi when it's selected
+@property (nonatomic, strong) NSString *noteText;
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, readonly, copy) NSString *subtitle;
@@ -37,7 +38,7 @@
 @property (nonatomic, strong) NSString *categoryName;
 @property (nonatomic, strong) UIColor *categoryColor;
 //@property (nonatomic) BOOL animatesDrop;
-@property (nonatomic) BOOL canShowCallout;
+//@property (nonatomic) BOOL canShowCallout;
 @property (nonatomic) BOOL itemSelected;
 
 @property (copy) NSString *address;

@@ -13,7 +13,6 @@
 		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
 		9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */; };
 		9B839ECB1DAEA51B00268DEF /* FilterByCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B839ECA1DAEA51B00268DEF /* FilterByCategoryTableViewController.m */; };
-		9B93C7951DAECC07006F3810 /* POINote.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B93C7941DAECC07006F3810 /* POINote.m */; };
 		9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */; };
 		9B96CD191D9455BC008E6842 /* SearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD181D9455BC008E6842 /* SearchResultsTableViewCell.m */; };
 		9B96CD1E1D99CA3C008E6842 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B96CD1D1D99CA3C008E6842 /* checked.png */; };
@@ -67,8 +66,6 @@
 		9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointOfInterest.m; sourceTree = "<group>"; };
 		9B839EC91DAEA51B00268DEF /* FilterByCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterByCategoryTableViewController.h; sourceTree = "<group>"; };
 		9B839ECA1DAEA51B00268DEF /* FilterByCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterByCategoryTableViewController.m; sourceTree = "<group>"; };
-		9B93C7931DAECC07006F3810 /* POINote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POINote.h; sourceTree = "<group>"; };
-		9B93C7941DAECC07006F3810 /* POINote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POINote.m; sourceTree = "<group>"; };
 		9B96CD141D945086008E6842 /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
 		9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
 		9B96CD171D9455BC008E6842 /* SearchResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewCell.h; sourceTree = "<group>"; };
@@ -200,8 +197,6 @@
 				9BACADC81D91D91100117D24 /* BLSDataSource.m */,
 				9B16A5E21D9B449F00EFC33C /* POICategory.h */,
 				9B16A5E31D9B449F00EFC33C /* POICategory.m */,
-				9B93C7931DAECC07006F3810 /* POINote.h */,
-				9B93C7941DAECC07006F3810 /* POINote.m */,
 				9B6FDCC81D919D35000B77AB /* Search.h */,
 				9B6FDCC91D919D35000B77AB /* Search.m */,
 				9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */,
@@ -441,7 +436,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B93C7951DAECC07006F3810 /* POINote.m in Sources */,
 				9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */,
 				9B96CD211D99CD54008E6842 /* ResultsDetailViewController.m in Sources */,
 				9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */,
