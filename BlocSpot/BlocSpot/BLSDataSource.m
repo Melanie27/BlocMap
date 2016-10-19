@@ -189,7 +189,6 @@ MKLocalSearch *localSearch;
 
     // self.arrayOfPOIs = newArrayOfPOIs;
     
-    //NSLog(@"new array %@", newArrayOfPOIs);
 }
 
 

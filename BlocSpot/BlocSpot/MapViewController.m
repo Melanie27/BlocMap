@@ -59,11 +59,8 @@ CLLocationManager *locationManager;
     }
     
 
-        [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
+    [self observeValueForKeyPath:@"arrayOfPOIs" ofObject:_chosenPointOfInterest change:nil context:nil];
 
-  
-    
-    
     [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
         // Set up annotations for each poi
         
@@ -172,10 +169,6 @@ CLLocationManager *locationManager;
     }
     //Call Activity Controller
     
-    //NSString *string = @"this can be the individual note to share";
-    //NSString *dstitle = title;
-    
-    
     UIActivityViewController *activityViewController =
     [[UIActivityViewController alloc] initWithActivityItems:@[title, reviewText]
                                       applicationActivities:nil];
@@ -184,8 +177,7 @@ CLLocationManager *locationManager;
                                           completion:^{
                                               // ...
                                           }];
-    
-    
+
 }
 
 
@@ -278,9 +270,9 @@ CLLocationManager *locationManager;
                                                                    
                                                                    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
                                                                        textField.placeholder = @"Input data...";
-                                                                   }]; // 10
+                                                                   }];
                                                                    
-                                                                   //[alert show];
+                                                                  
                                                                   [self presentViewController:alert animated:YES completion:nil]; 
                                                                   
                                                                    
@@ -288,19 +280,15 @@ CLLocationManager *locationManager;
         UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"share poi"
                                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                  
-                                                                  NSLog(@"share poi");
-                                                                  BLSDataSource *ds = [BLSDataSource sharedInstance];
-                                                                  //ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
                                                                   if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
                                                                       [ds.arrayOfPOIs addObject:ds.currentPOI];
                                                                   }
                                                                   
                                                                   NSString *name = ds.currentPOI.title;
-                                                                 NSString *reviewText = ds.currentPOI.noteText;
+                                                                  NSString *reviewText = ds.currentPOI.noteText;
                                                                   NSLog(@"note %@", ds.currentPOI.noteText);
-                                                                  //NSString *reviewText = @"";
-                                                                  //NSString *reviewText = ds.currentPOI.noteText;
-                                                                   NSLog(@"review text %@",  reviewText);
+                                                                  
+                                                                  
                                                                   //test if user somehow entered empty string
                                                                   if ([reviewText length] == 0) {
                                                                       reviewText = @"add a review if you haven't";
@@ -319,7 +307,7 @@ CLLocationManager *locationManager;
                                                               style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
                                                                   NSLog(@"cancel");
                                                                   
-                                                              }]; // 3
+                                                              }];
         
         [alert addAction:firstAction];
         [alert addAction:secondAction];
@@ -329,7 +317,6 @@ CLLocationManager *locationManager;
         
         [self presentViewController:alert animated:YES completion:nil]; // 6
         
-        /**/
     }
     
 }
@@ -397,7 +384,6 @@ CLLocationManager *locationManager;
 }
 
 
-
 -(void)loadSearchResults {
     MKLocalSearchResponse *results = [[BLSDataSource sharedInstance] results];
   
@@ -421,7 +407,6 @@ CLLocationManager *locationManager;
         [self.mapView setVisibleMapRect:zoomRect animated:YES];
         
     }
-   
    
 }
 
@@ -449,38 +434,6 @@ CLLocationManager *locationManager;
     }
 }
 
-
-
-
-
-
-/*-(void)shareButtonPressed: (MKAnnotationView *)annotationView {
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
-    
-    NSUInteger index = [ds.arrayOfPOIs indexOfObjectPassingTest:^BOOL(PointOfInterest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.coordinate.latitude == annotationView.annotation.coordinate.latitude &&
-            obj.coordinate.longitude == annotationView.annotation.coordinate.longitude &&
-            [obj.title isEqualToString:annotationView.annotation.title]) {
-            return YES;
-        } else {
-            return NO;
-        }
-    }];
-    
-    ds.currentPOI = ds.arrayOfPOIs[index];
-    //Call Activity Controller
-    NSString *string = @"this can be the individual note to share";
-    //NSString *subtitle = ds.currentPOI.subtitle;
-    NSString *name = ds.currentPOI.title;
-    UIActivityViewController *activityViewController =
-    [[UIActivityViewController alloc] initWithActivityItems:@[name, string]
-                                      applicationActivities:nil];
-    [self.navigationController presentViewController:activityViewController
-                                            animated:YES
-                                          completion:^{
-                                              // ...
-                                          }];
-}*/
 
 -(IBAction)deletePOIPressed:(UIButton *)button {
     NSLog(@"delete POI here");
