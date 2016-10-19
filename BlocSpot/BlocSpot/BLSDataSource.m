@@ -135,30 +135,20 @@ MKLocalSearch *localSearch;
 
 
 
-
-/*-(void)savePOIToCategory:(NSArray<PointOfInterest*> *)poisToSaveToCategory{
-    NSMutableArray *newArrayOfCategories = [[NSMutableArray alloc] init];
-    if (newArrayOfCategories == nil) {
-        newArrayOfCategories = [NSMutableArray arrayWithCapacity:100];
-    }
-    
-    for (PointOfInterest *poi in poisToSaveToCategory ) {
-        PointOfInterest *item = poi;
-        
-        //self.currentPOI.title = poi.title;
-        [newArrayOfCategories addObject:item];
-    }
-    
-    
-    
-    self.arrayOfCategories = newArrayOfCategories;
-    [self saveData];
-}*/
-
 -(void)saveNoteToPOI:(PointOfInterest*)note {
     //This should save the current one - how will we get it into the arrayOfPOIS
     self.currentPOI.noteText = note.noteText;
     NSLog(@"note text %@", note.noteText);
+    [self saveData];
+}
+
+
+//TRYING TO REVERSE???
+-(void)savePOIToCategory:(PointOfInterest*)poi {
+    self.currentCategory.poi = poi;
+    //NSLog(@"current category BLS %@", self.currentCategory.categoryName);
+    //self.currentCategory = category;
+    //NSLog(@"current poi BLS %@",category);
     [self saveData];
 }
 
@@ -196,6 +186,7 @@ MKLocalSearch *localSearch;
     NSLog(@"array of pois %@", self.arrayOfPOIs);
     NSLog(@"array of cats %@", self.arrayOfCategories);
      NSLog(@"array of pois %@", self.arrayOfPOIs);
+    NSLog(@"array of cats %@", self.arrayOfCategories);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *fullPath = [self pathForFilename:@"blocSpot.data"];

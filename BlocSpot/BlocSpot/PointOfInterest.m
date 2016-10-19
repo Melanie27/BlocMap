@@ -36,13 +36,6 @@
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
 
-/*-(instancetype)initWithPOICategory:(POICategory *)POIcategory {
-    NSString *categoryName = POIcategory.categoryName;
-    UIColor *categoryColor = POIcategory.categoryColor;
-    //NSLog(@"category name %@", categoryName);
-    //NSLog(@"category color %@", categoryColor);
-    return [self initWithCategoryName:categoryName categoryColor:categoryColor];
-}*/
 
 - (MKMapItem*)mapItem {
     NSDictionary *addrDict = @{
@@ -58,17 +51,7 @@
     return item;
 }
 
-/*-(id)initWithCategoryName:(NSString *)categoryName
-            categoryColor:(UIColor *)categoryColor{
-    self = [super init];
-    
-    if (self) {
-        _categoryName = categoryName;
-        _categoryColor = categoryColor;
-    }
-    
-    return self;
-}*/
+
 
 -(id)initWithAddress:(NSString *)address
           coordinate:(CLLocationCoordinate2D)coordinate
@@ -107,6 +90,7 @@
     [aCoder encodeObject:_categoryName forKey:@"categoryName"];
     [aCoder encodeObject:_categoryColor forKey:@"categoryColor"];
     [aCoder encodeObject:_noteText forKey:@"noteText"];
+    //[aCoder encodeObject:_poi forKey:@"poi"];
     
 }
 
@@ -124,6 +108,7 @@
         _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
         _categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
         _noteText = [aDecoder decodeObjectForKey:@"noteText"];
+        //ß_poi = [aDecoder decodeObjectForKey:@"poi"];
         
     }
     return self;
