@@ -166,21 +166,9 @@ CLLocationManager *locationManager;
 
 -(void)mapView:(MKMapView *)mapView currentPOI:(NSString*)title shareButtonPressed:(MKAnnotationView *)annotationView {
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    
-    NSUInteger index = [ds.arrayOfPOIs indexOfObjectPassingTest:^BOOL(PointOfInterest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.coordinate.latitude == annotationView.annotation.coordinate.latitude &&
-            obj.coordinate.longitude == annotationView.annotation.coordinate.longitude &&
-            [obj.title isEqualToString:annotationView.annotation.title]) {
-            return YES;
-        } else {
-            return NO;
-        }
-    }];
-    
-    ds.currentPOI = ds.arrayOfPOIs[index];
-    
+    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
     if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
-    //    [ds.arrayOfPOIs addObject:ds.currentPOI];
+        [ds.arrayOfPOIs addObject:ds.currentPOI];
     }
     //Call Activity Controller
     //GET THIS STRING FROM THE TEXTFIELD
@@ -199,6 +187,7 @@ CLLocationManager *locationManager;
     
     
 }
+
 
 -(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
     
@@ -298,16 +287,16 @@ CLLocationManager *locationManager;
                                                                }];
         UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"share poi"
                                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                 
                                                                   NSLog(@"share poi");
                                                                   BLSDataSource *ds = [BLSDataSource sharedInstance];
-                                                                  /*ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+                                                                  ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
                                                                   if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
                                                                       [ds.arrayOfPOIs addObject:ds.currentPOI];
-                                                                  }*/
+                                                                  }
                                                                   
                                                                   NSString *name = ds.currentPOI.title;
                                                                   [self mapView:self.mapView currentPOI:name shareButtonPressed:self.annotationView];
-                                                                  //[self shareButtonPressed:self.annotationView];
                                                                   
                                                               }];
         UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"delete poi"
@@ -333,12 +322,6 @@ CLLocationManager *locationManager;
     } else if (control == annotationView.detailCalloutAccessoryView) {
         NSLog(@"write a note");
     }
-    
-}
-
-
-//ATTACK TO OK BUTTON
-- (IBAction)alertButtonPressed:(id)sender {
     
 }
 
@@ -462,7 +445,7 @@ CLLocationManager *locationManager;
 
 
 
--(void)shareButtonPressed: (MKAnnotationView *)annotationView {
+/*-(void)shareButtonPressed: (MKAnnotationView *)annotationView {
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     
     NSUInteger index = [ds.arrayOfPOIs indexOfObjectPassingTest:^BOOL(PointOfInterest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -488,7 +471,7 @@ CLLocationManager *locationManager;
                                           completion:^{
                                               // ...
                                           }];
-}
+}*/
 
 -(IBAction)deletePOIPressed:(UIButton *)button {
     NSLog(@"delete POI here");
