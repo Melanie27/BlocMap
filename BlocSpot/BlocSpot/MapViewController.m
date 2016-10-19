@@ -277,13 +277,6 @@ CLLocationManager *locationManager;
                                                                        // access text from text field
                                                                       
                                                                        NSString *reviewText = ((UITextField *)[alert.textFields objectAtIndex:0]).text;
-                                                                        NSLog(@"You pressed button OK %@", reviewText);
-                                                                       BLSDataSource *ds = [BLSDataSource sharedInstance];
-                                                                       ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
-                                                                       if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
-                                                                           [ds.arrayOfPOIs addObject:ds.currentPOI];
-                                                                       }
-                                                                       
                                                                        ds.currentPOI.noteText = reviewText;
                                                                        NSLog(@"review text %@",  ds.currentPOI.noteText);
                                                                        //method that saves
