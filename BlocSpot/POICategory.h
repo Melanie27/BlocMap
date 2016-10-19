@@ -15,7 +15,8 @@
 
 @property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSString *categoryName;
-@property (nonatomic, strong) PointOfInterest *poi;
+//@property (nonatomic, strong) PointOfInterest *poi;
+@property (nonatomic, strong) PointOfInterest *cat;
 @property (nonatomic, strong) NSString *poiName;
 @property (nonatomic, strong) NSString *poiPhoneNumber;
 

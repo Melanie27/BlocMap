@@ -18,7 +18,8 @@
         self.categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
         self.inCategoryList = [aDecoder decodeBoolForKey:@"inCategoryList"];
         self.categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
-        self.poi = [aDecoder decodeObjectForKey:@"poi"];
+        //self.poi = [aDecoder decodeObjectForKey:@"poi"];
+        self.cat = [aDecoder decodeObjectForKey:@"category"];
         self.poiName = [aDecoder decodeObjectForKey:@"poiName"];
         self.poiPhoneNumber = [aDecoder decodeObjectForKey:@"poiPhoneNumber"];
         
@@ -33,7 +34,7 @@
     [aCoder encodeObject:self.categoryName forKey:@"categoryName"];
     [aCoder encodeBool:self.inCategoryList forKey:@"inCategoryList"];
     [aCoder encodeObject:self.categoryColor forKey:@"categoryColor"];
-    [aCoder encodeBool:self.inCategoryList forKey:@"poi"];
+    [aCoder encodeBool:self.inCategoryList forKey:@"category"];
     [aCoder encodeBool:self.inCategoryList forKey:@"poiName"];
     [aCoder encodeObject:self.categoryColor forKey:@"poiPhoneNumber"];
 }

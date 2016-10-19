@@ -307,10 +307,10 @@ CLLocationManager *locationManager;
                                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                   NSLog(@"share poi");
                                                                   BLSDataSource *ds = [BLSDataSource sharedInstance];
-                                                                  ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+                                                                  /*ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
                                                                   if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
                                                                       [ds.arrayOfPOIs addObject:ds.currentPOI];
-                                                                  }
+                                                                  }*/
                                                                   
                                                                   NSString *name = ds.currentPOI.title;
                                                                   [self mapView:self.mapView currentPOI:name shareButtonPressed:self.annotationView];
