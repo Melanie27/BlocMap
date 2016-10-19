@@ -194,6 +194,7 @@ MKLocalSearch *localSearch;
 
 
 - (void)saveData {
+    NSLog(@"array of pois %@", self.arrayOfPOIs);
     NSLog(@"array of cats %@", self.arrayOfCategories);
      NSLog(@"array of pois %@", self.arrayOfPOIs);
     

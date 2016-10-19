@@ -23,6 +23,7 @@
 @property (strong, nonatomic, getter=isChosen) MKAnnotationView *annotationView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) PointOfInterest *currentPOI;
+@property (strong, nonatomic) PointOfInterest *reviewText;
 @property (strong, nonatomic) POICategory *currentCategory;
 -(void)loadSearchResults;
 @end

@@ -259,7 +259,7 @@ CLLocationManager *locationManager;
                                                                                               initWithCoordinate:savedPoint.coordinate
                                                                                               addressDictionary:nil];
                                                                       
-                                                                      //NSLog(@"mkdest %@", mapDest);
+                                                                     
                                                                       
                                                                       MKMapItem *thisItem = [[MKMapItem alloc] initWithPlacemark:mapDest];
                                                                       [thisItem openInMapsWithLaunchOptions:nil];
@@ -270,18 +270,25 @@ CLLocationManager *locationManager;
        
         UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"add a brief note to poi"
                                                                style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert" message:@"This is an alert." preferredStyle:UIAlertControllerStyleAlert];
+                                                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add a note" message:@"Brief description of this POI." preferredStyle:UIAlertControllerStyleAlert];
                                                                    
-                                                                   //alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-                                                                   //UITextField *textField = [alert textFieldAtIndex:0];
-                                                                   //textField.keyboardType = UIKeyboardTypeDefault;
-                                                                   //textField.placeholder = @"Enter some text";
                                                                    
                                                                    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                        // access text from text field
                                                                       
-                                                                       NSString *text = ((UITextField *)[alert.textFields objectAtIndex:0]).text;
-                                                                        NSLog(@"You pressed button OK %@", text);
+                                                                       NSString *reviewText = ((UITextField *)[alert.textFields objectAtIndex:0]).text;
+                                                                        NSLog(@"You pressed button OK %@", reviewText);
+                                                                       BLSDataSource *ds = [BLSDataSource sharedInstance];
+                                                                       ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+                                                                       if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
+                                                                           [ds.arrayOfPOIs addObject:ds.currentPOI];
+                                                                       }
+                                                                       
+                                                                       ds.currentPOI.noteText = reviewText;
+                                                                       NSLog(@"review text %@",  ds.currentPOI.noteText);
+                                                                       //method that saves
+                                                                       [ds saveNoteToPOI:ds.currentPOI];
+
                                                                    }];
                                                                   
                                                                    
@@ -293,7 +300,7 @@ CLLocationManager *locationManager;
                                                                    
                                                                    //[alert show];
                                                                   [self presentViewController:alert animated:YES completion:nil]; 
-                                                                   NSLog(@"add a brief note");
+                                                                  
                                                                    
                                                                }];
         UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"share poi"
