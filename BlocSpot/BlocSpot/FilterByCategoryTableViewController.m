@@ -10,6 +10,7 @@
 #import "POICategory.h"
 #import "PointOfInterest.h"
 #import "BLSDataSource.h"
+#import "MapViewController.h"
 
 @interface FilterByCategoryTableViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *categories;
@@ -101,9 +102,13 @@ static NSString *CellIdentifier = @"Cat Identifier";
     }
     
     
-    
-    //NSArray *arrayofPOIS
-    //PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+    //STEPS
+    // NSString *savedPOICategofyNames =  poi.categoryName;
+    //NSLog(@"list of saved poi category names, %@", savedPOICategofyNames);
+    // 1 get the category name of the poi
+    // 2 compare the category name to the currentlySelectedCategory name
+    // if 1 and 2 match, show those pois in the map and table
+    // if one and 2 do not match hide the relevant pois
     
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
@@ -123,36 +128,19 @@ static NSString *CellIdentifier = @"Cat Identifier";
             [newlyHiddenArrayOfPOIs addObject:hiddenItem];
             ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
             NSLog(@"newly hidden %@",newlyHiddenArrayOfPOIs);
+            
+            
+            for (int i=0; i<[newlyHiddenArrayOfPOIs count]; i++) {
+                ///for each newlyhiddenarray hide the pin
+                //delegate?
+            }
+
+            
+            
         }
         
-        // NSString *savedPOICategofyNames =  poi.categoryName;
-        //NSLog(@"list of saved poi category names, %@", savedPOICategofyNames);
-        // 1 get the category name of the poi
-        // 2 compare the category name to the currentlySelectedCategory name
-        // if 1 and 2 match, show those pois in the map and table
-        // if one and 2 do not match hide the relevant pois
+        
     }
-    
-    // NSLog(@"currently seclected category %@", self.currentlySelectedCategory.categoryName);
-    //if(!self.currentlySelectedCategory) {
-        //[tableView reloadData];
-         //[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-        //[cell setSelected:NO];
-        //NSLog(@"not");
-    //} else {
-        //[cell setSelected:YES];
-        //[tableView reloadData];
-        //NSLog (@"yes %@", self.currentlySelectedCategory.categoryName);
-        //[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-        //need to get all POIs associated with this category
-   // }
-    
-   
-    //NSLog(@"current poi %@", ds.currentPOI);
-    
-    //NSLog(@"perform filter on all points of interest with the selected category, dismiss the view controller, show the map with only the selected category markers");
-    
-    
     
 }
 
