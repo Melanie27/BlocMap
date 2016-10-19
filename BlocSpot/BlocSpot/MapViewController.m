@@ -164,20 +164,20 @@ CLLocationManager *locationManager;
     
 }
 
--(void)mapView:(MKMapView *)mapView currentPOI:(NSString*)title shareButtonPressed:(MKAnnotationView *)annotationView {
+-(void)mapView:(MKMapView *)mapView currentPOI:(NSString*)title currentPOI:(NSString*)reviewText shareButtonPressed:(MKAnnotationView *)annotationView {
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
     if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
         [ds.arrayOfPOIs addObject:ds.currentPOI];
     }
     //Call Activity Controller
-    //GET THIS STRING FROM THE TEXTFIELD
-    NSString *string = @"this can be the individual note to share";
+    
+    //NSString *string = @"this can be the individual note to share";
     //NSString *dstitle = title;
     
     
     UIActivityViewController *activityViewController =
-    [[UIActivityViewController alloc] initWithActivityItems:@[title, string]
+    [[UIActivityViewController alloc] initWithActivityItems:@[title, reviewText]
                                       applicationActivities:nil];
     [self.navigationController presentViewController:activityViewController
                                             animated:YES
@@ -267,7 +267,7 @@ CLLocationManager *locationManager;
                                                                       
                                                                        NSString *reviewText = ((UITextField *)[alert.textFields objectAtIndex:0]).text;
                                                                        ds.currentPOI.noteText = reviewText;
-                                                                       NSLog(@"review text %@",  ds.currentPOI.noteText);
+                                                                      NSLog(@"review text %@",  reviewText);
                                                                        //method that saves
                                                                        [ds saveNoteToPOI:ds.currentPOI];
 
@@ -290,13 +290,24 @@ CLLocationManager *locationManager;
                                                                  
                                                                   NSLog(@"share poi");
                                                                   BLSDataSource *ds = [BLSDataSource sharedInstance];
-                                                                  ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+                                                                  //ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
                                                                   if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
                                                                       [ds.arrayOfPOIs addObject:ds.currentPOI];
                                                                   }
                                                                   
                                                                   NSString *name = ds.currentPOI.title;
-                                                                  [self mapView:self.mapView currentPOI:name shareButtonPressed:self.annotationView];
+                                                                 NSString *reviewText = ds.currentPOI.noteText;
+                                                                  NSLog(@"note %@", ds.currentPOI.noteText);
+                                                                  //NSString *reviewText = @"";
+                                                                  //NSString *reviewText = ds.currentPOI.noteText;
+                                                                   NSLog(@"review text %@",  reviewText);
+                                                                  //test if user somehow entered empty string
+                                                                  if ([reviewText length] == 0) {
+                                                                      reviewText = @"add a review if you haven't";
+                                                                  }
+                                                                  
+                                                                  [self mapView:self.mapView currentPOI:name currentPOI:reviewText shareButtonPressed:self.annotationView ];
+                                                                  
                                                                   
                                                               }];
         UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"delete poi"
@@ -319,8 +330,6 @@ CLLocationManager *locationManager;
         [self presentViewController:alert animated:YES completion:nil]; // 6
         
         /**/
-    } else if (control == annotationView.detailCalloutAccessoryView) {
-        NSLog(@"write a note");
     }
     
 }
