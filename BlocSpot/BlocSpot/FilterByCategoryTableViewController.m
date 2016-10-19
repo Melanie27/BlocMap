@@ -79,27 +79,73 @@ static NSString *CellIdentifier = @"Cat Identifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+   
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
-    //category = self.currentlySelectedCategory;
-    NSLog(@"category %@", category.categoryName);
+    POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
+    
+    //NSLog(@"category %@", category.categoryName);
     self.currentlySelectedCategory = category;
-    self.currentlySelectedCategory.categoryName = category.categoryName;
-    NSLog(@"currently seclected category %@", self.currentlySelectedCategory.categoryName);
-    if(!self.currentlySelectedCategory) {
+    //get the order of assignment correct
+    NSLog(@"category %@", self.currentlySelectedCategory);
+    NSLog(@"category %@", self.currentlySelectedCategory.categoryName);
+   
+    NSMutableArray *newlySelectedArrayOfPOIs = [[NSMutableArray alloc]init];
+    if (newlySelectedArrayOfPOIs == nil) {
+        newlySelectedArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
+    }
+    
+    NSMutableArray *newlyHiddenArrayOfPOIs = [[NSMutableArray alloc]init];
+    if (newlySelectedArrayOfPOIs == nil) {
+        newlySelectedArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
+    }
+    
+    
+    
+    //NSArray *arrayofPOIS
+    //PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+    
+    
+    for (PointOfInterest *poi in ds.arrayOfPOIs) {
+        //NSLog(@"array of pois title %@", poi.title);
+        //NSLog(@"array of pois category %@", poi.category);
+       
+        if(self.currentlySelectedCategory == poi.category) {
+            
+            //PRint a list of the POIS that meet this critera
+            PointOfInterest *filteredItem = [[PointOfInterest alloc] init];
+            [newlySelectedArrayOfPOIs addObject:filteredItem];
+            ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
+            NSLog(@"newly selected %@",newlySelectedArrayOfPOIs);
+        } else if (self.currentlySelectedCategory != poi.category){
+            
+            PointOfInterest *hiddenItem = [[PointOfInterest alloc] init];
+            [newlyHiddenArrayOfPOIs addObject:hiddenItem];
+            ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
+            NSLog(@"newly hidden %@",newlyHiddenArrayOfPOIs);
+        }
+        
+        // NSString *savedPOICategofyNames =  poi.categoryName;
+        //NSLog(@"list of saved poi category names, %@", savedPOICategofyNames);
+        // 1 get the category name of the poi
+        // 2 compare the category name to the currentlySelectedCategory name
+        // if 1 and 2 match, show those pois in the map and table
+        // if one and 2 do not match hide the relevant pois
+    }
+    
+    // NSLog(@"currently seclected category %@", self.currentlySelectedCategory.categoryName);
+    //if(!self.currentlySelectedCategory) {
         //[tableView reloadData];
          //[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
         //[cell setSelected:NO];
-        NSLog(@"not");
-    } else {
+        //NSLog(@"not");
+    //} else {
         //[cell setSelected:YES];
         //[tableView reloadData];
-        NSLog (@"yes %@", self.currentlySelectedCategory.categoryName);
+        //NSLog (@"yes %@", self.currentlySelectedCategory.categoryName);
         //[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
         //need to get all POIs associated with this category
-    }
+   // }
     
    
     //NSLog(@"current poi %@", ds.currentPOI);
