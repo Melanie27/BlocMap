@@ -133,7 +133,10 @@ MKLocalSearch *localSearch;
 //    self.arrayOfPOIs = newArrayOfPOIs;
 }
 
--(void)savePOIToCategory:(NSArray<PointOfInterest*> *)poisToSaveToCategory{
+
+
+
+/*-(void)savePOIToCategory:(NSArray<PointOfInterest*> *)poisToSaveToCategory{
     NSMutableArray *newArrayOfCategories = [[NSMutableArray alloc] init];
     if (newArrayOfCategories == nil) {
         newArrayOfCategories = [NSMutableArray arrayWithCapacity:100];
@@ -150,27 +153,18 @@ MKLocalSearch *localSearch;
     
     self.arrayOfCategories = newArrayOfCategories;
     [self saveData];
+}*/
+
+-(void)saveNoteToPOI:(PointOfInterest*)note {
+    //This should save the current one - how will we get it into the arrayOfPOIS
+    self.currentPOI.noteText = note.noteText;
+    NSLog(@"note text %@", note.noteText);
+    [self saveData];
 }
 
 -(void)saveCategoryToPOI:(POICategory *)cat {
-    //NSLog(@"current poi to be saved to this category %@", ds.currentPOI);
-    //NSLog(@"current poi title %@", ds.currentPOI.title);
-    //NSLog(@"current poi subtitle %@", ds.currentPOI.subtitle);
-    //NSLog(@"current cat name %@", ds.currentPOI.categoryName);
-    //NSLog(@"current cat color %@", ds.currentPOI.categoryColor);
-    //NSLog(@"current poi cat %@", ds.currentPOI.category);
-    //self.currentPOI = cat.poi;
-   
-    //self.currentPOI.subtitle = cat.poiPhoneNumber;
-    self.currentPOI.category = cat;
-    //self.currentPOI.title = poi.title;
-    //self.currentPOI.subtitle = poi.subtitle;
-    //self.currentPOI.categoryName = poi.categoryName;
-    //self.currentPOI.categoryColor = poi.categoryColor;
-    //NSLog(@"current poi cat BLS %@", self.currentPOI.category);
-    //NSLog(@"current poi title BLS %@", self.currentPOI.title);
     
-    //self.currentPOI.categoryColor = cat.categoryColor;
+    self.currentPOI.category = cat;
     [self saveData];
 }
 
@@ -201,6 +195,7 @@ MKLocalSearch *localSearch;
 
 - (void)saveData {
     NSLog(@"array of cats %@", self.arrayOfCategories);
+     NSLog(@"array of pois %@", self.arrayOfPOIs);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *fullPath = [self pathForFilename:@"blocSpot.data"];

@@ -49,6 +49,8 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave;
 
 //- (void)saveCategoryToPOI:(POICategory *)cat andThen:(SaveCatToPOICompletionHandler)completionHandler;
+-(void)saveNoteToPOI:(PointOfInterest*)note;
+
 - (void)saveCategoryToPOI:(POICategory *)cat;
 //-(void)savePOIToCategory:(PointOfInterest*)poi;
 //-(void)savePOIToCategory:(PointOfInterest*)poisToSaveToCategory;

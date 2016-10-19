@@ -278,8 +278,12 @@ CLLocationManager *locationManager;
                                                                    //textField.placeholder = @"Enter some text";
                                                                    
                                                                    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                                       NSLog(@"You pressed button OK");
-                                                                   }]; // 8
+                                                                       // access text from text field
+                                                                      
+                                                                       NSString *text = ((UITextField *)[alert.textFields objectAtIndex:0]).text;
+                                                                        NSLog(@"You pressed button OK %@", text);
+                                                                   }];
+                                                                  
                                                                    
                                                                    [alert addAction:defaultAction]; // 9
                                                                    
@@ -335,19 +339,7 @@ CLLocationManager *locationManager;
 
 //ATTACK TO OK BUTTON
 - (IBAction)alertButtonPressed:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert" message:@"This is an alert." preferredStyle:UIAlertControllerStyleAlert]; // 7
     
-    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        NSLog(@"You pressed button OK");
-    }]; // 8
-    
-    [alert addAction:defaultAction]; // 9
-    
-    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"Input data...";
-    }]; // 10
-    
-    [self presentViewController:alert animated:YES completion:nil]; // 11
 }
 
 
