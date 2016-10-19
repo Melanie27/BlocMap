@@ -17,8 +17,8 @@
 @property (nonatomic, strong) NSString *categoryName;
 //@property (nonatomic, strong) PointOfInterest *poi;
 @property (nonatomic, strong) PointOfInterest *cat;
-@property (nonatomic, strong) NSString *poiName;
-@property (nonatomic, strong) NSString *poiPhoneNumber;
+//@property (nonatomic, strong) NSString *poiName;
+//@property (nonatomic, strong) NSString *poiPhoneNumber;
 
 @property  BOOL inCategoryList;
 @property (nonatomic, strong) NSMutableOrderedSet *categories;

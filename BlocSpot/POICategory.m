@@ -48,7 +48,7 @@
     
     //Config
     [category setCategoryName:categoryName];
-    [category setInCategoryList:NO];
+    [category setInCategoryList:YES];
     [category setUuid:[[NSUUID UUID] UUIDString]];
     [category setCategoryColor:categoryColor];
     

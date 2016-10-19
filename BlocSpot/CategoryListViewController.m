@@ -114,8 +114,8 @@ BLSDataSource *ds;
     NSLog(@"current poi title %@", ds.currentPOI.title);
     NSLog(@"current poi subtitle %@", ds.currentPOI.subtitle);
      NSLog(@"current cat  %@", ds.currentPOI.category);
-    NSLog(@"current cat name %@", ds.currentPOI.categoryName);
-    NSLog(@"current cat color %@", ds.currentPOI.categoryColor);
+    //NSLog(@"current cat name %@", ds.currentPOI.categoryName);
+    //NSLog(@"current cat color %@", ds.currentPOI.categoryColor);
     NSLog(@"current poi cat %@", ds.currentPOI.category);
     
     

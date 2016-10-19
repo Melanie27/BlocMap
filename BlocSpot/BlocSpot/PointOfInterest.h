@@ -44,8 +44,8 @@
 @property (copy) NSString *address;
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (copy) NSNumber *identifier;
-@property (nonatomic, copy) NSString *imageKey;
-@property (nonatomic, copy) UIImage *image;
+//@property (nonatomic, copy) NSString *imageKey;
+//@property (nonatomic, copy) UIImage *image;
 
 
 
