@@ -51,7 +51,7 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 //- (void)saveCategoryToPOI:(POICategory *)cat andThen:(SaveCatToPOICompletionHandler)completionHandler;
 - (void)saveCategoryToPOI:(POICategory *)cat;
 //-(void)savePOIToCategory:(PointOfInterest*)poi;
--(void)savePOIToCategory:(PointOfInterest*)poisToSaveToCategory;
+//-(void)savePOIToCategory:(PointOfInterest*)poisToSaveToCategory;
 - (void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;
 -(void)saveData;
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;

@@ -140,9 +140,9 @@ MKLocalSearch *localSearch;
     }
     
     for (PointOfInterest *poi in poisToSaveToCategory ) {
-        PointOfInterest *item = self.currentPOI;
+        PointOfInterest *item = poi;
         
-        self.currentPOI.title = poi.title;
+        //self.currentPOI.title = poi.title;
         [newArrayOfCategories addObject:item];
     }
     
@@ -152,7 +152,7 @@ MKLocalSearch *localSearch;
     [self saveData];
 }
 
--(void)saveCategoryToPOI:(POICategory *)cat andThen:(PointOfInterest*) poi{
+-(void)saveCategoryToPOI:(POICategory *)cat {
     //NSLog(@"current poi to be saved to this category %@", ds.currentPOI);
     //NSLog(@"current poi title %@", ds.currentPOI.title);
     //NSLog(@"current poi subtitle %@", ds.currentPOI.subtitle);
@@ -163,12 +163,12 @@ MKLocalSearch *localSearch;
    
     //self.currentPOI.subtitle = cat.poiPhoneNumber;
     self.currentPOI.category = cat;
-    self.currentPOI.title = poi.title;
+    //self.currentPOI.title = poi.title;
     //self.currentPOI.subtitle = poi.subtitle;
-    self.currentPOI.categoryName = poi.categoryName;
-    self.currentPOI.categoryColor = poi.categoryColor;
-    NSLog(@"current poi cat BLS %@", self.currentPOI.category);
-    NSLog(@"current poi title BLS %@", self.currentPOI.title);
+    //self.currentPOI.categoryName = poi.categoryName;
+    //self.currentPOI.categoryColor = poi.categoryColor;
+    //NSLog(@"current poi cat BLS %@", self.currentPOI.category);
+    //NSLog(@"current poi title BLS %@", self.currentPOI.title);
     
     //self.currentPOI.categoryColor = cat.categoryColor;
     [self saveData];

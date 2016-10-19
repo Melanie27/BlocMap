@@ -122,7 +122,7 @@ BLSDataSource *ds;
     //TODO change this to an NSSet so it doesn't get double saved
     //[ds savePOIToCategory:poi];
     //[ds saveCategoryToPOI:category];
-    [ds savePOIToCategory:poi];
+    //[ds savePOIToCategory:poi];
     [ds saveCategoryToPOI:category];
     [ds saveData];
     
