@@ -76,10 +76,18 @@ MKLocalSearch *localSearch;
 - (void) deletePOIItem:(PointOfInterest *)item {
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfPOIs"];
     [mutableArrayWithKVO removeObject:item];
-     NSLog(@"item %@", item);
+     //NSLog(@"item %@", item);
     [_arrayOfPOIs removeObject:item];
-    NSLog(@"deleted");
-    NSLog(@"array of POIS %@", self.arrayOfPOIs);
+    
+   
+    [self saveData];
+}
+
+-(void)deleteCategory:(POICategory *)cat {
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfCategories"];
+    [mutableArrayWithKVO removeObject:cat];
+     [self.arrayOfCategories removeObject:cat];
+     NSLog(@"array of cats %@", self.arrayOfCategories);
     [self saveData];
 }
 
