@@ -11,7 +11,7 @@
 #import "PointOfInterest.h"
 
 @interface BLSDataSource () {
-     NSMutableArray *_arrayOfPOIs;
+     //NSMutableArray *_arrayOfPOIs;
 }
 @end
 
@@ -76,8 +76,11 @@ MKLocalSearch *localSearch;
 - (void) deletePOIItem:(PointOfInterest *)item {
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfPOIs"];
     [mutableArrayWithKVO removeObject:item];
-    //[self.arrayOfPOIs removeObject:item];
+     NSLog(@"item %@", item);
+    [_arrayOfPOIs removeObject:item];
     NSLog(@"deleted");
+    NSLog(@"array of POIS %@", self.arrayOfPOIs);
+    [self saveData];
 }
 
 
@@ -88,13 +91,7 @@ MKLocalSearch *localSearch;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        /*NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-        NSMutableArray<PointOfInterest*> *storedMapItems = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
-        
-        self.arrayOfPOIs = storedMapItems;
-        completionHandler(storedMapItems);*/
-       
-        //CRASHING
+
         NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
         NSArray *fileDataArray = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
         
@@ -105,9 +102,21 @@ MKLocalSearch *localSearch;
         if (self.arrayOfCategories == nil) { self.arrayOfCategories = [@[] mutableCopy]; }
         
         completionHandler(self.arrayOfPOIs);
-        
-        
+    
     });
+}
+
+-(void)loadFilteredData:(MarkersSavedCompletionHandler)completionHandler {
+    NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
+    NSArray *fileDataArray = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
+    
+    self.filteredArrayOfPOIs = fileDataArray[2];
+    self.filteredArrayOfCategories = fileDataArray[3];
+    
+    if (self.filteredArrayOfPOIs == nil) { self.filteredArrayOfPOIs = [@[] mutableCopy]; }
+    if (self.filteredArrayOfCategories == nil) { self.filteredArrayOfCategories = [@[] mutableCopy]; }
+    
+    completionHandler(self.filteredArrayOfPOIs);
 }
 
 #pragma saving to disc

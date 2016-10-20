@@ -65,7 +65,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"show a detail view now");
+    //NSLog(@"show a detail view now");
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -74,14 +74,14 @@
     
     // Configure the cell...
      resultCell.delegate = self;
-    //TODO crashing when I get to bottom of table OR not showing all the saved spots
+    
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     // Fetch Item
     PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
-    //[resultCell.textLabel setText:[category categoryName]];
+   
     resultCell.entryTitle.text = poi.title;
     resultCell.entrySubtitle.text = poi.subtitle;
-     NSLog(@"pois array for table %@", poi);
+    // NSLog(@"pois array for table %@", poi);
    
     
 
@@ -137,9 +137,12 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         NSLog(@"please delete");
-        PointOfInterest *item = [BLSDataSource sharedInstance].arrayOfPOIs[indexPath.row];
-    
+         BLSDataSource *ds = [BLSDataSource sharedInstance];
+        //PointOfInterest *item = [BLSDataSource sharedInstance].arrayOfPOIs[indexPath.row];
+        PointOfInterest *item = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
         [[BLSDataSource sharedInstance] deletePOIItem:item];
+        //[[BLSDataSource sharedInstance] removeObjectFromArrayOfPOIsAtIndex:indexPath.row];
+        
         //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
