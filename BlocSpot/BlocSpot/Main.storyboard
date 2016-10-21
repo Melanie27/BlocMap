@@ -453,7 +453,7 @@
         <!--Filter By Category Table View Controller-->
         <scene sceneID="xu8-9O-Nh7">
             <objects>
-                <tableViewController id="XO0-Ji-e9g" customClass="FilterByCategoryTableViewController" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="XO0-Ji-e9g" customClass="FilterByCategoryTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6LM-Yv-VAM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

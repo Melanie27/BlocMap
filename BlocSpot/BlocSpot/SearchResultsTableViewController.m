@@ -136,14 +136,13 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        NSLog(@"please delete");
-         BLSDataSource *ds = [BLSDataSource sharedInstance];
-        //PointOfInterest *item = [BLSDataSource sharedInstance].arrayOfPOIs[indexPath.row];
+       
+        BLSDataSource *ds = [BLSDataSource sharedInstance];
         PointOfInterest *item = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
         [[BLSDataSource sharedInstance] deletePOIItem:item];
-        //[[BLSDataSource sharedInstance] removeObjectFromArrayOfPOIsAtIndex:indexPath.row];
+       
         
-        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   

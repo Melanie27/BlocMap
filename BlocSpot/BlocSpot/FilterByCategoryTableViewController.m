@@ -27,10 +27,10 @@ static NSString *CellIdentifier = @"Cat Identifier";
         //set title
         self.title = @"Filter by Category";
         
-        //Load categories
         BLSDataSource *ds = [BLSDataSource sharedInstance];
         ds = [BLSDataSource sharedInstance];
-        //[self loadCategories];
+        
+        
     }
     
     return self;
@@ -43,10 +43,12 @@ static NSString *CellIdentifier = @"Cat Identifier";
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     NSLog(@"Categories > %@", ds.arrayOfCategories);
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //self.clearsSelectionOnViewWillAppear = NO;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSLog(@"array of pois %@", ds.arrayOfPOIs);
+   
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,6 +76,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     
     // Configure Cell
+    
     [cell.textLabel setText:[category categoryName]];
     
     return cell;
@@ -81,25 +84,20 @@ static NSString *CellIdentifier = @"Cat Identifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
-    
-    //NSLog(@"category %@", category.categoryName);
     self.currentlySelectedCategory = category;
-    //get the order of assignment correct
-    NSLog(@"category %@", self.currentlySelectedCategory);
-    NSLog(@"category %@", self.currentlySelectedCategory.categoryName);
+    self.currentlySelectedCategory.categoryName= category.categoryName;
+    NSLog(@"tapped cat  %@", self.currentlySelectedCategory);
+    NSLog(@"tapped cat name %@", self.currentlySelectedCategory.categoryName);
    
     NSMutableArray *newlySelectedArrayOfPOIs = [[NSMutableArray alloc]init];
     if (newlySelectedArrayOfPOIs == nil) {
         newlySelectedArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
     }
     
-    NSMutableArray *newlyHiddenArrayOfPOIs = [[NSMutableArray alloc]init];
-    if (newlySelectedArrayOfPOIs == nil) {
-        newlySelectedArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
-    }
     
     
     //STEPS
@@ -109,31 +107,32 @@ static NSString *CellIdentifier = @"Cat Identifier";
     // 2 compare the category name to the currentlySelectedCategory name
     // if 1 and 2 match, show those pois in the map and table
     // if one and 2 do not match hide the relevant pois
-    
+   
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
-        //NSLog(@"array of pois title %@", poi.title);
-        //NSLog(@"array of pois category %@", poi.category);
-       
+       // NSLog(@"current cat %@",self.currentlySelectedCategory);
+        //NSLog(@"poi after  %@", poi.category.categoryName);
+        //NSLog(@"in loop array of pois %@", ds.arrayOfPOIs);
         if(self.currentlySelectedCategory == poi.category) {
+            NSLog(@"each poi that matches %@", poi);
             
             //PRint a list of the POIS that meet this critera
-            PointOfInterest *filteredItem = [[PointOfInterest alloc] init];
-            [newlySelectedArrayOfPOIs addObject:filteredItem];
-            ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
-            NSLog(@"newly selected %@",newlySelectedArrayOfPOIs);
-        } else if (self.currentlySelectedCategory != poi.category){
+            PointOfInterest *matchingItem = [[PointOfInterest alloc] init];
+            [newlySelectedArrayOfPOIs addObject:matchingItem];
+            NSLog(@"new array %@", newlySelectedArrayOfPOIs);
+            //NSLog(@"newly selected %@",newlySelectedArrayOfPOIs);
+        //} else if (self.currentlySelectedCategory != poi.category){
             
-            PointOfInterest *hiddenItem = [[PointOfInterest alloc] init];
-            [newlyHiddenArrayOfPOIs addObject:hiddenItem];
-            ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
-            NSLog(@"newly hidden %@",newlyHiddenArrayOfPOIs);
+            //PointOfInterest *hiddenItem = [[PointOfInterest alloc] init];
+            //[newlyHiddenArrayOfPOIs addObject:hiddenItem];
+            //ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
+            //NSLog(@"newly hidden %@",newlyHiddenArrayOfPOIs);
             
             
-            for (int i=0; i<[newlyHiddenArrayOfPOIs count]; i++) {
+            //for (int i=0; i<[newlyHiddenArrayOfPOIs count]; i++) {
                 ///for each newlyhiddenarray hide the pin
                 //delegate?
-            }
+            //}
 
             
             

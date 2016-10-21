@@ -11,7 +11,7 @@
 #import "PointOfInterest.h"
 
 @interface BLSDataSource () {
-     //NSMutableArray *_arrayOfPOIs;
+
 }
 @end
 
@@ -272,13 +272,13 @@ MKLocalSearch *localSearch;
         }*/
         
         self.results = response;
-        NSLog(@"response, %@", response);
+        //NSLog(@"response, %@", response);
        
         
         
         for (MKMapItem *item in response.mapItems) {
-            NSString *name = item.name;
-            NSLog(@"%@",name);
+            //NSString *name = item.name;
+            //NSLog(@"%@",name);
             PointOfInterest *poi = [[PointOfInterest alloc] initWithMKMapItem:item];
             [self.arrayOfPOIs addObject:poi];
         }
