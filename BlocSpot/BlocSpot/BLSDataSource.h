@@ -58,6 +58,8 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 -(void)saveCategoryToPOI:(POICategory *)cat;
 -(void)savePOIToCategory:(PointOfInterest*)poi;
 
+-(void)saveFilteredPOISAndThen:(MKLocalSearchCompletionHandler)completionHandler;
+
 
 -(void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;
 -(void)saveData;

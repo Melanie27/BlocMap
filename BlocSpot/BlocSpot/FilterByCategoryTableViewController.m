@@ -47,6 +47,9 @@ static NSString *CellIdentifier = @"Cat Identifier";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
     NSLog(@"array of pois %@", ds.arrayOfPOIs);
+    // Create Add Button
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"No Filters" style:(UIBarButtonItemStylePlain) target:self action:@selector(removeFilters:)];
+   
    
    
 }
@@ -54,6 +57,10 @@ static NSString *CellIdentifier = @"Cat Identifier";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)removeFilters:(id)sender {
+    NSLog(@"for heavens sake just look at all of them");
 }
 
 #pragma mark - Table view data source
@@ -120,7 +127,16 @@ static NSString *CellIdentifier = @"Cat Identifier";
             PointOfInterest *matchingItem = [[PointOfInterest alloc] init];
             [newlySelectedArrayOfPOIs addObject:matchingItem];
             NSLog(@"new array %@", newlySelectedArrayOfPOIs);
-            //NSLog(@"newly selected %@",newlySelectedArrayOfPOIs);
+            //NSLog(@"matching item %@", matchingItem);
+            ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
+            
+            
+            //SAVE FILTERED DATA
+            //NEED TO CAPTURE THIS DATA IN THE MODEL
+            //NEED TO UPDATE THE RESULTS TABLE VIEW
+            
+            
+            
         //} else if (self.currentlySelectedCategory != poi.category){
             
             //PointOfInterest *hiddenItem = [[PointOfInterest alloc] init];

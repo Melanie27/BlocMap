@@ -202,8 +202,8 @@ MKLocalSearch *localSearch;
 - (void)saveData {
     NSLog(@"array of pois %@", self.arrayOfPOIs);
     NSLog(@"array of cats %@", self.arrayOfCategories);
-     NSLog(@"array of pois %@", self.arrayOfPOIs);
-    NSLog(@"array of cats %@", self.arrayOfCategories);
+     NSLog(@"array of pois %@", self.filteredArrayOfPOIs);
+   
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
@@ -228,6 +228,14 @@ MKLocalSearch *localSearch;
     });
 }
 
+- (void) saveFilteredData:(MKLocalSearchCompletionHandler)completionHandler{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self saveData];
+        
+        completionHandler(nil,nil);
+        
+    });
+}
 
 
 
