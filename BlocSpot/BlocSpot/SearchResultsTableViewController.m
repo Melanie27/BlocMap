@@ -81,10 +81,10 @@
    
     resultCell.entryTitle.text = poi.title;
     resultCell.entrySubtitle.text = poi.subtitle;
-    // NSLog(@"pois array for table %@", poi);
+     NSLog(@"pois array for table %@", poi);
+    NSLog(@"where title? %@", poi.title);
    
     
-
     return resultCell;
 }
 

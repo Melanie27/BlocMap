@@ -91,10 +91,11 @@ static NSString *CellIdentifier = @"Cat Identifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+   
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
+    
     self.currentlySelectedCategory = category;
     self.currentlySelectedCategory.categoryName= category.categoryName;
     NSLog(@"tapped cat  %@", self.currentlySelectedCategory);
@@ -117,7 +118,8 @@ static NSString *CellIdentifier = @"Cat Identifier";
    
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
-       // NSLog(@"current cat %@",self.currentlySelectedCategory);
+      
+        // NSLog(@"current cat %@",self.currentlySelectedCategory);
         //NSLog(@"poi after  %@", poi.category.categoryName);
         //NSLog(@"in loop array of pois %@", ds.arrayOfPOIs);
         if(self.currentlySelectedCategory == poi.category) {
@@ -126,9 +128,26 @@ static NSString *CellIdentifier = @"Cat Identifier";
             //PRint a list of the POIS that meet this critera
             PointOfInterest *matchingItem = [[PointOfInterest alloc] init];
             [newlySelectedArrayOfPOIs addObject:matchingItem];
+           
+            
+            matchingItem.title = poi.title;
+            NSLog(@"matching title pre save %@", matchingItem.title);
+            
+            //matchingItem.subtitle = poi.subtitle;
             NSLog(@"new array %@", newlySelectedArrayOfPOIs);
-            //NSLog(@"matching item %@", matchingItem);
-            ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
+            NSLog(@"matching item %@", matchingItem);
+            ds.arrayOfPOIs = newlySelectedArrayOfPOIs;  //newlySelectedArrayOfPOIs = ds.arrayOfPOIs;
+            NSLog(@"filtered array of POIS %@", ds.arrayOfPOIs);
+           
+            [ds saveData];
+            
+           
+            
+            NSLog(@"poi title post save %@",matchingItem.title);
+            
+                
+                            
+           
             
             
             //SAVE FILTERED DATA
