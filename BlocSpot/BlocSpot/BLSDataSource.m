@@ -105,27 +105,17 @@ MKLocalSearch *localSearch;
         
         self.arrayOfPOIs = fileDataArray[0];
         self.arrayOfCategories = fileDataArray[1];
+        self.filteredArrayOfPOIs = fileDataArray[2];
         
         if (self.arrayOfPOIs == nil) { self.arrayOfPOIs = [@[] mutableCopy]; }
         if (self.arrayOfCategories == nil) { self.arrayOfCategories = [@[] mutableCopy]; }
+        if (self.filteredArrayOfPOIs == nil) { self.filteredArrayOfPOIs = [@[] mutableCopy]; }
         
         completionHandler(self.arrayOfPOIs);
     
     });
 }
 
--(void)loadFilteredData:(MarkersSavedCompletionHandler)completionHandler {
-    NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
-    NSArray *fileDataArray = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
-    
-    self.filteredArrayOfPOIs = fileDataArray[2];
-    self.filteredArrayOfCategories = fileDataArray[3];
-    
-    if (self.filteredArrayOfPOIs == nil) { self.filteredArrayOfPOIs = [@[] mutableCopy]; }
-    if (self.filteredArrayOfCategories == nil) { self.filteredArrayOfCategories = [@[] mutableCopy]; }
-    
-    completionHandler(self.filteredArrayOfPOIs);
-}
 
 #pragma saving to disc
 - (NSString *) pathForFilename:(NSString *) filename {
@@ -202,12 +192,12 @@ MKLocalSearch *localSearch;
 - (void)saveData {
     NSLog(@" bls array of pois %@", self.arrayOfPOIs);
     NSLog(@"bls array of cats %@", self.arrayOfCategories);
-     //NSLog(@"array of pois %@", self.filteredArrayOfPOIs);
+     NSLog(@"array of pois %@", self.filteredArrayOfPOIs);
    
-    
+    if (self.filteredArrayOfPOIs == nil) { self.filteredArrayOfPOIs = [@[] mutableCopy]; }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
-        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:@[ self.arrayOfPOIs, self.arrayOfCategories]];
+        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:@[ self.arrayOfPOIs, self.arrayOfCategories, self.filteredArrayOfPOIs]];
         
         NSError *dataError;
         BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
@@ -220,15 +210,6 @@ MKLocalSearch *localSearch;
 }
 
 - (void) savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self saveData];
-        
-        completionHandler(nil,nil);
-        
-    });
-}
-
-- (void) saveFilteredData:(MKLocalSearchCompletionHandler)completionHandler{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self saveData];
         
@@ -290,6 +271,7 @@ MKLocalSearch *localSearch;
             //NSLog(@"%@",name);
             PointOfInterest *poi = [[PointOfInterest alloc] initWithMKMapItem:item];
             [self.arrayOfPOIs addObject:poi];
+            [self.filteredArrayOfPOIs addObject:poi];
         }
     
                 completionHandler(response, error);

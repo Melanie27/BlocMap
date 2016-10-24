@@ -60,7 +60,10 @@ static NSString *CellIdentifier = @"Cat Identifier";
 }
 
 -(void)removeFilters:(id)sender {
-    NSLog(@"for heavens sake just look at all of them");
+    NSLog(@"unfilter");
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    ds.filteredArrayOfPOIs = nil;
+    [ds saveData];
 }
 
 #pragma mark - Table view data source
@@ -93,7 +96,10 @@ static NSString *CellIdentifier = @"Cat Identifier";
    
    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
+     BLSDataSource *ds = [BLSDataSource sharedInstance];
+    //always set filtered set to nil here
+    ds.filteredArrayOfPOIs = nil;
+   
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     
     self.currentlySelectedCategory = category;
@@ -131,13 +137,16 @@ static NSString *CellIdentifier = @"Cat Identifier";
            
             
             matchingItem.title = poi.title;
+            matchingItem.noteText = poi.subtitle;
             NSLog(@"matching title pre save %@", matchingItem.title);
             
             //matchingItem.subtitle = poi.subtitle;
             NSLog(@"new array %@", newlySelectedArrayOfPOIs);
             NSLog(@"matching item %@", matchingItem);
-            ds.arrayOfPOIs = newlySelectedArrayOfPOIs;  //newlySelectedArrayOfPOIs = ds.arrayOfPOIs;
-            NSLog(@"filtered array of POIS %@", ds.arrayOfPOIs);
+            //ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
+            
+            ds.filteredArrayOfPOIs = newlySelectedArrayOfPOIs;
+            NSLog(@"filtered array of POIS %@", ds.filteredArrayOfPOIs);
            
             [ds saveData];
             

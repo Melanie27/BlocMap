@@ -60,7 +60,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   return [[BLSDataSource sharedInstance] arrayOfPOIs].count;
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    if([ds.filteredArrayOfPOIs count] > 0)  {
+        //return 4;
+        //appears to be returning the number of categories rather than the number of pois
+        return [[BLSDataSource sharedInstance] filteredArrayOfPOIs].count;
+    } else {
+    
+       return [[BLSDataSource sharedInstance] arrayOfPOIs].count;
+    }
 
 }
 
@@ -77,12 +85,23 @@
     
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     // Fetch Item
-    PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+    //Choose to display a filtered set or the entire thang
+    if([ds.filteredArrayOfPOIs count] > 0 && [ds.filteredArrayOfPOIs count]> indexPath.row) {
+       PointOfInterest *poi = [ds.filteredArrayOfPOIs objectAtIndex:[indexPath row]];
+        resultCell.entryTitle.text = poi.title;
+        resultCell.entrySubtitle.text = poi.subtitle;
+        
+        //TODO - don't show any other cats
+    } else if ([ds.arrayOfPOIs count ]>  0 && [ds.filteredArrayOfPOIs count] < 1 && [ds.arrayOfPOIs count] > indexPath.row  ){
+        PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+        resultCell.entryTitle.text = poi.title;
+        resultCell.entrySubtitle.text = poi.subtitle;
+    }
    
-    resultCell.entryTitle.text = poi.title;
-    resultCell.entrySubtitle.text = poi.subtitle;
-     NSLog(@"pois array for table %@", poi);
-    NSLog(@"where title? %@", poi.title);
+    
+    
+    
+    
    
     
     return resultCell;

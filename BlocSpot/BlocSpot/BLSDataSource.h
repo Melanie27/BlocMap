@@ -48,7 +48,7 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 
 
 -(void)loadSavedData:(MarkersSavedCompletionHandler)completionHandler;
--(void)loadFilteredData:(MarkersSavedCompletionHandler)completionHandler;
+//-(void)loadFilteredData:(MarkersSavedCompletionHandler)completionHandler;
 
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave;
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave;
@@ -58,7 +58,7 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 -(void)saveCategoryToPOI:(POICategory *)cat;
 -(void)savePOIToCategory:(PointOfInterest*)poi;
 
--(void)saveFilteredData:(MKLocalSearchCompletionHandler)completionHandler;
+//-(void)saveFilteredData:(MKLocalSearchCompletionHandler)completionHandler;
 
 
 -(void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;

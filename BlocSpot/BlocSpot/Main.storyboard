@@ -13,7 +13,7 @@
             <objects>
                 <tableViewController id="dfh-OX-2Rh" customClass="CategoryListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ryr-RK-Ziz">
-                        <rect key="frame" x="0.0" y="0.0" width="560" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections/>
@@ -40,11 +40,11 @@
                         <viewControllerLayoutGuide type="bottom" id="JJj-Wq-SvD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="coz-Wb-fQ0">
-                        <rect key="frame" x="0.0" y="0.0" width="560" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category Name" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="65h-ug-na6">
-                                <rect key="frame" x="29" y="101" width="491" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category Name" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="65h-ug-na6">
+                                <rect key="frame" x="29" y="101" width="531" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -374,12 +374,12 @@
                     <navigationItem key="navigationItem" id="UjH-S0-gGm">
                         <barButtonItem key="leftBarButtonItem" image="mapView.png" id="kOP-Pa-bqS">
                             <connections>
-                                <segue destination="jxr-Do-I8k" kind="show" id="uhC-Qn-CnK"/>
+                                <segue destination="jxr-Do-I8k" kind="show" identifier="resultsTable" id="uhC-Qn-CnK"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7">
                             <connections>
-                                <segue destination="8mN-88-Vaz" kind="show" id="IJd-4J-jqX"/>
+                                <segue destination="8mN-88-Vaz" kind="show" identifier="searchMap2" id="IJd-4J-jqX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -399,7 +399,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="jxr-Do-I8k" kind="show" id="SDO-40-JA1"/>
+                        <segue destination="jxr-Do-I8k" kind="show" identifier="embedTab" id="SDO-40-JA1"/>
                         <segue destination="jxr-Do-I8k" kind="relationship" relationship="viewControllers" id="Bag-VX-N7T"/>
                         <segue destination="oau-Dq-Vb5" kind="relationship" relationship="viewControllers" id="t9i-Ay-KO4"/>
                     </connections>
@@ -476,8 +476,8 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ooD-K5-9nQ"/>
         <segue reference="uhC-Qn-CnK"/>
-        <segue reference="IJd-4J-jqX"/>
+        <segue reference="fk6-TY-2Z4"/>
+        <segue reference="hiA-Gq-6wD"/>
     </inferredMetricsTieBreakers>
 </document>
