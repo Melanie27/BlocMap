@@ -104,8 +104,8 @@ static NSString *CellIdentifier = @"Cat Identifier";
     
     self.currentlySelectedCategory = category;
     self.currentlySelectedCategory.categoryName= category.categoryName;
-    NSLog(@"tapped cat  %@", self.currentlySelectedCategory);
-    NSLog(@"tapped cat name %@", self.currentlySelectedCategory.categoryName);
+    //NSLog(@"tapped cat  %@", self.currentlySelectedCategory);
+    //NSLog(@"tapped cat name %@", self.currentlySelectedCategory.categoryName);
    
     NSMutableArray *newlySelectedArrayOfPOIs = [[NSMutableArray alloc]init];
     if (newlySelectedArrayOfPOIs == nil) {
@@ -125,20 +125,21 @@ static NSString *CellIdentifier = @"Cat Identifier";
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
       
-        // NSLog(@"current cat %@",self.currentlySelectedCategory);
-        //NSLog(@"poi after  %@", poi.category.categoryName);
-        //NSLog(@"in loop array of pois %@", ds.arrayOfPOIs);
+         NSLog(@"current cat %@",self.currentlySelectedCategory);
+        NSLog(@"cat name %@", poi.category.categoryName);
+        NSLog(@"in loop array of pois %@", ds.arrayOfPOIs);
         if(self.currentlySelectedCategory == poi.category) {
-            NSLog(@"each poi that matches %@", poi);
+            NSLog(@"each poi that matches %@", poi.category);
             
             //PRint a list of the POIS that meet this critera
             PointOfInterest *matchingItem = [[PointOfInterest alloc] init];
             [newlySelectedArrayOfPOIs addObject:matchingItem];
            
-            
+            matchingItem.category = poi.category;
             matchingItem.title = poi.title;
+            //can't save subtitle??
             matchingItem.noteText = poi.subtitle;
-            NSLog(@"matching title pre save %@", matchingItem.title);
+            NSLog(@"matching items %@", matchingItem);
             
             //matchingItem.subtitle = poi.subtitle;
             NSLog(@"new array %@", newlySelectedArrayOfPOIs);
@@ -165,19 +166,6 @@ static NSString *CellIdentifier = @"Cat Identifier";
             
             
             
-        //} else if (self.currentlySelectedCategory != poi.category){
-            
-            //PointOfInterest *hiddenItem = [[PointOfInterest alloc] init];
-            //[newlyHiddenArrayOfPOIs addObject:hiddenItem];
-            //ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
-            //NSLog(@"newly hidden %@",newlyHiddenArrayOfPOIs);
-            
-            
-            //for (int i=0; i<[newlyHiddenArrayOfPOIs count]; i++) {
-                ///for each newlyhiddenarray hide the pin
-                //delegate?
-            //}
-
             
             
         }
