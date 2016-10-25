@@ -532,6 +532,15 @@ CLLocationManager *locationManager;
         if(lastLocation.horizontalAccuracy >= 0 && lastLocation.horizontalAccuracy <20) {
             self.locationInformationView.text = lastLocation.description;
             NSLog(@"loc info %@", self.locationInformationView.text);
+            
+            UILocalNotification *notification= [[UILocalNotification alloc] init];
+            notification.alertBody= [NSString stringWithFormat:@"New Location: %.3f, %.3f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
+            notification.alertAction = @"OK";
+            notification.soundName = UILocalNotificationDefaultSoundName;
+            
+            //increment the application badge number
+            notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] +1;
+            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
         }
     }
 }
