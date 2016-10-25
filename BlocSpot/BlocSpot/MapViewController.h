@@ -22,6 +22,15 @@
 
 @property (strong, nonatomic, getter=isChosen) MKAnnotationView *annotationView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
+
+
+@property (strong, nonatomic) IBOutlet UITextView *locationInformationView;
+
+@property (strong, nonatomic) IBOutlet UISwitch *locationUpdatesSwitch;
+
+- (IBAction)toggleLocationUpdates:(id)sender;
+
+
 @property (strong, nonatomic) PointOfInterest *currentPOI;
 //@property (strong, nonatomic) PointOfInterest *reviewText;
 @property (strong, nonatomic) POICategory *currentCategory;
