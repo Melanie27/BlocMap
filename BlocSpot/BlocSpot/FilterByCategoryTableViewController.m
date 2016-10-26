@@ -141,6 +141,17 @@ static NSString *CellIdentifier = @"Cat Identifier";
             matchingItem.noteText = poi.subtitle;
             NSLog(@"matching items %@", matchingItem);
             
+            
+            
+            //TODO Filtering
+            //NSString *filter = @"%K Contains %@";
+            //NSPredicate *predicate= [NSPredicate predicateWithFormat:filter, @"SELF", @"coffee"];
+            //TODO error [<PointOfInterest 0x7c9ef850> valueForUndefinedKey:]: this class is not key value coding-compliant for the key SELF.'
+                //NSArray* filteredData = [ds.arrayOfPOIs filteredArrayUsingPredicate:predicate];
+                // NSLog(@"array matching items please %@", filteredData);
+            
+            
+            
             //matchingItem.subtitle = poi.subtitle;
             NSLog(@"new array %@", newlySelectedArrayOfPOIs);
             NSLog(@"matching item %@", matchingItem);
