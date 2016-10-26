@@ -10,6 +10,7 @@
 #import "POICategory.h"
 #import "PointOfInterest.h"
 #import "BLSDataSource.h"
+#import "MapViewController.h"
 
 @interface FilterByCategoryTableViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *categories;
@@ -26,10 +27,10 @@ static NSString *CellIdentifier = @"Cat Identifier";
         //set title
         self.title = @"Filter by Category";
         
-        //Load categories
         BLSDataSource *ds = [BLSDataSource sharedInstance];
         ds = [BLSDataSource sharedInstance];
-        //[self loadCategories];
+        
+        
     }
     
     return self;
@@ -42,15 +43,27 @@ static NSString *CellIdentifier = @"Cat Identifier";
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     NSLog(@"Categories > %@", ds.arrayOfCategories);
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //self.clearsSelectionOnViewWillAppear = NO;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSLog(@"array of pois %@", ds.arrayOfPOIs);
+    // Create Add Button
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"No Filters" style:(UIBarButtonItemStylePlain) target:self action:@selector(removeFilters:)];
+   
+   
+   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)removeFilters:(id)sender {
+    NSLog(@"unfilter");
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    ds.filteredArrayOfPOIs = nil;
+    [ds saveData];
 }
 
 #pragma mark - Table view data source
@@ -73,40 +86,92 @@ static NSString *CellIdentifier = @"Cat Identifier";
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     
     // Configure Cell
+    
     [cell.textLabel setText:[category categoryName]];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+   
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+     BLSDataSource *ds = [BLSDataSource sharedInstance];
+    //always set filtered set to nil here
+    ds.filteredArrayOfPOIs = nil;
+   
+    POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
-     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
-    //category = self.currentlySelectedCategory;
-    NSLog(@"category %@", category.categoryName);
     self.currentlySelectedCategory = category;
-    self.currentlySelectedCategory.categoryName = category.categoryName;
-    NSLog(@"currently seclected category %@", self.currentlySelectedCategory.categoryName);
-    if(!self.currentlySelectedCategory) {
-        //[tableView reloadData];
-         //[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-        //[cell setSelected:NO];
-        NSLog(@"not");
-    } else {
-        //[cell setSelected:YES];
-        //[tableView reloadData];
-        NSLog (@"yes %@", self.currentlySelectedCategory.categoryName);
-        //[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-        //need to get all POIs associated with this category
+    self.currentlySelectedCategory.categoryName= category.categoryName;
+    //NSLog(@"tapped cat  %@", self.currentlySelectedCategory);
+    //NSLog(@"tapped cat name %@", self.currentlySelectedCategory.categoryName);
+   
+    NSMutableArray *newlySelectedArrayOfPOIs = [[NSMutableArray alloc]init];
+    if (newlySelectedArrayOfPOIs == nil) {
+        newlySelectedArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
     }
     
+    
+    
+    //STEPS
+    // NSString *savedPOICategofyNames =  poi.categoryName;
+    //NSLog(@"list of saved poi category names, %@", savedPOICategofyNames);
+    // 1 get the category name of the poi
+    // 2 compare the category name to the currentlySelectedCategory name
+    // if 1 and 2 match, show those pois in the map and table
+    // if one and 2 do not match hide the relevant pois
    
-    //NSLog(@"current poi %@", ds.currentPOI);
     
-    //NSLog(@"perform filter on all points of interest with the selected category, dismiss the view controller, show the map with only the selected category markers");
-    
-    
+    for (PointOfInterest *poi in ds.arrayOfPOIs) {
+      
+         NSLog(@"current cat %@",self.currentlySelectedCategory);
+        NSLog(@"cat name %@", poi.category.categoryName);
+        NSLog(@"in loop array of pois %@", ds.arrayOfPOIs);
+        if(self.currentlySelectedCategory == poi.category) {
+            NSLog(@"each poi that matches %@", poi.category);
+            
+            //PRint a list of the POIS that meet this critera
+            PointOfInterest *matchingItem = [[PointOfInterest alloc] init];
+            [newlySelectedArrayOfPOIs addObject:matchingItem];
+           
+            matchingItem.category = poi.category;
+            matchingItem.title = poi.title;
+            //can't save subtitle??
+            matchingItem.noteText = poi.subtitle;
+            NSLog(@"matching items %@", matchingItem);
+            
+            //matchingItem.subtitle = poi.subtitle;
+            NSLog(@"new array %@", newlySelectedArrayOfPOIs);
+            NSLog(@"matching item %@", matchingItem);
+            //ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
+            
+            ds.filteredArrayOfPOIs = newlySelectedArrayOfPOIs;
+            NSLog(@"filtered array of POIS %@", ds.filteredArrayOfPOIs);
+           
+            [ds saveData];
+            
+           
+            
+            NSLog(@"poi title post save %@",matchingItem.title);
+            
+                
+                            
+           
+            
+            
+            //SAVE FILTERED DATA
+            //NEED TO CAPTURE THIS DATA IN THE MODEL
+            //NEED TO UPDATE THE RESULTS TABLE VIEW
+            
+            
+            
+            
+            
+        }
+        
+        
+    }
     
 }
 

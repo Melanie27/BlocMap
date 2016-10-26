@@ -11,7 +11,7 @@
 #import "PointOfInterest.h"
 
 @interface BLSDataSource () {
-     NSMutableArray *_arrayOfPOIs;
+
 }
 @end
 
@@ -76,8 +76,19 @@ MKLocalSearch *localSearch;
 - (void) deletePOIItem:(PointOfInterest *)item {
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfPOIs"];
     [mutableArrayWithKVO removeObject:item];
-    //[self.arrayOfPOIs removeObject:item];
-    NSLog(@"deleted");
+     //NSLog(@"item %@", item);
+    [_arrayOfPOIs removeObject:item];
+    
+   
+    [self saveData];
+}
+
+-(void)deleteCategory:(POICategory *)cat {
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfCategories"];
+    [mutableArrayWithKVO removeObject:cat];
+     [self.arrayOfCategories removeObject:cat];
+     NSLog(@"array of cats %@", self.arrayOfCategories);
+    [self saveData];
 }
 
 
@@ -88,27 +99,23 @@ MKLocalSearch *localSearch;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        /*NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
-        NSMutableArray<PointOfInterest*> *storedMapItems = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
-        
-        self.arrayOfPOIs = storedMapItems;
-        completionHandler(storedMapItems);*/
-       
-        //CRASHING
+
         NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
         NSArray *fileDataArray = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
         
         self.arrayOfPOIs = fileDataArray[0];
         self.arrayOfCategories = fileDataArray[1];
+        self.filteredArrayOfPOIs = fileDataArray[2];
         
         if (self.arrayOfPOIs == nil) { self.arrayOfPOIs = [@[] mutableCopy]; }
         if (self.arrayOfCategories == nil) { self.arrayOfCategories = [@[] mutableCopy]; }
+        if (self.filteredArrayOfPOIs == nil) { self.filteredArrayOfPOIs = [@[] mutableCopy]; }
         
         completionHandler(self.arrayOfPOIs);
-        
-        
+    
     });
 }
+
 
 #pragma saving to disc
 - (NSString *) pathForFilename:(NSString *) filename {
@@ -183,14 +190,14 @@ MKLocalSearch *localSearch;
 
 
 - (void)saveData {
-    NSLog(@"array of pois %@", self.arrayOfPOIs);
-    NSLog(@"array of cats %@", self.arrayOfCategories);
-     NSLog(@"array of pois %@", self.arrayOfPOIs);
-    NSLog(@"array of cats %@", self.arrayOfCategories);
-    
+    NSLog(@" bls array of pois %@", self.arrayOfPOIs);
+    NSLog(@"bls array of cats %@", self.arrayOfCategories);
+     NSLog(@"array of pois %@", self.filteredArrayOfPOIs);
+   
+    if (self.filteredArrayOfPOIs == nil) { self.filteredArrayOfPOIs = [@[] mutableCopy]; }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
-        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:@[ self.arrayOfPOIs, self.arrayOfCategories]];
+        NSData *poiCategoryData = [NSKeyedArchiver archivedDataWithRootObject:@[ self.arrayOfPOIs, self.arrayOfCategories, self.filteredArrayOfPOIs]];
         
         NSError *dataError;
         BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
@@ -213,12 +220,12 @@ MKLocalSearch *localSearch;
 
 
 
-
 - (void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler{
    
     [self convertMapItemsToPOI:mapItemsToSave];
     [self savePOIAndThen:completionHandler];
 }
+
 
 
 
@@ -255,15 +262,16 @@ MKLocalSearch *localSearch;
         }*/
         
         self.results = response;
-        NSLog(@"response, %@", response);
+        //NSLog(@"response, %@", response);
        
         
         
         for (MKMapItem *item in response.mapItems) {
-            NSString *name = item.name;
-            NSLog(@"%@",name);
+            //NSString *name = item.name;
+            //NSLog(@"%@",name);
             PointOfInterest *poi = [[PointOfInterest alloc] initWithMKMapItem:item];
             [self.arrayOfPOIs addObject:poi];
+            [self.filteredArrayOfPOIs addObject:poi];
         }
     
                 completionHandler(response, error);

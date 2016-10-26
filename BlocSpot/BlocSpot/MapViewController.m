@@ -97,7 +97,7 @@ CLLocationManager *locationManager;
         
         if (kindOfChange == NSKeyValueChangeSetting) {
             
-            NSLog(@"registering a change neeed to update color of the POI title");
+            //NSLog(@"registering a change neeed to update color of the POI title");
     
             //TODO Grab a hold of the POI that was categorized and update the color of the annotation.title to the corresponding category color
            

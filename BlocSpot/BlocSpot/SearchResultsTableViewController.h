@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FilterByCategoryTableViewController.h"
+
 @class PointOfInterest;
 @class POICategory;
 @interface SearchResultsTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
--(void)loadSearchResults;
+
 @end
