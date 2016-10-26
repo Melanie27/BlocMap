@@ -191,13 +191,6 @@
                                     <segue destination="oau-Dq-Vb5" kind="embed" identifier="showEmbed" id="ooD-K5-9nQ"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39b-uf-LJk">
-                                <frame key="frameInset" minX="20" minY="483" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5uq-oG-NbU">
                                 <frame key="frameInset" minX="20" minY="512" width="240" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -207,12 +200,26 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3hQ-lH-qrQ">
-                                <frame key="frameInset" minX="304" minY="478" width="51" height="31"/>
+                                <frame key="frameInset" minX="20" minY="473" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="toggleLocationUpdates:" destination="BYZ-38-t0r" eventType="valueChanged" id="G5z-ab-PHM"/>
                                 </connections>
                             </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SYS-Jy-Jg3">
+                                <frame key="frameInset" minX="16" minY="79" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="toggleRegionMonitoring:" destination="BYZ-38-t0r" eventType="valueChanged" id="3wI-GA-4Zj"/>
+                                </connections>
+                            </switch>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et do" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="A91-EA-lQk">
+                                <frame key="frameInset" minX="79" minY="72" width="240" height="81"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -250,6 +257,8 @@
                         <outlet property="locationInformationView" destination="5uq-oG-NbU" id="6Al-SK-ztI"/>
                         <outlet property="locationUpdatesSwitch" destination="3hQ-lH-qrQ" id="jD6-OL-wmq"/>
                         <outlet property="mapView" destination="ReE-6e-pYB" id="Wwb-q4-fn3"/>
+                        <outlet property="regionInformationView" destination="A91-EA-lQk" id="M27-pk-tfe"/>
+                        <outlet property="regionMonitoringSwitch" destination="SYS-Jy-Jg3" id="1a2-ZU-oWU"/>
                         <segue destination="oau-Dq-Vb5" kind="show" identifier="showCategories" id="fk6-TY-2Z4"/>
                     </connections>
                 </viewController>
@@ -505,8 +514,8 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ooD-K5-9nQ"/>
         <segue reference="uhC-Qn-CnK"/>
-        <segue reference="IJd-4J-jqX"/>
+        <segue reference="hiA-Gq-6wD"/>
+        <segue reference="ooD-K5-9nQ"/>
     </inferredMetricsTieBreakers>
 </document>

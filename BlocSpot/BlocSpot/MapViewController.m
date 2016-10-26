@@ -433,10 +433,6 @@ CLLocationManager *locationManager;
 }
 
 
--(IBAction)deletePOIPressed:(UIButton *)button {
-    NSLog(@"delete POI here");
-}
-
 /*-(IBAction)savePOIButtonPressed:(UIButton *)button {
  NSLog(@"save poi");
  }*/
@@ -470,6 +466,9 @@ CLLocationManager *locationManager;
 
 
 ///STARTING AND STOPPING LOCATION UPDATES
+
+- (IBAction)regionMonitoringSwitch:(id)sender {
+}
 
 - (IBAction)toggleLocationUpdates:(id)sender {
     NSLog(@"toggling");
@@ -511,11 +510,98 @@ CLLocationManager *locationManager;
     }
 }
 
+- (IBAction)toggleRegionMonitoring:(id)sender {
+    NSLog(@"toggle region monitor");
+    if(self.regionMonitoringSwitch.on == YES) {
+        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        
+        if (status == kCLAuthorizationStatusAuthorizedAlways ||
+            status == kCLAuthorizationStatusAuthorizedWhenInUse ||
+            status == kCLAuthorizationStatusNotDetermined) {
+            
+            //start monitoring the region here
+            
+            //instantiate location manager instance variable if not already created
+            if (self.locationManager == nil) {
+                self.locationManager = [[CLLocationManager alloc]init];
+                self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+                self.locationManager.delegate = self;
+            }
+            
+            //define center coordinate and radius of region to monitor
+            CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
+            int regionRadius = 3000; //meters
+            if(regionRadius > self.locationManager.maximumRegionMonitoringDistance) {
+                regionRadius = self.locationManager.maximumRegionMonitoringDistance;
+            }
+            
+            CLCircularRegion *laRegion = [[CLCircularRegion alloc] initWithCenter:laLocation radius:regionRadius identifier:@"laRegion"];
+            
+            [self.locationManager startMonitoringForRegion:laRegion];
+            
+            
+            
+        } else {
+            if(self.locationManager == nil) {
+                for (CLCircularRegion *monitoredRegion in [self.locationManager monitoredRegions]){
+                    [self.locationManager stopMonitoringForRegion:monitoredRegion];
+                    self.regionInformationView.text = [NSString stringWithFormat:@"Turned off region monitoring for %@", monitoredRegion.identifier];
+                }
+            }
+            self.regionInformationView.text = @"Region Monitoring Disabled";
+            self.regionMonitoringSwitch.on = NO;
+        }
+    }
+}
+
+//managing failures
+-(void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
+        switch (error.code) {
+            case kCLErrorRegionMonitoringDenied: {
+                self.regionInformationView.text = @"Region monitoring denied on this device";
+                break;
+            }
+            case kCLErrorRegionMonitoringFailure: {
+                self.regionInformationView.text = [NSString stringWithFormat:@"Region Monitoring failed for region: %@", region.identifier];
+                break;
+            }
+            default: {
+                self.regionInformationView.text = [
+                                                   NSString stringWithFormat:@"An unhandled error occured: %@", error.description];
+                break;
+            }
+        }
+    
+}
+
+//enter a region
+-(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    self.regionInformationView.text = @"Welcome to LA!";
+    
+    UILocalNotification *entranceNotification = [[UILocalNotification alloc] init];
+    entranceNotification.alertBody = @"Welcome to LA!";
+    entranceNotification.alertAction= @"Ok";
+    entranceNotification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] presentLocalNotificationNow:entranceNotification];
+}
+
+//exit a region
+-(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    self.regionInformationView.text = @"Thanks for visiting! Come back soon!";
+    
+    UILocalNotification *exitNotification = [[UILocalNotification alloc] init];
+    exitNotification.alertBody = @"See ya!";
+    exitNotification.alertAction= @"Ok";
+    exitNotification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] presentLocalNotificationNow:exitNotification];
+    
+}
+
 //Receiving Location Updates
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     if(error.code == kCLErrorDenied) {
         //turning switch off triggers toggle action to stop further updates
-        self.locationUpdatesSwitch.on == NO;
+        //self.locationUpdatesSwitch.on == NO;
     } else {
         NSLog(@"Error %@", error);
     }
