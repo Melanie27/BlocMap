@@ -664,6 +664,8 @@ CLLocationManager *locationManager;
                 [self.geocoder cancelGeocode];
             
             //begin reverse geocoding
+            
+            //TODO pass the placemarks from the arrayofPOIS Here?
             [self.geocoder reverseGeocodeLocation:lastLocation completionHandler:^(NSArray *placemarks, NSError *error) {
                     if([placemarks count] > 0) {
                         CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
