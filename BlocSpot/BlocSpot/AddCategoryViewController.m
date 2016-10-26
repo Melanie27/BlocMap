@@ -37,17 +37,13 @@ UIColor *categoryColor;
    
     [self.navigationController popViewControllerAnimated:YES];
     
-    //save the current POI to the the current category
-    //get current POI
-    //NSLog(@"current poi to be saved to this category %@", self.currentPOI.title);
     
 }
 
  -(IBAction)grabColorFromButton:(UIButton*)sender {
     
-        categoryColor = sender.backgroundColor;
-        //NSLog(@"grab color %@", categoryColor);
-        //NSLog(@"tag %ld", (long)sender.tag);
+    categoryColor = sender.backgroundColor;
+    //TODO update ui of selected category
      
 }
 
