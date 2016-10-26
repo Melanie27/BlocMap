@@ -19,6 +19,7 @@
 @interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLGeocoder *geocoder;
 @property (nonatomic, strong) PointOfInterest *chosenPointOfInterest;
 
 @end
@@ -465,10 +466,32 @@ CLLocationManager *locationManager;
 //CHECKPOINT 8
 
 
+//geocoding
+- (IBAction)findCurrentAddress:(id)sender {
+    if([CLLocationManager locationServicesEnabled]) {
+        if(self.locationManager == nil) {
+            
+            _locationManager = [[CLLocationManager alloc] init];
+            _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+            _locationManager.distanceFilter = 500;
+            _locationManager.delegate = self;
+            
+        }
+        
+        [self.locationManager startUpdatingLocation];
+        self.geocodingResultsView.text = @"Getting location";
+    } else {
+        self.geocodingResultsView.text = @"location services unavailable";
+    }
+    
+}
+
 ///STARTING AND STOPPING LOCATION UPDATES
 
 - (IBAction)regionMonitoringSwitch:(id)sender {
 }
+
+
 
 - (IBAction)toggleLocationUpdates:(id)sender {
     NSLog(@"toggling");
@@ -602,10 +625,13 @@ CLLocationManager *locationManager;
     if(error.code == kCLErrorDenied) {
         //turning switch off triggers toggle action to stop further updates
         //self.locationUpdatesSwitch.on == NO;
+        self.geocodingResultsView.text = @"Location information denied";
     } else {
         NSLog(@"Error %@", error);
     }
 }
+
+
 
 //Handle Location Updates
 -(void)locationManager:(CLLocationManager*)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
@@ -617,7 +643,7 @@ CLLocationManager *locationManager;
         //check accuracy of event
         if(lastLocation.horizontalAccuracy >= 0 && lastLocation.horizontalAccuracy <20) {
             self.locationInformationView.text = lastLocation.description;
-            NSLog(@"loc info %@", self.locationInformationView.text);
+            //NSLog(@"loc info %@", self.locationInformationView.text);
             
             UILocalNotification *notification= [[UILocalNotification alloc] init];
             notification.alertBody= [NSString stringWithFormat:@"New Location: %.3f, %.3f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
@@ -627,6 +653,34 @@ CLLocationManager *locationManager;
             //increment the application badge number
             notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] +1;
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+            
+            
+            //geocoding stuff
+            if (self.geocoder == nil)
+                self.geocoder = [[CLGeocoder alloc] init];
+            
+            //only one geocoding instance per action
+            if([self.geocoder isGeocoding])
+                [self.geocoder cancelGeocode];
+            
+            //begin reverse geocoding
+            [self.geocoder reverseGeocodeLocation:lastLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+                    if([placemarks count] > 0) {
+                        CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
+                        self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", foundPlacemark.description];
+                    } else if (error.code == kCLErrorGeocodeCanceled) {
+                        NSLog(@"geocode cancelled");
+                    } else if (error.code == kCLErrorGeocodeFoundNoResult) {
+                        self.geocodingResultsView.text=@"no geocode result found";
+                    } else if  (error.code == kCLErrorGeocodeFoundPartialResult) {
+                        self.geocodingResultsView.text = @"got partial result";
+                    } else {
+                        self.geocodingResultsView.text = [NSString stringWithFormat:@"Unknown error %@", error.description];
+                    }
+                }
+             ];
+            //stop updating location until they click the button again
+            [manager stopUpdatingLocation];
         }
     }
 }

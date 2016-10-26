@@ -191,11 +191,10 @@
                                     <segue destination="oau-Dq-Vb5" kind="embed" identifier="showEmbed" id="ooD-K5-9nQ"/>
                                 </connections>
                             </containerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5uq-oG-NbU">
-                                <frame key="frameInset" minX="20" minY="512" width="240" height="79"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Location updates" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5uq-oG-NbU">
+                                <frame key="frameInset" minX="20" minY="512" width="240" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -213,13 +212,32 @@
                                     <action selector="toggleRegionMonitoring:" destination="BYZ-38-t0r" eventType="valueChanged" id="3wI-GA-4Zj"/>
                                 </connections>
                             </switch>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et do" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="A91-EA-lQk">
-                                <frame key="frameInset" minX="79" minY="72" width="240" height="81"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="region updates" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="A91-EA-lQk">
+                                <frame key="frameInset" minX="79" minY="72" width="240" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="geocoding tracking" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SVo-B6-WCU">
+                                <frame key="frameInset" minX="79" minY="118" width="164" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFb-mk-8FS">
+                                <frame key="frameInset" minX="20" minY="125" width="45" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="geo"/>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-H7-QoU">
+                                <frame key="frameInset" minX="260" minY="125" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="findCurrentAddress:" destination="BYZ-38-t0r" eventType="valueChanged" id="mHq-aI-Efe"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -254,11 +272,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="containerView" destination="E8W-dp-AfJ" id="O01-bD-TGG"/>
+                        <outlet property="geocodingResultsView" destination="SVo-B6-WCU" id="hGC-CO-G1S"/>
                         <outlet property="locationInformationView" destination="5uq-oG-NbU" id="6Al-SK-ztI"/>
                         <outlet property="locationUpdatesSwitch" destination="3hQ-lH-qrQ" id="jD6-OL-wmq"/>
                         <outlet property="mapView" destination="ReE-6e-pYB" id="Wwb-q4-fn3"/>
                         <outlet property="regionInformationView" destination="A91-EA-lQk" id="M27-pk-tfe"/>
                         <outlet property="regionMonitoringSwitch" destination="SYS-Jy-Jg3" id="1a2-ZU-oWU"/>
+                        <outlet property="reverseGeocodingButton" destination="JFb-mk-8FS" id="uF6-W0-fqh"/>
                         <segue destination="oau-Dq-Vb5" kind="show" identifier="showCategories" id="fk6-TY-2Z4"/>
                     </connections>
                 </viewController>
