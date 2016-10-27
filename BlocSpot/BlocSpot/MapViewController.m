@@ -489,11 +489,8 @@ CLLocationManager *locationManager;
 
 ///STARTING AND STOPPING LOCATION UPDATES
 
-
-
-
 - (IBAction)toggleLocationUpdates:(id)sender {
-    NSLog(@"toggling");
+    //NSLog(@"toggling");
     if(self.locationUpdatesSwitch.on == YES) {
         
         if([CLLocationManager locationServicesEnabled] == NO) {
@@ -507,7 +504,7 @@ CLLocationManager *locationManager;
             [alert addAction:defaultAction];
             [self presentViewController:alert animated:YES completion:nil];
             
-            //self.locationUpdatesSwitch.on == NO;
+            self.locationUpdatesSwitch.on == NO;
             return;
             
         }
@@ -556,7 +553,7 @@ CLLocationManager *locationManager;
 //Handle Location Updates
 -(void)locationManager:(CLLocationManager*)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
     CLLocation *lastLocation = [locations lastObject];
-    NSLog(@"%@", lastLocation);
+    //NSLog(@"%@", lastLocation);
     //Check if timestamp on location is recent
     NSTimeInterval eventInterval = [lastLocation.timestamp timeIntervalSinceNow];
     if(fabs(eventInterval) < 30.0) {
@@ -598,7 +595,7 @@ CLLocationManager *locationManager;
                         CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
                         self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", foundPlacemark.description];
                         
-                        NSLog(@"geo notifi %@", notification);
+                        //NSLog(@"geo notifi %@", notification);
                     } else if (error.code == kCLErrorGeocodeCanceled) {
                         NSLog(@"geocode cancelled");
                     } else if (error.code == kCLErrorGeocodeFoundNoResult) {
@@ -611,7 +608,7 @@ CLLocationManager *locationManager;
                 }
              ];
             //stop updating location until they click the button again
-            [manager stopUpdatingLocation];
+            //[manager stopUpdatingLocation];
         }
     }
 }
