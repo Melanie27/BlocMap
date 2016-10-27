@@ -25,13 +25,13 @@
 
 
 @property (strong, nonatomic) IBOutlet UITextView *locationInformationView;
-@property (strong, nonatomic) IBOutlet UITextView *regionInformationView;
+//@property (strong, nonatomic) IBOutlet UITextView *regionInformationView;
 
 @property (strong, nonatomic) IBOutlet UITextView *geocodingResultsView;
 
 
 @property (strong, nonatomic) IBOutlet UISwitch *locationUpdatesSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch *regionMonitoringSwitch;
+//@property (strong, nonatomic) IBOutlet UISwitch *regionMonitoringSwitch;
 @property (strong, nonatomic) IBOutlet UIButton *reverseGeocodingButton;
 
 - (IBAction)findCurrentAddress:(id)sender;
@@ -39,7 +39,7 @@
 
 - (IBAction)toggleLocationUpdates:(id)sender;
 
-- (IBAction)toggleRegionMonitoring:(id)sender;
+//- (IBAction)toggleRegionMonitoring:(id)sender;
 
 @property (strong, nonatomic) PointOfInterest *currentPOI;
 //@property (strong, nonatomic) PointOfInterest *reviewText;

@@ -488,8 +488,6 @@ CLLocationManager *locationManager;
 
 ///STARTING AND STOPPING LOCATION UPDATES
 
-- (IBAction)regionMonitoringSwitch:(id)sender {
-}
 
 
 
@@ -533,7 +531,7 @@ CLLocationManager *locationManager;
     }
 }
 
-- (IBAction)toggleRegionMonitoring:(id)sender {
+/*- (IBAction)toggleRegionMonitoring:(id)sender {
     NSLog(@"toggle region monitor");
     if(self.regionMonitoringSwitch.on == YES) {
         CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
@@ -575,10 +573,10 @@ CLLocationManager *locationManager;
             self.regionMonitoringSwitch.on = NO;
         }
     }
-}
+}*/
 
 //managing failures
--(void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
+/*-(void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
         switch (error.code) {
             case kCLErrorRegionMonitoringDenied: {
                 self.regionInformationView.text = @"Region monitoring denied on this device";
@@ -595,10 +593,10 @@ CLLocationManager *locationManager;
             }
         }
     
-}
+}*/
 
 //enter a region
--(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+/*-(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     self.regionInformationView.text = @"Welcome to LA!";
     
     UILocalNotification *entranceNotification = [[UILocalNotification alloc] init];
@@ -618,7 +616,7 @@ CLLocationManager *locationManager;
     exitNotification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] presentLocalNotificationNow:exitNotification];
     
-}
+}*/
 
 //Receiving Location Updates
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
