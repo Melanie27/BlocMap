@@ -191,20 +191,6 @@
                                     <segue destination="oau-Dq-Vb5" kind="embed" identifier="showEmbed" id="ooD-K5-9nQ"/>
                                 </connections>
                             </containerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Location updates" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5uq-oG-NbU">
-                                <frame key="frameInset" minX="20" minY="512" width="240" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3hQ-lH-qrQ">
-                                <frame key="frameInset" minX="20" minY="473" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="toggleLocationUpdates:" destination="BYZ-38-t0r" eventType="valueChanged" id="G5z-ab-PHM"/>
-                                </connections>
-                            </switch>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="geocoding tracking" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SVo-B6-WCU">
                                 <frame key="frameInset" minX="79" minY="118" width="164" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -259,8 +245,6 @@
                     <connections>
                         <outlet property="containerView" destination="E8W-dp-AfJ" id="O01-bD-TGG"/>
                         <outlet property="geocodingResultsView" destination="SVo-B6-WCU" id="hGC-CO-G1S"/>
-                        <outlet property="locationInformationView" destination="5uq-oG-NbU" id="6Al-SK-ztI"/>
-                        <outlet property="locationUpdatesSwitch" destination="3hQ-lH-qrQ" id="jD6-OL-wmq"/>
                         <outlet property="mapView" destination="ReE-6e-pYB" id="Wwb-q4-fn3"/>
                         <outlet property="reverseGeocodingButton" destination="JFb-mk-8FS" id="uF6-W0-fqh"/>
                         <segue destination="oau-Dq-Vb5" kind="show" identifier="showCategories" id="fk6-TY-2Z4"/>

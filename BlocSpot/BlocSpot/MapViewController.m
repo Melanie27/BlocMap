@@ -489,49 +489,6 @@ CLLocationManager *locationManager;
 
 ///STARTING AND STOPPING LOCATION UPDATES
 
-- (IBAction)toggleLocationUpdates:(id)sender {
-    //NSLog(@"toggling");
-    if(self.locationUpdatesSwitch.on == YES) {
-        
-        if([CLLocationManager locationServicesEnabled] == NO) {
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Location Services Disabled"
-                                                                           message:@"This feature requires location services. Enable it in theprivacy settings on your device."
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction * action) {}];
-            
-            [alert addAction:defaultAction];
-            [self presentViewController:alert animated:YES completion:nil];
-            
-            self.locationUpdatesSwitch.on == NO;
-            return;
-            
-        }
-        
-        if(_locationManager == nil) {
-            _locationManager = [[CLLocationManager alloc] init];
-            _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-            _locationManager.distanceFilter = 1;
-            _locationManager.activityType = CLActivityTypeFitness;
-            _locationManager.delegate = self;
-        }
-        
-        [_locationManager startUpdatingLocation];
-    }
-    
-    else {
-        //Switch was turned off
-        //Stop updates if they have been started
-        if(_locationManager !=nil) {
-            [_locationManager stopUpdatingLocation];
-        }
-    }
-}
-
-
-
-
 - (void)registerUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     NSLog(@"register user note ");
 }
@@ -559,7 +516,7 @@ CLLocationManager *locationManager;
     if(fabs(eventInterval) < 30.0) {
         //check accuracy of event
         if(lastLocation.horizontalAccuracy >= 0 && lastLocation.horizontalAccuracy <20) {
-            self.locationInformationView.text = lastLocation.description;
+            //self.locationInformationView.text = lastLocation.description;
             //NSLog(@"loc info %@", self.locationInformationView.text);
             
             
