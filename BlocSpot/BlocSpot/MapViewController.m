@@ -79,7 +79,6 @@ CLLocationManager *locationManager;
 
         }
         
-        
     }];
     
     UITapGestureRecognizer *tapOutsideContainerRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissContainerView)];
@@ -330,11 +329,8 @@ CLLocationManager *locationManager;
     }
     //prepare segue for embed
     if ([segue.identifier isEqualToString:@"showEmbed"]) {
-        //NSLog(@"showEmbed");
     } else if ([segue.identifier isEqualToString:@"showCategories"]) {
-       // NSLog(@"showCategories");
-        
-        
+       
         UINavigationController *navc = (UINavigationController*)segue.destinationViewController;
         CategoryListViewController *clvc = (CategoryListViewController*)([navc viewControllers][0]);
         clvc.POI = self.currentPOI;
@@ -349,15 +345,14 @@ CLLocationManager *locationManager;
     
     PointOfInterest *poi = nil;
         poi = (PointOfInterest *)annotation;
-        //NSLog(@"poi");
-  
+    
     
     if(poi) {
         if(![segueIdentifier length] || [segueIdentifier isEqualToString:@"showCategories"]) {
             if ([vc isKindOfClass:[UITableViewController class]]) {
                 UITableViewController *tvc = (UITableViewController *)vc;
                 tvc.title = poi.title;
-                //NSLog(@"title %@", tvc.title);
+                
                
             }
         }
@@ -365,17 +360,12 @@ CLLocationManager *locationManager;
     
 }
 
-
-
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
    
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
     
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
@@ -412,7 +402,7 @@ CLLocationManager *locationManager;
 
 
 -(IBAction)directionsButtonPressed:(UIButton *)button annotationView:(MKAnnotationView *)view {
-    NSLog(@"map it");
+    
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     NSArray *arrayMapItem = [NSArray arrayWithObjects:view.annotation, nil];
     
@@ -433,18 +423,6 @@ CLLocationManager *locationManager;
         
     }
 }
-
-
-/*-(IBAction)savePOIButtonPressed:(UIButton *)button {
- NSLog(@"save poi");
- }*/
-
--(IBAction)addNoteButtonPressed:(UIButton *)button {
-    
-    //self.currentNote.noteText = self.noteForPOI.text;
-    //NSLog(@"add Note %@", self.currentNote.noteText);
-}
-
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -498,7 +476,8 @@ CLLocationManager *locationManager;
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     if(error.code == kCLErrorDenied) {
         //turning switch off triggers toggle action to stop further updates
-        //self.locationUpdatesSwitch.on == NO;
+        
+        //self.geoSwitch.on = NO;
         self.geocodingResultsView.text = @"Location information denied";
     } else {
         NSLog(@"Error %@", error);
@@ -509,33 +488,18 @@ CLLocationManager *locationManager;
 
 //Handle Location Updates
 -(void)locationManager:(CLLocationManager*)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
+    
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
     CLLocation *lastLocation = [locations lastObject];
-    //NSLog(@"%@", lastLocation);
+    
     //Check if timestamp on location is recent
     NSTimeInterval eventInterval = [lastLocation.timestamp timeIntervalSinceNow];
     if(fabs(eventInterval) < 30.0) {
         //check accuracy of event
         if(lastLocation.horizontalAccuracy >= 0 && lastLocation.horizontalAccuracy <20) {
-            //self.locationInformationView.text = lastLocation.description;
-            //NSLog(@"loc info %@", self.locationInformationView.text);
+           
             
             
-            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
-                                                                                                 |UIUserNotificationTypeBadge
-                                                                                                 |UIUserNotificationTypeSound) categories:nil];
-            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-            UILocalNotification *notification= [[UILocalNotification alloc] init];
-            notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
-            notification.alertBody= [NSString stringWithFormat:@"New Location: %.3f, %.3f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
-            notification.alertAction = @"OK";
-            notification.soundName = UILocalNotificationDefaultSoundName;
-            notification.alertTitle = @"alert Title";
-            
-            //increment the application badge number
-            notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] +1;
-            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-            NSLog(@"loc note %@", notification);
             //geocoding stuff
             if (self.geocoder == nil)
                 self.geocoder = [[CLGeocoder alloc] init];
@@ -548,11 +512,36 @@ CLLocationManager *locationManager;
             
             //TODO pass the placemarks from the arrayofPOIS Here?
             [self.geocoder reverseGeocodeLocation:lastLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-                    if([placemarks count] > 0) {
-                        CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
-                        self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", foundPlacemark.description];
+                placemarks = ds.arrayOfPOIs;
+                NSLog(@"set placemarks %@", placemarks);
+                
+                //TODO set a index variable with the nearest location
+                //sort locations by proximity to users location
+                if([placemarks count] > 0) {
+                        CLPlacemark *foundPlacemark = [placemarks objectAtIndex:5];
+                    PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:foundPlacemark];
+                    NSLog(@"found placemark %@", item.title);
+                    
+                    self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item.title];
                         
-                        //NSLog(@"geo notifi %@", notification);
+                        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
+                                                                                                             |UIUserNotificationTypeBadge
+                                                                                                             |UIUserNotificationTypeSound) categories:nil];
+                        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+                        UILocalNotification *notification= [[UILocalNotification alloc] init];
+                        notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+                        notification.alertBody= [NSString stringWithFormat:@"You are near: %@", self.geocodingResultsView.text];
+                        notification.alertAction = @"OK";
+                        notification.soundName = UILocalNotificationDefaultSoundName;
+                        notification.alertTitle = @"Point of Interest";
+                        
+                        //increment the application badge number
+                        notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] +1;
+                        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+                        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+                        
+                        //one alert at a time
+                    
                     } else if (error.code == kCLErrorGeocodeCanceled) {
                         NSLog(@"geocode cancelled");
                     } else if (error.code == kCLErrorGeocodeFoundNoResult) {
@@ -564,10 +553,10 @@ CLLocationManager *locationManager;
                     }
                 }
              ];
-            //stop updating location until they click the button again
-            //[manager stopUpdatingLocation];
+            [manager stopUpdatingLocation];
         }
     }
+    
 }
 
 

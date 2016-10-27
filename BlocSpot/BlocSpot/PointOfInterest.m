@@ -36,6 +36,16 @@
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
 
+- (instancetype)initWithMKPlacemark:(MKPlacemark*)placemark {
+  
+    NSString *address = @"";
+    NSString *name = placemark.title;
+    NSString *subtitle = placemark.subtitle;
+    NSNumber *identifier = @10;
+    CLLocationCoordinate2D coord = placemark.coordinate;
+    return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
+}
+
 
 - (MKMapItem*)mapItem {
     NSDictionary *addrDict = @{

@@ -22,7 +22,8 @@
 @property (strong, nonatomic, getter=isChosen) MKAnnotationView *annotationView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UITextView *geocodingResultsView;
-@property (strong, nonatomic) IBOutlet UIButton *reverseGeocodingButton;
+
+@property (strong, nonatomic) IBOutlet UISwitch *geoSwitch;
 
 - (IBAction)findCurrentAddress:(id)sender;
 

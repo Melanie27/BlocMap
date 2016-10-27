@@ -198,11 +198,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFb-mk-8FS">
-                                <frame key="frameInset" minX="20" minY="125" width="45" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="geo"/>
-                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-H7-QoU">
                                 <frame key="frameInset" minX="260" minY="125" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -244,9 +239,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="containerView" destination="E8W-dp-AfJ" id="O01-bD-TGG"/>
+                        <outlet property="geoSwitch" destination="1qv-H7-QoU" id="7m6-lr-JfH"/>
                         <outlet property="geocodingResultsView" destination="SVo-B6-WCU" id="hGC-CO-G1S"/>
                         <outlet property="mapView" destination="ReE-6e-pYB" id="Wwb-q4-fn3"/>
-                        <outlet property="reverseGeocodingButton" destination="JFb-mk-8FS" id="uF6-W0-fqh"/>
                         <segue destination="oau-Dq-Vb5" kind="show" identifier="showCategories" id="fk6-TY-2Z4"/>
                     </connections>
                 </viewController>

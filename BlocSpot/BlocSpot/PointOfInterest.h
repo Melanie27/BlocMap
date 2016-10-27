@@ -20,6 +20,7 @@
 
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem;
+- (instancetype)initWithMKPlacemark:(MKPlacemark*)placemark;
 - (instancetype)initWithMKPointAnnotation:(MKPointAnnotation*)pointAnnotation;
 
 
