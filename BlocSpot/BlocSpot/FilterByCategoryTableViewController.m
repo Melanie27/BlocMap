@@ -143,18 +143,18 @@ static NSString *CellIdentifier = @"Cat Identifier";
             
             
             
-            //TODO Filtering
-            //NSString *filter = @"%K Contains %@";
-            //NSPredicate *predicate= [NSPredicate predicateWithFormat:filter, @"SELF", @"coffee"];
-            //TODO error [<PointOfInterest 0x7c9ef850> valueForUndefinedKey:]: this class is not key value coding-compliant for the key SELF.'
-                //NSArray* filteredData = [ds.arrayOfPOIs filteredArrayUsingPredicate:predicate];
-                // NSLog(@"array matching items please %@", filteredData);
             
             
+            //TODO checkout sortedArrayUsingSelector
+            //reason: '[<POICategory 0x60800009ced0> valueForUndefinedKey:]: this class is not key value coding-compliant for the key category.'
+            //NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+            //NSArray *sortedArrayWithDesc = [ds.arrayOfCategories sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
             
+            //NSLog(@"sort arr with Desc %@", sortedArrayWithDesc);
+            //NSArray *sortedArray = [ds.arrayOfPOIs sortedArrayUsingSelector:@selector(filterCategoriesByName:)];
             //matchingItem.subtitle = poi.subtitle;
-            NSLog(@"new array %@", newlySelectedArrayOfPOIs);
-            NSLog(@"matching item %@", matchingItem);
+            //NSLog(@"new array %@", newlySelectedArrayOfPOIs);
+            //NSLog(@"matching item %@", matchingItem);
             //ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
             
             ds.filteredArrayOfPOIs = newlySelectedArrayOfPOIs;
@@ -163,20 +163,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
             [ds saveData];
             
            
-            
             NSLog(@"poi title post save %@",matchingItem.title);
-            
-                
-                            
-           
-            
-            
-            //SAVE FILTERED DATA
-            //NEED TO CAPTURE THIS DATA IN THE MODEL
-            //NEED TO UPDATE THE RESULTS TABLE VIEW
-            
-            
-            
             
             
         }
@@ -185,6 +172,20 @@ static NSString *CellIdentifier = @"Cat Identifier";
     }
     
 }
+
+/*-(void)caseInsensitiveCompare:(NSArray*)category {
+    NSLog(@"case insensitive compare");
+}
+
+-(void)filterCategoriesByName:(NSArray *)sortedArray{
+    //TODO Filtering
+    NSString *filter = @"%K Contains %@";
+    NSPredicate *predicate= [NSPredicate predicateWithFormat:filter, @"SELF", @"coffee"];
+    //TODO error [<PointOfInterest 0x7c9ef850> valueForUndefinedKey:]: this class is not key value coding-compliant for the key SELF.'
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    NSArray* filteredData = [ds.arrayOfPOIs filteredArrayUsingPredicate:predicate];
+     NSLog(@"array matching items please %@", filteredData);
+}*/
 
 
 -(void)loadCategories {
