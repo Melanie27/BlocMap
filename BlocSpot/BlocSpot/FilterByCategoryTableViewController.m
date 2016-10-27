@@ -80,7 +80,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     BLSDataSource *ds = [BLSDataSource sharedInstance];
      POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     //category = self.currentlySelectedCategory;

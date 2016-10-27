@@ -508,7 +508,7 @@ CLLocationManager *locationManager;
             [alert addAction:defaultAction];
             [self presentViewController:alert animated:YES completion:nil];
             
-            self.locationUpdatesSwitch.on == NO;
+            //self.locationUpdatesSwitch.on == NO;
             return;
             
         }

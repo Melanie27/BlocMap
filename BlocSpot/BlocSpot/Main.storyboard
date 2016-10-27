@@ -14,7 +14,7 @@
             <objects>
                 <tableViewController id="dfh-OX-2Rh" customClass="CategoryListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ryr-RK-Ziz">
-                        <rect key="frame" x="0.0" y="0.0" width="339" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections/>
@@ -41,7 +41,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JJj-Wq-SvD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="coz-Wb-fQ0">
-                        <rect key="frame" x="0.0" y="0.0" width="339" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category Name" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="65h-ug-na6">
@@ -432,12 +432,12 @@
                     <navigationItem key="navigationItem" id="UjH-S0-gGm">
                         <barButtonItem key="leftBarButtonItem" image="mapView.png" id="kOP-Pa-bqS">
                             <connections>
-                                <segue destination="jxr-Do-I8k" kind="show" id="uhC-Qn-CnK"/>
+                                <segue destination="jxr-Do-I8k" kind="show" identifier="mapSegue" id="uhC-Qn-CnK"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7">
                             <connections>
-                                <segue destination="8mN-88-Vaz" kind="show" id="IJd-4J-jqX"/>
+                                <segue destination="8mN-88-Vaz" kind="show" identifier="listSearch" id="IJd-4J-jqX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -534,8 +534,8 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fk6-TY-2Z4"/>
         <segue reference="uhC-Qn-CnK"/>
         <segue reference="hiA-Gq-6wD"/>
-        <segue reference="ooD-K5-9nQ"/>
     </inferredMetricsTieBreakers>
 </document>
