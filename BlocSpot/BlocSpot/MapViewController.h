@@ -45,4 +45,5 @@
 //@property (strong, nonatomic) PointOfInterest *reviewText;
 @property (strong, nonatomic) POICategory *currentCategory;
 -(void)loadSearchResults;
+- (void)registerUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings;
 @end

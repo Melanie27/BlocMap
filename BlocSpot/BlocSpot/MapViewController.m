@@ -40,6 +40,7 @@ CLLocationManager *locationManager;
     self.mapView.delegate = self;
    
     
+    
     //set init mapkit region
     CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
     self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 100000, 100000);
@@ -531,92 +532,13 @@ CLLocationManager *locationManager;
     }
 }
 
-/*- (IBAction)toggleRegionMonitoring:(id)sender {
-    NSLog(@"toggle region monitor");
-    if(self.regionMonitoringSwitch.on == YES) {
-        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-        
-        if (status == kCLAuthorizationStatusAuthorizedAlways ||
-            status == kCLAuthorizationStatusAuthorizedWhenInUse ||
-            status == kCLAuthorizationStatusNotDetermined) {
-            
-            //start monitoring the region here
-            
-            //instantiate location manager instance variable if not already created
-            if (self.locationManager == nil) {
-                self.locationManager = [[CLLocationManager alloc]init];
-                self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-                self.locationManager.delegate = self;
-            }
-            
-            //define center coordinate and radius of region to monitor
-            CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
-            int regionRadius = 3000; //meters
-            if(regionRadius > self.locationManager.maximumRegionMonitoringDistance) {
-                regionRadius = self.locationManager.maximumRegionMonitoringDistance;
-            }
-            
-            CLCircularRegion *laRegion = [[CLCircularRegion alloc] initWithCenter:laLocation radius:regionRadius identifier:@"laRegion"];
-            
-            [self.locationManager startMonitoringForRegion:laRegion];
-            
-            
-            
-        } else {
-            if(self.locationManager == nil) {
-                for (CLCircularRegion *monitoredRegion in [self.locationManager monitoredRegions]){
-                    [self.locationManager stopMonitoringForRegion:monitoredRegion];
-                    self.regionInformationView.text = [NSString stringWithFormat:@"Turned off region monitoring for %@", monitoredRegion.identifier];
-                }
-            }
-            self.regionInformationView.text = @"Region Monitoring Disabled";
-            self.regionMonitoringSwitch.on = NO;
-        }
-    }
-}*/
 
-//managing failures
-/*-(void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
-        switch (error.code) {
-            case kCLErrorRegionMonitoringDenied: {
-                self.regionInformationView.text = @"Region monitoring denied on this device";
-                break;
-            }
-            case kCLErrorRegionMonitoringFailure: {
-                self.regionInformationView.text = [NSString stringWithFormat:@"Region Monitoring failed for region: %@", region.identifier];
-                break;
-            }
-            default: {
-                self.regionInformationView.text = [
-                                                   NSString stringWithFormat:@"An unhandled error occured: %@", error.description];
-                break;
-            }
-        }
-    
-}*/
 
-//enter a region
-/*-(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
-    self.regionInformationView.text = @"Welcome to LA!";
-    
-    UILocalNotification *entranceNotification = [[UILocalNotification alloc] init];
-    entranceNotification.alertBody = @"Welcome to LA!";
-    entranceNotification.alertAction= @"Ok";
-    entranceNotification.soundName = UILocalNotificationDefaultSoundName;
-    [[UIApplication sharedApplication] presentLocalNotificationNow:entranceNotification];
+
+- (void)registerUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    NSLog(@"register user note ");
 }
 
-//exit a region
--(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    self.regionInformationView.text = @"Thanks for visiting! Come back soon!";
-    
-    UILocalNotification *exitNotification = [[UILocalNotification alloc] init];
-    exitNotification.alertBody = @"See ya!";
-    exitNotification.alertAction= @"Ok";
-    exitNotification.soundName = UILocalNotificationDefaultSoundName;
-    [[UIApplication sharedApplication] presentLocalNotificationNow:exitNotification];
-    
-}*/
 
 //Receiving Location Updates
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -643,16 +565,23 @@ CLLocationManager *locationManager;
             self.locationInformationView.text = lastLocation.description;
             //NSLog(@"loc info %@", self.locationInformationView.text);
             
+            
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
+                                                                                                 |UIUserNotificationTypeBadge
+                                                                                                 |UIUserNotificationTypeSound) categories:nil];
+            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
             UILocalNotification *notification= [[UILocalNotification alloc] init];
+            notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
             notification.alertBody= [NSString stringWithFormat:@"New Location: %.3f, %.3f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
             notification.alertAction = @"OK";
             notification.soundName = UILocalNotificationDefaultSoundName;
+            notification.alertTitle = @"alert Title";
             
             //increment the application badge number
             notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] +1;
+            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-            
-            
+            NSLog(@"loc note %@", notification);
             //geocoding stuff
             if (self.geocoder == nil)
                 self.geocoder = [[CLGeocoder alloc] init];
@@ -668,6 +597,8 @@ CLLocationManager *locationManager;
                     if([placemarks count] > 0) {
                         CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
                         self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", foundPlacemark.description];
+                        
+                        NSLog(@"geo notifi %@", notification);
                     } else if (error.code == kCLErrorGeocodeCanceled) {
                         NSLog(@"geocode cancelled");
                     } else if (error.code == kCLErrorGeocodeFoundNoResult) {
