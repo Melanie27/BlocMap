@@ -122,6 +122,10 @@ static NSString *CellIdentifier = @"Cat Identifier";
     // if 1 and 2 match, show those pois in the map and table
     // if one and 2 do not match hide the relevant pois
    
+    //NSMutableArray *sortedByCategory = [[NSMutableArray alloc] init];
+    
+    
+    
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
       
@@ -141,16 +145,19 @@ static NSString *CellIdentifier = @"Cat Identifier";
             matchingItem.noteText = poi.subtitle;
             NSLog(@"matching items %@", matchingItem);
             
+            [finalCategories setObject:poi forKey:@"category" ];
             
+            NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
+            NSArray *sortDescriptors = @[categoryDescriptor];
             
+            NSArray *sortedByCategory = [ds.arrayOfCategories sortedArrayUsingDescriptors:sortDescriptors];
+            
+            NSLog(@"sort arr with Desc %@", sortedByCategory);
             
             
             //TODO checkout sortedArrayUsingSelector
             //reason: '[<POICategory 0x60800009ced0> valueForUndefinedKey:]: this class is not key value coding-compliant for the key category.'
-            //NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES selector:@selector(caseInsensitiveCompare:)];
-            //NSArray *sortedArrayWithDesc = [ds.arrayOfCategories sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
             
-            //NSLog(@"sort arr with Desc %@", sortedArrayWithDesc);
             //NSArray *sortedArray = [ds.arrayOfPOIs sortedArrayUsingSelector:@selector(filterCategoriesByName:)];
             //matchingItem.subtitle = poi.subtitle;
             //NSLog(@"new array %@", newlySelectedArrayOfPOIs);
