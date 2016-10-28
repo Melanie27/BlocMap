@@ -125,7 +125,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
     //NSMutableArray *sortedByCategory = [[NSMutableArray alloc] init];
     
     
-    
+    NSMutableDictionary *finalCategories = [NSMutableDictionary dictionary];
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
       
@@ -145,7 +145,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
             matchingItem.noteText = poi.subtitle;
             NSLog(@"matching items %@", matchingItem);
             
-            [finalCategories setObject:poi forKey:@"category" ];
+            //[categories setObject:obj forKey:@( distance )];
             
             NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
             NSArray *sortDescriptors = @[categoryDescriptor];
