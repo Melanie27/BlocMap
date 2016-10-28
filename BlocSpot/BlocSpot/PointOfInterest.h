@@ -10,7 +10,7 @@
 #import <Mapkit/Mapkit.h>
 #import "POICategory.h"
     
-@interface PointOfInterest : NSObject <NSCoding, MKAnnotation>
+@interface PointOfInterest : NSObject <NSCoding, MKAnnotation, CLLocationManagerDelegate>
 
 - (id)initWithAddress:(NSString*)address
            coordinate:(CLLocationCoordinate2D)coordinate
@@ -18,8 +18,14 @@
                 subtitle:(NSString *)s
            identifier:(NSNumber *)ident;
 
+- (id)initWithAddress2:(NSString*)address
+          location:(CLLocation*)location
+                title:(NSString *)t
+           identifier:(NSNumber *)ident;
+
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem;
+- (instancetype)initWithCLPLacemark:(CLPlacemark*)placemark;
 - (instancetype)initWithMKPlacemark:(MKPlacemark*)placemark;
 - (instancetype)initWithMKPointAnnotation:(MKPointAnnotation*)pointAnnotation;
 

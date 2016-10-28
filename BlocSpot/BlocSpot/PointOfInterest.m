@@ -46,6 +46,15 @@
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
 
+- (instancetype)initWithCLPlacemark:(CLPlacemark*)placemark {
+    
+    NSString *address = @"";
+    NSString *name = placemark.name;
+    NSNumber *identifier = @10;
+    CLLocation *location = placemark.location;
+    return [self initWithAddress2:address location:location title:name identifier:identifier];
+}
+
 
 - (MKMapItem*)mapItem {
     NSDictionary *addrDict = @{
@@ -81,6 +90,28 @@
          [self setSubtitle:s];
        
 
+    }
+    return self;
+}
+
+-(id)initWithAddress2:(NSString *)address
+             location:(CLLocation *)location
+                title:(NSString *)t
+           identifier:(NSNumber *)ident {
+
+    
+    self = [super init];
+    
+    if (self) {
+        _address = [address copy];
+        location = location;
+        _identifier = ident;
+        
+        //[self setPlacemark:_coordinate];
+        [self setTitle:t];
+       
+        
+        
     }
     return self;
 }
