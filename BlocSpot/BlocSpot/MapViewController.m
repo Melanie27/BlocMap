@@ -492,6 +492,11 @@ CLLocationManager *locationManager;
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     CLLocation *lastLocation = [locations lastObject];
     
+    //Get user location
+    CLLocation *userLocation = self.mapView.userLocation.location;
+    NSLog(@"user local %@", userLocation);
+    
+   
     //Check if timestamp on location is recent
     NSTimeInterval eventInterval = [lastLocation.timestamp timeIntervalSinceNow];
     if(fabs(eventInterval) < 30.0) {
@@ -512,13 +517,53 @@ CLLocationManager *locationManager;
             
             //TODO pass the placemarks from the arrayofPOIS Here?
             [self.geocoder reverseGeocodeLocation:lastLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-                placemarks = ds.arrayOfPOIs;
+                
+                NSLog(@"lastLocation %@", lastLocation);
+                NSLog(@"user local %@", userLocation);
                 NSLog(@"set placemarks %@", placemarks);
                 
+                NSMutableDictionary *distances = [NSMutableDictionary dictionary];
+                
+                for (PointOfInterest *obj in ds.arrayOfPOIs) {
+                    CLLocation *loc = [[CLLocation alloc] initWithLatitude:obj.coordinate.latitude longitude:obj.coordinate.longitude];
+                    CLLocationDistance distance = [loc distanceFromLocation:lastLocation];
+                    
+                    //Convert meters to km
+                    double km = distance/1000;
+                    
+                    NSLog(@"Distance from Point of Interest - %f", km);
+                    
+                    [distances setObject:obj forKey:@( distance )];
+                    
+                    
+                    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES comparator:^(id lastLocation, id userLocation) {
+                        if ([lastLocation integerValue] > [userLocation integerValue]) {
+                            return (NSComparisonResult)NSOrderedDescending;
+                        }
+                        if ([lastLocation integerValue] < [userLocation integerValue]) {
+                            return (NSComparisonResult)NSOrderedAscending;
+                        }
+                        return (NSComparisonResult)NSOrderedSame;
+                    }];
+                    
+                    NSLog(@"sort descriptor %@", sortDescriptor);
+                    
+                    //NSArray *sortedPOIs = [ds.arrayOfPOIs sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+                    //NSLog(@"sorted numbers %@", sortedPOIs);
+                    //placemarks = sortedPOIs;
+                }
+                
+
+                
+                //placemarks = closestKeys;
                 //TODO set a index variable with the nearest location
                 //sort locations by proximity to users location
                 if([placemarks count] > 0) {
-                        CLPlacemark *foundPlacemark = [placemarks objectAtIndex:5];
+                   
+                    //CLPlacemark *foundPlacemark =[placemarks firstObject];
+                    CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
+                    NSLog(@"found placemark %@", foundPlacemark);
+                    //PointOfInterest *item = [[PointOfInterest alloc] initWithCLPLacemark:foundPlacemark];
                     PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:foundPlacemark];
                     NSLog(@"found placemark %@", item.title);
                     
