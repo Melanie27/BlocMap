@@ -112,7 +112,7 @@ MKLocalSearch *localSearch;
         if (self.filteredArrayOfPOIs == nil) { self.filteredArrayOfPOIs = [@[] mutableCopy]; }
         
         completionHandler(self.arrayOfPOIs);
-    
+     
     });
 }
 

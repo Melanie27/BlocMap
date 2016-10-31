@@ -125,7 +125,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
     //NSMutableArray *sortedByCategory = [[NSMutableArray alloc] init];
     
     
-    NSMutableDictionary *finalCategories = [NSMutableDictionary dictionary];
+    //NSMutableDictionary *finalCategories = [NSMutableDictionary dictionary];
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
       
