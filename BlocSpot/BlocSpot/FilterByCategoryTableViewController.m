@@ -98,26 +98,14 @@ static NSString *CellIdentifier = @"Cat Identifier";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
      BLSDataSource *ds = [BLSDataSource sharedInstance];
     //always set filtered set to nil here
-    ds.filteredArrayOfPOIs = nil;
+    //ds.filteredArrayOfPOIs = nil;
    
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     
     self.currentlySelectedCategory = category;
     self.currentlySelectedCategory.categoryName= category.categoryName;
     
-   
 
-    //STEPS
-    // NSString *savedPOICategofyNames =  poi.categoryName;
-    //NSLog(@"list of saved poi category names, %@", savedPOICategofyNames);
-    // 1 get the category name of the poi
-    // 2 compare the category name to the currentlySelectedCategory name
-    // if 1 and 2 match, show those pois in the map and table
-    // if one and 2 do not match hide the relevant pois
-   
-    //NSMutableArray *sortedByCategory = [[NSMutableArray alloc] init];
-    // Filter by category
-    
     NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
     NSArray *sortedByCategory = [ds.arrayOfCategories sortedArrayUsingDescriptors:@[categoryDescriptor]];
     NSLog(@"sort arr with Desc %@", sortedByCategory);
@@ -146,18 +134,17 @@ static NSString *CellIdentifier = @"Cat Identifier";
            
             matchingItem.category = poi.category;
             matchingItem.title = poi.title;
-            //can't save subtitle??
-            //matchingItem.noteText = poi.subtitle;
+           
             
             
          
             ds.filteredArrayOfPOIs = newlySelectedArrayOfPOIs;
             //NSLog(@"filtered array of POIS %@", ds.filteredArrayOfPOIs);
            
-            //[ds saveData];
+            [ds saveData];
             
            
-            //NSLog(@"poi title post save %@",matchingItem.title);
+           
             
             
         }
