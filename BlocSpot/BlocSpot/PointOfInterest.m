@@ -45,8 +45,8 @@
     CLLocationCoordinate2D coord = placemark.coordinate;
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
+-(instancetype)initWithCLPLacemark:(CLPlacemark*)placemark {
 
-- (instancetype)initWithCLPlacemark:(CLPlacemark*)placemark {
     
     NSString *address = @"";
     NSString *name = placemark.name;

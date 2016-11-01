@@ -521,56 +521,54 @@ CLLocationManager *locationManager;
             //TODO pass the placemarks from the arrayofPOIS Here?
             [self.geocoder reverseGeocodeLocation:lastLocation completionHandler:^(NSArray *placemarks, NSError *error) {
                 
-                NSLog(@"lastLocation %@", lastLocation);
-                NSLog(@"user local %@", userLocation);
-                NSLog(@"set placemarks %@", placemarks);
+                //NSLog(@"lastLocation %@", lastLocation);
+                //NSLog(@"user local %@", userLocation);
+                //NSLog(@"set placemarks %@", placemarks);
                 
                 NSMutableDictionary *distances = [NSMutableDictionary dictionary];
                 
-                for (PointOfInterest *obj in ds.arrayOfPOIs) {
-                    CLLocation *loc = [[CLLocation alloc] initWithLatitude:obj.coordinate.latitude longitude:obj.coordinate.longitude];
-                    CLLocationDistance distance = [loc distanceFromLocation:lastLocation];
-                    
-                    //Convert meters to km
-                    double km = distance/1000;
-                    
-                    NSLog(@"Distance from Point of Interest - %f", km);
-                    
-                    [distances setObject:obj forKey:@( distance )];
-                    
-                    
-                    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES comparator:^(id lastLocation, id userLocation) {
-                        if ([lastLocation integerValue] > [userLocation integerValue]) {
-                            return (NSComparisonResult)NSOrderedDescending;
-                        }
-                        if ([lastLocation integerValue] < [userLocation integerValue]) {
-                            return (NSComparisonResult)NSOrderedAscending;
-                        }
-                        return (NSComparisonResult)NSOrderedSame;
-                    }];
-                    
-                    NSLog(@"sort descriptor %@", sortDescriptor);
-                    
-                    //NSArray *sortedPOIs = [ds.arrayOfPOIs sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-                    //NSLog(@"sorted numbers %@", sortedPOIs);
-                    //placemarks = sortedPOIs;
-                }
+                
                 
 
                 
-                //placemarks = closestKeys;
+                
                 //TODO set a index variable with the nearest location
                 //sort locations by proximity to users location
                 if([placemarks count] > 0) {
-                   
-                    //CLPlacemark *foundPlacemark =[placemarks firstObject];
-                    CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
-                    NSLog(@"found placemark %@", foundPlacemark);
-                    //PointOfInterest *item = [[PointOfInterest alloc] initWithCLPLacemark:foundPlacemark];
-                    PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:foundPlacemark];
-                    NSLog(@"found placemark %@", item.title);
                     
-                    self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item.title];
+                    //find the closest POI to where the user is
+                    
+                    for (PointOfInterest *poi in ds.arrayOfPOIs) {
+                        CLLocation *loc = [[CLLocation alloc] initWithLatitude:poi.coordinate.latitude longitude:poi.coordinate.longitude];
+                        CLLocationDistance distance = [loc distanceFromLocation:lastLocation];
+                        
+                        //Convert meters to km
+                        double km = distance/1000;
+                        
+                        NSLog(@"Distance from Point of Interest - %f", km);
+                        
+                        [distances setObject:poi forKey:@( distance )];
+                        NSLog(@"distances %@", distances);
+                        NSArray *keys = [distances allKeys];
+                        NSArray *values = [distances allValues];
+                        //id aKey = [keys objectAtIndex:0];
+                        
+                        MKPlacemark *closestPOI = [values objectAtIndex:0];
+                        //CLPlacemark *closestPOI = [keys objectAtIndex:0];
+                        NSLog(@"found placemark %@", closestPOI);
+                        //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:closestPOI];
+                        PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:closestPOI];
+                        self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item.title];
+                    }
+                    
+                    //CLPlacemark *foundPlacemark =[placemarks firstObject];
+                    //CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
+                    
+                    //PointOfInterest *item = [[PointOfInterest alloc] initWithCLPLacemark:foundPlacemark];
+                    //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:foundPlacemark];
+                    //NSLog(@"found placemark %@", item.title);
+                    
+                    //self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item];
                         
                         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
                                                                                                              |UIUserNotificationTypeBadge
