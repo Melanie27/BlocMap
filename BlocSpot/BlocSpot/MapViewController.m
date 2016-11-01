@@ -547,29 +547,23 @@ CLLocationManager *locationManager;
                         
                         NSLog(@"Distance from Point of Interest - %f", km);
                         
-                        [distances setObject:poi forKey:@( distance )];
+                        [distances setObject:poi forKey:@( km )];
                         NSLog(@"distances %@", distances);
-                        NSArray *keys = [distances allKeys];
+                        //NSArray *keys = [distances allKeys];
                         NSArray *values = [distances allValues];
                         //id aKey = [keys objectAtIndex:0];
                         
                         MKPlacemark *closestPOI = [values objectAtIndex:0];
                         //CLPlacemark *closestPOI = [keys objectAtIndex:0];
                         NSLog(@"found placemark %@", closestPOI);
-                        //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:closestPOI];
+                        //PointOfInterest *item = [[PointOfInterest alloc] initWithCLPlacemark:closestPOI];
                         PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:closestPOI];
                         self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item.title];
-                    }
                     
-                    //CLPlacemark *foundPlacemark =[placemarks firstObject];
-                    //CLPlacemark *foundPlacemark = [placemarks objectAtIndex:0];
                     
-                    //PointOfInterest *item = [[PointOfInterest alloc] initWithCLPLacemark:foundPlacemark];
-                    //PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:foundPlacemark];
-                    //NSLog(@"found placemark %@", item.title);
                     
-                    //self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item];
-                        
+                    
+                        //NOTIFICATIONS
                         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
                                                                                                              |UIUserNotificationTypeBadge
                                                                                                              |UIUserNotificationTypeSound) categories:nil];
@@ -588,6 +582,12 @@ CLLocationManager *locationManager;
                         
                         //one alert at a time
                     
+                    
+                    //[manager stopUpdatingLocation];
+                    
+                    }
+                    
+
                     } else if (error.code == kCLErrorGeocodeCanceled) {
                         NSLog(@"geocode cancelled");
                     } else if (error.code == kCLErrorGeocodeFoundNoResult) {
@@ -599,9 +599,11 @@ CLLocationManager *locationManager;
                     }
                 }
              ];
-            [manager stopUpdatingLocation];
+         [manager stopUpdatingLocation];
         }
+        
     }
+   
     
 }
 
