@@ -194,8 +194,11 @@ CLLocationManager *locationManager;
                 return NO;
             }
     }];
-    
-    ds.currentPOI = ds.arrayOfPOIs[index];
+    if (index != NSNotFound) {
+        ds.currentPOI = ds.arrayOfPOIs[index];
+    } else {
+        NSLog(@"POI not found! annotation %@ - %f,%f", annotationView.annotation.title, annotationView.annotation.coordinate.latitude, annotationView.annotation.coordinate.longitude);
+    }
     
 }
 

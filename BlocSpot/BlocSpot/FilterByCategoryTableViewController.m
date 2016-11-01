@@ -105,7 +105,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
     self.currentlySelectedCategory = category;
     self.currentlySelectedCategory.categoryName= category.categoryName;
     //NSLog(@"tapped cat  %@", self.currentlySelectedCategory);
-    //NSLog(@"tapped cat name %@", self.currentlySelectedCategory.categoryName);
+    NSLog(@"tapped cat name %@", self.currentlySelectedCategory.categoryName);
    
     NSMutableArray *newlySelectedArrayOfPOIs = [[NSMutableArray alloc]init];
     if (newlySelectedArrayOfPOIs == nil) {
@@ -125,17 +125,17 @@ static NSString *CellIdentifier = @"Cat Identifier";
     //NSMutableArray *sortedByCategory = [[NSMutableArray alloc] init];
     
     
-    //NSMutableDictionary *finalCategories = [NSMutableDictionary dictionary];
+    
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
       
-         NSLog(@"current cat %@",self.currentlySelectedCategory);
-        NSLog(@"cat name %@", poi.category.categoryName);
-        NSLog(@"in loop array of pois %@", ds.arrayOfPOIs);
+         //NSLog(@"current cat %@",self.currentlySelectedCategory);
+        //NSLog(@"cat name %@", poi.category.categoryName);
+        //NSLog(@"in loop array of pois %@", ds.arrayOfPOIs);
         if(self.currentlySelectedCategory == poi.category) {
             NSLog(@"each poi that matches %@", poi.category);
             
-            //PRint a list of the POIS that meet this critera
+            //Print a list of the POIS that meet this critera - this just creates a new array 1 save a time
             PointOfInterest *matchingItem = [[PointOfInterest alloc] init];
             [newlySelectedArrayOfPOIs addObject:matchingItem];
            
@@ -145,20 +145,16 @@ static NSString *CellIdentifier = @"Cat Identifier";
             matchingItem.noteText = poi.subtitle;
             NSLog(@"matching items %@", matchingItem);
             
-            //[categories setObject:obj forKey:@( distance )];
             
-            NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
-            NSArray *sortDescriptors = @[categoryDescriptor];
+            //TODO Filter by category
             
-            NSArray *sortedByCategory = [ds.arrayOfCategories sortedArrayUsingDescriptors:sortDescriptors];
-            
+           
+            NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
+            NSArray *sortedByCategory = [ds.arrayOfCategories sortedArrayUsingDescriptors:@[categoryDescriptor]];
             NSLog(@"sort arr with Desc %@", sortedByCategory);
-            
-            
-            //TODO checkout sortedArrayUsingSelector
             //reason: '[<POICategory 0x60800009ced0> valueForUndefinedKey:]: this class is not key value coding-compliant for the key category.'
             
-            //NSArray *sortedArray = [ds.arrayOfPOIs sortedArrayUsingSelector:@selector(filterCategoriesByName:)];
+           
             //matchingItem.subtitle = poi.subtitle;
             //NSLog(@"new array %@", newlySelectedArrayOfPOIs);
             //NSLog(@"matching item %@", matchingItem);
@@ -180,19 +176,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
     
 }
 
-/*-(void)caseInsensitiveCompare:(NSArray*)category {
-    NSLog(@"case insensitive compare");
-}
 
--(void)filterCategoriesByName:(NSArray *)sortedArray{
-    //TODO Filtering
-    NSString *filter = @"%K Contains %@";
-    NSPredicate *predicate= [NSPredicate predicateWithFormat:filter, @"SELF", @"coffee"];
-    //TODO error [<PointOfInterest 0x7c9ef850> valueForUndefinedKey:]: this class is not key value coding-compliant for the key SELF.'
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
-    NSArray* filteredData = [ds.arrayOfPOIs filteredArrayUsingPredicate:predicate];
-     NSLog(@"array matching items please %@", filteredData);
-}*/
 
 
 -(void)loadCategories {
