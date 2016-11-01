@@ -108,17 +108,29 @@ static NSString *CellIdentifier = @"Cat Identifier";
 
     NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
     NSArray *sortedByCategory = [ds.arrayOfPOIs sortedArrayUsingDescriptors:@[categoryDescriptor]];
-    NSLog(@"sort arr with Desc %@", sortedByCategory);
-    for (PointOfInterest *poi in sortedByCategory) {
-        //find the related POIS
-        NSLog(@"associated pois %@", poi.category.categoryName);
-        if(self.currentlySelectedCategory == poi.category) {
+     NSMutableArray *sortedMutable = [[NSMutableArray alloc] initWithArray:sortedByCategory];
+    //NSLog(@"sort arr with Desc %@", sortedMutable);
+    for (PointOfInterest *poi in sortedMutable) {
+        //Get a filtered list out of the sorted POIS
         
-            NSMutableArray *poisByCategory = [[NSMutableArray alloc] init];
-            [poisByCategory addObject:poi];
-            NSLog(@"pois by category %@", poisByCategory);
-            ds.filteredArrayOfPOIs = poisByCategory;
-        }
+        //NSPredicate *bPredicate = [NSPredicate predicateWithFormat:@"SELF.name contains[cd] %@",poi.category];
+        //NSArray *filteredArray = [sortedByCategory filteredArrayUsingPredicate:bPredicate];
+        //NSLog(@"HERE %@",filteredArray);
+        
+        
+            if(self.currentlySelectedCategory == poi.category) {
+                
+                
+                
+                NSMutableArray *poisByCategory = [[NSMutableArray alloc] init];
+                [poisByCategory addObject:poi];
+                NSLog(@"pois by category %@", poisByCategory);
+                ds.filteredArrayOfPOIs = poisByCategory;
+                NSLog(@"filtered array %@", ds.filteredArrayOfPOIs);
+            }
+        
+        
+       
         
     }
 
