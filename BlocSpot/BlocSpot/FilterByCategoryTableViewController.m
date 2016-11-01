@@ -107,50 +107,23 @@ static NSString *CellIdentifier = @"Cat Identifier";
     
 
     NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
-    NSArray *sortedByCategory = [ds.arrayOfCategories sortedArrayUsingDescriptors:@[categoryDescriptor]];
+    NSArray *sortedByCategory = [ds.arrayOfPOIs sortedArrayUsingDescriptors:@[categoryDescriptor]];
     NSLog(@"sort arr with Desc %@", sortedByCategory);
-    
-    //find all pois that are equal to stored by cat
-    
-    for (PointOfInterest *poi in ds.arrayOfPOIs) {
-      
-        
+    for (PointOfInterest *poi in sortedByCategory) {
+        //find the related POIS
+        NSLog(@"associated pois %@", poi.category.categoryName);
         if(self.currentlySelectedCategory == poi.category) {
-            NSLog(@"each poi that matches %@", poi.category);
-            
-            //Print a list of the POIS that meet this critera - this just creates a new array 1 save a time
-            NSMutableArray *newlySelectedArrayOfPOIs= [[NSMutableArray alloc] init];
-            PointOfInterest *matchingItem = [[PointOfInterest alloc] init];
-            NSLog(@"matching item %@", matchingItem.categoryName);
-            NSLog(@"newly selected array of POIS %@", newlySelectedArrayOfPOIs);
-            
-            //test that
-            if (matchingItem != nil) {
-                [newlySelectedArrayOfPOIs addObject:matchingItem];
-                
-            }
-            NSLog(@"newly selected array of POIS %@", newlySelectedArrayOfPOIs);
-            
-           
-            matchingItem.category = poi.category;
-            matchingItem.title = poi.title;
-           
-            
-            
-         
-            ds.filteredArrayOfPOIs = newlySelectedArrayOfPOIs;
-            //NSLog(@"filtered array of POIS %@", ds.filteredArrayOfPOIs);
-           
-            [ds saveData];
-            
-           
-           
-            
-            
+        
+            NSMutableArray *poisByCategory = [[NSMutableArray alloc] init];
+            [poisByCategory addObject:poi];
+            NSLog(@"pois by category %@", poisByCategory);
+            ds.filteredArrayOfPOIs = poisByCategory;
         }
         
-        
     }
+
+    
+    [ds saveData];
     
 }
 
