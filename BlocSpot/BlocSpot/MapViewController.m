@@ -98,7 +98,7 @@ CLLocationManager *locationManager;
         
         if (kindOfChange == NSKeyValueChangeSetting) {
             
-            NSLog(@"registering a change neeed to update color of the POI title");
+            //NSLog(@"registering a change neeed to update color of the POI title");
     
             //TODO Grab a hold of the POI that was categorized and update the color of the annotation.title to the corresponding category color
            
@@ -195,8 +195,11 @@ CLLocationManager *locationManager;
                 return NO;
             }
     }];
-    
-    ds.currentPOI = ds.arrayOfPOIs[index];
+    if (index != NSNotFound) {
+        ds.currentPOI = ds.arrayOfPOIs[index];
+    } else {
+        NSLog(@"POI not found! annotation %@ - %f,%f", annotationView.annotation.title, annotationView.annotation.coordinate.latitude, annotationView.annotation.coordinate.longitude);
+    }
     
 }
 

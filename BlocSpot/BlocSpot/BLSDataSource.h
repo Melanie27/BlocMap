@@ -17,6 +17,7 @@
 @class PointOfInterest;
 
 typedef void (^MarkersSavedCompletionHandler)(NSArray *pois);
+typedef void (^MarkersFilteredCompletionHandler)(NSArray *pois);
 typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 
 //typedef void (^SaveCatToPOICompletionHandler)(POICategory *currCat);
@@ -38,21 +39,26 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 @property (retain, nonatomic) NSMutableArray *annotations;
 @property (nonatomic) BOOL itemSelected;
 @property (nonatomic, strong) NSMutableArray<PointOfInterest*> *arrayOfPOIs;
+@property (nonatomic, strong) NSMutableArray<PointOfInterest*> *filteredArrayOfPOIs;
+@property (nonatomic, strong) NSMutableArray<PointOfInterest*> *hiddenArrayOfPOIs;
 @property (nonatomic, strong) NSMutableArray<POICategory*> *arrayOfCategories;
+@property (nonatomic, strong) NSMutableArray<POICategory*> *filteredArrayOfCategories;
 @property (atomic, strong) PointOfInterest* currentPOI;
 @property (atomic, strong) POICategory* currentCategory;
 
 
 -(void)loadSavedData:(MarkersSavedCompletionHandler)completionHandler;
-
+//-(void)loadFilteredData:(MarkersSavedCompletionHandler)completionHandler;
 
 - (void)convertMapItemsToPOI:(NSArray<MKMapItem *> *)mapItemsToSave;
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave;
 
-
+- (void) removeObjectFromArrayOfPOIsAtIndex:(NSUInteger)index;
 -(void)saveNoteToPOI:(PointOfInterest*)note;
 -(void)saveCategoryToPOI:(POICategory *)cat;
 -(void)savePOIToCategory:(PointOfInterest*)poi;
+
+//-(void)saveFilteredData:(MKLocalSearchCompletionHandler)completionHandler;
 
 
 -(void)savePOIAndThen:(MKLocalSearchCompletionHandler)completionHandler;
@@ -60,5 +66,5 @@ typedef void (^CategoriesSavedCompletionHandler)(NSArray *pois);
 -(void) savePOI:(NSArray<MKMapItem *> *)mapItemsToSave andThen:(MKLocalSearchCompletionHandler)completionHandler;
 -(void)searchMap:(NSString*)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler;
 -(void) deletePOIItem:(PointOfInterest *)item;
-//-(void)deleteCategory:(POICategory *)category;
+-(void)deleteCategory:(POICategory *)cat;
 @end

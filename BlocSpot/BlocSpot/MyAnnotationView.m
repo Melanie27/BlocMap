@@ -11,9 +11,8 @@
 @implementation MyAnnotationView
 
 /*-(id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier {
-   
-    
-    
+
+
     if(self) {
         UIImage *redHeart = [UIImage imageNamed:@"redHeart@2x.png"];
         self.image = redHeart;

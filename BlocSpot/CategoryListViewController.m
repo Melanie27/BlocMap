@@ -44,7 +44,7 @@ BLSDataSource *ds;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"Categories > %@", ds.arrayOfCategories);
+    //NSLog(@"Categories > %@", ds.arrayOfCategories);
     // Register Class for Cell Reuse
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
@@ -55,6 +55,8 @@ BLSDataSource *ds;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
     self.navigationItem.leftBarButtonItem = backButton;
+    
+    [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfCategories" options:0 context:nil];
     
     
     
@@ -194,22 +196,41 @@ BLSDataSource *ds;
    
 }
 
+//KVO
+- (void) dealloc {
+    [[BLSDataSource sharedInstance] removeObserver:self forKeyPath:@"arrayOfCategories"];
+}
+
+
+
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == [BLSDataSource sharedInstance] && [keyPath isEqualToString:@"arrayOfCategories"]) {
+        NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
+        
+        if (kindOfChange == NSKeyValueChangeRemoval) {
+            // Someone set a brand new images array
+            [self.tableView reloadData];
+        }
+    }
+}
+
+
 //Swipe to delete
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the category from the data source
-        POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
-        [ds.arrayOfCategories removeObject:category];
+    
+        BLSDataSource *ds = [BLSDataSource sharedInstance];
+        POICategory *cat = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
+        [[BLSDataSource sharedInstance] deleteCategory:cat];
         
-        //TODO fix category deletion
-        //NSArray *categories = [NSArray arrayWithObjects:self.categories, nil];
-        //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        NSIndexPath *deleteIndexPath = [NSIndexPath indexPathForItem:([ds.arrayOfCategories count] - 1) inSection:0];
-        [self.tableView deleteRowsAtIndexPaths:@[deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
+     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
 }
+
+
 
 
 
