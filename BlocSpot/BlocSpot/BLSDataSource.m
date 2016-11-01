@@ -105,7 +105,7 @@ MKLocalSearch *localSearch;
         
         self.arrayOfPOIs = fileDataArray[0];
         self.arrayOfCategories = fileDataArray[1];
-        //self.filteredArrayOfPOIs = fileDataArray[2];
+        self.filteredArrayOfPOIs = fileDataArray[2];
         
         if (self.arrayOfPOIs == nil) { self.arrayOfPOIs = [@[] mutableCopy]; }
         if (self.arrayOfCategories == nil) { self.arrayOfCategories = [@[] mutableCopy]; }

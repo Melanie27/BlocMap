@@ -104,16 +104,9 @@ static NSString *CellIdentifier = @"Cat Identifier";
     
     self.currentlySelectedCategory = category;
     self.currentlySelectedCategory.categoryName= category.categoryName;
-    //NSLog(@"tapped cat  %@", self.currentlySelectedCategory);
-    NSLog(@"tapped cat name %@", self.currentlySelectedCategory.categoryName);
+    
    
-    NSMutableArray *newlySelectedArrayOfPOIs = [[NSMutableArray alloc]init];
-    if (newlySelectedArrayOfPOIs == nil) {
-        newlySelectedArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
-    }
-    
-    
-    
+
     //STEPS
     // NSString *savedPOICategofyNames =  poi.categoryName;
     //NSLog(@"list of saved poi category names, %@", savedPOICategofyNames);
@@ -123,50 +116,48 @@ static NSString *CellIdentifier = @"Cat Identifier";
     // if one and 2 do not match hide the relevant pois
    
     //NSMutableArray *sortedByCategory = [[NSMutableArray alloc] init];
+    // Filter by category
     
+    NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
+    NSArray *sortedByCategory = [ds.arrayOfCategories sortedArrayUsingDescriptors:@[categoryDescriptor]];
+    NSLog(@"sort arr with Desc %@", sortedByCategory);
     
-    
+    //find all pois that are equal to stored by cat
     
     for (PointOfInterest *poi in ds.arrayOfPOIs) {
       
-         //NSLog(@"current cat %@",self.currentlySelectedCategory);
-        //NSLog(@"cat name %@", poi.category.categoryName);
-        //NSLog(@"in loop array of pois %@", ds.arrayOfPOIs);
+        
         if(self.currentlySelectedCategory == poi.category) {
             NSLog(@"each poi that matches %@", poi.category);
             
             //Print a list of the POIS that meet this critera - this just creates a new array 1 save a time
+            NSMutableArray *newlySelectedArrayOfPOIs= [[NSMutableArray alloc] init];
             PointOfInterest *matchingItem = [[PointOfInterest alloc] init];
-            [newlySelectedArrayOfPOIs addObject:matchingItem];
+            NSLog(@"matching item %@", matchingItem.categoryName);
+            NSLog(@"newly selected array of POIS %@", newlySelectedArrayOfPOIs);
+            
+            //test that
+            if (matchingItem != nil) {
+                [newlySelectedArrayOfPOIs addObject:matchingItem];
+                
+            }
+            NSLog(@"newly selected array of POIS %@", newlySelectedArrayOfPOIs);
+            
            
             matchingItem.category = poi.category;
             matchingItem.title = poi.title;
             //can't save subtitle??
-            matchingItem.noteText = poi.subtitle;
-            NSLog(@"matching items %@", matchingItem);
+            //matchingItem.noteText = poi.subtitle;
             
             
-            //TODO Filter by category
-            
-           
-            NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
-            NSArray *sortedByCategory = [ds.arrayOfCategories sortedArrayUsingDescriptors:@[categoryDescriptor]];
-            NSLog(@"sort arr with Desc %@", sortedByCategory);
-            //reason: '[<POICategory 0x60800009ced0> valueForUndefinedKey:]: this class is not key value coding-compliant for the key category.'
-            
-           
-            //matchingItem.subtitle = poi.subtitle;
-            //NSLog(@"new array %@", newlySelectedArrayOfPOIs);
-            //NSLog(@"matching item %@", matchingItem);
-            //ds.arrayOfPOIs = newlySelectedArrayOfPOIs;
-            
+         
             ds.filteredArrayOfPOIs = newlySelectedArrayOfPOIs;
-            NSLog(@"filtered array of POIS %@", ds.filteredArrayOfPOIs);
+            //NSLog(@"filtered array of POIS %@", ds.filteredArrayOfPOIs);
            
-            [ds saveData];
+            //[ds saveData];
             
            
-            NSLog(@"poi title post save %@",matchingItem.title);
+            //NSLog(@"poi title post save %@",matchingItem.title);
             
             
         }
