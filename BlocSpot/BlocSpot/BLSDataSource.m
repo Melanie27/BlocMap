@@ -153,9 +153,7 @@ MKLocalSearch *localSearch;
 //TRYING TO REVERSE???
 -(void)savePOIToCategory:(PointOfInterest*)poi {
     self.currentCategory.poi = poi;
-    //NSLog(@"current category BLS %@", self.currentCategory.categoryName);
-    //self.currentCategory = category;
-    //NSLog(@"current poi BLS %@",category);
+   
     [self saveData];
 }
 

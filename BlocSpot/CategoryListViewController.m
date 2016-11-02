@@ -63,7 +63,7 @@ BLSDataSource *ds;
 }
 
 - (void)addItem:(id)sender {
-    //NSLog(@"Button was tapped.");
+    NSLog(@"Button was tapped.");
     [self performSegueWithIdentifier:@"AddCategoryViewController" sender:self];
 }
 
@@ -95,39 +95,33 @@ BLSDataSource *ds;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-    
     // Fetch Item
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     ds.currentCategory = category;
     //NSLog(@"category from list %@", category.categoryName);
-    //ds.currentCategory = category;
-    //ds.currentCategory.categoryName = category.categoryName;
+    ds.currentCategory = category;
+    ds.currentCategory.categoryName = category.categoryName;
     //NSLog(@"new vars %@", ds.currentCategory.categoryName);
    
     
     
-    //Get POI
-    PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+    //Get POI GRABBING THE POI associated with this row
+    //PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+    NSLog(@"current POI %@", ds.currentPOI);
+    PointOfInterest *poi = ds.currentPOI;
     ds.currentPOI = poi;
     
-    //TODO change this to an NSSet so it doesn't get double saved
+    //TODO this save only works one time per category
    
     [ds saveCategoryToPOI:category];
-    [ds savePOIToCategory:poi];
+   
     
     [ds saveData];
     
 
 }
 
--(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSIndexPath *oldIndex = [self.tableView indexPathForSelectedRow];
-    [self.tableView cellForRowAtIndexPath:oldIndex].accessoryType = UITableViewCellAccessoryNone;
-    [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-    return indexPath;
-}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Dequeue Reusable Cell
@@ -143,21 +137,10 @@ BLSDataSource *ds;
 }
 
 
-
-//returns the path to the file containing the application's list of categories by appending a string to the path of the documents directory.
--(NSString*)pathForCategories {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documents = [paths lastObject];
-    
-    return [documents stringByAppendingPathComponent:@"categories.poi"];
-}
-
-
 -(void)saveCategories {
     [[BLSDataSource sharedInstance]saveData];
     
-    //NSString *filePath = [self pathForCategories];
-    //[NSKeyedArchiver archiveRootObject:self.categories toFile:filePath];
+    
 }
 
 
