@@ -32,6 +32,8 @@ CLLocationManager *locationManager;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"BlocSpot Map";
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
    
     //register kvo for points of interest
     [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfPOIs" options:0 context:nil];
@@ -494,6 +496,7 @@ CLLocationManager *locationManager;
     
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     CLLocation *lastLocation = [locations lastObject];
+    __block BOOL shouldSendNotification = NO;
     
     //Get user location
     CLLocation *userLocation = self.mapView.userLocation.location;
@@ -560,9 +563,16 @@ CLLocationManager *locationManager;
                         PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:closestPOI];
                         self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item.title];
                     
+                        shouldSendNotification = YES;
+                        
+                    
+                        
+                    
+                        }
                     
                     
                     
+                    if (shouldSendNotification) {
                         //NOTIFICATIONS
                         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
                                                                                                              |UIUserNotificationTypeBadge
@@ -579,16 +589,12 @@ CLLocationManager *locationManager;
                         notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] +1;
                         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
                         [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+                        [manager stopUpdatingLocation];
                         
-                        //one alert at a time
-                    
-                    
-                    //[manager stopUpdatingLocation];
-                    
                     }
                     
-
-                    } else if (error.code == kCLErrorGeocodeCanceled) {
+                    
+                } else if (error.code == kCLErrorGeocodeCanceled) {
                         NSLog(@"geocode cancelled");
                     } else if (error.code == kCLErrorGeocodeFoundNoResult) {
                         self.geocodingResultsView.text=@"no geocode result found";
@@ -599,7 +605,7 @@ CLLocationManager *locationManager;
                     }
                 }
              ];
-         [manager stopUpdatingLocation];
+         
         }
         
     }

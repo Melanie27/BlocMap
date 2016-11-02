@@ -201,7 +201,7 @@ MKLocalSearch *localSearch;
         
         NSError *dataError;
         BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-        NSLog(@"category data %@",  poiCategoryData);
+    //    NSLog(@"category data %@",  poiCategoryData);
         if (!wroteSuccessfully) {
             NSLog(@"Couldn't write file: %@", dataError);
         }

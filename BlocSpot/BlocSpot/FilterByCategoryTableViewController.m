@@ -97,8 +97,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
 
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
      BLSDataSource *ds = [BLSDataSource sharedInstance];
-    //always set filtered set to nil here
-    //ds.filteredArrayOfPOIs = nil;
+   
    
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     
@@ -109,32 +108,19 @@ static NSString *CellIdentifier = @"Cat Identifier";
     NSSortDescriptor* categoryDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
     NSArray *sortedByCategory = [ds.arrayOfPOIs sortedArrayUsingDescriptors:@[categoryDescriptor]];
      NSMutableArray *sortedMutable = [[NSMutableArray alloc] initWithArray:sortedByCategory];
-    //NSLog(@"sort arr with Desc %@", sortedMutable);
+    NSMutableArray *poisByCategory = [[NSMutableArray alloc] init];
+   
     for (PointOfInterest *poi in sortedMutable) {
         //Get a filtered list out of the sorted POIS
         
-        //NSPredicate *bPredicate = [NSPredicate predicateWithFormat:@"SELF.name contains[cd] %@",poi.category];
-        //NSArray *filteredArray = [sortedByCategory filteredArrayUsingPredicate:bPredicate];
-        //NSLog(@"HERE %@",filteredArray);
-        
-        
             if(self.currentlySelectedCategory == poi.category) {
                 
-                
-                
-                NSMutableArray *poisByCategory = [[NSMutableArray alloc] init];
                 [poisByCategory addObject:poi];
-                NSLog(@"pois by category %@", poisByCategory);
+                
                 ds.filteredArrayOfPOIs = poisByCategory;
-                NSLog(@"filtered array %@", ds.filteredArrayOfPOIs);
             }
-        
-        
-       
-        
     }
 
-    
     [ds saveData];
     
 }
