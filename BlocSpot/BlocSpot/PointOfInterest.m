@@ -45,15 +45,6 @@
     CLLocationCoordinate2D coord = placemark.coordinate;
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
--(instancetype)initWithCLPLacemark:(CLPlacemark*)placemark {
-
-    
-    NSString *address = @"";
-    NSString *name = placemark.name;
-    NSNumber *identifier = @10;
-    CLLocation *location = placemark.location;
-    return [self initWithAddress2:address location:location title:name identifier:identifier];
-}
 
 
 - (MKMapItem*)mapItem {

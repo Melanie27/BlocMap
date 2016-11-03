@@ -276,7 +276,7 @@ CLLocationManager *locationManager;
                                                                   
                                                                   NSString *name = ds.currentPOI.title;
                                                                   NSString *reviewText = ds.currentPOI.noteText;
-                                                                  NSLog(@"note %@", ds.currentPOI.noteText);
+                                                                  //NSLog(@"note %@", ds.currentPOI.noteText);
                                                                   
                                                                   
                                                                   //test if user somehow entered empty string
@@ -290,12 +290,12 @@ CLLocationManager *locationManager;
                                                               }];
         UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"delete poi"
                                                                style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
-                                                                   NSLog(@"delete poi");
+                                                                   //NSLog(@"delete poi");
                                                                    
                                                                }];
         UIAlertAction *fifthAction = [UIAlertAction actionWithTitle:@"cancel"
                                                               style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-                                                                  NSLog(@"cancel");
+                                                                  //NSLog(@"cancel");
                                                                   
                                                               }];
         
@@ -423,7 +423,7 @@ CLLocationManager *locationManager;
     [ds convertPointAnnotationsToPOI:arrayMapItem];
     for (int i=0; i<[arrayMapItem count]; i++ ) {
         MKPointAnnotation* savedPoint = arrayMapItem[i];
-        NSLog(@"MKPointAnnotation %@", savedPoint);
+        //NSLog(@"MKPointAnnotation %@", savedPoint);
         
         
         MKPlacemark *mkDest = [[MKPlacemark alloc]
