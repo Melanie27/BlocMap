@@ -333,14 +333,10 @@
                                     <frame key="frameInset" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yn2-Hb-Vpq">
-                                            <frame key="frameInset" minX="16" minY="16" width="28" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yn2-Hb-Vpq">
                                             <state key="normal" title="Button" image="blueHeart"/>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rX-uf-QbN">
-                                            <frame key="frameInset" minX="71" minY="14" width="488" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rX-uf-QbN">
                                             <attributedString key="attributedText">
                                                 <fragment content="This will be the title .">
                                                     <attributes>
@@ -351,22 +347,10 @@
                                             </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9J-ua-q6a">
-                                            <frame key="frameInset" minX="8" minY="54" width="50" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="&lt; 1 mi.">
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWW-Tb-7ZD">
-                                            <frame key="frameInset" minX="71" minY="51" width="142" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWW-Tb-7ZD">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="142" id="yBN-Yc-9zA"/>
+                                            </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="most recent review ">
                                                     <attributes>
@@ -378,6 +362,16 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yn2-Hb-Vpq" firstAttribute="top" secondItem="oqR-Fp-PHC" secondAttribute="topMargin" constant="12" id="CA9-cw-4jR"/>
+                                        <constraint firstItem="3rX-uf-QbN" firstAttribute="top" secondItem="oqR-Fp-PHC" secondAttribute="topMargin" constant="6" id="Hcw-Kl-VoM"/>
+                                        <constraint firstItem="VWW-Tb-7ZD" firstAttribute="leading" secondItem="oqR-Fp-PHC" secondAttribute="leadingMargin" constant="63" id="NRf-Wd-GR3"/>
+                                        <constraint firstItem="VWW-Tb-7ZD" firstAttribute="top" secondItem="3rX-uf-QbN" secondAttribute="bottom" constant="12" id="ihx-tv-gxQ"/>
+                                        <constraint firstItem="yn2-Hb-Vpq" firstAttribute="leading" secondItem="oqR-Fp-PHC" secondAttribute="leadingMargin" constant="8" id="nEU-TD-JeZ"/>
+                                        <constraint firstItem="3rX-uf-QbN" firstAttribute="leading" secondItem="yn2-Hb-Vpq" secondAttribute="trailing" constant="27" id="qe5-b7-Wdz"/>
+                                        <constraint firstItem="3rX-uf-QbN" firstAttribute="trailing" secondItem="oqR-Fp-PHC" secondAttribute="trailingMargin" id="tZ7-MR-R4y"/>
+                                        <constraint firstItem="3rX-uf-QbN" firstAttribute="leading" secondItem="VWW-Tb-7ZD" secondAttribute="leading" id="vQh-FK-PWr"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="categoryIcon" destination="yn2-Hb-Vpq" id="fnd-6c-auN"/>
@@ -403,7 +397,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rFE-JY-sig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1681" y="1484"/>
+            <point key="canvasLocation" x="1680.8" y="1483.8080959520241"/>
         </scene>
         <!--Map-->
         <scene sceneID="0Ws-sQ-8ky">
