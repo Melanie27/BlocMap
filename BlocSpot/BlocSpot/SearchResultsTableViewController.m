@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SearchResultsTableViewController.h"
 #import "SearchResultsTableViewCell.h"
-#import "ResultsDetailViewController.h"
 #import "BLSDataSource.h"
 #import "MapViewController.h"
 #import "PointOfInterest.h"
