@@ -210,22 +210,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-6e-pYB"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-6e-pYB">
+                                <frame key="frameInset" minY="64" width="375" height="603"/>
+                            </mapView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E8W-dp-AfJ">
                                 <frame key="frameInset" minX="20" minY="171" width="339" height="288"/>
                                 <connections>
                                     <segue destination="dfh-OX-2Rh" kind="embed" identifier="showEmbed" id="8Ba-ga-drh"/>
                                 </connections>
                             </containerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="geocoding tracking" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SVo-B6-WCU">
-                                <frame key="frameInset" minX="79" minY="118" width="164" height="45"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVo-B6-WCU">
+                                <frame key="frameInset" minX="280" minY="72" width="79" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="get alerts">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="menu" size="14"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="light"/>
                             </textView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-H7-QoU">
-                                <frame key="frameInset" minX="260" minY="125" width="51" height="31"/>
+                                <frame key="frameInset" minX="310" minY="113" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="findCurrentAddress:" destination="BYZ-38-t0r" eventType="valueChanged" id="mHq-aI-Efe"/>
@@ -343,7 +352,7 @@
             </objects>
             <point key="canvasLocation" x="2573" y="569"/>
         </scene>
-        <!--Item-->
+        <!--Search Results Table View Controller-->
         <scene sceneID="nJt-mJ-9Hu">
             <objects>
                 <tableViewController id="37Q-DX-nPR" customClass="SearchResultsTableViewController" sceneMemberID="viewController">
@@ -411,7 +420,6 @@
                             <outlet property="delegate" destination="37Q-DX-nPR" id="Hlb-jc-Eak"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="JVh-5u-iTn"/>
                     <navigationItem key="navigationItem" id="UjH-S0-gGm">
                         <barButtonItem key="leftBarButtonItem" image="mapView.png" id="kOP-Pa-bqS">
                             <connections>
@@ -425,11 +433,10 @@
             </objects>
             <point key="canvasLocation" x="1750" y="1388"/>
         </scene>
-        <!--Map-->
+        <!--Navigation Controller-->
         <scene sceneID="0Ws-sQ-8ky">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jxr-Do-I8k" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="mapView.png" id="vlw-Ca-zuR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DS4-Wt-has">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -461,6 +468,8 @@
                             <outlet property="delegate" destination="XO0-Ji-e9g" id="D3M-yp-8Jh"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amP-EE-hEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

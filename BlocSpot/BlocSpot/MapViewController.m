@@ -162,24 +162,8 @@ CLLocationManager *locationManager;
     
 }
 
--(void)mapView:(MKMapView *)mapView currentPOI:(NSString*)title currentPOI:(NSString*)reviewText shareButtonPressed:(MKAnnotationView *)annotationView {
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
-    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
-    if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
-        [ds.arrayOfPOIs addObject:ds.currentPOI];
-    }
-    //Call Activity Controller
-    
-    UIActivityViewController *activityViewController =
-    [[UIActivityViewController alloc] initWithActivityItems:@[title, reviewText]
-                                      applicationActivities:nil];
-    [self.navigationController presentViewController:activityViewController
-                                            animated:YES
-                                          completion:^{
-                                              // ...
-                                          }];
 
-}
+
 
 
 -(void)updateAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView {
@@ -202,6 +186,8 @@ CLLocationManager *locationManager;
     }
     
 }
+
+#pragma mark - Action Sheet
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView calloutAccessoryControlTapped:(UIControl *)control{
     BLSDataSource *ds = [BLSDataSource sharedInstance];
@@ -325,6 +311,27 @@ CLLocationManager *locationManager;
     
 }
 
+#pragma mark - Sharing
+-(void)mapView:(MKMapView *)mapView currentPOI:(NSString*)title currentPOI:(NSString*)reviewText shareButtonPressed:(MKAnnotationView *)annotationView {
+    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    ds.currentPOI = [[PointOfInterest alloc] initWithMKPointAnnotation:(MKPointAnnotation*)annotationView.annotation];
+    if (![ds.arrayOfPOIs containsObject:ds.currentPOI]) {
+        [ds.arrayOfPOIs addObject:ds.currentPOI];
+    }
+    //Call Activity Controller
+    
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[title, reviewText]
+                                      applicationActivities:nil];
+    [self.navigationController presentViewController:activityViewController
+                                            animated:YES
+                                          completion:^{
+                                              // ...
+                                          }];
+    
+}
+
+#pragma mark - Navigation
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([sender isKindOfClass:[MKAnnotationView class]]) {
@@ -334,9 +341,7 @@ CLLocationManager *locationManager;
     if ([segue.identifier isEqualToString:@"showEmbed"]) {
     } else if ([segue.identifier isEqualToString:@"showCategories"]) {
        
-        //UINavigationController *navc = (UINavigationController*)segue.destinationViewController;
          CategoryListViewController *clvc = (CategoryListViewController*)segue.destinationViewController;
-        //CategoryListViewController *clvc = (CategoryListViewController*)([navc viewControllers][0]);
         clvc.POI = self.currentPOI;
         
     }
@@ -362,6 +367,11 @@ CLLocationManager *locationManager;
         }
     }
     
+}
+
+- (IBAction)back:(UIStoryboardSegue *)segue {
+   
+    NSLog(@"go back");
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
@@ -433,23 +443,8 @@ CLLocationManager *locationManager;
     [self loadSearchResults];
 }
 
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    UIViewController *vc = [segue destinationViewController];
-    if ([vc isKindOfClass:[SearchViewController class]]) {
-        SearchViewController *svc = (SearchViewController*)vc;
-        svc.mapVC = self;
-    }
-}*/
-
-//CHECKPOINT 8
-
-
-//geocoding
+#pragma mark - Geocoding
 - (IBAction)findCurrentAddress:(id)sender {
     if([CLLocationManager locationServicesEnabled]) {
         if(self.locationManager == nil) {
@@ -462,9 +457,9 @@ CLLocationManager *locationManager;
         }
         
         [self.locationManager startUpdatingLocation];
-        self.geocodingResultsView.text = @"Getting location";
+        self.geocodingResultsView.text = @"tracking";
     } else {
-        self.geocodingResultsView.text = @"location services unavailable";
+        self.geocodingResultsView.text = @"unavailable";
     }
     
 }
@@ -472,7 +467,7 @@ CLLocationManager *locationManager;
 ///STARTING AND STOPPING LOCATION UPDATES
 
 - (void)registerUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    NSLog(@"register user note ");
+    //NSLog(@"register user note");
 }
 
 
@@ -495,6 +490,7 @@ CLLocationManager *locationManager;
     
     BLSDataSource *ds = [BLSDataSource sharedInstance];
     CLLocation *lastLocation = [locations lastObject];
+    //syntax for bool in a block
     __block BOOL shouldSendNotification = NO;
     
     //Get user location
@@ -508,8 +504,6 @@ CLLocationManager *locationManager;
         //check accuracy of event
         if(lastLocation.horizontalAccuracy >= 0 && lastLocation.horizontalAccuracy <20) {
            
-            
-            
             //geocoding stuff
             if (self.geocoder == nil)
                 self.geocoder = [[CLGeocoder alloc] init];
@@ -517,10 +511,7 @@ CLLocationManager *locationManager;
             //only one geocoding instance per action
             if([self.geocoder isGeocoding])
                 [self.geocoder cancelGeocode];
-            
-            //begin reverse geocoding
-            
-            //TODO pass the placemarks from the arrayofPOIS Here?
+
             [self.geocoder reverseGeocodeLocation:lastLocation completionHandler:^(NSArray *placemarks, NSError *error) {
                 
                 //NSLog(@"lastLocation %@", lastLocation);
@@ -529,13 +520,7 @@ CLLocationManager *locationManager;
                 
                 NSMutableDictionary *distances = [NSMutableDictionary dictionary];
                 
-                
-                
-
-                
-                
-                //TODO set a index variable with the nearest location
-                //sort locations by proximity to users location
+            
                 if([placemarks count] > 0) {
                     
                     //find the closest POI to where the user is
@@ -551,26 +536,18 @@ CLLocationManager *locationManager;
                         
                         [distances setObject:poi forKey:@( km )];
                         NSLog(@"distances %@", distances);
-                        //NSArray *keys = [distances allKeys];
                         NSArray *values = [distances allValues];
-                        //id aKey = [keys objectAtIndex:0];
-                        
                         MKPlacemark *closestPOI = [values objectAtIndex:0];
-                        //CLPlacemark *closestPOI = [keys objectAtIndex:0];
                         NSLog(@"found placemark %@", closestPOI);
-                        //PointOfInterest *item = [[PointOfInterest alloc] initWithCLPlacemark:closestPOI];
                         PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:closestPOI];
                         self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item.title];
                     
                         shouldSendNotification = YES;
                         
-                    
-                        
+                
                     
                         }
-                    
-                    
-                    
+   
                     if (shouldSendNotification) {
                         //NOTIFICATIONS
                         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
@@ -613,10 +590,7 @@ CLLocationManager *locationManager;
 }
 
 
-- (IBAction)back:(UIStoryboardSegue *)segue {
-    //[super.navigationController popViewControllerAnimated:YES];
-    NSLog(@"go back");
-}
+
 
 
 

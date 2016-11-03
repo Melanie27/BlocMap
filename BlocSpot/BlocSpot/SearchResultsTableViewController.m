@@ -123,6 +123,11 @@
     }
 }*/
 
+- (IBAction)backToResults:(UIStoryboardSegue *)segue {
+    //[super.navigationController popViewControllerAnimated:YES];
+    NSLog(@"go back to results");
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
