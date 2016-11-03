@@ -16,7 +16,6 @@
 		9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */; };
 		9B96CD191D9455BC008E6842 /* SearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD181D9455BC008E6842 /* SearchResultsTableViewCell.m */; };
 		9B96CD211D99CD54008E6842 /* ResultsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD201D99CD54008E6842 /* ResultsDetailViewController.m */; };
-		9B96CD231D9AF95B008E6842 /* iconSave.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B96CD221D9AF95B008E6842 /* iconSave.png */; };
 		9BA722C21D8C665E006FC1B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C11D8C665E006FC1B1 /* main.m */; };
 		9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C41D8C665E006FC1B1 /* AppDelegate.m */; };
 		9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722C71D8C665E006FC1B1 /* ViewController.m */; };
@@ -71,7 +70,6 @@
 		9B96CD181D9455BC008E6842 /* SearchResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewCell.m; sourceTree = "<group>"; };
 		9B96CD1F1D99CD54008E6842 /* ResultsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsDetailViewController.h; path = ../ResultsDetailViewController.h; sourceTree = "<group>"; };
 		9B96CD201D99CD54008E6842 /* ResultsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsDetailViewController.m; path = ../ResultsDetailViewController.m; sourceTree = "<group>"; };
-		9B96CD221D9AF95B008E6842 /* iconSave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconSave.png; sourceTree = "<group>"; };
 		9BA722BD1D8C665E006FC1B1 /* BlocSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA722C11D8C665E006FC1B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9BA722C31D8C665E006FC1B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 				9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */,
 				9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */,
 				9BA722CC1D8C665E006FC1B1 /* Assets.xcassets */,
-				9B96CD221D9AF95B008E6842 /* iconSave.png */,
 				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9BA722D11D8C665E006FC1B1 /* Info.plist */,
 				9BE6C8601D9F15CB005F1ECC /* seed.plist */,
@@ -365,7 +362,6 @@
 				9BA722CD1D8C665E006FC1B1 /* Assets.xcassets in Resources */,
 				9B6977591DA6BC8C003043D4 /* Main.storyboard in Resources */,
 				9BE6C8611D9F15CB005F1ECC /* seed.plist in Resources */,
-				9B96CD231D9AF95B008E6842 /* iconSave.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
