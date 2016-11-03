@@ -10,10 +10,6 @@
 #import "SearchResultsTableViewCell.h"
 #import "PointOfInterest.h"
 
-@interface BLSDataSource () {
-
-}
-@end
 
 @implementation BLSDataSource
 
@@ -76,10 +72,8 @@ MKLocalSearch *localSearch;
 - (void) deletePOIItem:(PointOfInterest *)item {
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfPOIs"];
     [mutableArrayWithKVO removeObject:item];
-     //NSLog(@"item %@", item);
     [_arrayOfPOIs removeObject:item];
     
-   
     [self saveData];
 }
 
@@ -87,7 +81,6 @@ MKLocalSearch *localSearch;
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"arrayOfCategories"];
     [mutableArrayWithKVO removeObject:cat];
      [self.arrayOfCategories removeObject:cat];
-     NSLog(@"array of cats %@", self.arrayOfCategories);
     [self saveData];
 }
 
@@ -96,10 +89,8 @@ MKLocalSearch *localSearch;
 
 -(void)loadSavedData:(MarkersSavedCompletionHandler)completionHandler {
    
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-
+    
         NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
         NSArray *fileDataArray = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
         
@@ -137,7 +128,6 @@ MKLocalSearch *localSearch;
         PointOfInterest *item = [[PointOfInterest alloc] initWithMKMapItem:mapItem];
         [newArrayOfPOIs addObject:item];
     }
-//    self.arrayOfPOIs = newArrayOfPOIs;
 }
 
 
@@ -145,7 +135,6 @@ MKLocalSearch *localSearch;
 -(void)saveNoteToPOI:(PointOfInterest*)note {
     //This should save the current one - how will we get it into the arrayOfPOIS
     self.currentPOI.noteText = note.noteText;
-    NSLog(@"note text %@", note.noteText);
     [self saveData];
 }
 
@@ -167,10 +156,9 @@ MKLocalSearch *localSearch;
 
 - (void)convertPointAnnotationsToPOI:(NSArray<MKPointAnnotation *> *)pointAnnotationsToSave {
     //init this array with already stored items
-    //CRASHING
+    
     NSString *fullPath = [self pathForFilename:@"blocSpot.data"];
     
-    //NSString *fullPath = [self pathForFilename:@"mapItems.poi"];
     NSMutableArray<PointOfInterest*> *newArrayOfPOIs = [[NSKeyedUnarchiver unarchiveObjectWithFile:fullPath] mutableCopy];
     if (newArrayOfPOIs == nil) {
         newArrayOfPOIs = [NSMutableArray arrayWithCapacity:100];
@@ -182,15 +170,11 @@ MKLocalSearch *localSearch;
         [newArrayOfPOIs addObject:item];
     }
 
-    // self.arrayOfPOIs = newArrayOfPOIs;
-    
 }
 
 
 - (void)saveData {
-    NSLog(@" bls array of pois %@", self.arrayOfPOIs);
-    NSLog(@"bls array of cats %@", self.arrayOfCategories);
-     NSLog(@"array of pois %@", self.filteredArrayOfPOIs);
+    
    
     if (self.filteredArrayOfPOIs == nil) { self.filteredArrayOfPOIs = [@[] mutableCopy]; }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -199,7 +183,7 @@ MKLocalSearch *localSearch;
         
         NSError *dataError;
         BOOL wroteSuccessfully = [poiCategoryData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-    //    NSLog(@"category data %@",  poiCategoryData);
+    
         if (!wroteSuccessfully) {
             NSLog(@"Couldn't write file: %@", dataError);
         }
@@ -230,7 +214,7 @@ MKLocalSearch *localSearch;
 -(void)searchMap:(NSString *)searchText andThen:(MKLocalSearchCompletionHandler)completionHandler {
     //cancel previous searches
     [localSearch cancel];
-    //remove unsaved annotations?
+    
     
     self.latestSearchRequest = [[MKLocalSearchRequest alloc] init];
     self.latestSearchRequest.naturalLanguageQuery = searchText;
@@ -239,34 +223,16 @@ MKLocalSearch *localSearch;
     localSearch = [[MKLocalSearch alloc] initWithRequest:self.latestSearchRequest];
     
     [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
-    //NSMutableArray *responsePOIs = [NSMutableArray arrayWithObjects:response.mapItems, nil];
+    
     
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
-        /*if (error != nil) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
-                                        message:[error localizedDescription]
-                                       delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
-            return;
-        }
-        
-        if ([response.mapItems count] == 0) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Results",nil)
-                                        message:nil
-                                       delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
-            return;
-        }*/
         
         self.results = response;
         //NSLog(@"response, %@", response);
        
         
-        
         for (MKMapItem *item in response.mapItems) {
-            //NSString *name = item.name;
-            //NSLog(@"%@",name);
+            
             PointOfInterest *poi = [[PointOfInterest alloc] initWithMKMapItem:item];
             [self.arrayOfPOIs addObject:poi];
             [self.filteredArrayOfPOIs addObject:poi];
@@ -275,7 +241,6 @@ MKLocalSearch *localSearch;
                 completionHandler(response, error);
 
          }];
-    
     
 }
 

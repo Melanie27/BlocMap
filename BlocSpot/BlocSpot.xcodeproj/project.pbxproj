@@ -161,8 +161,8 @@
 				9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */,
 				9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */,
 				9BA722CC1D8C665E006FC1B1 /* Assets.xcassets */,
-				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9BA722D11D8C665E006FC1B1 /* Info.plist */,
+				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9B6977581DA6BC8C003043D4 /* Main.storyboard */,
 				9BA722C01D8C665E006FC1B1 /* Supporting Files */,
 			);
