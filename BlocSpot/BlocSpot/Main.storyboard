@@ -330,7 +330,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bOE-Os-CMc" id="oqR-Fp-PHC">
-                                    <frame key="frameInset" width="375" height="150"/>
+                                    <frame key="frameInset" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yn2-Hb-Vpq">
@@ -396,11 +396,6 @@
                         <barButtonItem key="leftBarButtonItem" image="mapView.png" id="kOP-Pa-bqS">
                             <connections>
                                 <segue destination="jxr-Do-I8k" kind="show" identifier="mapSegue" id="uhC-Qn-CnK"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="3xx-Yr-Wz7">
-                            <connections>
-                                <segue destination="8mN-88-Vaz" kind="show" identifier="listSearch" id="IJd-4J-jqX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -497,8 +492,7 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fk6-TY-2Z4"/>
         <segue reference="uhC-Qn-CnK"/>
-        <segue reference="hiA-Gq-6wD"/>
+        <segue reference="t9i-Ay-KO4"/>
     </inferredMetricsTieBreakers>
 </document>
