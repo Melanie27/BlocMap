@@ -7,6 +7,7 @@
 //
 
 #import "FilterByCategoryTableViewController.h"
+#import "SearchResultsTableViewController.h"
 #import "POICategory.h"
 #import "PointOfInterest.h"
 #import "BLSDataSource.h"
@@ -120,9 +121,11 @@ static NSString *CellIdentifier = @"Cat Identifier";
 
     [ds saveData];
     
+    //TODO push to the results VC
+    //SearchResultsTableViewController *srtvc = [[SearchResultsTableViewController alloc] init];
+    //[self.navigationController pushViewController:srtvc animated:YES];
+    
 }
-
-
 
 
 -(void)loadCategories {
