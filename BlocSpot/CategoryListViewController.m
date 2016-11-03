@@ -48,7 +48,7 @@ BLSDataSource *ds;
     // Register Class for Cell Reuse
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
-        
+    
     [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfCategories" options:0 context:nil];
     
     
@@ -56,16 +56,12 @@ BLSDataSource *ds;
 }
 
 - (void)addItem:(id)sender {
-    NSLog(@"Button was tapped.");
+    //NSLog(@"Button was tapped.");
     [self performSegueWithIdentifier:@"AddCategoryViewController" sender:self];
 }
 
-- (IBAction)back:(id)sender {
-    [super.navigationController popViewControllerAnimated:YES];
-    
-    NSLog(@"go back");
 
-}
+
 
 
 
@@ -91,10 +87,8 @@ BLSDataSource *ds;
     // Fetch Item
     POICategory *category = [ds.arrayOfCategories objectAtIndex:[indexPath row]];
     ds.currentCategory = category;
-    //NSLog(@"category from list %@", category.categoryName);
-    ds.currentCategory = category;
     ds.currentCategory.categoryName = category.categoryName;
-    //NSLog(@"new vars %@", ds.currentCategory.categoryName);
+    
    
     
     

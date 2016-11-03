@@ -615,6 +615,10 @@ CLLocationManager *locationManager;
 }
 
 
+- (IBAction)back:(UIStoryboardSegue *)segue {
+    //[super.navigationController popViewControllerAnimated:YES];
+    NSLog(@"go back");
+}
 
 
 

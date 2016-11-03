@@ -40,7 +40,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    BLSDataSource *ds = [BLSDataSource sharedInstance];
+    //BLSDataSource *ds = [BLSDataSource sharedInstance];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
     
