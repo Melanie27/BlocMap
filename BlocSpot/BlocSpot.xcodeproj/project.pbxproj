@@ -25,7 +25,6 @@
 		9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722F61D8C6751006FC1B1 /* MapViewController.m */; };
 		9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADC81D91D91100117D24 /* BLSDataSource.m */; };
 		9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */; };
-		9BE6C8611D9F15CB005F1ECC /* seed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE6C8601D9F15CB005F1ECC /* seed.plist */; };
 		9BE6C8641D9F1B43005F1ECC /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */; };
 		9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5D7201D908690007E6DBE /* SearchViewController.m */; };
 /* End PBXBuildFile section */
@@ -84,7 +83,6 @@
 		9BACADC81D91D91100117D24 /* BLSDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLSDataSource.m; sourceTree = "<group>"; };
 		9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryListViewController.h; path = ../CategoryListViewController.h; sourceTree = "<group>"; };
 		9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryListViewController.m; path = ../CategoryListViewController.m; sourceTree = "<group>"; };
-		9BE6C8601D9F15CB005F1ECC /* seed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = seed.plist; sourceTree = "<group>"; };
 		9BE6C8621D9F1B43005F1ECC /* AddCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategoryViewController.h; sourceTree = "<group>"; };
 		9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCategoryViewController.m; sourceTree = "<group>"; };
 		9BF5D71F1D908690007E6DBE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -153,17 +151,7 @@
 		9BA722BF1D8C665E006FC1B1 /* BlocSpot */ = {
 			isa = PBXGroup;
 			children = (
-				9BE3E0ED1DCAC8B300CD1C18 /* Supporting Files */,
-				9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */,
-				9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */,
-				9BE6C8621D9F1B43005F1ECC /* AddCategoryViewController.h */,
-				9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */,
-				9BA722F51D8C6751006FC1B1 /* MapViewController.h */,
-				9BA722F61D8C6751006FC1B1 /* MapViewController.m */,
-				9BF5D71F1D908690007E6DBE /* SearchViewController.h */,
-				9BF5D7201D908690007E6DBE /* SearchViewController.m */,
-				9B96CD141D945086008E6842 /* SearchResultsTableViewController.h */,
-				9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */,
+				9BE3E0EE1DCAC99900CD1C18 /* ViewControllers */,
 				9B96CD171D9455BC008E6842 /* SearchResultsTableViewCell.h */,
 				9B96CD181D9455BC008E6842 /* SearchResultsTableViewCell.m */,
 				9BACADC71D91D91100117D24 /* BLSDataSource.h */,
@@ -175,10 +163,7 @@
 				9BA722CC1D8C665E006FC1B1 /* Assets.xcassets */,
 				9BA722CE1D8C665E006FC1B1 /* LaunchScreen.storyboard */,
 				9BA722D11D8C665E006FC1B1 /* Info.plist */,
-				9BE6C8601D9F15CB005F1ECC /* seed.plist */,
 				9B6977581DA6BC8C003043D4 /* Main.storyboard */,
-				9B839EC91DAEA51B00268DEF /* FilterByCategoryTableViewController.h */,
-				9B839ECA1DAEA51B00268DEF /* FilterByCategoryTableViewController.m */,
 				9BA722C01D8C665E006FC1B1 /* Supporting Files */,
 			);
 			path = BlocSpot;
@@ -187,6 +172,10 @@
 		9BA722C01D8C665E006FC1B1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9BA722C31D8C665E006FC1B1 /* AppDelegate.h */,
+				9BA722C41D8C665E006FC1B1 /* AppDelegate.m */,
+				9BA722C61D8C665E006FC1B1 /* ViewController.h */,
+				9BA722C71D8C665E006FC1B1 /* ViewController.m */,
 				9BA722C11D8C665E006FC1B1 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -210,15 +199,23 @@
 			path = BlocSpotUITests;
 			sourceTree = "<group>";
 		};
-		9BE3E0ED1DCAC8B300CD1C18 /* Supporting Files */ = {
+		9BE3E0EE1DCAC99900CD1C18 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9BA722C31D8C665E006FC1B1 /* AppDelegate.h */,
-				9BA722C41D8C665E006FC1B1 /* AppDelegate.m */,
-				9BA722C61D8C665E006FC1B1 /* ViewController.h */,
-				9BA722C71D8C665E006FC1B1 /* ViewController.m */,
+				9BE6C8621D9F1B43005F1ECC /* AddCategoryViewController.h */,
+				9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */,
+				9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */,
+				9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */,
+				9BA722F51D8C6751006FC1B1 /* MapViewController.h */,
+				9BA722F61D8C6751006FC1B1 /* MapViewController.m */,
+				9BF5D71F1D908690007E6DBE /* SearchViewController.h */,
+				9BF5D7201D908690007E6DBE /* SearchViewController.m */,
+				9B96CD141D945086008E6842 /* SearchResultsTableViewController.h */,
+				9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */,
+				9B839EC91DAEA51B00268DEF /* FilterByCategoryTableViewController.h */,
+				9B839ECA1DAEA51B00268DEF /* FilterByCategoryTableViewController.m */,
 			);
-			name = "Supporting Files";
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		BD4B1A65B33D16623EFDA475 /* Frameworks */ = {
@@ -349,7 +346,6 @@
 				9BA722D01D8C665E006FC1B1 /* LaunchScreen.storyboard in Resources */,
 				9BA722CD1D8C665E006FC1B1 /* Assets.xcassets in Resources */,
 				9B6977591DA6BC8C003043D4 /* Main.storyboard in Resources */,
-				9BE6C8611D9F15CB005F1ECC /* seed.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
