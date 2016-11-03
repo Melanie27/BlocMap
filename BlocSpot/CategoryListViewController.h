@@ -12,5 +12,7 @@
 @class PointOfInterest;
 @interface CategoryListViewController : UITableViewController 
 @property (strong) PointOfInterest *POI;
+- (IBAction)addItem:(id)sender;
+- (IBAction)back:(id)sender;
 
 @end

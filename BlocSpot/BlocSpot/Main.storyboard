@@ -17,6 +17,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="339" height="288"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <navigationBar key="tableFooterView" contentMode="scaleToFill" id="fEu-zD-25G">
+                            <rect key="frame" x="0.0" y="0.0" width="339" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Categories" id="ZhE-ad-F1J">
+                                    <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qIR-F8-nwj">
+                                        <connections>
+                                            <action selector="back:" destination="dfh-OX-2Rh" id="ZBN-WD-vXn"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem key="rightBarButtonItem" systemItem="add" id="LXx-Nk-1b7">
+                                        <connections>
+                                            <action selector="addItem:" destination="dfh-OX-2Rh" id="TSH-mg-ds4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="dfh-OX-2Rh" id="2ZC-06-CDi"/>
@@ -30,7 +48,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUu-Wm-fgh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3303" y="-800"/>
+            <point key="canvasLocation" x="1721" y="15"/>
         </scene>
         <!--Add Category-->
         <scene sceneID="2dY-kP-gRV">
@@ -170,7 +188,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fzf-XG-2Je" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4050" y="-716"/>
+            <point key="canvasLocation" x="2450" y="-679"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -188,7 +206,7 @@
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E8W-dp-AfJ">
                                 <frame key="frameInset" minX="20" minY="171" width="339" height="288"/>
                                 <connections>
-                                    <segue destination="oau-Dq-Vb5" kind="embed" identifier="showEmbed" id="ooD-K5-9nQ"/>
+                                    <segue destination="dfh-OX-2Rh" kind="embed" identifier="showEmbed" id="8Ba-ga-drh"/>
                                 </connections>
                             </containerView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="geocoding tracking" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SVo-B6-WCU">
@@ -242,7 +260,7 @@
                         <outlet property="geoSwitch" destination="1qv-H7-QoU" id="7m6-lr-JfH"/>
                         <outlet property="geocodingResultsView" destination="SVo-B6-WCU" id="hGC-CO-G1S"/>
                         <outlet property="mapView" destination="ReE-6e-pYB" id="Wwb-q4-fn3"/>
-                        <segue destination="oau-Dq-Vb5" kind="show" identifier="showCategories" id="fk6-TY-2Z4"/>
+                        <segue destination="dfh-OX-2Rh" kind="show" identifier="showCategories" id="Jtx-KJ-63c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -397,7 +415,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rFE-JY-sig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1680.8" y="1483.8080959520241"/>
+            <point key="canvasLocation" x="1750" y="1388"/>
         </scene>
         <!--Map-->
         <scene sceneID="0Ws-sQ-8ky">
@@ -421,25 +439,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oze-Q6-fui" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="965" y="561"/>
-        </scene>
-        <!--Faves-->
-        <scene sceneID="Ib4-Qo-Keh">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oau-Dq-Vb5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Faves" image="filter" id="WRS-Xi-D41"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qkx-5Y-ArS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dfh-OX-2Rh" kind="relationship" relationship="rootViewController" id="R96-5L-qGX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qoH-FE-oWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2476" y="-826"/>
         </scene>
         <!--Filter By Category Table View Controller-->
         <scene sceneID="xu8-9O-Nh7">
@@ -467,6 +466,6 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ooD-K5-9nQ"/>
+        <segue reference="8Ba-ga-drh"/>
     </inferredMetricsTieBreakers>
 </document>

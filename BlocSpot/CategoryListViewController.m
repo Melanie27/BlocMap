@@ -48,14 +48,7 @@ BLSDataSource *ds;
     // Register Class for Cell Reuse
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
-    // Create Add Button
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
-    
-    // Create Add Button
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
-    self.navigationItem.leftBarButtonItem = backButton;
-    
+        
     [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfCategories" options:0 context:nil];
     
     
@@ -67,13 +60,13 @@ BLSDataSource *ds;
     [self performSegueWithIdentifier:@"AddCategoryViewController" sender:self];
 }
 
--(void)back:(id)sender {
-    
-    //[super.navigationController popViewControllerAnimated:YES];
-    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)back:(id)sender {
+    [super.navigationController popViewControllerAnimated:YES];
     
     NSLog(@"go back");
+
 }
+
 
 
 
@@ -107,7 +100,7 @@ BLSDataSource *ds;
     
     //Get POI GRABBING THE POI associated with this row
     //PointOfInterest *poi = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
-    NSLog(@"current POI %@", ds.currentPOI);
+    //NSLog(@"current POI %@", ds.currentPOI);
     PointOfInterest *poi = ds.currentPOI;
     ds.currentPOI = poi;
     
@@ -117,6 +110,7 @@ BLSDataSource *ds;
    
     
     [ds saveData];
+    
     
 
 }
@@ -219,4 +213,6 @@ BLSDataSource *ds;
 
 
 
+- (IBAction)addCategory:(id)sender {
+}
 @end

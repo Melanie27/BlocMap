@@ -336,8 +336,9 @@ CLLocationManager *locationManager;
     if ([segue.identifier isEqualToString:@"showEmbed"]) {
     } else if ([segue.identifier isEqualToString:@"showCategories"]) {
        
-        UINavigationController *navc = (UINavigationController*)segue.destinationViewController;
-        CategoryListViewController *clvc = (CategoryListViewController*)([navc viewControllers][0]);
+        //UINavigationController *navc = (UINavigationController*)segue.destinationViewController;
+         CategoryListViewController *clvc = (CategoryListViewController*)segue.destinationViewController;
+        //CategoryListViewController *clvc = (CategoryListViewController*)([navc viewControllers][0]);
         clvc.POI = self.currentPOI;
         
     }

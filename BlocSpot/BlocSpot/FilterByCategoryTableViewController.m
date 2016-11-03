@@ -41,12 +41,9 @@ static NSString *CellIdentifier = @"Cat Identifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     BLSDataSource *ds = [BLSDataSource sharedInstance];
-    NSLog(@"Categories > %@", ds.arrayOfCategories);
-    // Uncomment the following line to preserve selection between presentations.
-    //self.clearsSelectionOnViewWillAppear = NO;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
-    NSLog(@"array of pois %@", ds.arrayOfPOIs);
+    
     // Create Add Button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"No Filters" style:(UIBarButtonItemStylePlain) target:self action:@selector(removeFilters:)];
    
