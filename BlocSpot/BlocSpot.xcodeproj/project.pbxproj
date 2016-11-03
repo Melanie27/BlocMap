@@ -156,14 +156,11 @@
 		9BA722BF1D8C665E006FC1B1 /* BlocSpot */ = {
 			isa = PBXGroup;
 			children = (
+				9BE3E0ED1DCAC8B300CD1C18 /* Supporting Files */,
 				9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */,
 				9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */,
 				9BE6C8621D9F1B43005F1ECC /* AddCategoryViewController.h */,
 				9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */,
-				9BA722C31D8C665E006FC1B1 /* AppDelegate.h */,
-				9BA722C41D8C665E006FC1B1 /* AppDelegate.m */,
-				9BA722C61D8C665E006FC1B1 /* ViewController.h */,
-				9BA722C71D8C665E006FC1B1 /* ViewController.m */,
 				9BA722F51D8C6751006FC1B1 /* MapViewController.h */,
 				9BA722F61D8C6751006FC1B1 /* MapViewController.m */,
 				9BF5D71F1D908690007E6DBE /* SearchViewController.h */,
@@ -216,6 +213,17 @@
 				9BA722E71D8C665E006FC1B1 /* Info.plist */,
 			);
 			path = BlocSpotUITests;
+			sourceTree = "<group>";
+		};
+		9BE3E0ED1DCAC8B300CD1C18 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9BA722C31D8C665E006FC1B1 /* AppDelegate.h */,
+				9BA722C41D8C665E006FC1B1 /* AppDelegate.m */,
+				9BA722C61D8C665E006FC1B1 /* ViewController.h */,
+				9BA722C71D8C665E006FC1B1 /* ViewController.m */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		BD4B1A65B33D16623EFDA475 /* Frameworks */ = {
