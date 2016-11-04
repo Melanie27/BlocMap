@@ -344,6 +344,20 @@ CLLocationManager *locationManager;
     
 }
 
+-(IBAction)cancelToMapView:(UIStoryboardSegue *)segue {
+    NSLog(@"back to map view");
+    self.containerView.hidden = YES;
+
+}
+
+-(IBAction)cancelToMapViewThenToResults:(UIStoryboardSegue *)segue {
+    NSLog(@"back to map view -> results");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self performSegueWithIdentifier:@"listView" sender:self];
+    });
+    
+}
+
 -(void)prepareViewController:(id)vc
                     forSegue:(NSString *)segueIdentifier
             toShowAnnotation:(id<MKAnnotation>)annotation {

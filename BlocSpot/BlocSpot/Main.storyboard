@@ -14,7 +14,7 @@
             <objects>
                 <tableViewController id="dfh-OX-2Rh" customClass="CategoryListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ryr-RK-Ziz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="339" height="288"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections/>
@@ -23,12 +23,19 @@
                             <outlet property="delegate" destination="dfh-OX-2Rh" id="dkj-Jd-G59"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Category List" id="z81-T0-edX"/>
+                    <navigationItem key="navigationItem" title="Category List" id="z81-T0-edX">
+                        <barButtonItem key="leftBarButtonItem" title="Done" id="qSq-6z-WhI">
+                            <connections>
+                                <segue destination="Nko-gS-ZBd" kind="unwind" unwindAction="cancelToMapView:" id="Mpr-Xc-u7U"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="jXw-7B-N7S" kind="show" identifier="AddCategoryViewController" id="e7E-NF-sW0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUu-Wm-fgh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Nko-gS-ZBd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3303" y="-800"/>
         </scene>
@@ -41,7 +48,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JJj-Wq-SvD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="coz-Wb-fQ0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="339" height="288"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category Name" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="65h-ug-na6">
@@ -330,7 +337,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bOE-Os-CMc" id="oqR-Fp-PHC">
-                                    <frame key="frameInset" width="375" height="150"/>
+                                    <frame key="frameInset" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yn2-Hb-Vpq">
@@ -471,7 +478,7 @@
             </objects>
             <point key="canvasLocation" x="2476" y="-826"/>
         </scene>
-        <!--Filter By Category Table View Controller-->
+        <!--Title-->
         <scene sceneID="xu8-9O-Nh7">
             <objects>
                 <tableViewController id="XO0-Ji-e9g" customClass="FilterByCategoryTableViewController" sceneMemberID="viewController">
@@ -484,8 +491,16 @@
                             <outlet property="delegate" destination="XO0-Ji-e9g" id="D3M-yp-8Jh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="I8K-b8-SZ8">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="cAg-Su-ocV">
+                            <connections>
+                                <segue destination="JHv-Br-Oai" kind="unwind" unwindAction="cancelToMapViewThenToResults:" id="rPj-Hl-GMe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amP-EE-hEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="JHv-Br-Oai" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2573" y="-99"/>
         </scene>
@@ -497,8 +512,8 @@
         <image name="mapView.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fk6-TY-2Z4"/>
         <segue reference="uhC-Qn-CnK"/>
+        <segue reference="ooD-K5-9nQ"/>
         <segue reference="hiA-Gq-6wD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,7 +25,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
     
     if(self) {
         //set title
-        self.title = @"Filter by Category";
+      //  self.title = @"Filter by Category";
         
         BLSDataSource *ds = [BLSDataSource sharedInstance];
         ds = [BLSDataSource sharedInstance];
@@ -50,7 +50,7 @@ static NSString *CellIdentifier = @"Cat Identifier";
     // Create Add Button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"No Filters" style:(UIBarButtonItemStylePlain) target:self action:@selector(removeFilters:)];
    
-   
+//   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(<#selector#>)]
    
 }
 

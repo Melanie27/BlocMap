@@ -53,13 +53,13 @@ BLSDataSource *ds;
     
     // Create Add Button
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
-    self.navigationItem.leftBarButtonItem = backButton;
+    /*UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
+    self.navigationItem.leftBarButtonItem = backButton;*/
     
     [[BLSDataSource sharedInstance] addObserver:self forKeyPath:@"arrayOfCategories" options:0 context:nil];
     
     
-    
+    //self.navigationController.view.hidden = NO;
 }
 
 - (void)addItem:(id)sender {
@@ -71,7 +71,7 @@ BLSDataSource *ds;
     
     //[super.navigationController popViewControllerAnimated:YES];
     //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    
+   // self.navigationController.view.hidden =YES;
     NSLog(@"go back");
 }
 
@@ -82,6 +82,7 @@ BLSDataSource *ds;
     if([segue.identifier isEqualToString:@"AddCategoryViewController"]) {
             AddCategoryViewController *addCategoryVC = (AddCategoryViewController*)segue.destinationViewController;
             [addCategoryVC setDelegate:self];
+        
     }
 }
 
