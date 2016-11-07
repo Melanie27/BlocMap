@@ -12,7 +12,6 @@
 #import "PointOfInterest.h"
 #import "CategoryListViewController.h"
 
-//#import "CategoryViewController.h"
 
 @interface MapViewController () <CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
 
