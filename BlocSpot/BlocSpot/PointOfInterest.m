@@ -10,13 +10,10 @@
 #import <AddressBook/AddressBook.h>
 
 @interface PointOfInterest ()
-@property (nonatomic, copy) NSString *subtitle;
-
-
+    @property (nonatomic, copy) NSString *subtitle;
 @end
 
 @implementation PointOfInterest
-
 
 - (instancetype)initWithMKMapItem:(MKMapItem*)mapItem {
     NSString *address = @"";
@@ -45,15 +42,6 @@
     CLLocationCoordinate2D coord = placemark.coordinate;
     return [self initWithAddress:address coordinate:coord title:name subtitle:subtitle identifier:identifier];
 }
--(instancetype)initWithCLPLacemark:(CLPlacemark*)placemark {
-
-    
-    NSString *address = @"";
-    NSString *name = placemark.name;
-    NSNumber *identifier = @10;
-    CLLocation *location = placemark.location;
-    return [self initWithAddress2:address location:location title:name identifier:identifier];
-}
 
 
 - (MKMapItem*)mapItem {
@@ -61,15 +49,12 @@
                             
                                };
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.coordinate addressDictionary:addrDict];
-    
     MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
     item.name = self.title;
     item.phoneNumber = self.subtitle;
     
-    
     return item;
 }
-
 
 
 -(id)initWithAddress:(NSString *)address
@@ -85,38 +70,12 @@
         _coordinate = coordinate;
         _identifier = ident;
        
-        //[self setPlacemark:_coordinate];
         [self setTitle:t];
-         [self setSubtitle:s];
+        [self setSubtitle:s];
        
-
     }
     return self;
 }
-
--(id)initWithAddress2:(NSString *)address
-             location:(CLLocation *)location
-                title:(NSString *)t
-           identifier:(NSNumber *)ident {
-
-    
-    self = [super init];
-    
-    if (self) {
-        _address = [address copy];
-        location = location;
-        _identifier = ident;
-        
-        //[self setPlacemark:_coordinate];
-        [self setTitle:t];
-       
-        
-        
-    }
-    return self;
-}
-    
-
 
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -131,7 +90,6 @@
     [aCoder encodeObject:_categoryName forKey:@"categoryName"];
     [aCoder encodeObject:_categoryColor forKey:@"categoryColor"];
     [aCoder encodeObject:_noteText forKey:@"noteText"];
-    //[aCoder encodeObject:_poi forKey:@"poi"];
     
 }
 
@@ -149,7 +107,6 @@
         _categoryName = [aDecoder decodeObjectForKey:@"categoryName"];
         _categoryColor = [aDecoder decodeObjectForKey:@"categoryColor"];
         _noteText = [aDecoder decodeObjectForKey:@"noteText"];
-        //ß_poi = [aDecoder decodeObjectForKey:@"poi"];
         
     }
     return self;
