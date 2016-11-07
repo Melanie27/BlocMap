@@ -10,7 +10,6 @@
 		98B0791459D852EDE832300A /* libPods-BlocSpot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41F29BCAD4C32762753D39C7 /* libPods-BlocSpot.a */; };
 		9B16A5E41D9B449F00EFC33C /* POICategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B16A5E31D9B449F00EFC33C /* POICategory.m */; };
 		9B6977591DA6BC8C003043D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B6977581DA6BC8C003043D4 /* Main.storyboard */; };
-		9B6FDCCA1D919D35000B77AB /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCC91D919D35000B77AB /* Search.m */; };
 		9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */; };
 		9B839ECB1DAEA51B00268DEF /* FilterByCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B839ECA1DAEA51B00268DEF /* FilterByCategoryTableViewController.m */; };
 		9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B96CD151D945086008E6842 /* SearchResultsTableViewController.m */; };
@@ -55,8 +54,6 @@
 		9B16A5E21D9B449F00EFC33C /* POICategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POICategory.h; path = ../POICategory.h; sourceTree = "<group>"; };
 		9B16A5E31D9B449F00EFC33C /* POICategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POICategory.m; path = ../POICategory.m; sourceTree = "<group>"; };
 		9B6977581DA6BC8C003043D4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		9B6FDCC81D919D35000B77AB /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
-		9B6FDCC91D919D35000B77AB /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
 		9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointOfInterest.h; sourceTree = "<group>"; };
 		9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointOfInterest.m; sourceTree = "<group>"; };
 		9B839EC91DAEA51B00268DEF /* FilterByCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterByCategoryTableViewController.h; sourceTree = "<group>"; };
@@ -176,8 +173,6 @@
 				9BACADC81D91D91100117D24 /* BLSDataSource.m */,
 				9B16A5E21D9B449F00EFC33C /* POICategory.h */,
 				9B16A5E31D9B449F00EFC33C /* POICategory.m */,
-				9B6FDCC81D919D35000B77AB /* Search.h */,
-				9B6FDCC91D919D35000B77AB /* Search.m */,
 				9B6FDCCB1D919D51000B77AB /* PointOfInterest.h */,
 				9B6FDCCC1D919D51000B77AB /* PointOfInterest.m */,
 				9BA722CC1D8C665E006FC1B1 /* Assets.xcassets */,
@@ -432,7 +427,6 @@
 				9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */,
 				9B96CD191D9455BC008E6842 /* SearchResultsTableViewCell.m in Sources */,
 				9BE6C8641D9F1B43005F1ECC /* AddCategoryViewController.m in Sources */,
-				9B6FDCCA1D919D35000B77AB /* Search.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
