@@ -25,8 +25,6 @@
 		9BA722F41D8C66F9006FC1B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA722F31D8C66F9006FC1B1 /* MapKit.framework */; };
 		9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA722F61D8C6751006FC1B1 /* MapViewController.m */; };
 		9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADC81D91D91100117D24 /* BLSDataSource.m */; };
-		9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCB1D921B5500117D24 /* MyAnnotation.m */; };
-		9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */; };
 		9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */; };
 		9BE6C8611D9F15CB005F1ECC /* seed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE6C8601D9F15CB005F1ECC /* seed.plist */; };
 		9BE6C8641D9F1B43005F1ECC /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6C8631D9F1B43005F1ECC /* AddCategoryViewController.m */; };
@@ -87,10 +85,6 @@
 		9BA722F61D8C6751006FC1B1 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		9BACADC71D91D91100117D24 /* BLSDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLSDataSource.h; sourceTree = "<group>"; };
 		9BACADC81D91D91100117D24 /* BLSDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLSDataSource.m; sourceTree = "<group>"; };
-		9BACADCA1D921B5500117D24 /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
-		9BACADCB1D921B5500117D24 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
-		9BACADCD1D921E8D00117D24 /* MyAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotationView.h; sourceTree = "<group>"; };
-		9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
 		9BE6C85B1D9EF2DD005F1ECC /* CategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryListViewController.h; path = ../CategoryListViewController.h; sourceTree = "<group>"; };
 		9BE6C85C1D9EF2DD005F1ECC /* CategoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryListViewController.m; path = ../CategoryListViewController.m; sourceTree = "<group>"; };
 		9BE6C8601D9F15CB005F1ECC /* seed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = seed.plist; sourceTree = "<group>"; };
@@ -172,10 +166,6 @@
 				9BA722C71D8C665E006FC1B1 /* ViewController.m */,
 				9BA722F51D8C6751006FC1B1 /* MapViewController.h */,
 				9BA722F61D8C6751006FC1B1 /* MapViewController.m */,
-				9BACADCA1D921B5500117D24 /* MyAnnotation.h */,
-				9BACADCB1D921B5500117D24 /* MyAnnotation.m */,
-				9BACADCD1D921E8D00117D24 /* MyAnnotationView.h */,
-				9BACADCE1D921E8D00117D24 /* MyAnnotationView.m */,
 				9BF5D71F1D908690007E6DBE /* SearchViewController.h */,
 				9BF5D7201D908690007E6DBE /* SearchViewController.m */,
 				9B96CD141D945086008E6842 /* SearchResultsTableViewController.h */,
@@ -432,14 +422,12 @@
 				9BA722C81D8C665E006FC1B1 /* ViewController.m in Sources */,
 				9B6FDCCD1D919D51000B77AB /* PointOfInterest.m in Sources */,
 				9BA722C51D8C665E006FC1B1 /* AppDelegate.m in Sources */,
-				9BACADCF1D921E8D00117D24 /* MyAnnotationView.m in Sources */,
 				9B96CD161D945086008E6842 /* SearchResultsTableViewController.m in Sources */,
 				9B839ECB1DAEA51B00268DEF /* FilterByCategoryTableViewController.m in Sources */,
 				9BF5D7211D908690007E6DBE /* SearchViewController.m in Sources */,
 				9B16A5E41D9B449F00EFC33C /* POICategory.m in Sources */,
 				9BACADC91D91D91100117D24 /* BLSDataSource.m in Sources */,
 				9BE6C85D1D9EF2DD005F1ECC /* CategoryListViewController.m in Sources */,
-				9BACADCC1D921B5500117D24 /* MyAnnotation.m in Sources */,
 				9BA722C21D8C665E006FC1B1 /* main.m in Sources */,
 				9BA722F71D8C6751006FC1B1 /* MapViewController.m in Sources */,
 				9B96CD191D9455BC008E6842 /* SearchResultsTableViewCell.m in Sources */,

@@ -7,8 +7,6 @@
 //
 
 #import "MapViewController.h"
-#import "MyAnnotation.h"
-#import "MyAnnotationView.h"
 #import "BLSDataSource.h"
 #import "SearchViewController.h"
 #import "PointOfInterest.h"
