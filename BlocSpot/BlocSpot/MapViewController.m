@@ -38,13 +38,6 @@ CLLocationManager *locationManager;
     //make the view controller be the map view's delegate
     self.mapView.delegate = self;
    
-    
-    
-    //set init mapkit region
-    CLLocationCoordinate2D laLocation= CLLocationCoordinate2DMake(34.0195, -118.4912);
-    self.mapView.region = MKCoordinateRegionMakeWithDistance(laLocation, 100000, 100000);
-    
-    
    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -53,9 +46,9 @@ CLLocationManager *locationManager;
         [self.locationManager requestAlwaysAuthorization];
         self.mapView.showsUserLocation = YES;
         [self.mapView setMapType:MKMapTypeStandard];
-        [self.mapView setZoomEnabled:YES];
+        //[self.mapView setZoomEnabled:YES];
         [self.mapView setScrollEnabled:YES];
-        //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+        [self.mapView setUserTrackingMode:MKUserTrackingModeNone];
 
     }
     
@@ -64,8 +57,6 @@ CLLocationManager *locationManager;
 
     [[BLSDataSource sharedInstance] loadSavedData:^(NSArray *pois) {
         // Set up annotations for each poi
-        
-        NSLog(@"number of stored map items hi %lu", (unsigned long)pois.count);
         
         for (MKPointAnnotation *annotation in pois) {
          PointOfInterest *item = [[PointOfInterest alloc] initWithMKPointAnnotation:annotation];
@@ -94,19 +85,11 @@ CLLocationManager *locationManager;
         // We know arrayOfPOIs changed.  Let's see what kind of change it is.
         
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
-        
         if (kindOfChange == NSKeyValueChangeSetting) {
             
-            //NSLog(@"registering a change neeed to update color of the POI title");
-    
-            //TODO Grab a hold of the POI that was categorized and update the color of the annotation.title to the corresponding category color
-           
-            
-        }  else if (kindOfChange == NSKeyValueChangeInsertion ||
+                  }  else if (kindOfChange == NSKeyValueChangeInsertion ||
                      kindOfChange == NSKeyValueChangeRemoval ||
                      kindOfChange == NSKeyValueChangeReplacement) {
-            // We have an incremental change: inserted, deleted, or replaced pins
-            
         }
 
     }
@@ -122,9 +105,7 @@ CLLocationManager *locationManager;
      self.containerView.hidden = YES;
 }
 
--(void)updateMapviewAnnotations {
-    
-}
+
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     
 }
@@ -137,8 +118,7 @@ CLLocationManager *locationManager;
 //gives an annotation and returns a view for that annotation
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-    
-    //detecting user interation with the annotated view
+    //detecting user interaction with the annotated view
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
@@ -148,7 +128,7 @@ CLLocationManager *locationManager;
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
         annotationView.canShowCallout = YES;
         UIButton *infoButton = [[UIButton alloc]init];
-        //TODO need different image to trigger Action sheet
+        
         [infoButton setBackgroundImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
         [infoButton sizeToFit];
         annotationView.leftCalloutAccessoryView = infoButton;
@@ -168,7 +148,6 @@ CLLocationManager *locationManager;
         [ds.arrayOfPOIs addObject:ds.currentPOI];
     }
     //Call Activity Controller
-    
     UIActivityViewController *activityViewController =
     [[UIActivityViewController alloc] initWithActivityItems:@[title, reviewText]
                                       applicationActivities:nil];
@@ -222,8 +201,6 @@ CLLocationManager *locationManager;
         [ds convertPointAnnotationsToPOI:arrayMapItem];
         [ds savePOIAndThen:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {}];
         self.containerView.hidden = NO;
-        
-       
         
     } else if (control == annotationView.leftCalloutAccessoryView){
         
@@ -342,13 +319,11 @@ CLLocationManager *locationManager;
 }
 
 -(IBAction)cancelToMapView:(UIStoryboardSegue *)segue {
-    NSLog(@"back to map view");
     self.containerView.hidden = YES;
 
 }
 
 -(IBAction)cancelToMapViewThenToResults:(UIStoryboardSegue *)segue {
-    NSLog(@"back to map view -> results");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self performSegueWithIdentifier:@"listView" sender:self];
     });
@@ -373,7 +348,6 @@ CLLocationManager *locationManager;
             }
         }
     }
-    
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
@@ -409,7 +383,6 @@ CLLocationManager *locationManager;
         
         
         [self.mapView addAnnotation:marker];
-        
         [self.mapView setVisibleMapRect:zoomRect animated:YES];
         
     }
@@ -425,9 +398,6 @@ CLLocationManager *locationManager;
     [ds convertPointAnnotationsToPOI:arrayMapItem];
     for (int i=0; i<[arrayMapItem count]; i++ ) {
         MKPointAnnotation* savedPoint = arrayMapItem[i];
-        NSLog(@"MKPointAnnotation %@", savedPoint);
-        
-        
         MKPlacemark *mkDest = [[MKPlacemark alloc]
                                initWithCoordinate:savedPoint.coordinate
                                addressDictionary:nil];
@@ -484,7 +454,7 @@ CLLocationManager *locationManager;
 ///STARTING AND STOPPING LOCATION UPDATES
 
 - (void)registerUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    NSLog(@"register user note ");
+    //NSLog(@"register user note ");
 }
 
 
@@ -519,9 +489,7 @@ CLLocationManager *locationManager;
     if(fabs(eventInterval) < 30.0) {
         //check accuracy of event
         if(lastLocation.horizontalAccuracy >= 0 && lastLocation.horizontalAccuracy <20) {
-           
-            
-            
+
             //geocoding stuff
             if (self.geocoder == nil)
                 self.geocoder = [[CLGeocoder alloc] init];
@@ -540,14 +508,6 @@ CLLocationManager *locationManager;
                 //NSLog(@"set placemarks %@", placemarks);
                 
                 NSMutableDictionary *distances = [NSMutableDictionary dictionary];
-                
-                
-                
-
-                
-                
-                //TODO set a index variable with the nearest location
-                //sort locations by proximity to users location
                 if([placemarks count] > 0) {
                     
                     //find the closest POI to where the user is
@@ -568,20 +528,13 @@ CLLocationManager *locationManager;
                         //id aKey = [keys objectAtIndex:0];
                         
                         MKPlacemark *closestPOI = [values objectAtIndex:0];
-                        //CLPlacemark *closestPOI = [keys objectAtIndex:0];
-                        NSLog(@"found placemark %@", closestPOI);
-                        //PointOfInterest *item = [[PointOfInterest alloc] initWithCLPlacemark:closestPOI];
+                        //NSLog(@"found placemark %@", closestPOI);
                         PointOfInterest *item = [[PointOfInterest alloc] initWithMKPlacemark:closestPOI];
                         self.geocodingResultsView.text = [NSString stringWithFormat:@"You are near %@", item.title];
                     
                         shouldSendNotification = YES;
-                        
-                    
-                        
-                    
-                        }
-                    
-                    
+
+                    }
                     
                     if (shouldSendNotification) {
                         //NOTIFICATIONS
@@ -623,12 +576,5 @@ CLLocationManager *locationManager;
    
     
 }
-
-
-
-
-
-
-
 
 @end
